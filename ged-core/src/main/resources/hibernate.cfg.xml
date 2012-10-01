@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
+			"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+
+		<property name="show_sql">false</property>
+		<property name="format_sql">true</property>
+		
+		<property name="lazy-init">false</property>
+		
+		<property name="dialect">com.tools.hibernate.SQLiteDialect</property>
+		<property name="connection.driver_class">org.sqlite.JDBC</property>
+		<property name="connection.url">jdbc:sqlite:simple_ged.sqlite</property>
+
+		<property name="connection.username"></property>
+		<property name="connection.password"></property>
+		
+		<property name="hibernate.hbm2ddl.auto">update</property>
+
+
+		<mapping class="com.ged.models.GedDocument" />
+		<mapping class="com.ged.models.GedDocumentFile" />
+		<mapping class="com.ged.models.GedDocumentPhysicalLocation" />
+		<mapping class="com.ged.models.GedMessage" />
+		
+		<mapping resource="mapping/ged_plugin.hbm.xml"/>
+		<mapping resource="mapping/ged_plugin_property.hbm.xml"/>
+
+    </session-factory>
+</hibernate-configuration>

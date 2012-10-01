@@ -1,0 +1,77 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>fr.simple.ged</groupId>
+	<artifactId>simple-ged</artifactId>
+	<version>1.0.0</version>
+	<name>Simple Ged</name>
+	<description>A simple GED</description>
+	<packaging>pom</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<ged.core.version>3.4</ged.core.version>
+		<ged.updater.version>1.2</ged.updater.version>
+	</properties>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>central</id>
+			<name>Maven Plugin Repository</name>
+			<url>http://repo1.maven.org/maven2</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+		</repository>
+	</repositories>
+
+
+	<modules>
+		<module>ged-core</module>
+		<module>ged-update</module>
+		<module>ged-connector</module>
+
+		<module>plugins/demo-plugin</module>
+		<module>plugins/orange-plugin</module>
+	</modules>
+
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.8.1</version>
+				<configuration>
+					<stylesheetfile>javadoc-template/api/stylesheet.css</stylesheetfile>
+					<javadocDirectory>javadoc-template/api</javadocDirectory>
+					<docfilessubdirs>true</docfilessubdirs>
+				</configuration>
+			</plugin>
+			<plugin>
+        			<groupId>org.codehaus.mojo</groupId>
+        			<artifactId>jxr-maven-plugin</artifactId>
+      		</plugin>
+		</plugins>
+	</reporting>
+
+</project>
