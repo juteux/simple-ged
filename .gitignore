@@ -4,3 +4,21 @@
 *.jar
 *.war
 *.ear
+
+# eclipse
+.project
+.settings
+.classpath
+
+# maven
+target
+
+# from simple ged
+*.profile
+*.sqlite
+*.sqlite-journal
+
+# others
+*.swp
+
+
