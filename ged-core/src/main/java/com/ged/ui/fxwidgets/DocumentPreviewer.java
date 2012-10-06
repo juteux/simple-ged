@@ -84,6 +84,15 @@ public class DocumentPreviewer extends VBox {
 	}
 	
 	/**
+	 * Set a special previewer, which is a previewer for add new document (used on directories)
+	 */
+	public void setSpecialPreviewer(AbstractFilePreviewer p) {
+		previewers.clear();
+		previewers.add(p);
+		gotoIndex(0);
+	}
+	
+	/**
 	 * Add a document to display list without forgetting previous elements
 	 * 
 	 * The insert file is showed

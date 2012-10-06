@@ -1,5 +1,6 @@
 package com.ged.ui.fxpreviewwidgets;
 
+import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 
 import org.apache.log4j.Logger;
@@ -30,6 +31,7 @@ public abstract class AbstractFilePreviewer extends HBox {
 	 */
 	public AbstractFilePreviewer(String absoluteFilePath) {
 		this.absoluteFilePath = absoluteFilePath;
+		setAlignment(Pos.CENTER);
 	}
 	
 	/**

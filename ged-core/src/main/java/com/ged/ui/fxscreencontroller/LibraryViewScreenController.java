@@ -5,6 +5,7 @@ import java.io.File;
 import com.ged.Profile;
 import com.ged.models.GedDocument;
 import com.ged.services.GedDocumentService;
+import com.ged.ui.fxpreviewwidgets.AddDocumentPreviewer;
 import com.ged.ui.fxscreen.LibraryViewScreen;
 import com.ged.ui.listeners.LibraryListener;
 
@@ -22,6 +23,15 @@ public class LibraryViewScreenController implements LibraryListener {
 	@Override
 	public void selectionChanged(String relativeFilePathOfNewSelection) {
 	
+		// special case
+		if (new File(Profile.getInstance().getLibraryRoot() + relativeFilePathOfNewSelection).isDirectory()) {
+			libraryViewScreen.getDocumentInfoViewerWidget().setGedDocument(null);
+			libraryViewScreen.getDocumentPreviewer().setSpecialPreviewer(new AddDocumentPreviewer());
+			return;
+		}
+		
+		// try to show doc
+		
 		GedDocument d = GedDocumentService.findDocumentbyFilePath(relativeFilePathOfNewSelection);
 		
 		if (d == null) {
