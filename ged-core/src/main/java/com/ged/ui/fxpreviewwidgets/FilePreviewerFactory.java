@@ -34,7 +34,7 @@ public class FilePreviewerFactory {
 	public static AbstractFilePreviewer getFilePreviewer(File documentFile, Dimension2D maxSize) {
 		
 		AbstractFilePreviewer previewer = null;
-	    
+		
 	    // choose the correct previewer
 	    switch (FileHelper.getFileType(documentFile.getAbsolutePath()))
 	    {
@@ -50,9 +50,9 @@ public class FilePreviewerFactory {
 	    //case HTML_TYPE :
 	    //	previewer = new HtmlFilePreviewer(documentFile.getAbsolutePath());
 	    //	break;
-	    //case PDF_TYPE :
-	    //	previewer = new PdfFilePreviewer(documentFile.getAbsolutePath(), maximumSize);
-	    //	break;
+	    case PDF_TYPE :
+	    	previewer = new PdfFilePreviewer(documentFile.getAbsolutePath(), maxSize);
+	    	break;
 	    default :
 	    	previewer = new DefaultFilePreviewer(documentFile.getAbsolutePath());
 	        break;

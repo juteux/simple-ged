@@ -82,6 +82,15 @@
 			<systemPath>${project.basedir}/lib/JTwain.jar</systemPath>
 		</dependency>
 
+		<dependency>
+			<groupId>org.jpedal</groupId>
+			<artifactId>jpedal</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/jpedal_lgpl.jar</systemPath>
+		</dependency>
+
+
 		<!-- javafx -->
 
 		<dependency>

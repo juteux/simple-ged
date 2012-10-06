@@ -3,7 +3,7 @@ package com.ged.ui.fxwidgets;
 import java.util.Properties;
 
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 
 import org.apache.log4j.Logger;
 
@@ -12,7 +12,7 @@ import com.tools.DateHelper;
 import com.tools.PropertiesHelper;
 
 
-public class FxDocumentInfoViewer extends VBox {
+public class FxDocumentInfoViewer extends GridPane {
 
 	private static final Logger logger = Logger.getLogger(FxDocumentInfoViewer.class);
 	
@@ -42,13 +42,13 @@ public class FxDocumentInfoViewer extends VBox {
 	public FxDocumentInfoViewer() {
 		instantiateWidgets();
 		
-		this.getChildren().add(title);
+		this.add(title, 0, 0);
 		title.getStyleClass().add("document-info-title");
 		
-		this.getChildren().add(date);
+		this.add(date, 1, 0);
 		date.getStyleClass().add("document-info-date");
 		
-		this.getChildren().add(description);
+		this.add(description, 0, 1, 2, 1);
 		description.getStyleClass().add("document-info-description");
 	}
 	
@@ -75,8 +75,8 @@ public class FxDocumentInfoViewer extends VBox {
 		
 		if (document == null) {
 			title.setText("-");
-			description.setText("-");
-			date.setText("-");
+			description.setText("");
+			date.setText("");
 			return;
 		}
 		
