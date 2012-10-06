@@ -83,7 +83,7 @@ public class FxMainWindow extends Application {
         
         ToolBar toolBar = new FxToolBar();
 
-        int height = 25;
+        int height = 40;
         toolBar.setPrefHeight(height);
         toolBar.setMinHeight(height);
         toolBar.setMaxHeight(height);

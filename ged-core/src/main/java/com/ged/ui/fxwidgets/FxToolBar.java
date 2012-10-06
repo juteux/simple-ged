@@ -1,13 +1,12 @@
 package com.ged.ui.fxwidgets;
 
 
+import java.awt.Dimension;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-
+import com.ged.ui.controllers.SlideDockController;
 import com.ged.ui.widgets.SimpleButton;
 import com.tools.PropertiesHelper;
 
@@ -15,53 +14,81 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
 import javafx.scene.control.ToolBar;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class FxToolBar extends ToolBar {
 
+	
+	/**
+	 * All buttons in slide dock are SlideDockButton
+	 */
+	private class ToolBarButton extends Button {
+		
+		public ToolBarButton(String toolTipText/*, SlideDockController controller*/) {
+			super();
+			
+			setTooltip(new Tooltip(toolTipText));
+			
+			//addActionListener(controller);
+		}
+		
+		public void setImage(String imageResource) {
+			Image i = new Image(getClass().getResourceAsStream(imageResource));
+			ImageView iv = new ImageView(i);
+			iv.setSmooth(true);
+			iv.setFitWidth(30);
+			iv.setFitHeight(30);
+			this.setGraphic(iv);
+		}
+	}
+	
+	
 	/**
 	 * Back to home screen button
 	 */
-	private Button btnHome;
+	private ToolBarButton btnHome;
 	
 	/**
 	 * Browse document library button
 	 */
-	private Button btnBrowse;
+	private ToolBarButton btnBrowse;
 	
 	/**
 	 * Add a document in library button
 	 */
-	private Button btnAddDoc;
+	private ToolBarButton btnAddDoc;
 	
 	/**
 	 * Search document in library button
 	 */
-	private Button btnSearch;
+	private ToolBarButton btnSearch;
 	
 	/**
 	 * About popup button
 	 */
-	private Button btnAbout;
+	private ToolBarButton btnAbout;
 	
 	/**
 	 * Go to setting screen button
 	 */
-	private Button btnSettings;
+	private ToolBarButton btnSettings;
 	
 	/**
 	 * Plugin management
 	 */
-	private Button btnPluginManagement;
+	private ToolBarButton btnPluginManagement;
 	
 	/**
 	 * Messages
 	 */
-	private Button btnMessages;
+	private ToolBarButton btnMessages;
 	
 	/**
 	 * Quit button
 	 */
-	private Button btnQuit;
+	private ToolBarButton btnQuit;
 	
 	
 	
@@ -112,18 +139,18 @@ public class FxToolBar extends ToolBar {
 		Properties properties = PropertiesHelper.getInstance().getProperties();
 		
 		// create buttons
-		btnHome  			= new Button(properties.getProperty("info_welcome")/*, controller*/);
-		btnBrowse   		= new Button(properties.getProperty("info_browse")/*, controller*/);
-		btnAddDoc			= new Button(properties.getProperty("info_add")/*, controller*/);
-		btnSearch   		= new Button(properties.getProperty("info_search")/*, controller*/);
-		btnSettings			= new Button(properties.getProperty("info_settings")/*, controller*/);
-		btnAbout			= new Button(properties.getProperty("info_about") + properties.getProperty("APPLICATION_NAME")/*, controller*/);
-		btnQuit				= new Button(properties.getProperty("quit")/*, controller*/);
-		btnPluginManagement	= new Button(properties.getProperty("info_plugin_management")/*, controller*/);
-		btnMessages			= new Button(properties.getProperty("info_messages")/*, controller*/);
+		btnHome  			= new ToolBarButton(properties.getProperty("info_welcome")/*, controller*/);
+		btnBrowse   		= new ToolBarButton(properties.getProperty("info_browse")/*, controller*/);
+		btnAddDoc			= new ToolBarButton(properties.getProperty("info_add")/*, controller*/);
+		btnSearch   		= new ToolBarButton(properties.getProperty("info_search")/*, controller*/);
+		btnSettings			= new ToolBarButton(properties.getProperty("info_settings")/*, controller*/);
+		btnAbout			= new ToolBarButton(properties.getProperty("info_about") + properties.getProperty("APPLICATION_NAME")/*, controller*/);
+		btnQuit				= new ToolBarButton(properties.getProperty("quit")/*, controller*/);
+		btnPluginManagement	= new ToolBarButton(properties.getProperty("info_plugin_management")/*, controller*/);
+		btnMessages			= new ToolBarButton(properties.getProperty("info_messages")/*, controller*/);
 		
 		// define associated pictures
-		Map<Button, String> associatedImages = new HashMap<>();
+		Map<ToolBarButton, String> associatedImages = new HashMap<>();
 		associatedImages.put(btnHome, 				properties.getProperty("ico_home"));
 		associatedImages.put(btnBrowse,				properties.getProperty("ico_library"));
 		associatedImages.put(btnAddDoc,				properties.getProperty("ico_add_doc"));
@@ -135,8 +162,8 @@ public class FxToolBar extends ToolBar {
 		associatedImages.put(btnMessages,			properties.getProperty("ico_message"));
 		
 		// set pictures
-		for (Map.Entry<Button, String> e : associatedImages.entrySet()) {
-			//e.getKey().setIcon(e.getValue());
+		for (Map.Entry<ToolBarButton, String> e : associatedImages.entrySet()) {
+			e.getKey().setImage(e.getValue());
 		}
 	}
 	
