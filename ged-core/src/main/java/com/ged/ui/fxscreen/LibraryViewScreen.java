@@ -4,15 +4,38 @@ import com.ged.ui.fxwidgets.FxDocumentInfoViewer;
 import com.ged.ui.fxwidgets.FxLibraryView;
 
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
+/**
+ * Library view screen
+ * 
+ * @author xavier
+ *
+ */
 public class LibraryViewScreen extends HBox {
 
+	/**
+	 * On the left, the tree with the library content
+	 */
+	private FxLibraryView libraryWidget;
+	
+	/**
+	 * On the right, the document informations
+	 */
+	private FxDocumentInfoViewer documentInfoViewerWidget;
+	
 	
 	public LibraryViewScreen() {
-        this.getChildren().add(new FxLibraryView());
-        this.getChildren().add(new FxDocumentInfoViewer());
+		
+		instanciateWidgets();
+		
+        this.getChildren().add(libraryWidget);
+        this.getChildren().add(documentInfoViewerWidget);
+	}
+	
+	
+	private void instanciateWidgets() {
+		libraryWidget = new FxLibraryView();
+		documentInfoViewerWidget = new FxDocumentInfoViewer();
 	}
 	
 }
