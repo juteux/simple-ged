@@ -1,38 +1,19 @@
 package com.ged.ui.fxwidgets;
 
 import java.io.File;
-import java.lang.ref.WeakReference;
 import java.util.Properties;
 
-import javax.swing.DropMode;
-import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
-
-import org.apache.log4j.Logger;
-
-import com.ged.Profile;
-import com.ged.ui.MainWindow;
-import com.ged.ui.controllers.LibraryViewController;
-import com.ged.ui.preview_widgets.FilePreviewerFactory.FileType;
-import com.tools.FileHelper;
-import com.tools.PropertiesHelper;
-import com.tools.RelativeFileSystemModel;
-
-import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-import javafx.util.Callback;
+
+import org.apache.log4j.Logger;
+
+import com.ged.Profile;
+import com.tools.FileHelper;
+import com.tools.PropertiesHelper;
 
 /**
  * A view of the library, a tree with files in GED directory
@@ -49,11 +30,14 @@ public class FxLibraryView extends TreeView<String> {
 	private static final Logger logger = Logger.getLogger(FxLibraryView.class);
 	
 	/**
-	 * TODO : fix this value usage
+	 * Not setted yet (always false)
 	 */
 	private boolean showDirectoryOnly = false;
 	
 	
+	/**
+	 * The software properties
+	 */
 	Properties properties = PropertiesHelper.getInstance().getProperties();
 	
 

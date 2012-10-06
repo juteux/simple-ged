@@ -1,15 +1,9 @@
 package com.ged.ui.fxwidgets;
 
 
-import java.awt.Dimension;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-
-import com.ged.ui.controllers.SlideDockController;
-import com.ged.ui.fxcontrollers.ToolBarController;
-import com.ged.ui.widgets.SimpleButton;
-import com.tools.PropertiesHelper;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -19,8 +13,17 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import com.ged.ui.fxcontrollers.ToolBarController;
+import com.tools.PropertiesHelper;
+
 public class FxToolBar extends ToolBar {
 
+	
+	/**
+	 * The software properties
+	 */
+	Properties properties = PropertiesHelper.getInstance().getProperties();
+	
 	
 	/**
 	 * All buttons in slide dock are SlideDockButton

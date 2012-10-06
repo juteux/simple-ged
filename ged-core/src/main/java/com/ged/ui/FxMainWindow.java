@@ -4,6 +4,8 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
+import com.ged.ui.fxscreen.LibraryViewScreen;
+import com.ged.ui.fxwidgets.FxDocumentInfoViewer;
 import com.ged.ui.fxwidgets.FxLibraryView;
 import com.ged.ui.fxwidgets.FxToolBar;
 import com.tools.PropertiesHelper;
@@ -14,6 +16,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -63,26 +66,8 @@ public class FxMainWindow extends Application {
     	properties = PropertiesHelper.getInstance().getProperties();
     	
         primaryStage.setTitle(properties.getProperty("APPLICATION_NAME"));
-        
-        /*
-        primaryStage.initStyle(StageStyle.UNDECORATED);
-        BorderPane borderPane = new BorderPane();
-        borderPane.setStyle("-fx-background-color: green;");
-        */
-        
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
- 
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
-        
-        
-        ToolBar toolBar = new FxToolBar();
 
+        ToolBar toolBar = new FxToolBar(); 
         int height = 40;
         toolBar.setPrefHeight(height);
         toolBar.setMinHeight(height);
@@ -91,7 +76,7 @@ public class FxMainWindow extends Application {
         BorderPane borderPane = new BorderPane();
         borderPane.setTop(toolBar);
         
-        borderPane.setCenter(new FxLibraryView());
+        borderPane.setCenter(new LibraryViewScreen());
         
         primaryStage.setScene(new Scene(borderPane, APP_WIDTH, APP_HEIGHT));
         primaryStage.show();
