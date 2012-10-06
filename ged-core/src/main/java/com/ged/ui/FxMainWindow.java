@@ -4,6 +4,7 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
+import com.ged.ui.fxwidgets.FxLibraryView;
 import com.tools.PropertiesHelper;
 
 import javafx.application.Application;
@@ -57,20 +58,9 @@ public class FxMainWindow extends Application {
     	
     	properties = PropertiesHelper.getInstance().getProperties();
     	
-    	TreeItem<String> rootItem = new TreeItem<String> ("Inbox"/*, rootIcon*/);
-        rootItem.setExpanded(true);
-        for (int i = 1; i < 6; i++) {
-            TreeItem<String> item = new TreeItem<String> ("Message" + i);            
-            rootItem.getChildren().add(item);
-        }        
-        TreeView<String> tree = new TreeView<String> (rootItem);        
-        StackPane root = new StackPane();
-        root.getChildren().add(tree);
-        primaryStage.setScene(new Scene(root, 300, 250));
-        primaryStage.show();
-    	
-    	/*
         primaryStage.setTitle(properties.getProperty("APPLICATION_NAME"));
+        
+        
         Button btn = new Button();
         btn.setText("Say 'Hello World'");
         btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -84,9 +74,10 @@ public class FxMainWindow extends Application {
         
         
         StackPane root = new StackPane();
-        root.getChildren().add(btn);
+        //root.getChildren().add(btn);
+        root.getChildren().add(new FxLibraryView());
         primaryStage.setScene(new Scene(root, APP_WIDTH, APP_HEIGHT));
-        primaryStage.show();*/
+        primaryStage.show();
     	
     }
 
