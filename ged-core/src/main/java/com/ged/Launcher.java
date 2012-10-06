@@ -4,12 +4,15 @@ package com.ged;
 import java.io.File;
 import java.util.Map.Entry;
 
+import javafx.application.Application;
+
 import javax.swing.JOptionPane;
 
 import org.apache.log4j.Logger;
 
 import com.ged.plugins.PluginManager;
 import com.ged.services.GedDocumentLocationService;
+import com.ged.ui.FxMainWindow;
 import com.ged.ui.MainWindow;
 import com.ged.ui.screens.FakeScreen;
 import com.ged.update.DoUpdate;
@@ -30,16 +33,20 @@ public class Launcher {
 	
 	
 	public static void main(String[] args) {
-		
+				
 		// load properties
 		PropertiesHelper.getInstance().load("properties/strings.properties");
 		PropertiesHelper.getInstance().load("properties/icons.properties");
+		PropertiesHelper.getInstance().load("properties/constants.properties");
 		
 		// create or update database
 		HibernateUtil.getSessionFactory().openSession();
 		
 		GedDocumentLocationService.makeSurAtLeastOneDocumentLocationExists();
 		MiddleProfile.getInstance().completeUpdate();
+		
+		// The main window (fx version)
+		Application.launch(FxMainWindow.class, args);
 		
 		// open main window
 		MainWindow mw = new MainWindow();
@@ -84,7 +91,7 @@ public class Launcher {
 				
 				String onlineVersion = UpdateHelper.getVersionNumber(UpdateInformations.GED_CORE_UPDATE_DESCRIPTOR_PATH);
 				
-				if (Float.parseFloat(onlineVersion) <= Float.parseFloat(Constants.applicationVersion)) {
+				if (Float.parseFloat(onlineVersion) <= Float.parseFloat(PropertiesHelper.getInstance().getProperties().getProperty("APPLICATION_VERSION"))) {
 					logger.info("UpdateManager : No new version");
 					return;
 				}
@@ -95,7 +102,7 @@ public class Launcher {
 					
 					// some new version is available		
 					int option = JOptionPane.showConfirmDialog(null, "Vous utilisez la version " 
-									+ Constants.applicationVersion + " de Simple GED or la version " 
+									+ PropertiesHelper.getInstance().getProperties().getProperty("APPLICATION_VERSION") + " de Simple GED or la version " 
 									+ onlineVersion + " est disponible.\n"
 									+ "Voulez-vous faire la mise à jour ? (recommandé)", 
 									"Nouvelle version disponible", 
@@ -118,5 +125,6 @@ public class Launcher {
 			}
 		});
 		t.start();
-	}	
+	}
+
 }

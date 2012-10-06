@@ -90,7 +90,7 @@ public class MiddleProfile implements Serializable {
 		
 		
 		// save new known version
-		lastKnownVersion = Double.parseDouble(Constants.applicationVersion);
+		lastKnownVersion = Double.parseDouble(properties.getProperty("APPLICATION_VERSION"));
 		commitChanges();
 	}
 	

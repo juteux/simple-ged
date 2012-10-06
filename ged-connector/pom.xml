@@ -9,4 +9,5 @@
   <groupId>fr.simple.ged.connector</groupId>
   <artifactId>ged-connector</artifactId>
   <name>Simple Ged Connector</name>
+  <version>${ged.connector.version}</version>
 </project>

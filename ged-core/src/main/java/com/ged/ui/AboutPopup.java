@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
 
-import com.ged.Constants;
 import com.ged.ui.widgets.SimpleButton;
 import com.managers.ImageManager;
 import com.tools.PropertiesHelper;
@@ -83,7 +82,7 @@ public class AboutPopup extends JFrame {
 		
 		instantiateWidgets();
 		
-	    setTitle("A propos de " + Constants.applicationName);
+	    setTitle("A propos de " + properties.getProperty("APPLICATION_NAME"));
 	    setSize(550,650);
 	    setResizable(false);
 	    setIconImage(imgLogo);
@@ -125,7 +124,7 @@ public class AboutPopup extends JFrame {
 		imgLogo = ImageManager.getImage(properties.getProperty("ico_ico"));
 		
 		labelNameAndVersion = new JLabel();
-		labelNameAndVersion.setText("<html><b>" + Constants.applicationName + "</b> - <i>version " + Constants.applicationVersion + "</i></html>");
+		labelNameAndVersion.setText("<html><b>" + properties.getProperty("APPLICATION_NAME") + "</b> - <i>version " + properties.getProperty("APPLICATION_VERSION") + "</i></html>");
 		labelNameAndVersion.setIcon(new ImageIcon(imgLogo.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 		
 		labelAboutText = new JLabel();

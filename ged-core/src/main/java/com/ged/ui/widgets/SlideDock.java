@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 
-import com.ged.Constants;
 import com.ged.ui.MainWindow;
 import com.ged.ui.controllers.SlideDockController;
 import com.ged.ui.screens.SoftwareScreen;
@@ -131,7 +130,7 @@ public class SlideDock extends SoftwareScreen { // I know it's not really a soft
 		btnAddDoc			= new SlideDockButton(properties.getProperty("info_add"), controller);
 		btnSearch   		= new SlideDockButton(properties.getProperty("info_search"), controller);
 		btnSettings			= new SlideDockButton(properties.getProperty("info_settings"), controller);
-		btnAbout			= new SlideDockButton(properties.getProperty("info_about") + Constants.applicationName, controller);
+		btnAbout			= new SlideDockButton(properties.getProperty("info_about") + properties.getProperty("APPLICATION_NAME"), controller);
 		btnQuit				= new SlideDockButton(properties.getProperty("quit"), controller);
 		btnPluginManagement	= new SlideDockButton(properties.getProperty("info_plugin_management"), controller);
 		btnMessages			= new SlideDockButton(properties.getProperty("info_messages"), controller);

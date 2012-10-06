@@ -82,6 +82,15 @@
 			<systemPath>${project.basedir}/lib/JTwain.jar</systemPath>
 		</dependency>
 
+		<!-- javafx -->
+
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>javafx</artifactId>
+			<version>2.2</version>
+			<systemPath>${java.home}/lib/jfxrt.jar</systemPath>
+			<scope>system</scope>
+		</dependency>
 
 		<!-- Dans les repos -->
 

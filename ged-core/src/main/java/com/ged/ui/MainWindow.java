@@ -14,7 +14,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import org.apache.log4j.Logger;
 
-import com.ged.Constants;
 import com.ged.Profile;
 import com.ged.services.MessageService;
 import com.ged.ui.screens.AddDocumentScreen;
@@ -87,7 +86,7 @@ public class MainWindow extends JFrame {
 	public MainWindow() {
 		properties = PropertiesHelper.getInstance().getProperties();
 		
-		setTitle(Constants.applicationName);
+		setTitle(properties.getProperty("APPLICATION_NAME"));
 		setIconImage(ImageManager.getImage(properties.getProperty("ico_ico")));
 		setSize(APP_DIM);
 		setMinimumSize(APP_DIM);
