@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.ged.ui.controllers.SlideDockController;
+import com.ged.ui.fxcontrollers.ToolBarController;
 import com.ged.ui.widgets.SimpleButton;
 import com.tools.PropertiesHelper;
 
@@ -26,12 +27,12 @@ public class FxToolBar extends ToolBar {
 	 */
 	private class ToolBarButton extends Button {
 		
-		public ToolBarButton(String toolTipText/*, SlideDockController controller*/) {
+		public ToolBarButton(String toolTipText, ToolBarController controller) {
 			super();
 			
 			setTooltip(new Tooltip(toolTipText));
 			
-			//addActionListener(controller);
+			setOnAction(controller);
 		}
 		
 		public void setImage(String imageResource) {
@@ -136,18 +137,20 @@ public class FxToolBar extends ToolBar {
 	 */
 	private void instantiateWidgets() {
 		
+		ToolBarController controller = new ToolBarController(this);
+		
 		Properties properties = PropertiesHelper.getInstance().getProperties();
 		
 		// create buttons
-		btnHome  			= new ToolBarButton(properties.getProperty("info_welcome")/*, controller*/);
-		btnBrowse   		= new ToolBarButton(properties.getProperty("info_browse")/*, controller*/);
-		btnAddDoc			= new ToolBarButton(properties.getProperty("info_add")/*, controller*/);
-		btnSearch   		= new ToolBarButton(properties.getProperty("info_search")/*, controller*/);
-		btnSettings			= new ToolBarButton(properties.getProperty("info_settings")/*, controller*/);
-		btnAbout			= new ToolBarButton(properties.getProperty("info_about") + properties.getProperty("APPLICATION_NAME")/*, controller*/);
-		btnQuit				= new ToolBarButton(properties.getProperty("quit")/*, controller*/);
-		btnPluginManagement	= new ToolBarButton(properties.getProperty("info_plugin_management")/*, controller*/);
-		btnMessages			= new ToolBarButton(properties.getProperty("info_messages")/*, controller*/);
+		btnHome  			= new ToolBarButton(properties.getProperty("info_welcome"), controller);
+		btnBrowse   		= new ToolBarButton(properties.getProperty("info_browse"), controller);
+		btnAddDoc			= new ToolBarButton(properties.getProperty("info_add"), controller);
+		btnSearch   		= new ToolBarButton(properties.getProperty("info_search"), controller);
+		btnSettings			= new ToolBarButton(properties.getProperty("info_settings"), controller);
+		btnAbout			= new ToolBarButton(properties.getProperty("info_about") + properties.getProperty("APPLICATION_NAME"), controller);
+		btnQuit				= new ToolBarButton(properties.getProperty("quit"), controller);
+		btnPluginManagement	= new ToolBarButton(properties.getProperty("info_plugin_management"), controller);
+		btnMessages			= new ToolBarButton(properties.getProperty("info_messages"), controller);
 		
 		// define associated pictures
 		Map<ToolBarButton, String> associatedImages = new HashMap<>();
@@ -165,6 +168,51 @@ public class FxToolBar extends ToolBar {
 		for (Map.Entry<ToolBarButton, String> e : associatedImages.entrySet()) {
 			e.getKey().setImage(e.getValue());
 		}
+	}
+
+
+	public ToolBarButton getBtnHome() {
+		return btnHome;
+	}
+
+
+	public ToolBarButton getBtnBrowse() {
+		return btnBrowse;
+	}
+
+
+	public ToolBarButton getBtnAddDoc() {
+		return btnAddDoc;
+	}
+
+
+	public ToolBarButton getBtnSearch() {
+		return btnSearch;
+	}
+
+
+	public ToolBarButton getBtnAbout() {
+		return btnAbout;
+	}
+
+
+	public ToolBarButton getBtnSettings() {
+		return btnSettings;
+	}
+
+
+	public ToolBarButton getBtnPluginManagement() {
+		return btnPluginManagement;
+	}
+
+
+	public ToolBarButton getBtnMessages() {
+		return btnMessages;
+	}
+
+
+	public ToolBarButton getBtnQuit() {
+		return btnQuit;
 	}
 	
 }
