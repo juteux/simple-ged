@@ -2,6 +2,9 @@ package com.ged.services;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -75,8 +78,16 @@ public class GedDocumentService {
 		}
 		
 		// physical renaming
-		File oldFile = new File(Profile.getInstance().getLibraryRoot() + oldName);
-		oldFile.renameTo(new File(Profile.getInstance().getLibraryRoot() + newName));
+		Path oldFilePath = Paths.get(Profile.getInstance().getLibraryRoot() + oldName);
+		Path newFilePath = Paths.get(Profile.getInstance().getLibraryRoot() + newName);
+		
+		try {
+			logger.info("Move : (" + oldFilePath + " => " + newFilePath);
+			Files.move(oldFilePath, newFilePath);
+		} catch (IOException e) {
+			logger.error("Move failed : (" + oldFilePath + " => " + newFilePath);
+			e.printStackTrace();
+		}
 		
 		// rename in database
 		DocumentDAO.updateFilePath(oldName, newName);

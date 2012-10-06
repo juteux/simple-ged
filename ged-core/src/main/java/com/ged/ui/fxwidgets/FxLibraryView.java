@@ -26,7 +26,7 @@ public class FxLibraryView extends TreeView<String> {
 	/**
 	 * Tree item icon size (px)
 	 */
-	private static final int TREE_ITEM_SIZE = 30;
+	public static final int TREE_ITEM_SIZE = 30;
 	
 	private static final Logger logger = Logger.getLogger(FxLibraryView.class);
 	

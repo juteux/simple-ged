@@ -1,6 +1,7 @@
 package com.ged.ui.fxwidgetcontrollers;
 
 import java.io.File;
+import java.util.Properties;
 
 import javax.swing.event.EventListenerList;
 
@@ -9,16 +10,22 @@ import com.ged.models.GedDocument;
 import com.ged.services.GedDocumentService;
 import com.ged.ui.fxwidgets.FxLibraryView;
 import com.ged.ui.listeners.LibraryListener;
+import com.tools.PropertiesHelper;
 
 import org.apache.log4j.Logger;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Callback;
@@ -122,6 +129,11 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 	
 	
 	private String getFilePathFromTreeItem(TreeItem<String> item) {
+		
+		if (item == null || item.getParent() == null) {
+			return "";
+		}
+		
 		String itemPath = item.getValue();
 		TreeItem<String> parent = item.getParent();
 		while (parent != null) {
@@ -134,20 +146,54 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 		return itemPath;
 	}
 	
+	
+	
 	private final class TextFieldTreeCellImpl extends TreeCell<String> {
 
+		private Properties properties = PropertiesHelper.getInstance().getProperties();
+		
 		private TextField textField;
 
+		private ContextMenu addMenu = new ContextMenu();
+
 		public TextFieldTreeCellImpl() {
+            MenuItem addMenuItem = new MenuItem(properties.getProperty("add_directory"));
+            addMenu.getItems().add(addMenuItem);
+            addMenuItem.setOnAction(new EventHandler() {
+                public void handle(Event t) {
+                	
+                	if ( ! new File(Profile.getInstance().getLibraryRoot() + getFilePathFromTreeItem(getTreeItem()) + "/" + properties.getProperty("new_dir")).mkdir() ) {
+        				return;
+        			}
+                	
+        			Image i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_library_folder")));
+        			ImageView iv = new ImageView(i);
+        			iv.setSmooth(true);
+        			iv.setFitWidth(FxLibraryView.TREE_ITEM_SIZE);
+        			iv.setFitHeight(FxLibraryView.TREE_ITEM_SIZE);
+                	
+                    TreeItem newFolder = new TreeItem<String>(properties.getProperty("new_dir"), iv);
+                    
+                    getTreeItem().setExpanded(true);
+                    
+                    getTreeItem().getChildren().add(newFolder);
+                }
+            });
 		}
 
 		@Override
 		public void startEdit() {
 			super.startEdit();
 
-			if (textField == null) {
-				createTextField();
+			if (!currentNodeIsRootOrDirectory()) {
+				return;
 			}
+			
+			if (textField == null) {
+				createTextField(); 
+				// TODO : open document edition
+			}
+			
 			setText(null);
 			setGraphic(textField);
 			textField.selectAll();
@@ -177,9 +223,20 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 				} else {
 					setText(getString());
 					setGraphic(getTreeItem().getGraphic());
+
+					if (currentNodeIsRootOrDirectory()) {
+                        setContextMenu(addMenu);
+                    }
+					
 				}
 			}
 		}
+		
+		
+		private boolean currentNodeIsRootOrDirectory() {
+			return getFilePathFromTreeItem(getTreeItem()).isEmpty() || new File(Profile.getInstance().getLibraryRoot() + getFilePathFromTreeItem(getTreeItem())).isDirectory();
+		}
+		
 
 		private void createTextField() {
 			textField = new TextField(getString());
@@ -188,6 +245,11 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 				@Override
 				public void handle(KeyEvent t) {
 					if (t.getCode() == KeyCode.ENTER) {
+						
+						logger.info("renaming from : " + getFilePathFromTreeItem(getTreeItem()) + " => " + getFilePathFromTreeItem(getTreeItem().getParent()) + "/" + textField.getText());
+						GedDocumentService.renameDocumentFile(getFilePathFromTreeItem(getTreeItem()), getFilePathFromTreeItem(getTreeItem().getParent()) + "/" + textField.getText());
+						
+						
 						commitEdit(textField.getText());
 					} else if (t.getCode() == KeyCode.ESCAPE) {
 						cancelEdit();
