@@ -1,26 +1,15 @@
 package com.ged.ui.fxwidgets;
 
-import java.awt.Color;
 import java.util.Properties;
 
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.border.TitledBorder;
-
-import net.miginfocom.swing.MigLayout;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 
 import org.apache.log4j.Logger;
 
 import com.ged.models.GedDocument;
-import com.ged.models.GedDocumentFile;
 import com.tools.DateHelper;
 import com.tools.PropertiesHelper;
-
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
 
 
 public class FxDocumentInfoViewer extends VBox {
@@ -54,8 +43,13 @@ public class FxDocumentInfoViewer extends VBox {
 		instantiateWidgets();
 		
 		this.getChildren().add(title);
+		title.getStyleClass().add("document-info-title");
+		
 		this.getChildren().add(date);
+		date.getStyleClass().add("document-info-date");
+		
 		this.getChildren().add(description);
+		description.getStyleClass().add("document-info-description");
 	}
 	
 	
@@ -74,6 +68,8 @@ public class FxDocumentInfoViewer extends VBox {
 	 * @param document
 	 */
 	public void setGedDocument(GedDocument document) {
+		
+		logger.debug("document selected changed");
 		
 		if (document == null) {
 			title.setText("");

@@ -1,0 +1,14 @@
+.document-info-title {
+    -fx-font-size: 24px;
+    -fx-padding: 20;
+    -fx-font-weight: bold;
+    -fx-text-fill: #006464;
+}
+
+.document-info-date {
+	-fx-font-style:italic;
+}
+
+.document-info-description {
+}
+
