@@ -64,6 +64,7 @@ public class FxLibraryView extends TreeView<String> {
     	
     	this.setEditable(true);
     	this.setCellFactory(controller);
+    	
     	this.getSelectionModel().selectedItemProperty().addListener(controller);  
     }
     
@@ -138,13 +139,30 @@ public class FxLibraryView extends TreeView<String> {
  			if (extension.equals("PDF")) {
  				i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_file_pdf")));
  			}
- 			/*/else if (extension.equals("HTML")) {
- 				return FileType.HTML_TYPE;
+ 			else if (extension.equals("HTML")) {
+ 				i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_file_html")));
  			}
  			if (extension.equals("TXT")) {
- 				return FileType.TEXT_TYPE;
- 			}*/
+ 				i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_file_txt")));
+ 			}
  			else { // more complex types
+ 				
+ 				String[] pptExtensions = new String[] { "PPT", "PPTX" };
+ 				for (String s : pptExtensions) {
+ 					if (extension.equals(s)) {
+ 						i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_file_ppt")));
+ 						break;
+ 					}
+ 				}
+ 				
+ 				String[] docExtensions = new String[] { "DOC", "DOCX" };
+ 				for (String s : docExtensions) {
+ 					if (extension.equals(s)) {
+ 						i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_file_doc")));
+ 						break;
+ 					}
+ 				}
+ 				
  				
  				String[] imagesExtensions = new String[] { "PNG", "JPG", "JPEG", "BMP", "GIF" };
  				for (String s : imagesExtensions) {

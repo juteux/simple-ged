@@ -1,5 +1,10 @@
 package com.ged.ui.fxcontrollers;
 
+import java.io.File;
+
+import com.ged.Profile;
+import com.ged.models.GedDocument;
+import com.ged.services.GedDocumentService;
 import com.ged.ui.fxwidgets.FxLibraryView;
 import org.apache.log4j.Logger;
 
@@ -39,6 +44,24 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 	 */
 	@Override
 	public TreeCell<String> call(TreeView<String> arg0) {
+		
+		if (arg0.getSelectionModel().getSelectedItem() != null) {
+
+			String itemPath = getFilePathFromTreeItem(arg0.getSelectionModel().getSelectedItem());
+			
+			// TODO : add root modification
+			
+			if (new File(Profile.getInstance().getLibraryRoot() + itemPath).isDirectory()) {
+				logger.debug("a library folder : " + itemPath);
+			}
+			else { // some library document
+				logger.debug("a library document : " + itemPath);
+				GedDocument d = GedDocumentService.findDocumentbyFilePath(itemPath);
+			}
+			
+			
+		}
+
 		return new TextFieldTreeCellImpl();
 	}
 	
@@ -51,18 +74,31 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 		// TODO Auto-generated method stub
 		logger.debug("selection changed : " + newItem.getValue());
 		
-		String itemPath = newItem.getValue();
-		TreeItem<String> parent = newItem.getParent();
-		while (parent != null) {
-			itemPath = parent.getValue() + "/" + itemPath;
-			parent = parent.getParent();
-		}
+		String itemPath = getFilePathFromTreeItem(newItem);
 		
 		logger.debug("Full item path : " + itemPath);
+		
+		if (new File(Profile.getInstance().getLibraryRoot() + itemPath).isDirectory()) {
+			logger.debug("a library folder : " + itemPath);
+		}
+		else { // some library document
+			logger.debug("a library document : " + itemPath);
+			GedDocument d = GedDocumentService.findDocumentbyFilePath(itemPath);
+		}
 		
 	}
 	
 	
+	
+	private String getFilePathFromTreeItem(TreeItem<String> item) {
+		String itemPath = item.getValue();
+		TreeItem<String> parent = item.getParent();
+		while (parent != null) {
+			itemPath = parent.getValue() + "/" + itemPath;
+			parent = parent.getParent();
+		}
+		return itemPath;
+	}
 	
 	private final class TextFieldTreeCellImpl extends TreeCell<String> {
 
