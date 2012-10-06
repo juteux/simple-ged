@@ -5,6 +5,7 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 
 import com.ged.ui.fxwidgets.FxLibraryView;
+import com.ged.ui.fxwidgets.FxToolBar;
 import com.tools.PropertiesHelper;
 
 import javafx.application.Application;
@@ -12,11 +13,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.ToolBar;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
@@ -60,6 +64,11 @@ public class FxMainWindow extends Application {
     	
         primaryStage.setTitle(properties.getProperty("APPLICATION_NAME"));
         
+        /*
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+        BorderPane borderPane = new BorderPane();
+        borderPane.setStyle("-fx-background-color: green;");
+        */
         
         Button btn = new Button();
         btn.setText("Say 'Hello World'");
@@ -72,11 +81,19 @@ public class FxMainWindow extends Application {
         });
         
         
+        ToolBar toolBar = new FxToolBar();
+
+        int height = 25;
+        toolBar.setPrefHeight(height);
+        toolBar.setMinHeight(height);
+        toolBar.setMaxHeight(height);
         
-        StackPane root = new StackPane();
-        //root.getChildren().add(btn);
-        root.getChildren().add(new FxLibraryView());
-        primaryStage.setScene(new Scene(root, APP_WIDTH, APP_HEIGHT));
+        BorderPane borderPane = new BorderPane();
+        borderPane.setTop(toolBar);
+        
+        borderPane.setCenter(new FxLibraryView());
+        
+        primaryStage.setScene(new Scene(borderPane, APP_WIDTH, APP_HEIGHT));
         primaryStage.show();
     	
     }
