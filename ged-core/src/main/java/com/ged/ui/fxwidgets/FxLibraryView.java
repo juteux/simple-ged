@@ -122,49 +122,36 @@ public class FxLibraryView extends TreeView<String> {
  		
  		if (new File(filePath).isFile()) {
  			
- 			String extension = FileHelper.getExtension(filePath);
  			Image i = null;
  			
- 			if (extension.equals("PDF")) {
- 				i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_file_pdf")));
- 			}
- 			else if (extension.equals("HTML")) {
- 				i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_file_html")));
- 			}
- 			if (extension.equals("TXT")) {
- 				i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_file_txt")));
- 			}
- 			else { // more complex types
- 				
- 				String[] pptExtensions = new String[] { "PPT", "PPTX" };
- 				for (String s : pptExtensions) {
- 					if (extension.equals(s)) {
- 						i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_file_ppt")));
- 						break;
- 					}
- 				}
- 				
- 				String[] docExtensions = new String[] { "DOC", "DOCX" };
- 				for (String s : docExtensions) {
- 					if (extension.equals(s)) {
- 						i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_file_doc")));
- 						break;
- 					}
- 				}
- 				
- 				
- 				String[] imagesExtensions = new String[] { "PNG", "JPG", "JPEG", "BMP", "GIF" };
- 				for (String s : imagesExtensions) {
- 					if (extension.equals(s)) {
- 						i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_file_img")));
- 						break;
- 					}
- 				}
- 			}
- 			
- 			if (i == null) { // we haven't found a matched type
- 				i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_file_unknown")));
- 			}
+ 			switch (FileHelper.getFileType(filePath)) {
+			case PDF_TYPE:
+				i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_file_pdf")));
+				break;
+			case HTML_TYPE:
+				i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_file_html")));
+				break;
+			case TEXT_TYPE :
+				i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_file_txt")));
+				break;
+			case PPT_TYPE :
+			case PPTX_TYPE :
+				i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_file_ppt")));
+				break;
+			case DOC_TYPE :
+			case DOCX_TYPE :
+				i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_file_doc")));
+				break;
+			case PNG_TYPE :
+			case JPG_TYPE :
+			case BMP_TYPE :
+			case GIF_TYPE :
+				i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_file_img")));
+				break;
+			default:
+				i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_file_unknown")));
+				break;
+			}
  			
  			// apply image
 			ImageView iv = new ImageView(i);
