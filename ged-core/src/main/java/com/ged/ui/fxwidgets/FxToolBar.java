@@ -13,7 +13,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import com.ged.ui.fxcontrollers.ToolBarController;
+import com.ged.ui.fxwidgetcontrollers.ToolBarController;
 import com.tools.PropertiesHelper;
 
 public class FxToolBar extends ToolBar {

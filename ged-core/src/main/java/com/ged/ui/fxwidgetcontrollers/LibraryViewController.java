@@ -1,11 +1,15 @@
-package com.ged.ui.fxcontrollers;
+package com.ged.ui.fxwidgetcontrollers;
 
 import java.io.File;
+
+import javax.swing.event.EventListenerList;
 
 import com.ged.Profile;
 import com.ged.models.GedDocument;
 import com.ged.services.GedDocumentService;
 import com.ged.ui.fxwidgets.FxLibraryView;
+import com.ged.ui.listeners.LibraryListener;
+
 import org.apache.log4j.Logger;
 
 import javafx.beans.value.ChangeListener;
@@ -33,6 +37,13 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 	 * The controlled object
 	 */
 	private FxLibraryView libraryView;
+	
+	/**
+	 * Event listener
+	 */
+	private final EventListenerList listeners = new EventListenerList();
+	
+	
 	
 	public LibraryViewController(FxLibraryView libraryView) {
 		this.libraryView = libraryView;
@@ -78,6 +89,7 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 		
 		logger.debug("Full item path : " + itemPath);
 		
+		/*
 		if (new File(Profile.getInstance().getLibraryRoot() + itemPath).isDirectory()) {
 			logger.debug("a library folder : " + itemPath);
 		}
@@ -85,9 +97,28 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 			logger.debug("a library document : " + itemPath);
 			GedDocument d = GedDocumentService.findDocumentbyFilePath(itemPath);
 		}
+		*/
 		
+        for(LibraryListener listener : getLibraryListeners()) {
+            listener.selectionChanged(itemPath);
+        }
 	}
 	
+	
+	// for externals listeners
+
+	public void addLibraryListener(LibraryListener listener) {
+		listeners.add(LibraryListener.class, listener);
+	}
+
+	public void removeLibraryListener(LibraryListener listener) {
+		listeners.remove(LibraryListener.class, listener);
+	}
+
+	public LibraryListener[] getLibraryListeners() {
+		return listeners.getListeners(LibraryListener.class);
+	}
+
 	
 	
 	private String getFilePathFromTreeItem(TreeItem<String> item) {

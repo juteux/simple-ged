@@ -1,6 +1,7 @@
 package com.ged.ui.fxwidgets;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.Properties;
 
 import javafx.scene.Node;
@@ -34,6 +35,10 @@ public class FxLibraryView extends TreeView<String> {
 	 */
 	private boolean showDirectoryOnly = false;
 	
+	/**
+	 * My controller
+	 */
+	private WeakReference<com.ged.ui.fxwidgetcontrollers.LibraryViewController> controller;
 	
 	/**
 	 * The software properties
@@ -44,12 +49,12 @@ public class FxLibraryView extends TreeView<String> {
     public FxLibraryView() {
     	buildTree();
     	
-    	com.ged.ui.fxcontrollers.LibraryViewController controller = new com.ged.ui.fxcontrollers.LibraryViewController(this);
+    	controller = new WeakReference<com.ged.ui.fxwidgetcontrollers.LibraryViewController>(new com.ged.ui.fxwidgetcontrollers.LibraryViewController(this));
     	
     	this.setEditable(true);
-    	this.setCellFactory(controller);
+    	this.setCellFactory(controller.get());
     	
-    	this.getSelectionModel().selectedItemProperty().addListener(controller);  
+    	this.getSelectionModel().selectedItemProperty().addListener(controller.get());  
     }
     
    
@@ -203,5 +208,11 @@ public class FxLibraryView extends TreeView<String> {
 		}
 		return node;
 	}
-    
+
+
+
+	public com.ged.ui.fxwidgetcontrollers.LibraryViewController getController() {
+		return controller.get();
+	}
+  
 }

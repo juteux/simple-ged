@@ -57,9 +57,11 @@ public class FxDocumentInfoViewer extends VBox {
 	 * Instantiate attributes (widgets)
 	 */
 	private void instantiateWidgets() {
-		title = new Label("Titre de test");
-		description = new Label("Description de test");
-		date = new Label("00/00/0000");
+		title = new Label();
+		description = new Label();
+		date = new Label();
+		
+		setGedDocument(null);
 	}
 	
 	
@@ -72,9 +74,9 @@ public class FxDocumentInfoViewer extends VBox {
 		logger.debug("document selected changed");
 		
 		if (document == null) {
-			title.setText("");
-			description.setText("");
-			date.setText("");
+			title.setText("-");
+			description.setText("-");
+			date.setText("-");
 			return;
 		}
 		

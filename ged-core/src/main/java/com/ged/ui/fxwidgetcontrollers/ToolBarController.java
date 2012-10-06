@@ -1,4 +1,4 @@
-package com.ged.ui.fxcontrollers;
+package com.ged.ui.fxwidgetcontrollers;
 
 import org.apache.log4j.Logger;
 

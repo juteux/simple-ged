@@ -1,5 +1,6 @@
 package com.ged.ui.fxscreen;
 
+import com.ged.ui.fxscreencontroller.LibraryViewScreenController;
 import com.ged.ui.fxwidgets.FxDocumentInfoViewer;
 import com.ged.ui.fxwidgets.FxLibraryView;
 
@@ -34,8 +35,22 @@ public class LibraryViewScreen extends HBox {
 	
 	
 	private void instanciateWidgets() {
+		
+		LibraryViewScreenController controller = new LibraryViewScreenController(this);
+		
 		libraryWidget = new FxLibraryView();
+		libraryWidget.getController().addLibraryListener(controller);
+		
 		documentInfoViewerWidget = new FxDocumentInfoViewer();
+	}
+
+
+	public FxLibraryView getLibraryWidget() {
+		return libraryWidget;
+	}
+
+	public FxDocumentInfoViewer getDocumentInfoViewerWidget() {
+		return documentInfoViewerWidget;
 	}
 	
 }
