@@ -1,10 +1,10 @@
 package com.ged.ui.fxpreviewwidgets;
 
-import java.awt.Dimension;
 import java.io.File;
 
 import org.apache.log4j.Logger;
 
+import javafx.geometry.Dimension2D;
 import com.tools.FileHelper;
 
 
@@ -19,19 +19,6 @@ public class FilePreviewerFactory {
 	
 	private static final Logger logger = Logger.getLogger(FilePreviewerFactory.class);
 	
-	/**
-	 * Supported file types
-	 * 
-	 * @author xavier
-	 * 
-	 */
-	public enum FileType {
-		OTHER_TYPE, // Unknown file type
-		IMAGE_TYPE, // An image
-		TEXT_TYPE, // A brut text file
-		PDF_TYPE, // A pdf file
-		HTML_TYPE	// An html file
-	}
 
 	/**
 	 * Return the previewer which is matching with file type
@@ -44,19 +31,22 @@ public class FilePreviewerFactory {
 	 * 
 	 * @return The appropriate viewer
 	 */
-	public static AbstractFilePreviewer getFilePreviewer(File documentFile) {
+	public static AbstractFilePreviewer getFilePreviewer(File documentFile, Dimension2D maxSize) {
 		
 		AbstractFilePreviewer previewer = null;
 	    
 	    // choose the correct previewer
 	    switch (FileHelper.getFileType(documentFile.getAbsolutePath()))
 	    {
-	    //case TEXT_TYPE :
-	    //	previewer = new TextFilePreviewer(documentFile.getAbsolutePath());
-	    //    break;
-	    //case IMAGE_TYPE :
-	    //	previewer = new ImageFilePreviewer(documentFile.getAbsolutePath(), maximumSize);
-	    //    break;
+	    case TEXT_TYPE :
+	    	previewer = new TextFilePreviewer(documentFile.getAbsolutePath());
+	        break;
+	    case PNG_TYPE :
+	    case JPG_TYPE :
+	    case BMP_TYPE :
+	    case GIF_TYPE :
+	    	previewer = new ImageFilePreviewer(documentFile.getAbsolutePath(), maxSize);
+	        break;
 	    //case HTML_TYPE :
 	    //	previewer = new HtmlFilePreviewer(documentFile.getAbsolutePath());
 	    //	break;

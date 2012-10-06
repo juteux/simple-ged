@@ -125,6 +125,9 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 		String itemPath = item.getValue();
 		TreeItem<String> parent = item.getParent();
 		while (parent != null) {
+			if (parent.getParent() == null) { // we wan't to exclude root from the final path
+				break;
+			}
 			itemPath = parent.getValue() + "/" + itemPath;
 			parent = parent.getParent();
 		}

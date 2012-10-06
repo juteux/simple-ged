@@ -76,16 +76,17 @@ public class FxMainWindow extends Application {
         BorderPane borderPane = new BorderPane();
         borderPane.setTop(toolBar);
         
-        borderPane.setCenter(new LibraryViewScreen());
+        LibraryViewScreen l = new LibraryViewScreen();
+        borderPane.setCenter(l);
         
         Scene scene = new Scene(borderPane, APP_WIDTH, APP_HEIGHT);
         scene.getStylesheets().add("templates/style.css");
         
         primaryStage.setScene(scene);
         
-        
         primaryStage.show();
-    	
+        
+        l.refreshLayoutSize();
     }
 
 }

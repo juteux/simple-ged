@@ -26,16 +26,12 @@ public class LibraryViewScreenController implements LibraryListener {
 		
 		if (d == null) {
 			libraryViewScreen.getDocumentInfoViewerWidget().setGedDocument(null);
-			//libraryViewScreen.getDocumentPreview().setFile(new File(Profile.getInstance().getLibraryRoot() + relativeFilePathOfNewSelection));
+			libraryViewScreen.getDocumentPreviewer().setFile(new File(Profile.getInstance().getLibraryRoot() + relativeFilePathOfNewSelection));
 		}
 		else {
 			libraryViewScreen.getDocumentInfoViewerWidget().setGedDocument(d); 
-			//libraryViewScreen.getDocumentPreview().setGedDocument(d);
+			libraryViewScreen.getDocumentPreviewer().setGedDocument(d);
 		}
-	
-		// do not forget to refresh
-		//libraryViewScreen.getDocumentPreview().validate();
-		//libraryViewScreen.validate();
 	}
 
 }
