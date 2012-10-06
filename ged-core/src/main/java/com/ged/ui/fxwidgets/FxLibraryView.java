@@ -19,14 +19,20 @@ import com.tools.PropertiesHelper;
 import com.tools.RelativeFileSystemModel;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 /**
  * A view of the library, a tree with files in GED directory
@@ -53,8 +59,15 @@ public class FxLibraryView extends TreeView<String> {
 
     public FxLibraryView() {
     	buildTree();
+    	
+    	com.ged.ui.fxcontrollers.LibraryViewController controller = new com.ged.ui.fxcontrollers.LibraryViewController(this);
+    	
+    	this.setEditable(true);
+    	this.setCellFactory(controller);
+    	this.getSelectionModel().selectedItemProperty().addListener(controller);  
     }
-
+    
+   
     
 	/**
 	 * Get the path to display in a tree node
@@ -95,7 +108,7 @@ public class FxLibraryView extends TreeView<String> {
 	
  	private Node getIconForNode(String filePath) {
  		
- 		//logger.info(filePath);
+ 		logger.trace(filePath);
  		
  		// root
  		if (filePath == "") {
