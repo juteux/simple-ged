@@ -6,6 +6,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.StringWriter;
 
+import javax.print.DocFlavor;
+
+import com.ged.tools.PrintingHelper;
+
 import javafx.geometry.Dimension2D;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextAreaBuilder;
@@ -58,6 +62,11 @@ public class TextFilePreviewer extends AbstractFilePreviewer {
 
 	@Override
 	public boolean isPrintable() {
-		return false;
+		return true;
+	}
+	
+	@Override
+	public void print() {
+		PrintingHelper.printFile(absoluteFilePath, DocFlavor.INPUT_STREAM.TEXT_PLAIN_HOST);
 	}
 }

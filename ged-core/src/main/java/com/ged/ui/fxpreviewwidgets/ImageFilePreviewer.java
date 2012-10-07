@@ -4,11 +4,16 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
 
+import javax.print.DocFlavor;
+
 import javafx.geometry.Dimension2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import org.apache.log4j.Logger;
+
+import com.ged.tools.PrintingHelper;
+import com.tools.FileHelper;
 
 public class ImageFilePreviewer extends AbstractFilePreviewer {
 
@@ -64,7 +69,35 @@ public class ImageFilePreviewer extends AbstractFilePreviewer {
 
 	@Override
 	public boolean isPrintable() {
-		return true;
+
+		switch (FileHelper.getFileType(absoluteFilePath)) {
+		case PNG_TYPE :
+		case JPG_TYPE :
+		case GIF_TYPE :
+			return true;
+		default:
+			return false;
+		}
+	}
+	
+	
+	@Override
+	public void print() {
+		
+		String extension = com.tools.FileHelper.getExtension(absoluteFilePath);
+		DocFlavor flavor = null;
+		
+		if (extension.equalsIgnoreCase("PNG")) {
+			flavor = DocFlavor.INPUT_STREAM.PNG;
+		}
+		else if (extension.equalsIgnoreCase("GIF")) {
+			flavor = DocFlavor.INPUT_STREAM.GIF;
+		}
+		else if (extension.equalsIgnoreCase("JPG") || extension.equalsIgnoreCase("JPEG")) {
+			flavor = DocFlavor.INPUT_STREAM.JPEG;
+		}
+		
+		PrintingHelper.printFile(absoluteFilePath, flavor);
 	}
 
 }

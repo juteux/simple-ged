@@ -16,6 +16,8 @@ import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DataFormat;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -56,6 +58,11 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 	 */
 	private final EventListenerList listeners = new EventListenerList();
 	
+	/*
+	 * Drag & drop format 
+	 */
+	public static DataFormat dataFormat =  new DataFormat("x-ged-element");
+
 	
 	
 	public LibraryViewController(FxLibraryView libraryView) {
@@ -67,37 +74,43 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 	 * Cell edition
 	 */
 	@Override
-	public TreeCell<String> call(TreeView<String> arg0) {
+	public TreeCell<String> call(TreeView<String> arg0) {		
 		
-		if (arg0.getSelectionModel().getSelectedItem() != null) {
-
-			String itemPath = getFilePathFromTreeItem(arg0.getSelectionModel().getSelectedItem());
-			
-			// TODO : add root modification
-			
-			if (new File(Profile.getInstance().getLibraryRoot() + itemPath).isDirectory()) {
-				logger.debug("a library folder : " + itemPath);
-			}
-			else { // some library document
-				logger.debug("a library document : " + itemPath);
-				//GedDocument d = GedDocumentService.findDocumentbyFilePath(itemPath);
-			}
-			
-			
-		}
-		
-		/*
 		arg0.setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-            	Dragboard db = new Dragboard();
+            	logger.info("drag started");
+            	
+            	Dragboard db = libraryView.startDragAndDrop(TransferMode.MOVE);
+                
+                Object item = libraryView.getSelectionModel().getSelectedItem();
                 ClipboardContent content = new ClipboardContent();
-                content.putString("Hello!");
+                if (item != null) {
+                	content.put(dataFormat,item.toString());            
+                } else {
+                	content.put(dataFormat,"XData"); 
+                }
                 db.setContent(content);
+                
                 mouseEvent.consume();
             }
         });
-		*/
+
+		
+
+		arg0.setOnDragDropped(new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent event) {
+            	logger.info("drop event");
+            	event.acceptTransferModes(TransferMode.MOVE);    
+            	
+            	// TODO : la modification dans la vraie vie
+            	
+            	event.consume();
+            }
+        });
+		
+		
 		
 		return new TextFieldTreeCellImpl();
 	}
@@ -183,6 +196,11 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
         node.setExpanded(true);
         
         node.getChildren().add(newFolder);
+	}
+	
+	
+	public void addDocumentUnderNode(TreeItem<String> node) {
+		// TODO
 	}
 	
 	
