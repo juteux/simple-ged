@@ -190,7 +190,7 @@ public class FxLibraryView extends TreeView<String> {
 				
 				subNode = new TreeItem<String>(convertToNodeName(f.getName()), getIconForNode(f.getPath()));
 			}
-			
+						
 			node.getChildren().add(subNode);
 		}
 		return node;

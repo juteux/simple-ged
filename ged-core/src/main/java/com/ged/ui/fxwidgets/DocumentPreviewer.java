@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.geometry.Dimension2D;
+import javafx.geometry.Insets;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 import com.ged.Profile;
@@ -37,12 +39,6 @@ public class DocumentPreviewer extends VBox {
 	 */
 	private int currentPreviewerIndex;
 	
-	/**
-	 * The maximum size for previewer, initialized when the first file preview is required
-	 */
-	private Dimension2D maximumPreviewerSize;
-	
-	
 	
 	public DocumentPreviewer() {
 		instantiateWidgets();
@@ -56,6 +52,9 @@ public class DocumentPreviewer extends VBox {
 		previewers = new ArrayList<>();
 		
 		// TODO : add previous & next buttons
+		
+		setPadding(new Insets(5,5,5,5));
+		setVgrow(this, Priority.ALWAYS);
 	}
 	
 	
@@ -99,10 +98,8 @@ public class DocumentPreviewer extends VBox {
 	 */
 	public void addFile(final File file) {
 		
-		if (maximumPreviewerSize == null) {
-			maximumPreviewerSize = new Dimension2D(this.getWidth(), this.getHeight());
-		}
-		
+		// always choose the best size for you !
+		Dimension2D maximumPreviewerSize = new Dimension2D(this.getWidth(), this.getHeight());
 		
 		previewers.add(FilePreviewerFactory.getFilePreviewer(file, maximumPreviewerSize));
 		gotoIndex(previewers.size()-1);

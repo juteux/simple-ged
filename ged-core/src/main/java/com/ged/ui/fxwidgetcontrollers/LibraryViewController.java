@@ -3,20 +3,9 @@ package com.ged.ui.fxwidgetcontrollers;
 import java.io.File;
 import java.util.Properties;
 
-import javax.swing.event.EventListenerList;
-
-import com.ged.Profile;
-import com.ged.models.GedDocument;
-import com.ged.services.GedDocumentService;
-import com.ged.ui.fxwidgets.FxLibraryView;
-import com.ged.ui.listeners.LibraryListener;
-import com.tools.PropertiesHelper;
-
-import org.apache.log4j.Logger;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.Event;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
@@ -26,9 +15,24 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.util.Callback;
+
+import javax.swing.event.EventListenerList;
+
+import org.apache.log4j.Logger;
+
+import com.ged.Profile;
+import com.ged.models.GedDocument;
+import com.ged.services.GedDocumentService;
+import com.ged.ui.fxwidgets.FxLibraryView;
+import com.ged.ui.listeners.LibraryListener;
+import com.tools.PropertiesHelper;
 
 /**
  * The controller for the tree library view
@@ -74,16 +78,30 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 			}
 			else { // some library document
 				logger.debug("a library document : " + itemPath);
-				GedDocument d = GedDocumentService.findDocumentbyFilePath(itemPath);
+				//GedDocument d = GedDocumentService.findDocumentbyFilePath(itemPath);
 			}
 			
 			
 		}
-
+		
+		/*
+		arg0.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+            	Dragboard db = new Dragboard();
+                ClipboardContent content = new ClipboardContent();
+                content.putString("Hello!");
+                db.setContent(content);
+                mouseEvent.consume();
+            }
+        });
+		*/
+		
 		return new TextFieldTreeCellImpl();
 	}
 	
 	
+
 	/**
 	 * Selection changed
 	 */
@@ -147,7 +165,6 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 	}
 	
 	
-	
 	private final class TextFieldTreeCellImpl extends TreeCell<String> {
 
 		private Properties properties = PropertiesHelper.getInstance().getProperties();
@@ -159,8 +176,8 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 		public TextFieldTreeCellImpl() {
             MenuItem addMenuItem = new MenuItem(properties.getProperty("add_directory"));
             addMenu.getItems().add(addMenuItem);
-            addMenuItem.setOnAction(new EventHandler() {
-                public void handle(Event t) {
+            addMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent t) {
                 	
                 	if ( ! new File(Profile.getInstance().getLibraryRoot() + getFilePathFromTreeItem(getTreeItem()) + "/" + properties.getProperty("new_dir")).mkdir() ) {
         				return;
@@ -172,7 +189,7 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
         			iv.setFitWidth(FxLibraryView.TREE_ITEM_SIZE);
         			iv.setFitHeight(FxLibraryView.TREE_ITEM_SIZE);
                 	
-                    TreeItem newFolder = new TreeItem<String>(properties.getProperty("new_dir"), iv);
+                    TreeItem<String> newFolder = new TreeItem<>(properties.getProperty("new_dir"), iv);
                     
                     getTreeItem().setExpanded(true);
                     
