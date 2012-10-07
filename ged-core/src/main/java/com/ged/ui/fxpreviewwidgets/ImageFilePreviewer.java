@@ -1,5 +1,7 @@
 package com.ged.ui.fxpreviewwidgets;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.File;
 
 import javafx.geometry.Dimension2D;
@@ -26,49 +28,32 @@ public class ImageFilePreviewer extends AbstractFilePreviewer {
 		try {
 			File file = new File(absoluteFilePath);
 			Image image = new Image(file.toURI().toURL().toExternalForm());
-		
+
+			Dimension s = Toolkit.getDefaultToolkit().getScreenSize();
+			s.setSize(maximumSize.getWidth(), maximumSize.getHeight());
+
+			double pW = image.getWidth();
+			double pH = image.getHeight();
 			
-			// Scaled image size
-			double newWidth = image.getWidth();
-			double newHeight = image.getHeight();
-			boolean hasToBeScalled = false;
+			double xScale = (double) s.width / pW;
+			double yScale = (double) s.height / pH;
+			double scale = xScale < yScale ? xScale : yScale;
 
-			if (image.getHeight() > maximumSize.getHeight() && image.getWidth() <= maximumSize.getWidth()) {	// too height
-				double scaleFactor = maximumSize.getHeight() / (double)image.getHeight();
-				newWidth = image.getWidth() * scaleFactor;
-				newHeight = image.getHeight() * scaleFactor;
-				hasToBeScalled = true;
-			} 
-			else if (image.getWidth() > maximumSize.getWidth() && image.getHeight() <= maximumSize.getHeight()) { // too large
-				double scaleFactor = maximumSize.getWidth() / (double)image.getWidth();
-				newWidth = image.getWidth() * scaleFactor;
-				newHeight = image.getHeight() * scaleFactor;
-				hasToBeScalled = true;
-			}
-			else if (image.getWidth() > maximumSize.getWidth() && image.getHeight() > maximumSize.getWidth()){ // too height & too large
-				if (image.getHeight() > image.getWidth()) { 
-					double scaleFactor = (maximumSize.getHeight() / (double)image.getHeight())/2;
-					newWidth = image.getWidth() * scaleFactor;
-					newHeight = image.getHeight() * scaleFactor;
-					hasToBeScalled = true;
-				}
-				else {
-					double scaleFactor = (maximumSize.getWidth() / (double)image.getWidth())/2;
-					newWidth = image.getWidth() * scaleFactor;
-					newHeight = image.getHeight() * scaleFactor;
-					hasToBeScalled = true;
-				}
-			}
+			// Work out target size
+			pW *= scale;
+			pH *= scale;
 
-			ImageView iv = new ImageView(image);
+			// Get image and set
+			ImageView imageView = new ImageView(image);
+
+			// Set size of components
+			imageView.setSmooth(true);
+			imageView.setFitWidth(pW);
+			imageView.setFitHeight(pH);
+			this.setWidth(imageView.getFitWidth() + 2);
+			this.setHeight(imageView.getFitHeight() + 2);
 			
-			if (hasToBeScalled) {
-				iv.setSmooth(true);
-				iv.setFitHeight(newHeight);
-				iv.setFitWidth(newWidth);
-			} 
-
-			getChildren().add(iv);
+			getChildren().add(imageView);
 		} 
 		catch (Exception e) {
 			logger.error("Failed to load " + absoluteFilePath + " : " + e.getMessage());
