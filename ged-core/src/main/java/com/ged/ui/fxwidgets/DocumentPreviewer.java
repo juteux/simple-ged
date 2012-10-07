@@ -1,23 +1,30 @@
 package com.ged.ui.fxwidgets;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import com.ged.Profile;
 import com.ged.models.GedDocument;
 import com.ged.models.GedDocumentFile;
+import com.ged.ui.controllers.DocumentPreviewController;
 import com.ged.ui.fxpreviewwidgets.AbstractFilePreviewer;
 import com.ged.ui.fxpreviewwidgets.FilePreviewerFactory;
+import com.ged.ui.fxwidgetcontrollers.FxDocumentPreviewerController;
 
 
 /**
@@ -26,7 +33,7 @@ import com.ged.ui.fxpreviewwidgets.FilePreviewerFactory;
  * @author xavier
  *
  */
-public class DocumentPreviewer extends VBox {
+public class DocumentPreviewer extends HBox {
 
 	/**
 	 * Every previewers attached to the current document
@@ -53,9 +60,45 @@ public class DocumentPreviewer extends VBox {
 	 */
 	private Button back;
 	
+	/**
+	 * The right box contains actions buttons
+	 */
+	private VBox rightBox;
+	
+	/**
+	 * The current previewer container
+	 */
+	private VBox leftBox;
+	
+	/**
+	 * My controller
+	 */
+	private WeakReference<FxDocumentPreviewerController> controller;
+	
 	
 	public DocumentPreviewer() {
 		instantiateWidgets();
+		
+		HBox navBtnBox = new HBox();
+		navBtnBox.getChildren().addAll(back, next);
+		
+		rightBox = new VBox();
+		rightBox.getChildren().addAll(navBtnBox);
+		//rightBox.setStyle("-fx-background-color:green");
+		
+		leftBox = new VBox();
+		//leftBox.setStyle("-fx-background-color:orange");
+		HBox.setHgrow(leftBox, Priority.ALWAYS);
+		VBox.setVgrow(leftBox, Priority.ALWAYS);
+		
+		setPadding(new Insets(5,5,5,5));
+		
+		HBox.setHgrow(this, Priority.ALWAYS);
+		VBox.setVgrow(this, Priority.ALWAYS);
+		
+		HBox.setHgrow(rightBox, Priority.NEVER);
+		
+		this.getChildren().addAll(leftBox, rightBox);
 	}
 	
 	/**
@@ -63,31 +106,19 @@ public class DocumentPreviewer extends VBox {
 	 */
 	private void instantiateWidgets() {
 		
+		controller = new WeakReference<>(new FxDocumentPreviewerController(this));
+		
 		previewers = new ArrayList<>();
 		
 		back = new Button("<");
-		back.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent t) {
-				gotoPreviousPreviewer();
-			}
-		});
+		back.setOnAction(controller.get());
 		back.setPrefSize(50, 50);
-		AnchorPane.setLeftAnchor(back, 3.0);
-		AnchorPane.setBottomAnchor(back, 4.0);
 
 		next = new Button(">");
-		next.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent t) {
-				gotoNextPreviewer();
-			}
-		});
+		next.setOnAction(controller.get());
 		next.setPrefSize(50, 50);
 		
-		
-		setPadding(new Insets(5,5,5,5));
-		setVgrow(this, Priority.ALWAYS);
+		controller.get().fixButtonsVisibility();
 	}
 	
 	
@@ -132,7 +163,7 @@ public class DocumentPreviewer extends VBox {
 	public void addFile(final File file) {
 		
 		// always choose the best size for you !
-		Dimension2D maximumPreviewerSize = new Dimension2D(this.getWidth() - 10, this.getHeight() - 10);
+		Dimension2D maximumPreviewerSize = new Dimension2D(leftBox.getWidth() - 10, leftBox.getHeight() - 10);
 		
 		previewers.add(FilePreviewerFactory.getFilePreviewer(file, maximumPreviewerSize));
 		gotoIndex(previewers.size()-1);
@@ -143,15 +174,15 @@ public class DocumentPreviewer extends VBox {
 	 */
 	private void refreshDocumentViewer() {
 		if (currentPreviewer != null) {
-			this.getChildren().remove(currentPreviewer);
+			leftBox.getChildren().clear();//remove(currentPreviewer);
 		}
 		
 		if (previewers.size() != 0) {
 			currentPreviewer = previewers.get(currentPreviewerIndex);
-			this.getChildren().add(currentPreviewer);
+			leftBox.getChildren().add(currentPreviewer);
 		}
 		
-		//controller.fixButtonsVisibility();
+		controller.get().fixButtonsVisibility();
 	}
 	
 	/**
@@ -200,7 +231,28 @@ public class DocumentPreviewer extends VBox {
 		refreshDocumentViewer();
 	}
 	
-	
-	
+	public int getPreviewersCount() {
+		return previewers.size();
+	}
+
+	public List<AbstractFilePreviewer> getPreviewers() {
+		return previewers;
+	}
+
+	public AbstractFilePreviewer getCurrentPreviewer() {
+		return currentPreviewer;
+	}
+
+	public int getCurrentPreviewerIndex() {
+		return currentPreviewerIndex;
+	}
+
+	public Button getNext() {
+		return next;
+	}
+
+	public Button getBack() {
+		return back;
+	}
 	
 }
