@@ -202,7 +202,7 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 		public void startEdit() {
 			super.startEdit();
 
-			if (!currentNodeIsRootOrDirectory()) {
+			if (!currentNodeIsDirectory()) {
 				return;
 			}
 			
@@ -241,7 +241,7 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 					setText(getString());
 					setGraphic(getTreeItem().getGraphic());
 
-					if (currentNodeIsRootOrDirectory()) {
+					if (currentNodeIsRoot() || currentNodeIsDirectory()) {
                         setContextMenu(addMenu);
                     }
 					
@@ -249,9 +249,18 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 			}
 		}
 		
-		
-		private boolean currentNodeIsRootOrDirectory() {
-			return getFilePathFromTreeItem(getTreeItem()).isEmpty() || new File(Profile.getInstance().getLibraryRoot() + getFilePathFromTreeItem(getTreeItem())).isDirectory();
+		/**
+		 * The root is excluded from this list, please call currentNodeIsRoot if you wan't to know if it is
+		 */
+		private boolean currentNodeIsDirectory() {
+			if (currentNodeIsRoot()) {
+				return false;
+			}
+			return new File(Profile.getInstance().getLibraryRoot() + getFilePathFromTreeItem(getTreeItem())).isDirectory();
+		}
+
+		private boolean currentNodeIsRoot() {
+			return getFilePathFromTreeItem(getTreeItem()).isEmpty();
 		}
 		
 
