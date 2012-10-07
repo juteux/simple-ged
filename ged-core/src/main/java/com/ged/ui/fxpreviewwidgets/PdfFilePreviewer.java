@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.animation.FadeTransition;
-import javafx.event.Event;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.geometry.Dimension2D;
@@ -71,8 +71,9 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 		AnchorPane.setBottomAnchor(imageView, 1.0);
 
 		back = new Button("<");
-		back.setOnAction(new EventHandler() {
-			public void handle(Event t) {
+		back.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent t) {
 				showPage(pageNumber - 1);
 			}
 		});
@@ -81,8 +82,9 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 		AnchorPane.setBottomAnchor(back, 4.0);
 
 		next = new Button(">");
-		next.setOnAction(new EventHandler() {
-			public void handle(Event t) {
+		next.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent t) {
 				showPage(pageNumber + 1);
 			}
 		});
@@ -251,7 +253,7 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 		}
 
 		public void handle(MouseEvent e) {
-			EventType type = e.getEventType();
+			EventType<?> type = e.getEventType();
 			if (type == MouseEvent.MOUSE_MOVED) {
 
 				// Set time to disappear

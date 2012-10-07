@@ -1,14 +1,12 @@
 package com.ged.ui.fxpreviewwidgets;
 
-import java.awt.Dimension;
 import java.util.Properties;
-
-import com.ged.ui.screens.WelcomeScreen.WelcomeScreenButton;
-import com.tools.PropertiesHelper;
 
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import com.tools.PropertiesHelper;
 
 /**
  * Not really a previewer, I know...

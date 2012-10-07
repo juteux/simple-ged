@@ -1,17 +1,16 @@
 package com.ged.ui.fxscreen;
 
+import javafx.geometry.Insets;
+import javafx.scene.control.Separator;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+
 import com.ged.ui.FxMainWindow;
 import com.ged.ui.fxscreencontroller.LibraryViewScreenController;
 import com.ged.ui.fxwidgets.DocumentPreviewer;
 import com.ged.ui.fxwidgets.FxDocumentInfoViewer;
 import com.ged.ui.fxwidgets.FxLibraryView;
-
-import javafx.geometry.Insets;
-import javafx.scene.control.Separator;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 
 /**
  * Library view screen

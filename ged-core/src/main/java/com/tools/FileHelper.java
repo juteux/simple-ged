@@ -4,8 +4,6 @@ import java.io.File;
 
 import org.apache.log4j.Logger;
 
-import com.ged.ui.preview_widgets.FilePreviewerFactory.FileType;
-
 /**
  * File manipulation tools
  * @author xavier

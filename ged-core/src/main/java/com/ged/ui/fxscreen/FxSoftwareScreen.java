@@ -1,24 +1,15 @@
 package com.ged.ui.fxscreen;
 
-import java.awt.Frame;
 import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.swing.Box;
+import javafx.scene.layout.HBox;
 
 import org.apache.log4j.Logger;
 
 import com.ged.ui.FxMainWindow;
-import com.ged.ui.MainWindow;
-import com.ged.ui.screens.SoftwareScreen;
 import com.tools.PropertiesHelper;
-
-import javafx.scene.Parent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 
 /**
  * 
