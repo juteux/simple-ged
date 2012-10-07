@@ -50,8 +50,8 @@ public class ImageFilePreviewer extends AbstractFilePreviewer {
 			imageView.setSmooth(true);
 			imageView.setFitWidth(pW);
 			imageView.setFitHeight(pH);
-			this.setWidth(imageView.getFitWidth() + 2);
-			this.setHeight(imageView.getFitHeight() + 2);
+			//this.setWidth(imageView.getFitWidth() /*+ 2*/);
+			//this.setHeight(imageView.getFitHeight() /*+ 2*/);
 			
 			getChildren().add(imageView);
 		} 

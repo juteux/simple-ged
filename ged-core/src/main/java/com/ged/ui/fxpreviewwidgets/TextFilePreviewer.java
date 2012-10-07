@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 
 
 public class TextFilePreviewer extends AbstractFilePreviewer {
@@ -37,8 +38,8 @@ public class TextFilePreviewer extends AbstractFilePreviewer {
 			throw new CannotCreatePreviewerException();
 		}
 
-		Label l = new Label(out.toString());
-		getChildren().add(l);
+		Text t = new Text(out.toString());
+		getChildren().add(t);
 	}
 
 

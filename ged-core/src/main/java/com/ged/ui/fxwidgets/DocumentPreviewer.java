@@ -99,7 +99,7 @@ public class DocumentPreviewer extends VBox {
 	public void addFile(final File file) {
 		
 		// always choose the best size for you !
-		Dimension2D maximumPreviewerSize = new Dimension2D(this.getWidth(), this.getHeight());
+		Dimension2D maximumPreviewerSize = new Dimension2D(this.getWidth() - 10, this.getHeight() - 10);
 		
 		previewers.add(FilePreviewerFactory.getFilePreviewer(file, maximumPreviewerSize));
 		gotoIndex(previewers.size()-1);

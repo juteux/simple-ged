@@ -218,8 +218,8 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 		// Set size of components
 		imageView.setFitWidth(pW);
 		imageView.setFitHeight(pH);
-		this.setWidth(imageView.getFitWidth() + 2);
-		this.setHeight(imageView.getFitHeight() + 2);
+		//this.setWidth(imageView.getFitWidth() /*+ 2*/);
+		//this.setHeight(imageView.getFitHeight() /*+ 2*/);
 	}
 
 	/**
