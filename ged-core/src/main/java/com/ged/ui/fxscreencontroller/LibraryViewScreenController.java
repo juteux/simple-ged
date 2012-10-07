@@ -26,7 +26,7 @@ public class LibraryViewScreenController implements LibraryListener {
 		// special case
 		if (new File(Profile.getInstance().getLibraryRoot() + relativeFilePathOfNewSelection).isDirectory()) {
 			libraryViewScreen.getDocumentInfoViewerWidget().setGedDocument(null);
-			libraryViewScreen.getDocumentPreviewer().setSpecialPreviewer(new AddDocumentPreviewer());
+			libraryViewScreen.getDocumentPreviewer().setSpecialPreviewer(new AddDocumentPreviewer(libraryViewScreen.getLibraryWidget().getSelectionModel().getSelectedItem(), libraryViewScreen.getLibraryWidget().getController()));
 			return;
 		}
 		

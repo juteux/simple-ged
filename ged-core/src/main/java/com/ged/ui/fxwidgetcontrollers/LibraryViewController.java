@@ -42,6 +42,8 @@ import com.tools.PropertiesHelper;
  */
 public class LibraryViewController implements Callback<TreeView<String>,TreeCell<String>>, ChangeListener<TreeItem<String>>  {
 
+	private Properties properties = PropertiesHelper.getInstance().getProperties();
+	
 	private static final Logger logger = Logger.getLogger(LibraryViewController.class);
 	
 	/**
@@ -165,9 +167,26 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 	}
 	
 	
+	public void addLibraryFolderUnderNode(TreeItem<String> node) {
+    	if ( ! new File(Profile.getInstance().getLibraryRoot() + getFilePathFromTreeItem(node) + "/" + properties.getProperty("new_dir")).mkdir() ) {
+			return;
+		}
+    	
+		Image i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_library_folder")));
+		ImageView iv = new ImageView(i);
+		iv.setSmooth(true);
+		iv.setFitWidth(FxLibraryView.TREE_ITEM_SIZE);
+		iv.setFitHeight(FxLibraryView.TREE_ITEM_SIZE);
+    	
+        TreeItem<String> newFolder = new TreeItem<>(properties.getProperty("new_dir"), iv);
+        
+        node.setExpanded(true);
+        
+        node.getChildren().add(newFolder);
+	}
+	
+	
 	private final class TextFieldTreeCellImpl extends TreeCell<String> {
-
-		private Properties properties = PropertiesHelper.getInstance().getProperties();
 		
 		private TextField textField;
 
@@ -178,22 +197,7 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
             addMenu.getItems().add(addMenuItem);
             addMenuItem.setOnAction(new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent t) {
-                	
-                	if ( ! new File(Profile.getInstance().getLibraryRoot() + getFilePathFromTreeItem(getTreeItem()) + "/" + properties.getProperty("new_dir")).mkdir() ) {
-        				return;
-        			}
-                	
-        			Image i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_library_folder")));
-        			ImageView iv = new ImageView(i);
-        			iv.setSmooth(true);
-        			iv.setFitWidth(FxLibraryView.TREE_ITEM_SIZE);
-        			iv.setFitHeight(FxLibraryView.TREE_ITEM_SIZE);
-                	
-                    TreeItem<String> newFolder = new TreeItem<>(properties.getProperty("new_dir"), iv);
-                    
-                    getTreeItem().setExpanded(true);
-                    
-                    getTreeItem().getChildren().add(newFolder);
+                	addLibraryFolderUnderNode(getTreeItem());
                 }
             });
 		}
