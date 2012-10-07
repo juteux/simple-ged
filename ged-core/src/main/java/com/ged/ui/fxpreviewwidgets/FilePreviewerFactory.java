@@ -39,7 +39,7 @@ public class FilePreviewerFactory {
 	    switch (FileHelper.getFileType(documentFile.getAbsolutePath()))
 	    {
 	    case TEXT_TYPE :
-	    	previewer = new TextFilePreviewer(documentFile.getAbsolutePath());
+	    	previewer = new TextFilePreviewer(documentFile.getAbsolutePath(), maxSize);
 	        break;
 	    case PNG_TYPE :
 	    case JPG_TYPE :

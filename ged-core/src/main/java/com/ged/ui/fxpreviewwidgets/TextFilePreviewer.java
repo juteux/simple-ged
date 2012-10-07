@@ -6,14 +6,19 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.StringWriter;
 
-import javafx.scene.control.Label;
-import javafx.scene.text.Text;
+import javafx.geometry.Dimension2D;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextAreaBuilder;
 
 
 public class TextFilePreviewer extends AbstractFilePreviewer {
 	
-	public TextFilePreviewer(String absoluteFilePath) {
+	private Dimension2D maximumSize;
+	
+	public TextFilePreviewer(String absoluteFilePath, Dimension2D maxSize) {
 		super(absoluteFilePath);
+		
+		this.maximumSize = maxSize;
 	}
 
 	/**
@@ -38,8 +43,16 @@ public class TextFilePreviewer extends AbstractFilePreviewer {
 			throw new CannotCreatePreviewerException();
 		}
 
-		Text t = new Text(out.toString());
-		getChildren().add(t);
+		final TextArea textArea = TextAreaBuilder.create()
+				.prefWidth(maximumSize.getWidth())
+				.prefHeight(maximumSize.getHeight())
+				.wrapText(true)
+				.build();
+		
+		textArea.setText(out.toString());
+		textArea.setEditable(false);
+		
+		getChildren().add(textArea);
 	}
 
 

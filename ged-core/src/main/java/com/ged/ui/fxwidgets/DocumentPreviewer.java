@@ -4,8 +4,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
@@ -39,6 +43,16 @@ public class DocumentPreviewer extends VBox {
 	 */
 	private int currentPreviewerIndex;
 	
+	/**
+	 * Next file button
+	 */
+	private Button next;
+	
+	/**
+	 * Previous file button
+	 */
+	private Button back;
+	
 	
 	public DocumentPreviewer() {
 		instantiateWidgets();
@@ -51,7 +65,26 @@ public class DocumentPreviewer extends VBox {
 		
 		previewers = new ArrayList<>();
 		
-		// TODO : add previous & next buttons
+		back = new Button("<");
+		back.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent t) {
+				gotoPreviousPreviewer();
+			}
+		});
+		back.setPrefSize(50, 50);
+		AnchorPane.setLeftAnchor(back, 3.0);
+		AnchorPane.setBottomAnchor(back, 4.0);
+
+		next = new Button(">");
+		next.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent t) {
+				gotoNextPreviewer();
+			}
+		});
+		next.setPrefSize(50, 50);
+		
 		
 		setPadding(new Insets(5,5,5,5));
 		setVgrow(this, Priority.ALWAYS);
