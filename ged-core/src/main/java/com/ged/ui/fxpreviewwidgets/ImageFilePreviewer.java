@@ -44,6 +44,10 @@ public class ImageFilePreviewer extends AbstractFilePreviewer {
 			double yScale = (double) s.height / pH;
 			double scale = xScale < yScale ? xScale : yScale;
 
+			if (scale > 1) { // we don't want a too big image
+				scale = 1;
+			}
+			
 			// Work out target size
 			pW *= scale;
 			pH *= scale;
@@ -83,18 +87,19 @@ public class ImageFilePreviewer extends AbstractFilePreviewer {
 	
 	@Override
 	public void print() {
-		
-		String extension = com.tools.FileHelper.getExtension(absoluteFilePath);
+
 		DocFlavor flavor = null;
 		
-		if (extension.equalsIgnoreCase("PNG")) {
+		switch (FileHelper.getFileType(absoluteFilePath)) {
+		case PNG_TYPE:
 			flavor = DocFlavor.INPUT_STREAM.PNG;
-		}
-		else if (extension.equalsIgnoreCase("GIF")) {
-			flavor = DocFlavor.INPUT_STREAM.GIF;
-		}
-		else if (extension.equalsIgnoreCase("JPG") || extension.equalsIgnoreCase("JPEG")) {
+			break;
+		case JPG_TYPE:
 			flavor = DocFlavor.INPUT_STREAM.JPEG;
+			break;
+		case GIF_TYPE:
+			flavor = DocFlavor.INPUT_STREAM.GIF;
+			break;
 		}
 		
 		PrintingHelper.printFile(absoluteFilePath, flavor);
