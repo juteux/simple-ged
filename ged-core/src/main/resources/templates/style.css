@@ -1,3 +1,8 @@
+
+/**
+	Document info view
+*/
+
 .document-info-title {
     -fx-font-size: 24px;
     -fx-padding: 20;
@@ -10,5 +15,13 @@
 }
 
 .document-info-description {
+}
+
+/*
+	 library tree 
+*/
+
+.over-element {
+	-fx-background-color : #E3E3E3;
 }
 

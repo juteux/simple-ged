@@ -1,59 +1,24 @@
 package com.ged.ui;
 
-import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.ToolBar;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 import org.apache.log4j.Logger;
 
 import com.ged.Profile;
 import com.ged.ui.fxscreen.FxSoftwareScreen;
 import com.ged.ui.fxscreen.LibraryViewScreen;
-import com.ged.ui.fxwidgets.FxDocumentInfoViewer;
-import com.ged.ui.fxwidgets.FxLibraryView;
 import com.ged.ui.fxwidgets.FxToolBar;
-import com.ged.ui.screens.AddDocumentScreen;
-import com.ged.ui.screens.BrowseLibraryScreen;
-import com.ged.ui.screens.EditDocumentScreen;
-import com.ged.ui.screens.LocationManagementScreen;
-import com.ged.ui.screens.MessageScreen;
-import com.ged.ui.screens.PluginManagementScreen;
-import com.ged.ui.screens.PluginOptionEditionScreen;
-import com.ged.ui.screens.SearchingScreen;
-import com.ged.ui.screens.SettingsScreen;
-import com.ged.ui.screens.SoftwareScreen;
-import com.ged.ui.screens.WelcomeScreen;
-import com.ged.ui.screens.SoftwareScreen.Screen;
-import com.ged.ui.widgets.SlideDock;
 import com.tools.FileHelper;
 import com.tools.PropertiesHelper;
-
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.application.Application;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.ToolBar;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
  
 
 /**

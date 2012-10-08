@@ -1,6 +1,8 @@
 package com.ged.ui.fxwidgetcontrollers;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 import javafx.beans.value.ChangeListener;
@@ -30,7 +32,6 @@ import javax.swing.event.EventListenerList;
 import org.apache.log4j.Logger;
 
 import com.ged.Profile;
-import com.ged.models.GedDocument;
 import com.ged.services.GedDocumentService;
 import com.ged.ui.fxwidgets.FxLibraryView;
 import com.ged.ui.listeners.LibraryListener;
@@ -58,11 +59,13 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 	 */
 	private final EventListenerList listeners = new EventListenerList();
 	
-	/*
+	/**
 	 * Drag & drop format 
 	 */
-	public static DataFormat dataFormat =  new DataFormat("x-ged-element");
+	public static DataFormat dataFormatLibraryTreeItem =  new DataFormat("x-ged-library-tree-item");
 
+	
+	private TreeItem<String> draggedItem;
 	
 	
 	public LibraryViewController(FxLibraryView libraryView) {
@@ -71,45 +74,36 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 	
 	
 	/**
-	 * Cell edition
+	 * Cell edition or drag & drop
 	 */
 	@Override
-	public TreeCell<String> call(TreeView<String> arg0) {		
+	public TreeCell<String> call(final TreeView<String> arg0) {		
 		
 		arg0.setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
             	logger.info("drag started");
             	
+            	// forbidden on root
+            	if (getFilePathFromTreeItem(libraryView.getSelectionModel().getSelectedItem()).isEmpty()) {
+            		mouseEvent.consume();
+            		return;
+            	}
+            	
+            	draggedItem = libraryView.getSelectionModel().getSelectedItem();
+            	logger.info(draggedItem.getValue());
+            	
             	Dragboard db = libraryView.startDragAndDrop(TransferMode.MOVE);
                 
-                Object item = libraryView.getSelectionModel().getSelectedItem();
+                TreeItem<String> item = libraryView.getSelectionModel().getSelectedItem();
                 ClipboardContent content = new ClipboardContent();
-                if (item != null) {
-                	content.put(dataFormat,item.toString());            
-                } else {
-                	content.put(dataFormat,"XData"); 
-                }
+                content.put(dataFormatLibraryTreeItem, item.toString());            
+                
                 db.setContent(content);
                 
                 mouseEvent.consume();
             }
         });
-
-		
-
-		arg0.setOnDragDropped(new EventHandler<DragEvent>() {
-            @Override
-            public void handle(DragEvent event) {
-            	logger.info("drop event");
-            	event.acceptTransferModes(TransferMode.MOVE);    
-            	
-            	// TODO : la modification dans la vraie vie
-            	
-            	event.consume();
-            }
-        });
-		
 		
 		
 		return new TextFieldTreeCellImpl();
@@ -122,7 +116,11 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 	 */
 	@Override
 	public void changed(ObservableValue<? extends TreeItem<String>> arg0, TreeItem<String> arg1, TreeItem<String> newItem) {
-		// TODO Auto-generated method stub
+
+		if (newItem == null) {
+			return;
+		}
+		
 		logger.debug("selection changed : " + newItem.getValue());
 		
 		String itemPath = getFilePathFromTreeItem(newItem);
@@ -143,6 +141,7 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
             listener.selectionChanged(itemPath);
         }
 	}
+	
 	
 	
 	// for externals listeners
@@ -194,8 +193,8 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
         TreeItem<String> newFolder = new TreeItem<>(properties.getProperty("new_dir"), iv);
         
         node.setExpanded(true);
-        
         node.getChildren().add(newFolder);
+        libraryView.getSelectionModel().select(newFolder);
 	}
 	
 	
@@ -211,15 +210,94 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 		private ContextMenu addMenu = new ContextMenu();
 
 		public TextFieldTreeCellImpl() {
-            MenuItem addMenuItem = new MenuItem(properties.getProperty("add_directory"));
+            
+			MenuItem addMenuItem = new MenuItem(properties.getProperty("add_directory"));
+            MenuItem deleteMenuItem = new MenuItem(properties.getProperty("delete"));
+            
             addMenu.getItems().add(addMenuItem);
             addMenuItem.setOnAction(new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent t) {
                 	addLibraryFolderUnderNode(getTreeItem());
                 }
             });
+            
+            final TextFieldTreeCellImpl self = this;
+
+            this.setOnDragOver(new EventHandler<DragEvent>() {
+
+				@Override
+				public void handle(DragEvent event) {
+					
+					// move from the tree
+					if (event.getDragboard().hasContent(dataFormatLibraryTreeItem)) {
+
+						boolean dropEnable = true;
+						
+						// me on me ?
+						if (draggedItem == getTreeItem()) {
+							dropEnable = false;
+						}
+							
+						// the target is a dir ?
+						if (! new File(Profile.getInstance().getLibraryRoot() + getFilePathFromTreeItem(getTreeItem())).isDirectory()) {
+							dropEnable = false;
+						}
+						
+						if (dropEnable) {
+							event.acceptTransferModes(TransferMode.MOVE);
+							self.getStyleClass().add("over-element");
+						}
+					}
+					//else { // move from system ?
+						//event.acceptTransferModes(TransferMode.MOVE);
+					//}
+					
+				}
+			});
+            
+            
+            this.setOnDragExited(new EventHandler<DragEvent>() {
+				@Override
+				public void handle(DragEvent event) {
+					self.getStyleClass().remove("over-element");
+				}
+			});
+            
+
+    		this.setOnDragDropped(new EventHandler<DragEvent>() {
+                @Override
+                public void handle(DragEvent event) {
+                	logger.info("drop event");
+                	
+                	TreeItem<String> sourceItem = draggedItem;
+                	TreeItem<String> targetItem = getTreeItem();
+                	
+                	String sourcePath = getFilePathFromTreeItem(sourceItem);
+                	String targetPath = getFilePathFromTreeItem(targetItem);
+
+                	File f = new File(Profile.getInstance().getLibraryRoot() + sourcePath);
+                	
+                	GedDocumentService.renameDocumentFile(sourcePath, targetPath + File.separatorChar + f.getName());
+                	
+                	sourceItem.getParent().getChildren().remove(sourceItem);
+                	targetItem.getChildren().add(sourceItem);
+                	
+                	//targetItem.setExpanded(true);
+                    //libraryView.getSelectionModel().select(targetItem);
+                	
+    				event.acceptTransferModes(TransferMode.MOVE);    
+    				event.setDropCompleted(true);
+    				
+                	event.consume();
+                }
+            });
+    		
+    		
+            
 		}
 
+		
+		
 		@Override
 		public void startEdit() {
 			super.startEdit();
