@@ -44,4 +44,11 @@ public class BrowseLibraryScreenController implements LibraryListener {
 	public void refreshScreen() {
 		selectionChanged(browseLibraryScreen.getLibraryView().getController().getLastKnownNodePath());
 	}
+
+
+	@Override
+	public void releaseOpenedFiles() {
+		// TODO Auto-generated method stub
+		
+	}
 }

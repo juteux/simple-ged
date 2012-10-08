@@ -1,7 +1,5 @@
 package com.ged.ui.fxwidgetcontrollers;
 
-import javax.swing.JLabel;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -9,7 +7,6 @@ import javafx.scene.control.Button;
 import org.apache.log4j.Logger;
 
 import com.ged.ui.fxwidgets.DocumentPreviewer;
-import com.ged.ui.widgets.SimpleButton;
 
 public class FxDocumentPreviewerController implements EventHandler<ActionEvent> {
 

@@ -17,4 +17,9 @@ public interface LibraryListener extends EventListener {
 	 */
 	void selectionChanged(String relativeFilePathOfNewSelection);
 	
+	/**
+	 * Called when the listeners have to closed there manipulated files 
+	 */
+	void releaseOpenedFiles();
+	
 }

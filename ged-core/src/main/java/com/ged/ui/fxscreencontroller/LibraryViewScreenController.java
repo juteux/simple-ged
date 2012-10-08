@@ -44,4 +44,9 @@ public class LibraryViewScreenController implements LibraryListener {
 		}
 	}
 
+	@Override
+	public void releaseOpenedFiles() {
+		libraryViewScreen.getDocumentPreviewer().releaseOpenedFiles();
+	}
+
 }

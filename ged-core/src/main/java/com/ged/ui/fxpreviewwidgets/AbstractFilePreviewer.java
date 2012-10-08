@@ -59,4 +59,12 @@ public abstract class AbstractFilePreviewer extends HBox {
 	public String getAbsoluteFilePath() {
 		return absoluteFilePath;
 	}
+
+	/**
+	 * Close some file resource, if opened.
+	 * 
+	 * Override this method if you need to release your resource !
+	 */
+	public void closeFile() {
+	}
 }

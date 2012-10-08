@@ -29,10 +29,12 @@ import javax.print.PrintService;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 
+import org.apache.log4j.Logger;
 import org.jpedal.PdfDecoder;
 
 import com.ged.Profile;
 import com.ged.tools.PrintingHelper;
+import com.ged.ui.fxwidgetcontrollers.FxDocumentPreviewerController;
 import com.sun.pdfview.PDFFile;
 import com.sun.pdfview.PDFPrintPage;
 
@@ -47,6 +49,8 @@ import com.sun.pdfview.PDFPrintPage;
  */
 public class PdfFilePreviewer extends AbstractFilePreviewer {
 
+	private static final Logger logger = Logger.getLogger(PdfFilePreviewer.class);
+	
 	PdfDecoder pdf;
 	ImageView imageView;
 	Button back, next;
@@ -68,6 +72,16 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 		// logger.debug("Max size : " + maxSize.getWidth() + " x " +
 		// maxSize.getHeight());
 	}
+	
+	
+	@Override
+	public void closeFile() {
+		logger.info("Need to close pdf file");
+		if (pdf.isOpen()) {
+			pdf.closePdfFile();
+		}
+	}
+	
 
 	@Override
 	public void load() throws CannotCreatePreviewerException {

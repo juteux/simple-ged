@@ -205,4 +205,10 @@ public class AddDocumentScreenController implements ActionListener,
 		checkValidity();
 	}
 
+	@Override
+	public void releaseOpenedFiles() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

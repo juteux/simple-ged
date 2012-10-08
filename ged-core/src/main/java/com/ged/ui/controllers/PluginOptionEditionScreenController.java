@@ -131,5 +131,12 @@ public class PluginOptionEditionScreenController implements ActionListener, Libr
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 	}
+
+
+	@Override
+	public void releaseOpenedFiles() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

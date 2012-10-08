@@ -254,5 +254,14 @@ public class DocumentPreviewer extends HBox {
 	public Button getBack() {
 		return back;
 	}
+
+	/**
+	 * Ask to close all opened files in previewers
+	 */
+	public void releaseOpenedFiles() {
+		for (AbstractFilePreviewer p : previewers) {
+			p.closeFile();
+		}
+	}
 	
 }

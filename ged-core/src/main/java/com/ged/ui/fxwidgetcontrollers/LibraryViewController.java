@@ -1,8 +1,6 @@
 package com.ged.ui.fxwidgetcontrollers;
 
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Properties;
 
 import javafx.beans.value.ChangeListener;
@@ -275,6 +273,10 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
                 	String sourcePath = getFilePathFromTreeItem(sourceItem);
                 	String targetPath = getFilePathFromTreeItem(targetItem);
 
+                    for(LibraryListener listener : getLibraryListeners()) {
+                        listener.releaseOpenedFiles();
+                    }
+                	
                 	File f = new File(Profile.getInstance().getLibraryRoot() + sourcePath);
                 	
                 	GedDocumentService.renameDocumentFile(sourcePath, targetPath + File.separatorChar + f.getName());
