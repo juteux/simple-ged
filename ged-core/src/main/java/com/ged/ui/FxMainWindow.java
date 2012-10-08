@@ -10,10 +10,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import org.apache.log4j.Logger;
 
 import com.ged.Profile;
+import com.ged.ui.fxscreen.AddDocumentScreen;
 import com.ged.ui.fxscreen.FxSoftwareScreen;
 import com.ged.ui.fxscreen.LibraryViewScreen;
 import com.ged.ui.fxwidgets.FxToolBar;
@@ -30,7 +32,7 @@ import com.tools.PropertiesHelper;
 public class FxMainWindow extends Application {
 
 	
-	private static final Logger logger = Logger.getLogger(MainWindow.class);
+	private static final Logger logger = Logger.getLogger(FxMainWindow.class);
 	
 	/**
 	 * Default application width
@@ -180,10 +182,10 @@ public class FxMainWindow extends Application {
 		/*
 		case SETTING_SCREEN :
 			return new SettingsScreen(this);
-	
+		*/
 		case ADD_SCREEN :
 			return new AddDocumentScreen(this);
-			
+		/*
 		case EDITION_SCREEN :
 			return new EditDocumentScreen(this);
 			

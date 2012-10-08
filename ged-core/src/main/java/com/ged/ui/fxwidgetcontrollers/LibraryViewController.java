@@ -200,7 +200,11 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 	
 	
 	public void addDocumentUnderNode(TreeItem<String> node) {
-		// TODO
+		
+		// TODO : push node
+		
+
+		
 	}
 	
 	
@@ -296,9 +300,9 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 							self.getStyleClass().add("over-element");
 						}
 					}
-					//else { // move from system ?
+					else { // move from system ?
 						//event.acceptTransferModes(TransferMode.MOVE);
-					//}
+					}
 					
 				}
 			});

@@ -51,7 +51,8 @@ public class AddDocumentPreviewer extends AbstractFilePreviewer {
 		
 		Properties properties = PropertiesHelper.getInstance().getProperties();
 		
-		Button btnNewLibraryFolder = new Button("Ajouter un classeur"); // TODO : a passer dans le properties
+		Button btnNewLibraryFolder = new Button(properties.getProperty("add_directory"));
+		btnNewLibraryFolder.getStyleClass().add("btn-on-add-document-previewer");
 		
 		btnNewLibraryFolder.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -63,6 +64,7 @@ public class AddDocumentPreviewer extends AbstractFilePreviewer {
 		// TODO : clean this
 		
 		Button btnAddDocument = new Button(properties.getProperty("goto_add_document"));
+		btnAddDocument.getStyleClass().add("btn-on-add-document-previewer");
 		
 		Image i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_add_doc")));
 		ImageView iv = new ImageView(i);
@@ -77,9 +79,6 @@ public class AddDocumentPreviewer extends AbstractFilePreviewer {
 		
 		btnNewLibraryFolder.setGraphic(iv2);
 		btnAddDocument.setGraphic(iv);
-
-		btnNewLibraryFolder.setPrefSize(200, 120);
-		btnAddDocument.setPrefSize(200, 120);
 		
 		VBox mainLayout = new VBox();
 		mainLayout.getChildren().addAll(btnNewLibraryFolder, btnAddDocument);
