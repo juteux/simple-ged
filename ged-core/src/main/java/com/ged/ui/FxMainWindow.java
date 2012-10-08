@@ -63,12 +63,18 @@ public class FxMainWindow extends Application {
 	 */
 	private BorderPane mainLayout;
 	
+	/**
+	 * The main stage
+	 */
+	private Stage stage;
+	
 	
     @Override
     public void start(Stage primaryStage) {
     	
     	properties = PropertiesHelper.getInstance().getProperties();
     	screens = new ArrayList<>();
+    	stage = primaryStage;
     	
         primaryStage.setTitle(properties.getProperty("APPLICATION_NAME"));
         //primaryStage.initStyle(StageStyle.UNDECORATED);
@@ -219,4 +225,12 @@ public class FxMainWindow extends Application {
 		}
 	}
 
+
+	/**
+	 * Get the main stage
+	 */
+	public Stage getStage() {
+		return stage;
+	}
+	
 }

@@ -23,6 +23,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import javax.swing.event.EventListenerList;
@@ -34,6 +35,8 @@ import com.ged.services.GedDocumentService;
 import com.ged.ui.fxwidgets.FxLibraryView;
 import com.ged.ui.listeners.LibraryListener;
 import com.tools.PropertiesHelper;
+import com.tools.javafx.ModalConfirm;
+import com.tools.javafx.ModalConfirmResponse;
 
 /**
  * The controller for the tree library view
@@ -170,7 +173,7 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 			if (parent.getParent() == null) { // we wan't to exclude root from the final path
 				break;
 			}
-			itemPath = parent.getValue() + "/" + itemPath;
+			itemPath = parent.getValue() + File.separatorChar + itemPath;
 			parent = parent.getParent();
 		}
 		return itemPath;
@@ -178,7 +181,7 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 	
 	
 	public void addLibraryFolderUnderNode(TreeItem<String> node) {
-    	if ( ! new File(Profile.getInstance().getLibraryRoot() + getFilePathFromTreeItem(node) + "/" + properties.getProperty("new_dir")).mkdir() ) {
+    	if ( ! new File(Profile.getInstance().getLibraryRoot() + getFilePathFromTreeItem(node) + File.separatorChar + properties.getProperty("new_dir")).mkdir() ) {
 			return;
 		}
     	
@@ -205,19 +208,66 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 		
 		private TextField textField;
 
-		private ContextMenu addMenu = new ContextMenu();
+		
+		private ContextMenu directoryContextMenu = new ContextMenu();
 
+		private MenuItem directoryAddMenuItem;
+		
+		private MenuItem directoryDeleteMenuItem;
+		
+		private MenuItem directoryRenameMenuItem;
+		
+		private MenuItem directoryAddDocumentItem;
+		
+		
 		public TextFieldTreeCellImpl() {
             
-			MenuItem addMenuItem = new MenuItem(properties.getProperty("add_directory"));
-            MenuItem deleteMenuItem = new MenuItem(properties.getProperty("delete"));
+			directoryAddMenuItem = new MenuItem(properties.getProperty("add_directory"));
+			directoryRenameMenuItem = new MenuItem(properties.getProperty("rename"));
+            directoryDeleteMenuItem = new MenuItem(properties.getProperty("delete"));
+            directoryAddDocumentItem = new MenuItem(properties.getProperty("add_document"));
             
-            addMenu.getItems().add(addMenuItem);
-            addMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+            directoryContextMenu.getItems().addAll(directoryAddMenuItem, directoryRenameMenuItem, directoryDeleteMenuItem, directoryAddDocumentItem);
+            
+            directoryAddMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+            	@Override
                 public void handle(ActionEvent t) {
                 	addLibraryFolderUnderNode(getTreeItem());
                 }
             });
+            
+            directoryRenameMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+            	@Override
+                public void handle(ActionEvent t) {
+                	startEdit();
+                }
+            });
+            
+            directoryDeleteMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+            	@Override
+                public void handle(ActionEvent t) {
+                	ModalConfirm.show(new Stage(), new ModalConfirmResponse() {
+            			@Override
+            			public void confirm() {
+            				GedDocumentService.deleteDocumentFile(getFilePathFromTreeItem(getTreeItem()));
+            				getTreeItem().getParent().getChildren().remove(getTreeItem());
+            			}
+            			@Override
+            			public void cancel() {
+            				// do nothing
+            			}
+            		}, properties.getProperty("wanna_delete_item_named").replace("{0}", getString()));
+                }
+            });
+            
+            directoryAddDocumentItem.setOnAction(new EventHandler<ActionEvent>() {
+            	@Override
+                public void handle(ActionEvent t) {
+                	addDocumentUnderNode(getTreeItem());
+                }
+            });
+            
+            
             
             final TextFieldTreeCellImpl self = this;
 
@@ -344,7 +394,7 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 					setGraphic(getTreeItem().getGraphic());
 
 					if (currentNodeIsRoot() || currentNodeIsDirectory()) {
-                        setContextMenu(addMenu);
+                        setContextMenu(directoryContextMenu);
                     }
 					
 				}
@@ -368,14 +418,17 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 
 		private void createTextField() {
 			textField = new TextField(getString());
+			
+			textField.setPrefHeight(FxLibraryView.TREE_ITEM_SIZE);
+			
 			textField.setOnKeyReleased(new EventHandler<KeyEvent>() {
 
 				@Override
 				public void handle(KeyEvent t) {
 					if (t.getCode() == KeyCode.ENTER) {
 						
-						logger.info("renaming from : " + getFilePathFromTreeItem(getTreeItem()) + " => " + getFilePathFromTreeItem(getTreeItem().getParent()) + "/" + textField.getText());
-						GedDocumentService.renameDocumentFile(getFilePathFromTreeItem(getTreeItem()), getFilePathFromTreeItem(getTreeItem().getParent()) + "/" + textField.getText());
+						logger.info("renaming from : " + getFilePathFromTreeItem(getTreeItem()) + " => " + getFilePathFromTreeItem(getTreeItem().getParent()) + File.separatorChar + textField.getText());
+						GedDocumentService.renameDocumentFile(getFilePathFromTreeItem(getTreeItem()), getFilePathFromTreeItem(getTreeItem().getParent()) + File.separatorChar + textField.getText());
 						
 						
 						commitEdit(textField.getText());
