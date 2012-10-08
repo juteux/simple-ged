@@ -61,10 +61,17 @@ public class AddDocumentPreviewer extends AbstractFilePreviewer {
 			}
 		});
 		
-		// TODO : clean this
-		
 		Button btnAddDocument = new Button(properties.getProperty("goto_add_document"));
 		btnAddDocument.getStyleClass().add("btn-on-add-document-previewer");
+		
+		btnAddDocument.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				libraryController.get().addDocumentUnderNode(parentNode);
+			}
+		});
+		
+		// TODO : clean this
 		
 		Image i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_add_doc")));
 		ImageView iv = new ImageView(i);

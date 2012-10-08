@@ -13,10 +13,12 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import com.ged.ui.FxMainWindow;
+import com.ged.ui.fxscreen.FxSoftwareScreen;
 import com.ged.ui.fxwidgetcontrollers.ToolBarController;
 import com.tools.PropertiesHelper;
 
-public class FxToolBar extends ToolBar {
+public class FxToolBar extends FxSoftwareScreen {
 
 	
 	/**
@@ -94,9 +96,13 @@ public class FxToolBar extends ToolBar {
 	 */
 	private ToolBarButton btnQuit;
 	
+	/**
+	 * My tool bar
+	 */
+	private ToolBar toolBar;
 	
-	
-	public FxToolBar() {
+	public FxToolBar(FxMainWindow w) {
+		super(w);
 		
 		instantiateWidgets();
 		
@@ -130,7 +136,7 @@ public class FxToolBar extends ToolBar {
 	 * Add a button an element the tool bar
 	 */
 	private void addElement(Node n) {
-		getItems().add(n);
+		toolBar.getItems().add(n);
 	}
 	
 	
@@ -140,6 +146,7 @@ public class FxToolBar extends ToolBar {
 	 */
 	private void instantiateWidgets() {
 		
+		toolBar = new ToolBar();
 		ToolBarController controller = new ToolBarController(this);
 		
 		Properties properties = PropertiesHelper.getInstance().getProperties();
@@ -216,6 +223,11 @@ public class FxToolBar extends ToolBar {
 
 	public ToolBarButton getBtnQuit() {
 		return btnQuit;
+	}
+
+
+	public ToolBar getToolBar() {
+		return toolBar;
 	}
 	
 }

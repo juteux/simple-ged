@@ -60,7 +60,7 @@ public class LibraryViewScreen extends FxSoftwareScreen {
 
 		LibraryViewScreenController controller = new LibraryViewScreenController(this);
 
-		libraryWidget = new FxLibraryView();
+		libraryWidget = new FxLibraryView(this);
 		libraryWidget.getController().addLibraryListener(controller);
 
 		documentInfoViewerWidget = new FxDocumentInfoViewer();

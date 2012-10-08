@@ -32,6 +32,7 @@ import org.apache.log4j.Logger;
 
 import com.ged.Profile;
 import com.ged.services.GedDocumentService;
+import com.ged.ui.fxscreen.FxSoftwareScreen.Screen;
 import com.ged.ui.fxwidgets.FxLibraryView;
 import com.ged.ui.listeners.LibraryListener;
 import com.tools.PropertiesHelper;
@@ -203,7 +204,7 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 		
 		// TODO : push node
 		
-
+		libraryView.getParentScreen().pushScreen(Screen.ADD_SCREEN);
 		
 	}
 	

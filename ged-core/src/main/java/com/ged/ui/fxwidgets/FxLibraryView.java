@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import org.apache.log4j.Logger;
 
 import com.ged.Profile;
+import com.ged.ui.fxscreen.FxSoftwareScreen;
 import com.tools.FileHelper;
 import com.tools.PropertiesHelper;
 
@@ -45,8 +46,16 @@ public class FxLibraryView extends TreeView<String> {
 	 */
 	Properties properties = PropertiesHelper.getInstance().getProperties();
 	
+	/**
+	 * My parent
+	 */
+	private FxSoftwareScreen parentScreen;
+	
 
-    public FxLibraryView() {
+	public FxLibraryView(FxSoftwareScreen parentScreen) {
+    	
+    	this.parentScreen = parentScreen;
+    	
     	buildTree();
     	
     	controller = new WeakReference<com.ged.ui.fxwidgetcontrollers.LibraryViewController>(new com.ged.ui.fxwidgetcontrollers.LibraryViewController(this));
@@ -202,4 +211,10 @@ public class FxLibraryView extends TreeView<String> {
 		return controller.get();
 	}
   
+
+    public FxSoftwareScreen getParentScreen() {
+		return parentScreen;
+	}
+
+	
 }

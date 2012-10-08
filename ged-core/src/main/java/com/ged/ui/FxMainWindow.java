@@ -81,14 +81,14 @@ public class FxMainWindow extends Application {
         primaryStage.setTitle(properties.getProperty("APPLICATION_NAME"));
         //primaryStage.initStyle(StageStyle.UNDECORATED);
         
-        ToolBar toolBar = new FxToolBar(); 
+        FxToolBar toolBar = new FxToolBar(this); 
         int height = 40;
         toolBar.setPrefHeight(height);
         toolBar.setMinHeight(height);
         toolBar.setMaxHeight(height);
         
         mainLayout = new BorderPane();
-        mainLayout.setTop(toolBar);
+        mainLayout.setTop(toolBar.getToolBar());
         
 
         Scene scene = new Scene(mainLayout, APP_WIDTH, APP_HEIGHT);
