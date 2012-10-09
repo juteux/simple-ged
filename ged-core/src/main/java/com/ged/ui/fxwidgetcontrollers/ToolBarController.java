@@ -39,7 +39,7 @@ public class ToolBarController implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent action) {
 	
-		if (action.getSource() == toolBar.getBtnHome()) {
+		if (action.getSource() == toolBar.getBtnBack()) {
 			toolBar.gotoScreen(Screen.BROWSING_SCREEN);
 		}
 		else {

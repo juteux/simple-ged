@@ -88,7 +88,7 @@ public class FxMainWindow extends Application {
         toolBar.setMaxHeight(height);
         
         mainLayout = new BorderPane();
-        mainLayout.setTop(toolBar.getToolBar());
+        mainLayout.setTop(toolBar);
         
 
         Scene scene = new Scene(mainLayout, APP_WIDTH, APP_HEIGHT);
