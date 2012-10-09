@@ -79,6 +79,8 @@ public class FxToolBar extends FxSoftwareScreen {
 	public FxToolBar(FxMainWindow w) {
 		super(w);
 		
+		this.getStyleClass().add("toolbar");
+		
 		instantiateWidgets();
 		
 		// fill the bar

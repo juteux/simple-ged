@@ -35,4 +35,9 @@
 	-fx-height : 120;
 }
 
-
+/*
+	Top bar
+*/
+.toolbar {
+	-fx-background-color : #EEEEEE;
+}
