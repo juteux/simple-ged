@@ -23,7 +23,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import javax.swing.event.EventListenerList;
@@ -251,7 +250,7 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
             directoryDeleteMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             	@Override
                 public void handle(ActionEvent t) {
-                	ModalConfirm.show(new Stage(), new ModalConfirmResponse() {
+                	ModalConfirm.show(libraryView.getParentScreen().getMainStage(), new ModalConfirmResponse() {
             			@Override
             			public void confirm() {
             				GedDocumentService.deleteDocumentFile(getFilePathFromTreeItem(getTreeItem()));

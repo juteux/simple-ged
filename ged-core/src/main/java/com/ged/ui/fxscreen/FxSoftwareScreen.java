@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 import org.apache.log4j.Logger;
 
@@ -127,10 +128,10 @@ private static final Logger logger = Logger.getLogger(FxSoftwareScreen.class);
 	//}
 	
 	/**
-	 * Get the main window as frame
+	 * Get the main window stage
 	 */
-	//public Frame getMainFrame() {
-	//	return mainWindow.get();
-	//}
+	public Stage getMainStage() {
+		return mainWindow.get().getMainStage();
+	}
 	
 }

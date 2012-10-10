@@ -229,7 +229,7 @@ public class FxMainWindow extends Application {
 	/**
 	 * Get the main stage
 	 */
-	public Stage getStage() {
+	public Stage getMainStage() {
 		return stage;
 	}
 	

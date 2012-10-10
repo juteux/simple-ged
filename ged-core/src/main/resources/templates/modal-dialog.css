@@ -7,7 +7,7 @@
  */
 
 .modal-dialog-root {
-  -fx-glass-color: rgba(243, 243, 243, 0.9);
+  -fx-glass-color: rgba(243, 243, 243, 1);
 }
 
 .modal-dialog {
