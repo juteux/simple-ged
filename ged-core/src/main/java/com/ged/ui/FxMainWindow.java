@@ -7,10 +7,8 @@ import java.util.Properties;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import org.apache.log4j.Logger;
 

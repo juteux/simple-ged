@@ -2,10 +2,8 @@ package com.ged.ui.fxwidgets;
 
 import java.util.Properties;
 
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 
 import org.apache.log4j.Logger;
 

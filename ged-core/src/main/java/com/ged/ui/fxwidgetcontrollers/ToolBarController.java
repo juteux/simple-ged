@@ -1,12 +1,11 @@
 package com.ged.ui.fxwidgetcontrollers;
 
-import org.apache.log4j.Logger;
-
-import com.ged.ui.fxscreen.FxSoftwareScreen.Screen;
-import com.ged.ui.fxwidgets.FxToolBar;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+
+import org.apache.log4j.Logger;
+
+import com.ged.ui.fxwidgets.FxToolBar;
 
 /**
  * Tool bar controller
@@ -40,7 +39,7 @@ public class ToolBarController implements EventHandler<ActionEvent> {
 	public void handle(ActionEvent action) {
 	
 		if (action.getSource() == toolBar.getBtnBack()) {
-			toolBar.gotoScreen(Screen.BROWSING_SCREEN);
+			toolBar.finish();
 		}
 		else {
 			logger.warn("Not implemented yet, see ToolBarController.handle");

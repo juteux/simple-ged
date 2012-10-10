@@ -5,23 +5,16 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.animation.FadeTransition;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.util.Duration;
 
 import com.ged.Profile;
 import com.ged.models.GedDocument;
 import com.ged.models.GedDocumentFile;
-import com.ged.ui.controllers.DocumentPreviewController;
 import com.ged.ui.fxpreviewwidgets.AbstractFilePreviewer;
 import com.ged.ui.fxpreviewwidgets.FilePreviewerFactory;
 import com.ged.ui.fxwidgetcontrollers.FxDocumentPreviewerController;
