@@ -72,7 +72,7 @@ public class ModalConfirm {
 							}
 		}).build()).build()).build(), Color.TRANSPARENT));
 		
-		dialog.getScene().getStylesheets().add("templates/modal-dialog.css");
+		dialog.getScene().getStylesheets().add("templates/tools/modal-dialog.css");
 
 		// allow the dialog to be dragged around.
 		final Node root = dialog.getScene().getRoot();
