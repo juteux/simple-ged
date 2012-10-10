@@ -98,4 +98,10 @@ public class AddDocumentPreviewer extends AbstractFilePreviewer {
 		return false;
 	}
 
+	@Override
+	public boolean isOpenable() {
+		return false;
+	}
+
+	
 }

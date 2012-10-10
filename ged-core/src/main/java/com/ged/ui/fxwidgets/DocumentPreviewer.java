@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
@@ -18,6 +19,7 @@ import com.ged.models.GedDocumentFile;
 import com.ged.ui.fxpreviewwidgets.AbstractFilePreviewer;
 import com.ged.ui.fxpreviewwidgets.FilePreviewerFactory;
 import com.ged.ui.fxwidgetcontrollers.FxDocumentPreviewerController;
+import com.tools.PropertiesHelper;
 
 
 /**
@@ -68,21 +70,54 @@ public class DocumentPreviewer extends HBox {
 	 */
 	private WeakReference<FxDocumentPreviewerController> controller;
 	
+	/**
+	 * Button for opening document
+	 */
+	private Button btnOpenFile;
+	
+	/**
+	 * Button for printing document
+	 */
+	private Button btnPrintFile;
+	
+	/**
+	 * Properties
+	 */
+	Properties properties = PropertiesHelper.getInstance().getProperties();
+	
 	
 	public DocumentPreviewer() {
 		instantiateWidgets();
 		
-		HBox navBtnBox = new HBox();
-		navBtnBox.getChildren().addAll(back, next);
-		
-		rightBox = new VBox();
-		rightBox.getChildren().addAll(navBtnBox);
-		//rightBox.setStyle("-fx-background-color:green");
+		//	+-----------+-------------------+
+		//	|			|					|
+		//	|			| Top right Box		|
+		//	|			|					|
+		//	|			|					|
+		//	| left Box	+------right-box----+
+		//	|			|					|
+		//	|			| Bottom right Box	|
+		//	|			|					|
+		//	+-----------+-------------------+
 		
 		leftBox = new VBox();
 		//leftBox.setStyle("-fx-background-color:orange");
 		HBox.setHgrow(leftBox, Priority.ALWAYS);
 		VBox.setVgrow(leftBox, Priority.ALWAYS);
+
+		
+		HBox topRightBox = new HBox();
+		topRightBox.getChildren().addAll(back, next);
+		VBox.setVgrow(topRightBox, Priority.ALWAYS);
+		
+		VBox bottomRightBox = new VBox();
+		bottomRightBox.getChildren().addAll(btnOpenFile, btnPrintFile);
+		VBox.setVgrow(bottomRightBox, Priority.NEVER);
+		
+		rightBox = new VBox();
+		rightBox.getChildren().addAll(topRightBox, bottomRightBox);
+		//rightBox.setStyle("-fx-background-color:green");
+		
 		
 		setPadding(new Insets(5,5,5,5));
 		
@@ -110,6 +145,14 @@ public class DocumentPreviewer extends HBox {
 		next = new Button(">");
 		next.setOnAction(controller.get());
 		next.setPrefSize(50, 50);
+		
+		btnOpenFile = new Button(properties.getProperty("open"));
+		btnOpenFile.setOnAction(controller.get());
+		btnOpenFile.setPrefSize(100, 50);
+		
+		btnPrintFile = new Button(properties.getProperty("print"));
+		btnPrintFile.setOnAction(controller.get());
+		btnPrintFile.setPrefSize(100, 50);
 		
 		controller.get().fixButtonsVisibility();
 	}
@@ -255,6 +298,22 @@ public class DocumentPreviewer extends HBox {
 		for (AbstractFilePreviewer p : previewers) {
 			p.closeFile();
 		}
+	}
+
+	public Button getBtnOpenFile() {
+		return btnOpenFile;
+	}
+
+	public Button getBtnPrintFile() {
+		return btnPrintFile;
+	}
+	
+	
+	/**
+	 * Get the absolute file path of the current viewer
+	 */
+	public String getCurrentPreviewerFilePath() {
+		return currentPreviewer.getAbsoluteFilePath();
 	}
 	
 }

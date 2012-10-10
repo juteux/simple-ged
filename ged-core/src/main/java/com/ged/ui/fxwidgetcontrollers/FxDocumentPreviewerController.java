@@ -1,5 +1,9 @@
 package com.ged.ui.fxwidgetcontrollers;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -32,24 +36,24 @@ public class FxDocumentPreviewerController implements EventHandler<ActionEvent> 
 		}
 		/*else if (arg0.getSource() == documentPreview.getBtnUnlink()) {
 			documentPreview.removeCurrentPreviewer();
-		}
-		else if (arg0.getSource() == documentPreview.getBtnOpen()) {
+		}*/
+		else if (arg0.getSource() == documentPreviewer.getBtnOpenFile()) {
 			
 			// see : http://java.developpez.com/faq/java/?page=systeme#ouvrirFichier
 			if ( Desktop.isDesktopSupported() ) {
 				Desktop desktop = Desktop.getDesktop();
 				if (desktop.isSupported(Desktop.Action.OPEN)) {
 					try {
-						desktop.open(new File(documentPreview.getCurrentPreviewerFilePath()));
+						desktop.open(new File(documentPreviewer.getCurrentPreviewerFilePath()));
 					} catch (IOException e) {
-						logger.error("Cannot open file : " + documentPreview.getCurrentPreviewerFilePath());
+						logger.error("Cannot open file : " + documentPreviewer.getCurrentPreviewerFilePath());
 					}
 				}
 			}
 		}
-		else if (arg0.getSource() == documentPreview.getBtnPrint()) {
-			documentPreview.getCurrentPreviewer().print();
-		}*/
+		else if (arg0.getSource() == documentPreviewer.getBtnPrintFile()) {
+			documentPreviewer.getCurrentPreviewer().print();
+		}
 		else {
 			logger.warn("Not implemented yet : FxDocumentPreviewerController.handle");
 		}
@@ -62,23 +66,23 @@ public class FxDocumentPreviewerController implements EventHandler<ActionEvent> 
 	 */
 	public void fixButtonsVisibility() {
 	   
-		//SimpleButton btnOpen = documentPreviewer.getBtnOpen();
+		Button btnOpen = documentPreviewer.getBtnOpenFile();
 		//SimpleButton btnUnlink = documentPreviewer.getBtnUnlink();
 		Button btnNext = documentPreviewer.getNext();
 		Button btnPrevious = documentPreviewer.getBack();
-		//SimpleButton btnPrint = documentPreviewer.getBtnPrint();
+		Button btnPrint = documentPreviewer.getBtnPrintFile();
 		//JLabel labelNavigation = documentPreviewer.getNavigationLabel();
 		int currentIndex = documentPreviewer.getCurrentPreviewerIndex();
 		int viewerCount = documentPreviewer.getPreviewersCount();
 
-		//btnOpen.setVisible( viewerCount != 0 );
-		//btnPrint.setVisible(btnOpen.isVisible());
+		btnOpen.setVisible(viewerCount != 0 && documentPreviewer.getCurrentPreviewer().isOpenable());
+		btnPrint.setVisible(btnOpen.isVisible());
 	    //btnUnlink.setVisible( documentPreviewer.isBtnUnlinkIsAvailable() && viewerCount != 0 );
 
 	    if ( viewerCount <= 1 ) {
-	    	//if (documentPreviewer.getCurrentPreviewer() != null) {
-	    	//	btnPrint.setEnabled(documentPreviewer.getCurrentPreviewer().isPrintable());
-	    	//}
+	    	if (documentPreviewer.getCurrentPreviewer() != null) {
+	    		btnPrint.setDisable(!documentPreviewer.getCurrentPreviewer().isPrintable());
+	    	}
 	    	
 	    	btnPrevious.setVisible(false);
 	        btnNext.setVisible(false);

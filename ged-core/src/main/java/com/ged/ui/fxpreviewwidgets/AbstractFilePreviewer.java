@@ -54,6 +54,15 @@ public abstract class AbstractFilePreviewer extends HBox {
 	}
 	
 	/**
+	 * Is the file openable ?
+	 * 
+	 * Should always be true, exepted for special previewer like "AddDocumentPreviewer"
+	 */
+	public boolean isOpenable() {
+		return true;
+	}
+	
+	/**
 	 * Get the absolute file path
 	 */
 	public String getAbsoluteFilePath() {
