@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
@@ -17,6 +20,7 @@ import javafx.scene.layout.Priority;
 import com.ged.ui.FxMainWindow;
 import com.ged.ui.fxscreen.FxSoftwareScreen;
 import com.ged.ui.fxwidgetcontrollers.ToolBarController;
+import com.sun.glass.events.MouseEvent;
 import com.tools.PropertiesHelper;
 
 public class FxToolBar extends FxSoftwareScreen {
@@ -69,7 +73,11 @@ public class FxToolBar extends FxSoftwareScreen {
 	 * Back to previous screen
 	 */
 	private ToolBarButton btnBack;
-	
+
+	/**
+	 * New back button version
+	 */
+	private ImageView backButton;
 	
 	/**
 	 * The box which contains action buttons
@@ -97,12 +105,13 @@ public class FxToolBar extends FxSoftwareScreen {
 	    addElement(btnAbout);
 	    
 		HBox leftBox = new HBox();
+		leftBox.setPadding(new Insets(5, 0, 0, 5));
 		HBox rightBox = new HBox();
 		
 		HBox.setHgrow(leftBox, Priority.ALWAYS);
 		HBox.setHgrow(rightBox, Priority.ALWAYS);
 		
-		leftBox.getChildren().add(btnBack);
+		leftBox.getChildren().add(backButton);
 		
 		this.getChildren().addAll(leftBox, centralBox, rightBox);
 	}
@@ -127,6 +136,19 @@ public class FxToolBar extends FxSoftwareScreen {
 		ToolBarController controller = new ToolBarController(this);
 		
 		Properties properties = PropertiesHelper.getInstance().getProperties();
+		
+		Image backButtonImage = new Image(getClass().getResourceAsStream(properties.getProperty("ico_toolbar_back_button")));
+		backButton = new ImageView(backButtonImage);
+		backButton.setSmooth(true);
+		backButton.setFitWidth(30);
+		backButton.setFitHeight(30);
+		
+		backButton.setOnMouseClicked(new EventHandler<Event>() {
+			@Override
+			public void handle(Event arg0) {
+				finish();
+			}
+		});
 		
 		// create buttons
 		btnBack  			= new ToolBarButton(properties.getProperty("back"), controller);
@@ -171,6 +193,10 @@ public class FxToolBar extends FxSoftwareScreen {
 	public ToolBarButton getBtnBack() {
 		return btnBack;
 	}
-	
-	
+
+
+	public ImageView getBackButton() {
+		return backButton;
+	}
+
 }
