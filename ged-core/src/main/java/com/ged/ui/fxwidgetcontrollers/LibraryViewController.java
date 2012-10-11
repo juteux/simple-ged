@@ -231,7 +231,7 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
             directoryDeleteMenuItem = new MenuItem(properties.getProperty("delete"));
             directoryAddDocumentItem = new MenuItem(properties.getProperty("add_document"));
             
-            directoryContextMenu.getItems().addAll(directoryAddMenuItem, directoryRenameMenuItem, directoryDeleteMenuItem, directoryAddDocumentItem);
+            directoryContextMenu.getItems().addAll(directoryAddDocumentItem, directoryAddMenuItem, directoryRenameMenuItem, directoryDeleteMenuItem);
             
             directoryAddMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             	@Override

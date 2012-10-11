@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import javafx.animation.FadeTransition;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -16,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.util.Duration;
 
 import com.ged.ui.FxMainWindow;
 import com.ged.ui.fxscreen.FxSoftwareScreen;
@@ -142,6 +144,7 @@ public class FxToolBar extends FxSoftwareScreen {
 		backButton.setSmooth(true);
 		backButton.setFitWidth(30);
 		backButton.setFitHeight(30);
+		backButton.setOpacity(0.5);
 		
 		backButton.setOnMouseClicked(new EventHandler<Event>() {
 			@Override
@@ -149,6 +152,27 @@ public class FxToolBar extends FxSoftwareScreen {
 				finish();
 			}
 		});
+		
+		backButton.setOnMouseEntered(new EventHandler<Event>() {
+			@Override
+			public void handle(Event arg0) {
+				FadeTransition ft = new FadeTransition(Duration.millis(1000), backButton);
+				ft.setFromValue(backButton.getOpacity());
+				ft.setToValue(1);
+				ft.play();
+			}
+		});
+		
+		backButton.setOnMouseExited(new EventHandler<Event>() {
+			@Override
+			public void handle(Event arg0) {
+				FadeTransition ft = new FadeTransition(Duration.millis(500), backButton);
+				ft.setFromValue(backButton.getOpacity());
+				ft.setToValue(0.5);
+				ft.play();
+			}
+		});
+		
 		
 		// create buttons
 		btnBack  			= new ToolBarButton(properties.getProperty("back"), controller);

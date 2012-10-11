@@ -81,6 +81,10 @@ public class GedDocumentService {
 		Path oldFilePath = Paths.get(Profile.getInstance().getLibraryRoot() + oldName);
 		Path newFilePath = Paths.get(Profile.getInstance().getLibraryRoot() + newName);
 		
+		if (oldFilePath.equals(newFilePath)) {
+			return;
+		}
+		
 		try {
 			logger.info("Move : (" + oldFilePath + " => " + newFilePath);
 			Files.move(oldFilePath, newFilePath);
