@@ -3,7 +3,6 @@ package com.ged.ui.fxscreen;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -81,7 +80,7 @@ public class AddDocumentScreen extends FxSoftwareScreen {
 		ImageView iv2 = new ImageView(i2);
 		iv2.setSmooth(true);
 		iv2.setFitWidth(64);
-		iv2.setFitHeight(64);;
+		iv2.setFitHeight(64);
 		btnAddFromScanner.setGraphic(iv2);
 		
 		

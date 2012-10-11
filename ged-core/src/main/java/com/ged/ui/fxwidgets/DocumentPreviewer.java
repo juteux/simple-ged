@@ -9,6 +9,8 @@ import java.util.Properties;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -142,17 +144,35 @@ public class DocumentPreviewer extends HBox {
 		back.setOnAction(controller.get());
 		back.setPrefSize(50, 50);
 
+		
 		next = new Button(">");
 		next.setOnAction(controller.get());
 		next.setPrefSize(50, 50);
 		
+		
 		btnOpenFile = new Button(properties.getProperty("open"));
 		btnOpenFile.setOnAction(controller.get());
-		btnOpenFile.setPrefSize(125, 50);
+		btnOpenFile.setPrefSize(160, 50);
+
+		Image i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_open_file")));
+		ImageView iv = new ImageView(i);
+		iv.setSmooth(true);
+		iv.setFitWidth(32);
+		iv.setFitHeight(32);
+		btnOpenFile.setGraphic(iv);
+		
 		
 		btnPrintFile = new Button(properties.getProperty("print"));
 		btnPrintFile.setOnAction(controller.get());
-		btnPrintFile.setPrefSize(125, 50);
+		btnPrintFile.setPrefSize(160, 50);
+		
+		Image i2 = new Image(getClass().getResourceAsStream(properties.getProperty("ico_print")));
+		ImageView iv2 = new ImageView(i2);
+		iv2.setSmooth(true);
+		iv2.setFitWidth(32);
+		iv2.setFitHeight(32);
+		btnPrintFile.setGraphic(iv2);
+		
 		
 		controller.get().fixButtonsVisibility();
 	}
