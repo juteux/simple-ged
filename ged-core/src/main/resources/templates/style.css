@@ -26,16 +26,6 @@
 }
 
 /*
-	Button style
-*/
-
-.btn-on-add-document-previewer {
-	-fx-padding: 20;
-	-fx-width : 200;
-	-fx-height : 120;
-}
-
-/*
 	Top bar
 */
 .toolbar {

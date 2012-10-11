@@ -65,6 +65,9 @@ public class LibraryViewScreen extends FxSoftwareScreen {
 
 		documentInfoViewerWidget = new FxDocumentInfoViewer();
 		documentPreviewer = new DocumentPreviewer();
+		
+		// intialize previewer
+		controller.selectionChanged(libraryWidget.getController().getCurrentItemRelativePath());
 	}
 
 	public FxLibraryView getLibraryWidget() {

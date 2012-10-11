@@ -51,6 +51,8 @@ public class AddDocumentPreviewer extends AbstractFilePreviewer {
 		
 		Properties properties = PropertiesHelper.getInstance().getProperties();
 		
+		// --
+		
 		Button btnNewLibraryFolder = new Button(properties.getProperty("add_directory"));
 		btnNewLibraryFolder.getStyleClass().add("btn-on-add-document-previewer");
 		
@@ -60,6 +62,14 @@ public class AddDocumentPreviewer extends AbstractFilePreviewer {
 				libraryController.get().addLibraryFolderUnderNode(parentNode);
 			}
 		});
+		
+		Image i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_new_folder")));
+		ImageView iv = new ImageView(i);
+		btnNewLibraryFolder.setGraphic(iv);
+		
+		btnNewLibraryFolder.setPrefSize(250, 80);
+		
+		// --
 		
 		Button btnAddDocument = new Button(properties.getProperty("goto_add_document"));
 		btnAddDocument.getStyleClass().add("btn-on-add-document-previewer");
@@ -71,25 +81,17 @@ public class AddDocumentPreviewer extends AbstractFilePreviewer {
 			}
 		});
 		
-		// TODO : clean this
+		Image i2 = new Image(getClass().getResourceAsStream(properties.getProperty("ico_new_doc")));
+		ImageView iv2 = new ImageView(i2);
+		btnAddDocument.setGraphic(iv2);
 		
-		Image i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_add_doc")));
-		ImageView iv = new ImageView(i);
-		iv.setSmooth(true);
-		iv.setFitWidth(50);
-		iv.setFitHeight(50);
+		btnAddDocument.setPrefSize(250, 80);
 		
-		ImageView iv2 = new ImageView(i);
-		iv2.setSmooth(true);
-		iv2.setFitWidth(50);
-		iv2.setFitHeight(50);
+		// --
 		
-		btnNewLibraryFolder.setGraphic(iv2);
-		btnAddDocument.setGraphic(iv);
-		
-		VBox mainLayout = new VBox();
+		VBox mainLayout = new VBox(30); // space between buttons
 		mainLayout.getChildren().addAll(btnNewLibraryFolder, btnAddDocument);
-		
+	
 		this.getChildren().add(mainLayout);
 	}
 
@@ -102,6 +104,5 @@ public class AddDocumentPreviewer extends AbstractFilePreviewer {
 	public boolean isOpenable() {
 		return false;
 	}
-
 	
 }

@@ -144,6 +144,10 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 	}
 	
 	
+	public String getCurrentItemRelativePath() {
+		return getFilePathFromTreeItem(libraryView.getSelectionModel().getSelectedItem());
+	}
+	
 	
 	// for externals listeners
 

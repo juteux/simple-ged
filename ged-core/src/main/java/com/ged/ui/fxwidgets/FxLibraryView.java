@@ -51,6 +51,11 @@ public class FxLibraryView extends TreeView<String> {
 	 */
 	private FxSoftwareScreen parentScreen;
 	
+	/**
+	 * Root item
+	 */
+	TreeItem<String> rootItem;
+	
 
 	public FxLibraryView(FxSoftwareScreen parentScreen) {
     	
@@ -58,12 +63,13 @@ public class FxLibraryView extends TreeView<String> {
     	
     	buildTree();
     	
-    	controller = new WeakReference<com.ged.ui.fxwidgetcontrollers.LibraryViewController>(new com.ged.ui.fxwidgetcontrollers.LibraryViewController(this));
+    	controller = new WeakReference<>(new com.ged.ui.fxwidgetcontrollers.LibraryViewController(this));
     	
     	this.setEditable(true);
     	this.setCellFactory(controller.get());
+    	this.getSelectionModel().select(rootItem);
     	
-    	this.getSelectionModel().selectedItemProperty().addListener(controller.get());  
+    	this.getSelectionModel().selectedItemProperty().addListener(controller.get()); 
     }
     
    
@@ -82,8 +88,8 @@ public class FxLibraryView extends TreeView<String> {
 	 */
 	private void buildTree() {
 		
-		TreeItem<String> rootItem = new TreeItem<String>(convertToNodeName(Profile.getInstance().getLibraryRoot()), getIconForNode(""));
-		
+		rootItem = new TreeItem<String>(convertToNodeName(Profile.getInstance().getLibraryRoot()), getIconForNode(""));
+
 		listFile(
 				new File(Profile.getInstance().getLibraryRoot()), 
 				rootItem
