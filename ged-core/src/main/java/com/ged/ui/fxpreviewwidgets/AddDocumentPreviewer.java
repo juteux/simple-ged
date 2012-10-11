@@ -67,7 +67,7 @@ public class AddDocumentPreviewer extends AbstractFilePreviewer {
 		ImageView iv = new ImageView(i);
 		btnNewLibraryFolder.setGraphic(iv);
 		
-		btnNewLibraryFolder.setPrefSize(250, 80);
+		btnNewLibraryFolder.setPrefSize(300, 80);
 		
 		// --
 		
@@ -82,10 +82,10 @@ public class AddDocumentPreviewer extends AbstractFilePreviewer {
 		});
 		
 		Image i2 = new Image(getClass().getResourceAsStream(properties.getProperty("ico_new_doc")));
-		ImageView iv2 = new ImageView(i2);
+		ImageView iv2 = new ImageView(i2); 
 		btnAddDocument.setGraphic(iv2);
 		
-		btnAddDocument.setPrefSize(250, 80);
+		btnAddDocument.setPrefSize(300, 80);
 		
 		// --
 		

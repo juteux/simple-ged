@@ -56,7 +56,7 @@ public class FxToolBar extends FxSoftwareScreen {
 					if (currentTransition != null) {
 						currentTransition.stop();
 					}
-					currentTransition = new FadeTransition(Duration.millis(1000), self);
+					currentTransition = new FadeTransition(Duration.millis(400), self);
 					currentTransition.setFromValue(getOpacity());
 					currentTransition.setToValue(1);
 					currentTransition.play();
@@ -69,7 +69,7 @@ public class FxToolBar extends FxSoftwareScreen {
 					if (currentTransition != null) {
 						currentTransition.stop();
 					}
-					currentTransition = new FadeTransition(Duration.millis(500), self);
+					currentTransition = new FadeTransition(Duration.millis(200), self);
 					currentTransition.setFromValue(getOpacity());
 					currentTransition.setToValue(INITIAL_OPACITY);
 					currentTransition.play();

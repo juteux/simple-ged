@@ -1,7 +1,6 @@
 package com.ged.ui.fxscreen;
 
 import javafx.geometry.Insets;
-import javafx.scene.control.Separator;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -41,7 +40,7 @@ public class LibraryViewScreen extends FxSoftwareScreen {
 		instanciateWidgets();
 		
 		VBox rightLayoutBoxing = new VBox();
-		rightLayoutBoxing.getChildren().addAll(documentInfoViewerWidget, new Separator(), documentPreviewer);
+		rightLayoutBoxing.getChildren().addAll(documentInfoViewerWidget, documentPreviewer);
 		
 		rightLayoutBoxing.setPadding(new Insets(5, 5, 5, 5));
 		rightLayoutBoxing.setSpacing(5);

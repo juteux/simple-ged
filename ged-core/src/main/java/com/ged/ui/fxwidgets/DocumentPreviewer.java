@@ -106,11 +106,11 @@ public class DocumentPreviewer extends HBox {
 		VBox.setVgrow(leftBox, Priority.ALWAYS);
 
 		
-		HBox topRightBox = new HBox();
+		HBox topRightBox = new HBox(5);
 		topRightBox.getChildren().addAll(back, next);
 		VBox.setVgrow(topRightBox, Priority.ALWAYS);
 		
-		VBox bottomRightBox = new VBox();
+		VBox bottomRightBox = new VBox(10);
 		bottomRightBox.getChildren().addAll(btnOpenFile, btnPrintFile);
 		VBox.setVgrow(bottomRightBox, Priority.NEVER);
 		
@@ -148,11 +148,11 @@ public class DocumentPreviewer extends HBox {
 		
 		btnOpenFile = new Button(properties.getProperty("open"));
 		btnOpenFile.setOnAction(controller.get());
-		btnOpenFile.setPrefSize(100, 50);
+		btnOpenFile.setPrefSize(125, 50);
 		
 		btnPrintFile = new Button(properties.getProperty("print"));
 		btnPrintFile.setOnAction(controller.get());
-		btnPrintFile.setPrefSize(100, 50);
+		btnPrintFile.setPrefSize(125, 50);
 		
 		controller.get().fixButtonsVisibility();
 	}
