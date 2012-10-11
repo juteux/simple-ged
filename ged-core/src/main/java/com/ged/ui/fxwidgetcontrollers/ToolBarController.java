@@ -1,6 +1,6 @@
 package com.ged.ui.fxwidgetcontrollers;
 
-import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 
 import org.apache.log4j.Logger;
@@ -13,7 +13,7 @@ import com.ged.ui.fxwidgets.FxToolBar;
  * @author xavier
  *
  */
-public class ToolBarController implements EventHandler<ActionEvent> {
+public class ToolBarController implements EventHandler<Event> {
 
 	/**
 	 * My logger
@@ -36,7 +36,7 @@ public class ToolBarController implements EventHandler<ActionEvent> {
 	 * Handle the event
 	 */
 	@Override
-	public void handle(ActionEvent action) {
+	public void handle(Event action) {
 	
 		if (action.getSource() == toolBar.getBtnBack()) {
 			toolBar.finish();

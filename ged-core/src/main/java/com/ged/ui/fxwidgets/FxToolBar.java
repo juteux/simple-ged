@@ -10,9 +10,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
-import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -22,7 +20,6 @@ import javafx.util.Duration;
 import com.ged.ui.FxMainWindow;
 import com.ged.ui.fxscreen.FxSoftwareScreen;
 import com.ged.ui.fxwidgetcontrollers.ToolBarController;
-import com.sun.glass.events.MouseEvent;
 import com.tools.PropertiesHelper;
 
 public class FxToolBar extends FxSoftwareScreen {
@@ -31,23 +28,64 @@ public class FxToolBar extends FxSoftwareScreen {
 	/**
 	 * All buttons in slide dock are SlideDockButton
 	 */
-	private class ToolBarButton extends Button {
+	private class ToolBarButton extends ImageView {
+		
+		
+		/**
+		 * Initial and "normal" button opacity
+		 */
+		private static final double INITIAL_OPACITY = 0.5;
+		
+		/**
+		 * Current transition
+		 */
+		private FadeTransition currentTransition = null;
+		
 		
 		public ToolBarButton(String toolTipText, ToolBarController controller) {
 			super();
 			
-			setTooltip(new Tooltip(toolTipText));
+			setOpacity(INITIAL_OPACITY);
+
+			//setTooltip(new Tooltip(toolTipText));
 			
-			setOnAction(controller);
+			final ToolBarButton self = this;
+			
+			setOnMouseEntered(new EventHandler<Event>() {
+				@Override
+				public void handle(Event arg0) {
+					if (currentTransition != null) {
+						currentTransition.stop();
+					}
+					currentTransition = new FadeTransition(Duration.millis(1000), self);
+					currentTransition.setFromValue(getOpacity());
+					currentTransition.setToValue(1);
+					currentTransition.play();
+				}
+			});
+			
+			setOnMouseExited(new EventHandler<Event>() {
+				@Override
+				public void handle(Event arg0) {
+					if (currentTransition != null) {
+						currentTransition.stop();
+					}
+					currentTransition = new FadeTransition(Duration.millis(500), self);
+					currentTransition.setFromValue(getOpacity());
+					currentTransition.setToValue(INITIAL_OPACITY);
+					currentTransition.play();
+				}
+			});
+			
+			setOnMouseClicked(controller);
 		}
 		
 		public void setImage(String imageResource) {
 			Image i = new Image(getClass().getResourceAsStream(imageResource));
-			ImageView iv = new ImageView(i);
-			iv.setSmooth(true);
-			iv.setFitWidth(30);
-			iv.setFitHeight(30);
-			this.setGraphic(iv);
+			setSmooth(true);
+			setFitWidth(30);
+			setFitHeight(30);
+			setImage(i);
 		}
 	}
 	
@@ -76,10 +114,6 @@ public class FxToolBar extends FxSoftwareScreen {
 	 */
 	private ToolBarButton btnBack;
 
-	/**
-	 * New back button version
-	 */
-	private ImageView backButton;
 	
 	/**
 	 * The box which contains action buttons
@@ -97,23 +131,23 @@ public class FxToolBar extends FxSoftwareScreen {
 		
 	    addElement(btnPluginManagement);
 	    
-	    addElement(new Separator());
-	    
 	    addElement(btnMessages);
-	    
-	    addElement(new Separator());
 	    
 	    addElement(btnSettings);
 	    addElement(btnAbout);
 	    
 		HBox leftBox = new HBox();
 		leftBox.setPadding(new Insets(5, 0, 0, 5));
+		
+		centralBox.setPadding(new Insets(5, 0, 0, 5));
+		
 		HBox rightBox = new HBox();
+		rightBox.setPadding(new Insets(5, 0, 0, 5));
 		
 		HBox.setHgrow(leftBox, Priority.ALWAYS);
 		HBox.setHgrow(rightBox, Priority.ALWAYS);
 		
-		leftBox.getChildren().add(backButton);
+		leftBox.getChildren().add(btnBack);
 		
 		this.getChildren().addAll(leftBox, centralBox, rightBox);
 	}
@@ -133,46 +167,11 @@ public class FxToolBar extends FxSoftwareScreen {
 	 */
 	private void instantiateWidgets() {
 		
-		centralBox = new HBox();
+		centralBox = new HBox(20); // space between buttons
 		
 		ToolBarController controller = new ToolBarController(this);
 		
 		Properties properties = PropertiesHelper.getInstance().getProperties();
-		
-		Image backButtonImage = new Image(getClass().getResourceAsStream(properties.getProperty("ico_toolbar_back_button")));
-		backButton = new ImageView(backButtonImage);
-		backButton.setSmooth(true);
-		backButton.setFitWidth(30);
-		backButton.setFitHeight(30);
-		backButton.setOpacity(0.5);
-		
-		backButton.setOnMouseClicked(new EventHandler<Event>() {
-			@Override
-			public void handle(Event arg0) {
-				finish();
-			}
-		});
-		
-		backButton.setOnMouseEntered(new EventHandler<Event>() {
-			@Override
-			public void handle(Event arg0) {
-				FadeTransition ft = new FadeTransition(Duration.millis(1000), backButton);
-				ft.setFromValue(backButton.getOpacity());
-				ft.setToValue(1);
-				ft.play();
-			}
-		});
-		
-		backButton.setOnMouseExited(new EventHandler<Event>() {
-			@Override
-			public void handle(Event arg0) {
-				FadeTransition ft = new FadeTransition(Duration.millis(500), backButton);
-				ft.setFromValue(backButton.getOpacity());
-				ft.setToValue(0.5);
-				ft.play();
-			}
-		});
-		
 		
 		// create buttons
 		btnBack  			= new ToolBarButton(properties.getProperty("back"), controller);
@@ -183,10 +182,11 @@ public class FxToolBar extends FxSoftwareScreen {
 		
 		// define associated pictures
 		Map<ToolBarButton, String> associatedImages = new HashMap<>();
-		associatedImages.put(btnSettings, 			properties.getProperty("ico_settings"));
-		associatedImages.put(btnAbout,				properties.getProperty("ico_about"));
-		associatedImages.put(btnPluginManagement,	properties.getProperty("ico_plugin_management"));
-		associatedImages.put(btnMessages,			properties.getProperty("ico_message"));
+		associatedImages.put(btnBack, 				properties.getProperty("ico_toolbar_back_button"));
+		associatedImages.put(btnSettings, 			properties.getProperty("ico_toolbar_pref"));
+		associatedImages.put(btnAbout,				properties.getProperty("ico_toolbar_about"));
+		associatedImages.put(btnPluginManagement,	properties.getProperty("ico_toolbar_plugins"));
+		associatedImages.put(btnMessages,			properties.getProperty("ico_toolbar_message_off"));
 		
 		// set pictures
 		for (Map.Entry<ToolBarButton, String> e : associatedImages.entrySet()) {
@@ -216,11 +216,6 @@ public class FxToolBar extends FxSoftwareScreen {
 
 	public ToolBarButton getBtnBack() {
 		return btnBack;
-	}
-
-
-	public ImageView getBackButton() {
-		return backButton;
 	}
 
 }
