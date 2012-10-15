@@ -1,7 +1,6 @@
 package com.ged.ui.fxwidgets;
 
 import java.io.File;
-import java.lang.ref.WeakReference;
 import java.util.Properties;
 
 import javafx.scene.Node;
@@ -14,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import com.ged.Profile;
 import com.ged.ui.fxscreen.FxSoftwareScreen;
+import com.ged.ui.fxwidgets.eventhandler.LibraryViewEventHandler;
 import com.tools.FileHelper;
 import com.tools.PropertiesHelper;
 
@@ -37,9 +37,9 @@ public class FxLibraryView extends TreeView<String> {
 	private boolean showDirectoryOnly = false;
 	
 	/**
-	 * My controller
+	 * My event handler
 	 */
-	private WeakReference<com.ged.ui.fxwidgets.eventhandler.LibraryViewEventHandler> controller;
+	private LibraryViewEventHandler eventHandler;
 	
 	/**
 	 * The software properties
@@ -63,13 +63,13 @@ public class FxLibraryView extends TreeView<String> {
     	
     	buildTree();
     	
-    	controller = new WeakReference<>(new com.ged.ui.fxwidgets.eventhandler.LibraryViewEventHandler(this));
+    	eventHandler = new LibraryViewEventHandler(this);
     	
     	this.setEditable(true);
-    	this.setCellFactory(controller.get());
+    	this.setCellFactory(eventHandler);
     	this.getSelectionModel().select(rootItem);
     	
-    	this.getSelectionModel().selectedItemProperty().addListener(controller.get()); 
+    	this.getSelectionModel().selectedItemProperty().addListener(eventHandler); 
     }
     
    
@@ -213,8 +213,8 @@ public class FxLibraryView extends TreeView<String> {
 
 
 
-	public com.ged.ui.fxwidgets.eventhandler.LibraryViewEventHandler getController() {
-		return controller.get();
+	public LibraryViewEventHandler getEventHandler() {
+		return eventHandler;
 	}
   
 

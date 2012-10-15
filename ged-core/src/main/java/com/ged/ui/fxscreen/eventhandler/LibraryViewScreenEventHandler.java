@@ -3,6 +3,8 @@ package com.ged.ui.fxscreen.eventhandler;
 import java.io.File;
 import java.lang.ref.WeakReference;
 
+import org.apache.log4j.Logger;
+
 import com.ged.Profile;
 import com.ged.models.GedDocument;
 import com.ged.services.GedDocumentService;
@@ -19,6 +21,11 @@ import com.ged.ui.listeners.LibraryListener;
 public class LibraryViewScreenEventHandler implements LibraryListener {
 
 	/**
+	 * Logger
+	 */
+	private static final Logger logger = Logger.getLogger(LibraryViewScreenEventHandler.class);
+	
+	/**
 	 * The controlled object
 	 */
 	private WeakReference<LibraryViewScreen> libraryViewScreen;
@@ -30,10 +37,12 @@ public class LibraryViewScreenEventHandler implements LibraryListener {
 	@Override
 	public void selectionChanged(String relativeFilePathOfNewSelection) {
 	
+		logger.debug("selectionChanged fired : " + relativeFilePathOfNewSelection);
+		
 		// special case
 		if (new File(Profile.getInstance().getLibraryRoot() + relativeFilePathOfNewSelection).isDirectory()) {
 			libraryViewScreen.get().getDocumentInfoViewerWidget().setGedDocument(null);
-			libraryViewScreen.get().getDocumentPreviewer().setSpecialPreviewer(new AddDocumentPreviewer(libraryViewScreen.get().getLibraryWidget().getSelectionModel().getSelectedItem(), libraryViewScreen.get().getLibraryWidget().getController()));
+			libraryViewScreen.get().getDocumentPreviewer().setSpecialPreviewer(new AddDocumentPreviewer(libraryViewScreen.get().getLibraryWidget().getSelectionModel().getSelectedItem(), libraryViewScreen.get().getLibraryWidget().getEventHandler()));
 			return;
 		}
 		
@@ -42,10 +51,12 @@ public class LibraryViewScreenEventHandler implements LibraryListener {
 		GedDocument d = GedDocumentService.findDocumentbyFilePath(relativeFilePathOfNewSelection);
 		
 		if (d == null) {
+			logger.debug("no document found for this file");
 			libraryViewScreen.get().getDocumentInfoViewerWidget().setGedDocument(null);
 			libraryViewScreen.get().getDocumentPreviewer().setFile(new File(Profile.getInstance().getLibraryRoot() + relativeFilePathOfNewSelection));
 		}
 		else {
+			logger.debug("document found for this file");
 			libraryViewScreen.get().getDocumentInfoViewerWidget().setGedDocument(d); 
 			libraryViewScreen.get().getDocumentPreviewer().setGedDocument(d);
 		}

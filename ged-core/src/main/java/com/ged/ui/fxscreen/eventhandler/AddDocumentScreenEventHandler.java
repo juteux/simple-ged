@@ -5,8 +5,6 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Properties;
 
-import javax.swing.JOptionPane;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.FileChooser;

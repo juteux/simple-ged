@@ -74,7 +74,7 @@ public class FxDocumentInfoViewer extends GridPane {
 		logger.debug("document selected changed");
 		
 		if (document == null) {
-			title.setText("-");
+			title.setText("");
 			description.setText("");
 			date.setText("");
 			return;
