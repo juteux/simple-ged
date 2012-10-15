@@ -1,7 +1,6 @@
 package com.ged.ui.fxwidgets;
 
 import java.io.File;
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -20,7 +19,7 @@ import com.ged.models.GedDocument;
 import com.ged.models.GedDocumentFile;
 import com.ged.ui.fxpreviewwidgets.AbstractFilePreviewer;
 import com.ged.ui.fxpreviewwidgets.FilePreviewerFactory;
-import com.ged.ui.fxwidgetcontrollers.FxDocumentPreviewerController;
+import com.ged.ui.fxwidgets.eventhandler.FxDocumentPreviewerEventHandler;
 import com.tools.PropertiesHelper;
 
 
@@ -70,7 +69,7 @@ public class DocumentPreviewer extends HBox {
 	/**
 	 * My controller
 	 */
-	private WeakReference<FxDocumentPreviewerController> controller;
+	private FxDocumentPreviewerEventHandler eventHandler;
 	
 	/**
 	 * Button for opening document
@@ -136,22 +135,22 @@ public class DocumentPreviewer extends HBox {
 	 */
 	private void instantiateWidgets() {
 		
-		controller = new WeakReference<>(new FxDocumentPreviewerController(this));
+		eventHandler = new FxDocumentPreviewerEventHandler(this);
 		
 		previewers = new ArrayList<>();
 		
 		back = new Button("<");
-		back.setOnAction(controller.get());
+		back.setOnAction(eventHandler);
 		back.setPrefSize(50, 50);
 
 		
 		next = new Button(">");
-		next.setOnAction(controller.get());
+		next.setOnAction(eventHandler);
 		next.setPrefSize(50, 50);
 		
 		
 		btnOpenFile = new Button(properties.getProperty("open"));
-		btnOpenFile.setOnAction(controller.get());
+		btnOpenFile.setOnAction(eventHandler);
 		btnOpenFile.setPrefSize(160, 50);
 
 		Image i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_open_file")));
@@ -163,7 +162,7 @@ public class DocumentPreviewer extends HBox {
 		
 		
 		btnPrintFile = new Button(properties.getProperty("print"));
-		btnPrintFile.setOnAction(controller.get());
+		btnPrintFile.setOnAction(eventHandler);
 		btnPrintFile.setPrefSize(160, 50);
 		
 		Image i2 = new Image(getClass().getResourceAsStream(properties.getProperty("ico_print")));
@@ -174,7 +173,7 @@ public class DocumentPreviewer extends HBox {
 		btnPrintFile.setGraphic(iv2);
 		
 		
-		controller.get().fixButtonsVisibility();
+		eventHandler.fixButtonsVisibility();
 	}
 	
 	
@@ -238,7 +237,7 @@ public class DocumentPreviewer extends HBox {
 			leftBox.getChildren().add(currentPreviewer);
 		}
 		
-		controller.get().fixButtonsVisibility();
+		eventHandler.fixButtonsVisibility();
 	}
 	
 	/**
@@ -334,6 +333,10 @@ public class DocumentPreviewer extends HBox {
 	 */
 	public String getCurrentPreviewerFilePath() {
 		return currentPreviewer.getAbsoluteFilePath();
+	}
+
+	public FxDocumentPreviewerEventHandler getEventHandler() {
+		return eventHandler;
 	}
 	
 }

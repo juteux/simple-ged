@@ -34,7 +34,7 @@ import org.jpedal.PdfDecoder;
 
 import com.ged.Profile;
 import com.ged.tools.PrintingHelper;
-import com.ged.ui.fxwidgetcontrollers.FxDocumentPreviewerController;
+import com.ged.ui.fxwidgets.eventhandler.FxDocumentPreviewerEventHandler;
 import com.sun.pdfview.PDFFile;
 import com.sun.pdfview.PDFPrintPage;
 

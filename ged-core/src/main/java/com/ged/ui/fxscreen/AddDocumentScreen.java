@@ -5,9 +5,12 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 import com.ged.ui.FxMainWindow;
+import com.ged.ui.fxscreen.eventhandler.AddDocumentScreenEventHandler;
 import com.ged.ui.fxwidgets.DocumentPreviewer;
 import com.ged.ui.fxwidgets.FxDocumentInfoEditor;
 
@@ -38,6 +41,11 @@ public class AddDocumentScreen extends FxSoftwareScreen {
 	 */
 	private DocumentPreviewer documentPreviewer;
 	
+	/**
+	 * My event handler
+	 */
+	private AddDocumentScreenEventHandler eventHandler;
+	
 	
 	/**
 	 * 
@@ -54,16 +62,22 @@ public class AddDocumentScreen extends FxSoftwareScreen {
 		
 		leftBox.getChildren().addAll(btnAddFromFS, btnAddFromScanner, docInfoEditor, btnSubmit);
 
+		HBox.setHgrow(documentPreviewer, Priority.ALWAYS);
+		
+		HBox mainLayout = new HBox();
+		mainLayout.getChildren().addAll(leftBox, documentPreviewer);
+		
 		this.getChildren().addAll(leftBox);
 	}
 
 	
 	private void instanciateWidgets() {
 
-		//this.getStylesheets().add("templates/tools/calendarstyle.css");
-
+		eventHandler = new AddDocumentScreenEventHandler(this);
+		
 		btnAddFromFS = new Button(properties.getProperty("add_from_hard_drive"));
 		btnAddFromFS.setPrefSize(300, 80);
+		btnAddFromFS.setOnAction(eventHandler);
 		
 		Image i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_library_root")));
 		ImageView iv = new ImageView(i);
@@ -75,6 +89,7 @@ public class AddDocumentScreen extends FxSoftwareScreen {
 		
 		btnAddFromScanner = new Button(properties.getProperty("add_scan"));
 		btnAddFromScanner.setPrefSize(300, 80);
+		btnAddFromScanner.setOnAction(eventHandler);
 		
 		Image i2 = new Image(getClass().getResourceAsStream(properties.getProperty("ico_scan")));
 		ImageView iv2 = new ImageView(i2);
@@ -85,15 +100,30 @@ public class AddDocumentScreen extends FxSoftwareScreen {
 		
 		
 		docInfoEditor = new FxDocumentInfoEditor(this);
+		docInfoEditor.getEventHandler().addDocumentInfoEditorListener(eventHandler);
 		
 		btnSubmit = new Button(properties.getProperty("save"));
+		btnSubmit.setPrefSize(300, 80);
+		btnSubmit.setOnAction(eventHandler);
+		
+		Image i3 = new Image(getClass().getResourceAsStream(properties.getProperty("ico_save")));
+		ImageView iv3 = new ImageView(i3);
+		iv3.setSmooth(true);
+		iv3.setFitWidth(64);
+		iv3.setFitHeight(64);
+		btnSubmit.setGraphic(iv3);
+		
+		btnSubmit.setDisable(true);
+		
+		
+		documentPreviewer = new DocumentPreviewer();
+		documentPreviewer.getEventHandler().addDocumentPreviewListener(eventHandler);
 	}
 
 
 	public Button getBtnAddFromFS() {
 		return btnAddFromFS;
 	}
-
 
 	public Button getBtnAddFromScanner() {
 		return btnAddFromScanner;
@@ -107,4 +137,9 @@ public class AddDocumentScreen extends FxSoftwareScreen {
 		return documentPreviewer;
 	}
 
+	public FxDocumentInfoEditor getDocInfoEditor() {
+		return docInfoEditor;
+	}
+
+	
 }
