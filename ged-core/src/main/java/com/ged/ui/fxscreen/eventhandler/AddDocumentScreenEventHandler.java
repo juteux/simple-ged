@@ -2,6 +2,10 @@ package com.ged.ui.fxscreen.eventhandler;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
+import java.util.List;
+import java.util.Properties;
+
+import javax.swing.JOptionPane;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,11 +15,19 @@ import org.apache.log4j.Logger;
 
 import com.asprise.util.jtwain.Source;
 import com.asprise.util.jtwain.SourceManager;
+import com.ged.Profile;
+import com.ged.models.GedDocument;
+import com.ged.models.GedDocumentFile;
+import com.ged.services.GedDocumentService;
+import com.ged.tools.FileHelper;
 import com.ged.ui.fxscreen.AddDocumentScreen;
 import com.ged.ui.listeners.DocumentInfoEditorListener;
 import com.ged.ui.listeners.DocumentPreviewListener;
 import com.tools.DateTokenGetter;
 import com.tools.OSHelper;
+import com.tools.PropertiesHelper;
+import com.tools.javafx.ModalConfirm;
+import com.tools.javafx.ModalConfirmResponse;
 
 public class AddDocumentScreenEventHandler implements DocumentInfoEditorListener, DocumentPreviewListener, EventHandler<ActionEvent> {
 
@@ -29,6 +41,12 @@ public class AddDocumentScreenEventHandler implements DocumentInfoEditorListener
 	 */
 	private WeakReference<AddDocumentScreen> addDocumentScreen;
 
+	/**
+	 * Properties
+	 */
+	private Properties properties = PropertiesHelper.getInstance().getProperties();
+	
+	
 	public AddDocumentScreenEventHandler(AddDocumentScreen addDocumentScreen) {
 		this.addDocumentScreen = new WeakReference<>(addDocumentScreen);
 	}
@@ -79,6 +97,12 @@ public class AddDocumentScreenEventHandler implements DocumentInfoEditorListener
 			// Show open file dialog
 			File file = fileChooser.showOpenDialog(null);
 
+			if (file == null) {
+				return;
+			}
+			
+			logger.debug("File is " + file.toString());
+			
 			addDocumentScreen.get().getDocumentPreviewer().addFile(file);
 		} else if (arg0.getSource() == addDocumentScreen.get().getBtnAddFromScanner()) {
 
@@ -106,6 +130,28 @@ public class AddDocumentScreenEventHandler implements DocumentInfoEditorListener
 
 		} else if (arg0.getSource() == addDocumentScreen.get().getBtnSubmit()) {
 
+			GedDocument document = addDocumentScreen.get().getDocInfoEditor().getEventHandler().getDocument();
+			List<GedDocumentFile> attachedFiles = FileHelper.copyFilesIfNecessary(
+					addDocumentScreen.get().getDocumentPreviewer().getEventHandler().getFileList(), 
+					new File(Profile.getInstance().getLibraryRoot() + addDocumentScreen.get().getDocumentRelativeDirectory()), 
+					addDocumentScreen.get().getDocInfoEditor().getEditDocumentTitle().getText()
+				);
+			document.setDocumentFiles(attachedFiles);
+			
+			GedDocumentService.addDocument(document);
+
+			ModalConfirm.show(addDocumentScreen.get().getMainStage(), new ModalConfirmResponse() {
+    			@Override
+    			public void confirm() {
+    			}
+    			@Override
+    			public void cancel() {
+    			}
+    		}, properties.getProperty("doc_added"));
+			
+			addDocumentScreen.get().getDocInfoEditor().clearFields();
+			addDocumentScreen.get().getDocumentPreviewer().clearPreviews();
+			
 		} else {
 			logger.warn("Not implemented yet, see AddDocumentScreenEventHandler.handle");
 		}

@@ -4,6 +4,8 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.event.EventListenerList;
 
@@ -13,6 +15,7 @@ import javafx.scene.control.Button;
 
 import org.apache.log4j.Logger;
 
+import com.ged.ui.fxpreviewwidgets.AbstractFilePreviewer;
 import com.ged.ui.fxwidgets.DocumentPreviewer;
 import com.ged.ui.listeners.DocumentPreviewListener;
 
@@ -33,6 +36,18 @@ public class FxDocumentPreviewerEventHandler implements EventHandler<ActionEvent
 	
 	public FxDocumentPreviewerEventHandler(DocumentPreviewer documentPreviewer) {
 		this.documentPreviewer = new WeakReference<>(documentPreviewer);
+	}
+	
+	
+	/**
+	 * Return the list of files in the previewer
+	 */
+	public List<File> getFileList() {
+		List<File> l = new ArrayList<File>();
+		for (AbstractFilePreviewer previewer : documentPreviewer.get().getPreviewers()) {
+			l.add(new File(previewer.getAbsoluteFilePath()));
+		}
+		return l;
 	}
 	
 	

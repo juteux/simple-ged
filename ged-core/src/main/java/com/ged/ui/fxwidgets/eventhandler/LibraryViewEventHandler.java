@@ -1,6 +1,9 @@
-package com.ged.ui.fxwidgetcontrollers;
+package com.ged.ui.fxwidgets.eventhandler;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import javafx.beans.value.ChangeListener;
@@ -39,21 +42,21 @@ import com.tools.javafx.ModalConfirm;
 import com.tools.javafx.ModalConfirmResponse;
 
 /**
- * The controller for the tree library view
+ * The event handler for the tree library view
  * 
  * @author xavier
  * 
  */
-public class LibraryViewController implements Callback<TreeView<String>,TreeCell<String>>, ChangeListener<TreeItem<String>>  {
+public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCell<String>>, ChangeListener<TreeItem<String>>  {
 
 	private Properties properties = PropertiesHelper.getInstance().getProperties();
 	
-	private static final Logger logger = Logger.getLogger(LibraryViewController.class);
+	private static final Logger logger = Logger.getLogger(LibraryViewEventHandler.class);
 	
 	/**
 	 * The controlled object
 	 */
-	private FxLibraryView libraryView;
+	private WeakReference<FxLibraryView> libraryView;
 	
 	/**
 	 * Event listener
@@ -69,8 +72,8 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 	private TreeItem<String> draggedItem;
 	
 	
-	public LibraryViewController(FxLibraryView libraryView) {
-		this.libraryView = libraryView;
+	public LibraryViewEventHandler(FxLibraryView libraryView) {
+		this.libraryView = new WeakReference<>(libraryView);
 	}
 	
 	
@@ -86,17 +89,17 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
             	logger.info("drag started");
             	
             	// forbidden on root
-            	if (getFilePathFromTreeItem(libraryView.getSelectionModel().getSelectedItem()).isEmpty()) {
+            	if (getFilePathFromTreeItem(libraryView.get().getSelectionModel().getSelectedItem()).isEmpty()) {
             		mouseEvent.consume();
             		return;
             	}
             	
-            	draggedItem = libraryView.getSelectionModel().getSelectedItem();
+            	draggedItem = libraryView.get().getSelectionModel().getSelectedItem();
             	logger.info(draggedItem.getValue());
             	
-            	Dragboard db = libraryView.startDragAndDrop(TransferMode.MOVE);
+            	Dragboard db = libraryView.get().startDragAndDrop(TransferMode.MOVE);
                 
-                TreeItem<String> item = libraryView.getSelectionModel().getSelectedItem();
+                TreeItem<String> item = libraryView.get().getSelectionModel().getSelectedItem();
                 ClipboardContent content = new ClipboardContent();
                 content.put(dataFormatLibraryTreeItem, item.toString());            
                 
@@ -145,7 +148,7 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
 	
 	
 	public String getCurrentItemRelativePath() {
-		return getFilePathFromTreeItem(libraryView.getSelectionModel().getSelectedItem());
+		return getFilePathFromTreeItem(libraryView.get().getSelectionModel().getSelectedItem());
 	}
 	
 	
@@ -199,16 +202,18 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
         
         node.setExpanded(true);
         node.getChildren().add(newFolder);
-        libraryView.getSelectionModel().select(newFolder);
+        libraryView.get().getSelectionModel().select(newFolder);
 	}
 	
 	
 	public void addDocumentUnderNode(TreeItem<String> node) {
 		
-		// TODO : push node
+		libraryView.get().getParentScreen().pushScreen(Screen.ADD_SCREEN);
 		
-		libraryView.getParentScreen().pushScreen(Screen.ADD_SCREEN);
+		Map<String, Object> extras = new HashMap<>();
+		extras.put("relative-document-root", getFilePathFromTreeItem(node));
 		
+		libraryView.get().getParentScreen().putExtra(extras);
 	}
 	
 	
@@ -254,7 +259,7 @@ public class LibraryViewController implements Callback<TreeView<String>,TreeCell
             directoryDeleteMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             	@Override
                 public void handle(ActionEvent t) {
-                	ModalConfirm.show(libraryView.getParentScreen().getMainStage(), new ModalConfirmResponse() {
+                	ModalConfirm.show(libraryView.get().getParentScreen().getMainStage(), new ModalConfirmResponse() {
             			@Override
             			public void confirm() {
             				GedDocumentService.deleteDocumentFile(getFilePathFromTreeItem(getTreeItem()));

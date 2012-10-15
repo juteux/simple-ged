@@ -39,7 +39,7 @@ public class FxLibraryView extends TreeView<String> {
 	/**
 	 * My controller
 	 */
-	private WeakReference<com.ged.ui.fxwidgetcontrollers.LibraryViewController> controller;
+	private WeakReference<com.ged.ui.fxwidgets.eventhandler.LibraryViewEventHandler> controller;
 	
 	/**
 	 * The software properties
@@ -63,7 +63,7 @@ public class FxLibraryView extends TreeView<String> {
     	
     	buildTree();
     	
-    	controller = new WeakReference<>(new com.ged.ui.fxwidgetcontrollers.LibraryViewController(this));
+    	controller = new WeakReference<>(new com.ged.ui.fxwidgets.eventhandler.LibraryViewEventHandler(this));
     	
     	this.setEditable(true);
     	this.setCellFactory(controller.get());
@@ -213,7 +213,7 @@ public class FxLibraryView extends TreeView<String> {
 
 
 
-	public com.ged.ui.fxwidgetcontrollers.LibraryViewController getController() {
+	public com.ged.ui.fxwidgets.eventhandler.LibraryViewEventHandler getController() {
 		return controller.get();
 	}
   

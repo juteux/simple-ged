@@ -1,23 +1,21 @@
 package com.ged.ui.fxwidgets;
 
-import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Properties;
-
-import org.apache.log4j.Logger;
-
-import com.ged.ui.fxscreen.AddDocumentScreen;
-import com.ged.ui.fxwidgets.eventhandler.FxDocumentInfoEditorEventHandler;
-import com.tools.PropertiesHelper;
-import com.tools.javafx.calendar.DatePicker;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+
+import org.apache.log4j.Logger;
+
+import com.ged.ui.fxwidgets.eventhandler.FxDocumentInfoEditorEventHandler;
+import com.tools.PropertiesHelper;
+import com.tools.javafx.calendar.DatePicker;
 
 public class FxDocumentInfoEditor extends GridPane {
 
@@ -43,11 +41,6 @@ public class FxDocumentInfoEditor extends GridPane {
 	private TextArea editDocumentDescription;
 	
 	/**
-	 * My parent
-	 */
-	private WeakReference<AddDocumentScreen> addDocumentScreen;
-	
-	/**
 	 * Properties
 	 */
 	private Properties properties = PropertiesHelper.getInstance().getProperties();
@@ -58,9 +51,7 @@ public class FxDocumentInfoEditor extends GridPane {
 	private FxDocumentInfoEditorEventHandler eventHandler;
 	
 	
-	public FxDocumentInfoEditor(AddDocumentScreen addDocumentScreen) {
-		this.addDocumentScreen = new WeakReference<>(addDocumentScreen);
-		
+	public FxDocumentInfoEditor() {
 		instanciateWidgets();
 		
 		setAlignment(Pos.CENTER);
@@ -88,7 +79,7 @@ public class FxDocumentInfoEditor extends GridPane {
 		
 		editDocumentDate = new DatePicker();
 		editDocumentDate.setDateFormat(new SimpleDateFormat("dd/MM/yyyy"));
-		editDocumentDate.getCalendarView().setCalendar(new GregorianCalendar());
+		
 		editDocumentDate.getCalendarView().setShowTodayButton(true);
 		editDocumentDate.getCalendarView().todayButtonTextProperty().set(properties.getProperty("today"));
 		editDocumentDate.setSelectedDate(new Date());
@@ -99,6 +90,16 @@ public class FxDocumentInfoEditor extends GridPane {
 	}
 
 
+	/**
+	 * Set default values in fields
+	 */
+	public void clearFields() {
+		editDocumentTitle.setText("");
+		editDocumentDate.getCalendarView().setCalendar(new GregorianCalendar());
+		editDocumentDescription.setText("");
+	}
+	
+	
 
 	public TextField getEditDocumentTitle() {
 		return editDocumentTitle;

@@ -1,5 +1,7 @@
 package com.ged.ui.fxscreen;
 
+import java.util.Map;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -14,6 +16,12 @@ import com.ged.ui.fxscreen.eventhandler.AddDocumentScreenEventHandler;
 import com.ged.ui.fxwidgets.DocumentPreviewer;
 import com.ged.ui.fxwidgets.FxDocumentInfoEditor;
 
+/**
+ * The view for adding a document in the ged
+ * 
+ * @author xavier
+ *
+ */
 public class AddDocumentScreen extends FxSoftwareScreen {
 
 	/**
@@ -46,6 +54,11 @@ public class AddDocumentScreen extends FxSoftwareScreen {
 	 */
 	private AddDocumentScreenEventHandler eventHandler;
 	
+	/**
+	 * My target directory (relative path)
+	 */
+	private String documentRelativeDirectory; 
+	
 	
 	/**
 	 * 
@@ -63,11 +76,18 @@ public class AddDocumentScreen extends FxSoftwareScreen {
 		leftBox.getChildren().addAll(btnAddFromFS, btnAddFromScanner, docInfoEditor, btnSubmit);
 
 		HBox.setHgrow(documentPreviewer, Priority.ALWAYS);
+		VBox.setVgrow(documentPreviewer, Priority.ALWAYS);
 		
-		HBox mainLayout = new HBox();
-		mainLayout.getChildren().addAll(leftBox, documentPreviewer);
-		
-		this.getChildren().addAll(leftBox);
+		this.getChildren().addAll(leftBox, documentPreviewer);
+	}
+	
+	
+	/**
+	 * Get our target directory
+	 */
+	@Override
+	public void receiveExtraValue(Map<String, Object> extra) {
+		documentRelativeDirectory = (String) extra.get("relative-document-root");
 	}
 
 	
@@ -99,7 +119,7 @@ public class AddDocumentScreen extends FxSoftwareScreen {
 		btnAddFromScanner.setGraphic(iv2);
 		
 		
-		docInfoEditor = new FxDocumentInfoEditor(this);
+		docInfoEditor = new FxDocumentInfoEditor();
 		docInfoEditor.getEventHandler().addDocumentInfoEditorListener(eventHandler);
 		
 		btnSubmit = new Button(properties.getProperty("save"));
@@ -141,5 +161,8 @@ public class AddDocumentScreen extends FxSoftwareScreen {
 		return docInfoEditor;
 	}
 
+	public String getDocumentRelativeDirectory() {
+		return documentRelativeDirectory;
+	}
 	
 }

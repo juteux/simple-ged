@@ -7,6 +7,7 @@ import javafx.scene.input.KeyEvent;
 
 import javax.swing.event.EventListenerList;
 
+import com.ged.models.GedDocument;
 import com.ged.ui.fxwidgets.FxDocumentInfoEditor;
 import com.ged.ui.listeners.DocumentInfoEditorListener;
 
@@ -26,6 +27,20 @@ public class FxDocumentInfoEditorEventHandler implements EventHandler<KeyEvent> 
 	public FxDocumentInfoEditorEventHandler(FxDocumentInfoEditor documentInfoEditor) {
 		this.documentInfoEditor = new WeakReference<>(documentInfoEditor);
 	}
+	
+	
+	/**
+	 * Get the document, according to the entered informations
+	 */
+	public GedDocument getDocument() {
+		GedDocument document = new GedDocument();
+		document.setName(documentInfoEditor.get().getEditDocumentTitle().getText());
+		document.setDate(documentInfoEditor.get().getEditDocumentDate().getSelectedDate());
+		document.setDescription(documentInfoEditor.get().getEditDocumentDescription().getText());
+		//document.setLocation(GedDocumentLocationService.findLocationById(documentInfoEditor.getLocationSelector().getSelectedLocationID()));
+		return document;
+	}
+	
 	
 	
 	@Override

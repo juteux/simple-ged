@@ -6,7 +6,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 import com.ged.ui.FxMainWindow;
-import com.ged.ui.fxscreencontroller.LibraryViewScreenController;
+import com.ged.ui.fxscreen.eventhandler.LibraryViewScreenEventHandler;
 import com.ged.ui.fxwidgets.DocumentPreviewer;
 import com.ged.ui.fxwidgets.FxDocumentInfoViewer;
 import com.ged.ui.fxwidgets.FxLibraryView;
@@ -57,16 +57,16 @@ public class LibraryViewScreen extends FxSoftwareScreen {
 
 	private void instanciateWidgets() {
 
-		LibraryViewScreenController controller = new LibraryViewScreenController(this);
+		LibraryViewScreenEventHandler eventHandler = new LibraryViewScreenEventHandler(this);
 
 		libraryWidget = new FxLibraryView(this);
-		libraryWidget.getController().addLibraryListener(controller);
+		libraryWidget.getController().addLibraryListener(eventHandler);
 
 		documentInfoViewerWidget = new FxDocumentInfoViewer();
 		documentPreviewer = new DocumentPreviewer();
 		
 		// intialize previewer
-		controller.selectionChanged(libraryWidget.getController().getCurrentItemRelativePath());
+		eventHandler.selectionChanged(libraryWidget.getController().getCurrentItemRelativePath());
 	}
 
 	public FxLibraryView getLibraryWidget() {

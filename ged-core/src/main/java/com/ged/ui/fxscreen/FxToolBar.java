@@ -1,4 +1,4 @@
-package com.ged.ui.fxwidgets;
+package com.ged.ui.fxscreen;
 
 
 import java.util.HashMap;
@@ -17,8 +17,7 @@ import javafx.scene.layout.Priority;
 import javafx.util.Duration;
 
 import com.ged.ui.FxMainWindow;
-import com.ged.ui.fxscreen.FxSoftwareScreen;
-import com.ged.ui.fxwidgetcontrollers.ToolBarController;
+import com.ged.ui.fxscreen.eventhandler.ToolBarEventHandler;
 import com.tools.PropertiesHelper;
 
 public class FxToolBar extends FxSoftwareScreen {
@@ -41,7 +40,7 @@ public class FxToolBar extends FxSoftwareScreen {
 		private FadeTransition currentTransition = null;
 		
 		
-		public ToolBarButton(String toolTipText, ToolBarController controller) {
+		public ToolBarButton(String toolTipText, ToolBarEventHandler eventHandler) {
 			super();
 			
 			setOpacity(INITIAL_OPACITY);
@@ -76,7 +75,7 @@ public class FxToolBar extends FxSoftwareScreen {
 				}
 			});
 			
-			setOnMouseClicked(controller);
+			setOnMouseClicked(eventHandler);
 		}
 		
 		public void setImage(String imageResource) {
@@ -113,6 +112,11 @@ public class FxToolBar extends FxSoftwareScreen {
 	 */
 	private ToolBarButton btnBack;
 
+	/**
+	 * My event handler
+	 */
+	private ToolBarEventHandler eventHandler;
+	
 	
 	/**
 	 * The box which contains action buttons
@@ -168,16 +172,16 @@ public class FxToolBar extends FxSoftwareScreen {
 		
 		centralBox = new HBox(20); // space between buttons
 		
-		ToolBarController controller = new ToolBarController(this);
+		eventHandler = new ToolBarEventHandler(this);
 		
 		Properties properties = PropertiesHelper.getInstance().getProperties();
 		
 		// create buttons
-		btnBack  			= new ToolBarButton(properties.getProperty("back"), controller);
-		btnSettings			= new ToolBarButton(properties.getProperty("info_settings"), controller);
-		btnAbout			= new ToolBarButton(properties.getProperty("info_about") + properties.getProperty("APPLICATION_NAME"), controller);
-		btnPluginManagement	= new ToolBarButton(properties.getProperty("info_plugin_management"), controller);
-		btnMessages			= new ToolBarButton(properties.getProperty("info_messages"), controller);
+		btnBack  			= new ToolBarButton(properties.getProperty("back"), eventHandler);
+		btnSettings			= new ToolBarButton(properties.getProperty("info_settings"), eventHandler);
+		btnAbout			= new ToolBarButton(properties.getProperty("info_about") + properties.getProperty("APPLICATION_NAME"), eventHandler);
+		btnPluginManagement	= new ToolBarButton(properties.getProperty("info_plugin_management"), eventHandler);
+		btnMessages			= new ToolBarButton(properties.getProperty("info_messages"), eventHandler);
 		
 		// define associated pictures
 		Map<ToolBarButton, String> associatedImages = new HashMap<>();

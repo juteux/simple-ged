@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
-import com.ged.ui.fxwidgetcontrollers.LibraryViewController;
+import com.ged.ui.fxwidgets.eventhandler.LibraryViewEventHandler;
 import com.tools.PropertiesHelper;
 
 /**
@@ -30,10 +30,10 @@ public class AddDocumentPreviewer extends AbstractFilePreviewer {
 	/**
 	 * The library controller contains method to make actions on the node
 	 */
-	private WeakReference<LibraryViewController> libraryController;
+	private WeakReference<LibraryViewEventHandler> libraryController;
 	
 	
-	public AddDocumentPreviewer(TreeItem<String> parentNode, LibraryViewController libraryController) {
+	public AddDocumentPreviewer(TreeItem<String> parentNode, LibraryViewEventHandler libraryController) {
 		super("");
 		
 		this.parentNode = parentNode;
