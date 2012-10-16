@@ -62,10 +62,12 @@ public class MessageDAO {
 		logger.debug("mark all messages as read");
 		
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
 		
 		String hqlUpdate = "UPDATE GedMessage SET read=true";
 		session.createQuery(hqlUpdate).executeUpdate();
 		
+		session.getTransaction().commit();
 		session.close();
 	}
 	
@@ -74,7 +76,9 @@ public class MessageDAO {
 	 */
 	public static synchronized void saveOrUpdate(GedMessage message) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
 		session.saveOrUpdate(message);
+		session.getTransaction().commit();
 		session.close();
 	}
 	

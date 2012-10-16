@@ -62,7 +62,9 @@ public class DocumentDAO {
 	{
 		logger.debug("save document");
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
 		session.saveOrUpdate(document);
+		session.getTransaction().commit();
 		session.close();
 	}
 	
@@ -82,6 +84,7 @@ public class DocumentDAO {
 		logger.debug("Rename : " + oldName + " to " + newName);
 
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
 		
 		Criteria criteria = session.createCriteria(GedDocumentFile.class).add(Restrictions.like("relativeFilePath", oldName + "%"));  
 		
@@ -93,6 +96,7 @@ public class DocumentDAO {
 			session.update(file);
 		}
 		
+		session.getTransaction().commit();
 		session.close();
 	}
 
@@ -105,8 +109,8 @@ public class DocumentDAO {
 	public static synchronized void deleteFile(String filePath) {
 		logger.debug("Remove document : " + filePath);
 		
-		
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
 		
 		Criteria criteria = session.createCriteria(GedDocumentFile.class).add(Restrictions.like("relativeFilePath", filePath + "%"));  
 		
@@ -130,6 +134,7 @@ public class DocumentDAO {
 			
 		}
 		
+		session.getTransaction().commit();
 		session.close();
 	}
 	

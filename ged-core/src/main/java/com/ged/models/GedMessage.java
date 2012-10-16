@@ -24,7 +24,7 @@ public class GedMessage {
     @Id
     @GeneratedValue
     @Column(name="rowid")
-	private int id;
+	private Integer id;
 	
 	/**
 	 * The message date
@@ -56,10 +56,12 @@ public class GedMessage {
 
 	
 	public GedMessage() {
+		this.id = null;
 		this.read = false;
 	}
 	
 	public GedMessage(String level, String label) {
+		this.id = null;
 		this.date = new GregorianCalendar().getTime();
 		this.read = false;
 		this.messageLevel = level;

@@ -43,7 +43,9 @@ public class DocumentLocationDAO {
 	{
 		logger.debug("save location");
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
 		session.saveOrUpdate(location);
+		session.getTransaction().commit();
 		session.close();
 	}
 	
@@ -79,7 +81,9 @@ public class DocumentLocationDAO {
 	 */
 	public static synchronized void delete(GedDocumentPhysicalLocation location) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
 		session.delete(location);
+		session.getTransaction().commit();
 		session.close();
 	}
 	

@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -14,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
+
 
 /**
  * Some document of the GED
@@ -37,13 +40,14 @@ public class GedDocument implements Serializable {
     @Id
     @GeneratedValue
     @Column(name="rowid")
-    private int id;
+    private Integer id;
 	
 	/**
 	 * Files associated to document
 	 */
-    @OneToMany(mappedBy="id")
+    @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     @OrderColumn(name="file_order")
+    @JoinColumn(name="document_id", nullable=false)
     private List<GedDocumentFile> documentFiles;  
 
     /**
@@ -74,7 +78,7 @@ public class GedDocument implements Serializable {
     
     
 	public GedDocument(int id, List<GedDocumentFile> documentFiles, String name, Date date, String description) {
-		this.id = -1;
+		this.id = id;
 		this.documentFiles = documentFiles;
 		this.name = name;
 		this.date = date;
@@ -83,7 +87,7 @@ public class GedDocument implements Serializable {
 	}
 
 	public GedDocument(int id, List<GedDocumentFile> documentFiles, String name, Date date, String description, GedDocumentPhysicalLocation location) {
-		this.id = -1;
+		this.id = id;
 		this.documentFiles = documentFiles;
 		this.name = name;
 		this.date = date;
@@ -93,7 +97,7 @@ public class GedDocument implements Serializable {
 	
 
 	public GedDocument() {
-		this.id = -1;
+		this.id = null;
 		this.documentFiles = new ArrayList<GedDocumentFile>();
 		this.name = new String();
 		this.date = new Date();

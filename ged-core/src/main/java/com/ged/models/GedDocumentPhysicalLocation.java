@@ -23,7 +23,7 @@ public class GedDocumentPhysicalLocation {
     @Id
     @GeneratedValue
     @Column(name="rowid")
-	private int id;
+	private Integer id;
 	
     
 	/**
@@ -32,6 +32,11 @@ public class GedDocumentPhysicalLocation {
     @Column(name="label")
 	private String label;
 
+    
+    public GedDocumentPhysicalLocation() {
+    	id = null;
+    }
+    
 
 	public int getId() {
 		return id;

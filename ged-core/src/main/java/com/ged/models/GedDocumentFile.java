@@ -8,6 +8,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Index;
+
+
 
 /**
  * Some document file
@@ -24,24 +27,25 @@ public class GedDocumentFile {
     @Id
     @GeneratedValue
     @Column(name="rowid")
-	private int id;
+	private Integer id;
 	
 	/**
 	 * The file path, relative to the library root
 	 */
     @Column(name="path")
+    @Index(name="idx_doc_file_path")
 	private String relativeFilePath;
 
 	/**
 	 * Document
 	 */
     @ManyToOne
-    @JoinColumn(name="document_id", nullable=false)
+    @JoinColumn(name="document_id", insertable=false, updatable=false, nullable=false)
 	private GedDocument document;
 	
 	
 	private GedDocumentFile() {
-		id = -1;
+		id = null;
 		document = null;
 		relativeFilePath = "";
 	}

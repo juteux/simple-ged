@@ -21,7 +21,6 @@ public class GedDocumentLocationService {
 		List<GedDocumentPhysicalLocation> locations = DocumentLocationDAO.getLocations();
 		if (locations.isEmpty()) {
 			GedDocumentPhysicalLocation loc = new GedDocumentPhysicalLocation();
-			loc.setId(1);
 			loc.setLabel(" ");
 			DocumentLocationDAO.saveOrUpdate(loc);		
 		}
