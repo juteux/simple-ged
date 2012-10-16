@@ -211,4 +211,10 @@ public class AddDocumentScreenController implements ActionListener,
 		
 	}
 
+	@Override
+	public void selectionChanged(LIBRARY_FILE_TYPE newSelectionType) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

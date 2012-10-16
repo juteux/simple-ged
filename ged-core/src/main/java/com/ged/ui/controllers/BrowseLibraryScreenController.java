@@ -51,4 +51,11 @@ public class BrowseLibraryScreenController implements LibraryListener {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	@Override
+	public void selectionChanged(LIBRARY_FILE_TYPE newSelectionType) {
+		// TODO Auto-generated method stub
+		
+	}
 }

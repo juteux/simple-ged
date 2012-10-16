@@ -91,6 +91,7 @@ public class FxDocumentInfoViewer extends GridPane {
 		date = new Label();
 		
 		btnEditDocument = new Button(properties.getProperty("modify"));
+		btnEditDocument.setDisable(true);
 		
 		Image i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_edit_doc")));
 		ImageView iv = new ImageView(i);
@@ -122,5 +123,12 @@ public class FxDocumentInfoViewer extends GridPane {
 		date.setText(DateHelper.calendarToString(document.getDate()));
 		description.setText(document.getDescription());
 	}
+
+
+	public Button getBtnEditDocument() {
+		return btnEditDocument;
+	}
+	
+	
 }
 

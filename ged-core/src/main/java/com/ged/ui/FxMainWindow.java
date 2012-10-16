@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 
 import com.ged.Profile;
 import com.ged.ui.fxscreen.AddDocumentScreen;
+import com.ged.ui.fxscreen.EditDocumentScreen;
 import com.ged.ui.fxscreen.FxSoftwareScreen;
 import com.ged.ui.fxscreen.FxToolBar;
 import com.ged.ui.fxscreen.LibraryViewScreen;
@@ -183,10 +184,10 @@ public class FxMainWindow extends Application {
 		*/
 		case ADD_SCREEN :
 			return new AddDocumentScreen(this);
-		/*
+		
 		case EDITION_SCREEN :
 			return new EditDocumentScreen(this);
-			
+		/*
 		case SEARCHING_SCREEN :
 			return new SearchingScreen(this);
 			

@@ -37,6 +37,7 @@ import com.ged.services.GedDocumentService;
 import com.ged.ui.fxscreen.FxSoftwareScreen.Screen;
 import com.ged.ui.fxwidgets.FxLibraryView;
 import com.ged.ui.listeners.LibraryListener;
+import com.ged.ui.listeners.LibraryListener.LIBRARY_FILE_TYPE;
 import com.tools.PropertiesHelper;
 import com.tools.javafx.ModalConfirm;
 import com.tools.javafx.ModalConfirmResponse;
@@ -131,18 +132,24 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 		
 		logger.debug("Full item path : " + itemPath);
 		
-		/*
-		if (new File(Profile.getInstance().getLibraryRoot() + itemPath).isDirectory()) {
-			logger.debug("a library folder : " + itemPath);
+		if (nodeIsRoot(newItem) || nodeIsDirectory(newItem)) {
+			
 		}
-		else { // some library document
-			logger.debug("a library document : " + itemPath);
-			GedDocument d = GedDocumentService.findDocumentbyFilePath(itemPath);
+		else { // we are on a document, edition ?
+			
 		}
-		*/
+		
+		LIBRARY_FILE_TYPE type = LIBRARY_FILE_TYPE.LIBRARY_FILE;
+		if (nodeIsRoot(newItem)) {
+			type = LIBRARY_FILE_TYPE.LIBRARY_ROOT;
+		} 
+		else if (nodeIsDirectory(newItem)) {
+			type = LIBRARY_FILE_TYPE.LIBRARY_DIR;
+		}
 		
         for(LibraryListener listener : getLibraryListeners()) {
             listener.selectionChanged(itemPath);
+            listener.selectionChanged(type);
         }
 	}
 	
@@ -185,6 +192,23 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 		}
 		return itemPath;
 	}
+	
+	
+	/**
+	 * The root is excluded from this list, please call currentNodeIsRoot if you wan't to know if it is
+	 */
+	private boolean nodeIsDirectory(TreeItem<String> node) {
+		if (nodeIsRoot(node)) {
+			return false;
+		}
+		return new File(Profile.getInstance().getLibraryRoot() + getFilePathFromTreeItem(node)).isDirectory();
+	}
+
+	private boolean nodeIsRoot(TreeItem<String> node) {
+		return getFilePathFromTreeItem(node).isEmpty();
+	}
+	
+	
 	
 	
 	public void addLibraryFolderUnderNode(TreeItem<String> node) {
@@ -358,8 +382,6 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
                 }
             });
     		
-    		
-            
 		}
 
 		
@@ -407,7 +429,7 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 					setText(getString());
 					setGraphic(getTreeItem().getGraphic());
 
-					if (currentNodeIsRoot() || currentNodeIsDirectory()) {
+					if (currentNodeIsDirectory()) {
                         setContextMenu(directoryContextMenu);
                     }
 					
@@ -419,14 +441,11 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 		 * The root is excluded from this list, please call currentNodeIsRoot if you wan't to know if it is
 		 */
 		private boolean currentNodeIsDirectory() {
-			if (currentNodeIsRoot()) {
-				return false;
-			}
-			return new File(Profile.getInstance().getLibraryRoot() + getFilePathFromTreeItem(getTreeItem())).isDirectory();
+			return nodeIsDirectory(getTreeItem());
 		}
 
 		private boolean currentNodeIsRoot() {
-			return getFilePathFromTreeItem(getTreeItem()).isEmpty();
+			return nodeIsRoot(getTreeItem());
 		}
 		
 
