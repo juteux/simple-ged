@@ -36,6 +36,7 @@ import com.ged.Profile;
 import com.ged.services.GedDocumentService;
 import com.ged.ui.fxscreen.FxSoftwareScreen.Screen;
 import com.ged.ui.fxwidgets.FxLibraryView;
+import com.ged.ui.listeners.DocumentInfoViewerListener;
 import com.ged.ui.listeners.LibraryListener;
 import com.ged.ui.listeners.LibraryListener.LIBRARY_FILE_TYPE;
 import com.tools.PropertiesHelper;
@@ -48,7 +49,7 @@ import com.tools.javafx.ModalConfirmResponse;
  * @author xavier
  * 
  */
-public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCell<String>>, ChangeListener<TreeItem<String>>  {
+public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCell<String>>, ChangeListener<TreeItem<String>>, DocumentInfoViewerListener {
 
 	private Properties properties = PropertiesHelper.getInstance().getProperties();
 	
@@ -239,6 +240,31 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 		extras.put("open-in-edition-mode", true);
 		
 		libraryView.get().getParentScreen().putExtra(extras);
+	}
+	
+	
+	public void openEditionForNode(TreeItem<String> node) {
+		
+		if (nodeIsRoot(node)) {
+			return; // we never edit the root !
+		}
+		
+		if (nodeIsDirectory(node)) {
+			// will come later
+		}
+		else { // node is a file
+			
+			libraryView.get().getParentScreen().pushScreen(Screen.EDITION_SCREEN);
+			
+			Map<String, Object> extras = new HashMap<>();
+			extras.put("relative-document-root", getFilePathFromTreeItem(node));
+			extras.put("open-in-edition-mode", true);
+			extras.put("ged-document", GedDocumentService.getDocumentFromFile(getFilePathFromTreeItem(node)));
+			
+			libraryView.get().getParentScreen().putExtra(extras);
+			
+		}
+		
 	}
 	
 	
@@ -475,6 +501,12 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 		private String getString() {
 			return getItem() == null ? "" : getItem().toString();
 		}
+	}
+
+
+	@Override
+	public void askForDocumentEdition() {
+		openEditionForNode(libraryView.get().getSelectionModel().getSelectedItem());
 	}
 
 

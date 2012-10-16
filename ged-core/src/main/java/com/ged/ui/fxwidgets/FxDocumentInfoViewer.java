@@ -12,6 +12,7 @@ import javafx.scene.layout.Priority;
 import org.apache.log4j.Logger;
 
 import com.ged.models.GedDocument;
+import com.ged.ui.fxwidgets.eventhandler.DocumentInfoViewerEventHandler;
 import com.tools.DateHelper;
 import com.tools.PropertiesHelper;
 
@@ -46,6 +47,11 @@ public class FxDocumentInfoViewer extends GridPane {
 	 * This button allow document modification
 	 */
 	private Button btnEditDocument;
+	
+	/**
+	 * My event handler
+	 */
+	private DocumentInfoViewerEventHandler eventHandler;
 	
 	
 	public FxDocumentInfoViewer() {
@@ -86,12 +92,16 @@ public class FxDocumentInfoViewer extends GridPane {
 	 * Instantiate attributes (widgets)
 	 */
 	private void instantiateWidgets() {
+		
+		eventHandler = new DocumentInfoViewerEventHandler(this);
+		
 		title = new Label();
 		description = new Label();
 		date = new Label();
 		
 		btnEditDocument = new Button(properties.getProperty("modify"));
 		btnEditDocument.setDisable(true);
+		btnEditDocument.setOnAction(eventHandler);
 		
 		Image i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_edit_doc")));
 		ImageView iv = new ImageView(i);
@@ -127,6 +137,11 @@ public class FxDocumentInfoViewer extends GridPane {
 
 	public Button getBtnEditDocument() {
 		return btnEditDocument;
+	}
+
+
+	public DocumentInfoViewerEventHandler getEventHandler() {
+		return eventHandler;
 	}
 	
 	

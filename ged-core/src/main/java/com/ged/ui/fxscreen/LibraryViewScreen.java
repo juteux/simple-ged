@@ -63,6 +63,8 @@ public class LibraryViewScreen extends FxSoftwareScreen {
 		libraryWidget.getEventHandler().addLibraryListener(eventHandler);
 
 		documentInfoViewerWidget = new FxDocumentInfoViewer();
+		documentInfoViewerWidget.getEventHandler().addDocumentInfoViewerListener(libraryWidget.getEventHandler());
+		
 		documentPreviewer = new DocumentPreviewer();
 		
 		libraryWidget.getEventHandler().addLibraryListener(eventHandler);

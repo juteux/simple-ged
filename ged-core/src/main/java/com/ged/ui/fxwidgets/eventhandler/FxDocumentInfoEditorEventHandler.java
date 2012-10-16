@@ -7,6 +7,8 @@ import javafx.scene.input.KeyEvent;
 
 import javax.swing.event.EventListenerList;
 
+import org.apache.log4j.Logger;
+
 import com.ged.models.GedDocument;
 import com.ged.ui.fxwidgets.FxDocumentInfoEditor;
 import com.ged.ui.listeners.DocumentInfoEditorListener;
@@ -14,6 +16,12 @@ import com.ged.ui.listeners.DocumentInfoEditorListener;
 
 public class FxDocumentInfoEditorEventHandler implements EventHandler<KeyEvent> {
 
+	/**
+	 * Logger
+	 */
+	private static final Logger logger = Logger.getLogger(FxDocumentInfoEditorEventHandler.class);
+	
+	
 	/**
 	 * The object we're listerning to
 	 */
@@ -39,6 +47,22 @@ public class FxDocumentInfoEditorEventHandler implements EventHandler<KeyEvent> 
 		document.setDescription(documentInfoEditor.get().getEditDocumentDescription().getText());
 		//document.setLocation(GedDocumentLocationService.findLocationById(documentInfoEditor.getLocationSelector().getSelectedLocationID()));
 		return document;
+	}
+	
+	/**
+	 * Set the document information, but too stupid to remember the id =)
+	 */
+	public void setDocument(GedDocument document) {
+		
+		if (document == null) {
+			logger.debug("I get an null document");
+			return;
+		}
+		logger.debug("The document is not null");
+		
+		documentInfoEditor.get().getEditDocumentTitle().setText(document.getName());
+		documentInfoEditor.get().getEditDocumentDate().setSelectedDate(document.getDate());
+		documentInfoEditor.get().getEditDocumentDescription().setText(document.getDescription());
 	}
 	
 	

@@ -45,7 +45,7 @@ public class EditDocumentScreen extends AddDocumentScreen {
 		
 		HBox btnLayout = super.getControlButtonsLayout();
 		btnLayout.getChildren().clear();
-		btnLayout.getChildren().addAll(btnBack, btnSave);
+		//btnLayout.getChildren().addAll(btnBack, btnSave);
 		
 		instanciateWidgets();
 	}
@@ -61,7 +61,7 @@ public class EditDocumentScreen extends AddDocumentScreen {
 		
 		document = (GedDocument)extras.get("ged-document");
 		
-		// TODO : fill fields
+		getDocInfoEditor().getEventHandler().setDocument(document);
 	}
 
 	
