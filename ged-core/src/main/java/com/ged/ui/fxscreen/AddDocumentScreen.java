@@ -86,8 +86,10 @@ public class AddDocumentScreen extends FxSoftwareScreen {
 	 * Get our target directory
 	 */
 	@Override
-	public void receiveExtraValue(Map<String, Object> extra) {
-		documentRelativeDirectory = (String) extra.get("relative-document-root");
+	public void receiveExtraValue(Map<String, Object> extras) {
+		documentRelativeDirectory = (String) extras.get("relative-document-root");
+		
+		documentPreviewer.setEditionMode(extras.get("open-in-edition-mode") != null && (boolean)extras.get("open-in-edition-mode"));
 	}
 
 	

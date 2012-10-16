@@ -82,12 +82,27 @@ public class DocumentPreviewer extends HBox {
 	private Button btnPrintFile;
 	
 	/**
+	 * Button for unlinking files
+	 */
+	private Button btnUnlinkFile;
+	
+	/**
+	 * Edition mode is on ? Default false
+	 * Edition mode enable you to unlink document files for example
+	 */
+	private boolean editionMode;
+	
+	
+	/**
 	 * Properties
 	 */
 	Properties properties = PropertiesHelper.getInstance().getProperties();
 	
 	
 	public DocumentPreviewer() {
+		
+		editionMode = false;
+		
 		instantiateWidgets();
 		
 		//	+-----------+-------------------+
@@ -107,8 +122,12 @@ public class DocumentPreviewer extends HBox {
 		VBox.setVgrow(leftBox, Priority.ALWAYS);
 
 		
-		HBox topRightBox = new HBox(5);
-		topRightBox.getChildren().addAll(back, next);
+		VBox topRightBox = new VBox(10);
+		
+		HBox topRightBoxTop = new HBox(5);
+		topRightBoxTop.getChildren().addAll(back, next);
+		
+		topRightBox.getChildren().addAll(topRightBoxTop, btnUnlinkFile);
 		VBox.setVgrow(topRightBox, Priority.ALWAYS);
 		
 		VBox bottomRightBox = new VBox(10);
@@ -171,6 +190,18 @@ public class DocumentPreviewer extends HBox {
 		iv2.setFitWidth(32);
 		iv2.setFitHeight(32);
 		btnPrintFile.setGraphic(iv2);
+		
+		
+		btnUnlinkFile = new Button(properties.getProperty("unlink"));
+		btnUnlinkFile.setOnAction(eventHandler);
+		btnUnlinkFile.setPrefSize(160, 50);
+		
+		Image i3 = new Image(getClass().getResourceAsStream(properties.getProperty("ico_remove")));
+		ImageView iv3 = new ImageView(i3);
+		iv3.setSmooth(true);
+		iv3.setFitWidth(32);
+		iv3.setFitHeight(32);
+		btnUnlinkFile.setGraphic(iv3);
 		
 		
 		eventHandler.fixButtonsVisibility();
@@ -306,8 +337,13 @@ public class DocumentPreviewer extends HBox {
 		return next;
 	}
 
+	// Get back Jojo =)
 	public Button getBack() {
 		return back;
+	}
+
+	public Button getBtnUnlinkFile() {
+		return btnUnlinkFile;
 	}
 
 	/**
@@ -338,5 +374,15 @@ public class DocumentPreviewer extends HBox {
 	public FxDocumentPreviewerEventHandler getEventHandler() {
 		return eventHandler;
 	}
+
+	public boolean isEditionMode() {
+		return editionMode;
+	}
+
+	public void setEditionMode(boolean editionMode) {
+		this.editionMode = editionMode;
+		eventHandler.fixButtonsVisibility();
+	}
+	
 	
 }

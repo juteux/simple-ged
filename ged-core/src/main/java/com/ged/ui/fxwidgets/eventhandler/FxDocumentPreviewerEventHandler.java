@@ -59,9 +59,9 @@ public class FxDocumentPreviewerEventHandler implements EventHandler<ActionEvent
 		else if (arg0.getSource() == documentPreviewer.get().getBack()) {
 			documentPreviewer.get().gotoPreviousPreviewer();
 		}
-		/*else if (arg0.getSource() == documentPreview.getBtnUnlink()) {
-			documentPreview.removeCurrentPreviewer();
-		}*/
+		else if (arg0.getSource() == documentPreviewer.get().getBtnUnlinkFile()) {
+			documentPreviewer.get().removeCurrentPreviewer();
+		}
 		else if (arg0.getSource() == documentPreviewer.get().getBtnOpenFile()) {
 			
 			// see : http://java.developpez.com/faq/java/?page=systeme#ouvrirFichier
@@ -80,7 +80,7 @@ public class FxDocumentPreviewerEventHandler implements EventHandler<ActionEvent
 			documentPreviewer.get().getCurrentPreviewer().print();
 		}
 		else {
-			logger.warn("Not implemented yet : FxDocumentPreviewerController.handle");
+			logger.warn("Not implemented yet : FxDocumentPreviewerEventHandler.handle");
 		}
 		
 	}
@@ -94,7 +94,7 @@ public class FxDocumentPreviewerEventHandler implements EventHandler<ActionEvent
 		fireEvent();
 		
 		Button btnOpen = documentPreviewer.get().getBtnOpenFile();
-		//SimpleButton btnUnlink = documentPreviewer.getBtnUnlink();
+		Button btnUnlink = documentPreviewer.get().getBtnUnlinkFile();
 		Button btnNext = documentPreviewer.get().getNext();
 		Button btnPrevious = documentPreviewer.get().getBack();
 		Button btnPrint = documentPreviewer.get().getBtnPrintFile();
@@ -104,7 +104,8 @@ public class FxDocumentPreviewerEventHandler implements EventHandler<ActionEvent
 
 		btnOpen.setVisible(viewerCount != 0 && documentPreviewer.get().getCurrentPreviewer().isOpenable());
 		btnPrint.setVisible(btnOpen.isVisible());
-	    //btnUnlink.setVisible( documentPreviewer.isBtnUnlinkIsAvailable() && viewerCount != 0 );
+	    btnUnlink.setVisible(documentPreviewer.get().isEditionMode());
+	    btnUnlink.setDisable(viewerCount == 0);
 
 	    if ( viewerCount <= 1 ) {
 	    	if (documentPreviewer.get().getCurrentPreviewer() != null) {

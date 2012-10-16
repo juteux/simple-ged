@@ -212,6 +212,7 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 		
 		Map<String, Object> extras = new HashMap<>();
 		extras.put("relative-document-root", getFilePathFromTreeItem(node));
+		extras.put("open-in-edition-mode", true);
 		
 		libraryView.get().getParentScreen().putExtra(extras);
 	}
