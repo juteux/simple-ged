@@ -2,8 +2,10 @@ package com.ged.ui.fxwidgets;
 
 import java.util.Properties;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 
 import org.apache.log4j.Logger;
 
@@ -38,6 +40,11 @@ public class FxDocumentInfoViewer extends GridPane {
 	 */
 	private Label date;
 	
+	/**
+	 * This button allow document modification
+	 */
+	private Button btnEditDocument;
+	
 	
 	public FxDocumentInfoViewer() {
 		instantiateWidgets();
@@ -50,6 +57,8 @@ public class FxDocumentInfoViewer extends GridPane {
 		
 		this.add(description, 0, 1, 2, 1);
 		description.getStyleClass().add("document-info-description");
+		
+		GridPane.setHgrow(title, Priority.ALWAYS);
 	}
 	
 	
