@@ -42,7 +42,7 @@ public class LibraryViewScreen extends FxSoftwareScreen {
 		VBox rightLayoutBoxing = new VBox();
 		rightLayoutBoxing.getChildren().addAll(documentInfoViewerWidget, documentPreviewer);
 		
-		rightLayoutBoxing.setPadding(new Insets(5, 5, 5, 5));
+		rightLayoutBoxing.setPadding(new Insets(0, 5, 5, 5));
 		rightLayoutBoxing.setSpacing(5);
 		
 		HBox mainLayout = new HBox();

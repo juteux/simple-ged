@@ -2,8 +2,11 @@ package com.ged.ui.fxwidgets;
 
 import java.util.Properties;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 
@@ -49,16 +52,34 @@ public class FxDocumentInfoViewer extends GridPane {
 	public FxDocumentInfoViewer() {
 		instantiateWidgets();
 		
+		//         	0                  1				2
+		//   +------------------+---------------+---------------+
+		// 0 |					|				|				|
+		// 	 |		Title		|		Date	|				|
+		//	 |					|				| Edit button	|
+		//   |------------------+---------------+				|
+		//   |									|				|
+		// 1 |			Description             |				|
+		//   |           						|				|
+		//   +----------------------------------+---------------+
+		
+		
 		this.add(title, 0, 0);
 		title.getStyleClass().add("document-info-title");
 		
 		this.add(date, 1, 0);
 		date.getStyleClass().add("document-info-date");
 		
+		this.add(btnEditDocument, 2, 0, 1, 2);
+		date.getStyleClass().add("document-info-date");
+		
 		this.add(description, 0, 1, 2, 1);
 		description.getStyleClass().add("document-info-description");
 		
 		GridPane.setHgrow(title, Priority.ALWAYS);
+		GridPane.setHgrow(date, Priority.NEVER);
+		GridPane.setHgrow(description, Priority.ALWAYS);
+		GridPane.setHgrow(btnEditDocument, Priority.NEVER);
 	}
 	
 	
@@ -69,6 +90,15 @@ public class FxDocumentInfoViewer extends GridPane {
 		title = new Label();
 		description = new Label();
 		date = new Label();
+		
+		btnEditDocument = new Button(properties.getProperty("modify"));
+		
+		Image i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_edit_doc")));
+		ImageView iv = new ImageView(i);
+		iv.setSmooth(true);
+		iv.setFitWidth(32);
+		iv.setFitHeight(32);
+		btnEditDocument.setGraphic(iv);
 		
 		setGedDocument(null);
 	}

@@ -11,7 +11,8 @@
 }
 
 .document-info-date {
-	-fx-font-style:italic;
+	/*-fx-font-style:italic;*/
+	-fx-text-fill: #999999;
 }
 
 .document-info-description {
