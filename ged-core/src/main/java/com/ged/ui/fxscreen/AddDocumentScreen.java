@@ -59,6 +59,12 @@ public class AddDocumentScreen extends FxSoftwareScreen {
 	 */
 	private String documentRelativeDirectory; 
 	
+	/**
+	 * 
+	 * My child will be allowed to modify this layout
+	 */
+	private HBox controlButtonsLayout;
+	
 	
 	/**
 	 * 
@@ -73,7 +79,10 @@ public class AddDocumentScreen extends FxSoftwareScreen {
 		leftBox.setAlignment(Pos.CENTER);
 		leftBox.setPadding(new Insets(25, 25, 25, 25));
 		
-		leftBox.getChildren().addAll(btnAddFromFS, btnAddFromScanner, docInfoEditor, btnSubmit);
+		controlButtonsLayout = new HBox(5);
+		controlButtonsLayout.getChildren().addAll(btnSubmit);
+		
+		leftBox.getChildren().addAll(btnAddFromFS, btnAddFromScanner, docInfoEditor, controlButtonsLayout);
 
 		HBox.setHgrow(documentPreviewer, Priority.ALWAYS);
 		VBox.setVgrow(documentPreviewer, Priority.ALWAYS);
@@ -87,8 +96,7 @@ public class AddDocumentScreen extends FxSoftwareScreen {
 	 */
 	@Override
 	public void receiveExtraValue(Map<String, Object> extras) {
-		documentRelativeDirectory = (String) extras.get("relative-document-root");
-		
+		setDocumentRelativeDirectory((String) extras.get("relative-document-root"));
 		documentPreviewer.setEditionMode(extras.get("open-in-edition-mode") != null && (boolean)extras.get("open-in-edition-mode"));
 	}
 
@@ -125,7 +133,7 @@ public class AddDocumentScreen extends FxSoftwareScreen {
 		docInfoEditor.getEventHandler().addDocumentInfoEditorListener(eventHandler);
 		
 		btnSubmit = new Button(properties.getProperty("save"));
-		btnSubmit.setPrefSize(300, 80);
+		btnSubmit.setPrefSize(250, 80);
 		btnSubmit.setOnAction(eventHandler);
 		
 		Image i3 = new Image(getClass().getResourceAsStream(properties.getProperty("ico_save")));
@@ -165,6 +173,17 @@ public class AddDocumentScreen extends FxSoftwareScreen {
 
 	public String getDocumentRelativeDirectory() {
 		return documentRelativeDirectory;
+	}
+
+	/**
+	 * Only enable for my children
+	 */
+	protected HBox getControlButtonsLayout() {
+		return controlButtonsLayout;
+	}
+
+	protected void setDocumentRelativeDirectory(String documentRelativeDirectory) {
+		this.documentRelativeDirectory = documentRelativeDirectory;
 	}
 	
 }
