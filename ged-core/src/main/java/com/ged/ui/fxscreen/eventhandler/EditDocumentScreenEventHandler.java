@@ -102,18 +102,39 @@ public class EditDocumentScreenEventHandler implements DocumentInfoEditorListene
 		
 	}
 
+	
+	/**
+	 * Check if currents values are valid, if true, the save button is available
+	 */
+	public void checkValidity() {
 
-	@Override
-	public void fileCountChanged(int newFileCount) {
-		// TODO Auto-generated method stub
-		
+		boolean isValid = true;
+
+		if (!editDocumentScreen.get().getDocInfoEditor().getEventHandler().isValid()) {
+			isValid = false;
+		}
+
+		if (editDocumentScreen.get().getDocumentPreviewer().getEventHandler().isFileListEmpty()) {
+			isValid = false;
+		}
+
+		editDocumentScreen.get().getBtnSave().setDisable(!isValid);
 	}
 
-
+	/**
+	 * @see com.ged.ui.listeners.DocumentInfoEditorListener#selectionChanged(boolean)
+	 */
 	@Override
 	public void selectionChanged(boolean isValid) {
-		// TODO Auto-generated method stub
-		
+		checkValidity();
+	}
+
+	/**
+	 * @see com.ged.ui.listeners.DocumentPreviewListener#fileCountChanged(int)
+	 */
+	@Override
+	public void fileCountChanged(int newFileCount) {
+		checkValidity();
 	}
 
 }
