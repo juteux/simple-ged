@@ -256,7 +256,7 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 			extras.put("ged-document", GedDocumentService.getDocumentFromFile(getFilePathFromTreeItem(node)));
 			
 			if (GedDocumentService.getDocumentFromFile(getFilePathFromTreeItem(node)) == null) {
-				extras.put("system-file-path", new File(Profile.getInstance().getLibraryRoot() + getCurrentItemRelativePath()));
+				extras.put("system-file", new File(Profile.getInstance().getLibraryRoot() + getCurrentItemRelativePath()));
 			}
 			
 			libraryView.get().getParentScreen().pushExtraValues(extras);

@@ -111,8 +111,8 @@ public class AddDocumentScreen extends FxSoftwareScreen {
 		docInfoEditor.getEventHandler().setDocument(document);
 		documentPreviewer.getEventHandler().setDocument(document);
 		
-		if (extras.get("system-file-path") != null) {
-			documentPreviewer.addFile((File)extras.get("system-file-path"));
+		if (extras.containsKey("system-file")) {
+			documentPreviewer.addFile((File)extras.get("system-file"));
 		}
 	}
 
