@@ -1,5 +1,6 @@
 package com.ged.ui.fxscreen;
 
+import java.io.File;
 import java.util.Map;
 
 import javafx.geometry.Insets;
@@ -109,6 +110,10 @@ public class AddDocumentScreen extends FxSoftwareScreen {
 		
 		docInfoEditor.getEventHandler().setDocument(document);
 		documentPreviewer.getEventHandler().setDocument(document);
+		
+		if (extras.get("system-file-path") != null) {
+			documentPreviewer.addFile((File)extras.get("system-file-path"));
+		}
 	}
 
 	
