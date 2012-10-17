@@ -349,7 +349,7 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 						}
 							
 						// the target is a dir ?
-						if (currentNodeIsRoot() || currentNodeIsDirectory()) {
+						if (currentNodeIsFile()) {
 							dropEnable = false;
 						}
 						
