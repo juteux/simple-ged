@@ -76,8 +76,8 @@ public abstract class FxSoftwareScreen extends HBox {
 	 * 
 	 * <key, value>
 	 */
-	public void putExtra(Map<String, Object> extra) {
-		mainWindow.get().putExtraToTopScreen(extra);
+	public void pushExtraValues(Map<String, Object> extras) {
+		mainWindow.get().pushExtraValuesToTopScreen(extras);
 	}
 
 	/**
@@ -85,7 +85,7 @@ public abstract class FxSoftwareScreen extends HBox {
 	 * 
 	 * Should be override by child classes
 	 */
-	public void receiveExtraValue(Map<String, Object> extra) {
+	public void pullExtraValues(Map<String, Object> extras) {
 		logger.warn("Warning : the child screen doesn't take care about extra values");
 	}
 

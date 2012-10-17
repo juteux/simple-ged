@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.regex.Matcher;
 
 import org.apache.log4j.Logger;
 
@@ -27,13 +28,22 @@ public class GedDocumentService {
 
 	private static final Logger logger = Logger.getLogger(GedDocumentService.class);
 
+	
+	/**
+	 * Replace \\ by /, to keep unix like path in database
+	 */
+	private static String forceUnixSeparator(String s) {
+		return s.replaceAll(Matcher.quoteReplacement("\\"), Matcher.quoteReplacement("/"));
+	}
+	
+	
 	/**
 	 * 
 	 * @param filePath
 	 *            The file path, relative to ged root
 	 */
 	public static GedDocument findDocumentbyFilePath(String filePath) {
-		return DocumentDAO.findDocumentbyFilePath(filePath);
+		return DocumentDAO.findDocumentbyFilePath(forceUnixSeparator(filePath));
 	}
 	
 	
@@ -44,21 +54,13 @@ public class GedDocumentService {
 	 */
 	public static GedDocument getDocumentFromFile(String filePath)
 	{
-		return DocumentDAO.findDocumentbyFilePath(filePath);
+		return DocumentDAO.findDocumentbyFilePath(forceUnixSeparator(filePath));
 	}
 	
 	/**
 	 * Add a document
 	 */
-	public static void addDocument(GedDocument doc)
-	{
-		DocumentDAO.saveOrUpdate(doc);
-	}
-	
-	/**
-	 * Update document
-	 */
-	public static void updateDocument(GedDocument doc)
+	public static void addOrUpdateDocument(GedDocument doc)
 	{
 		DocumentDAO.saveOrUpdate(doc);
 	}
@@ -94,7 +96,7 @@ public class GedDocumentService {
 		}
 		
 		// rename in database
-		DocumentDAO.updateFilePath(oldName, newName);
+		DocumentDAO.updateFilePath(forceUnixSeparator(oldName), forceUnixSeparator(newName));
 	}
 	
 	
@@ -110,7 +112,7 @@ public class GedDocumentService {
 			logger.error("Delete error");
 		}
 		
-		DocumentDAO.deleteFile(filePath);
+		DocumentDAO.deleteFile(forceUnixSeparator(filePath));
 	}
 	
 	/**

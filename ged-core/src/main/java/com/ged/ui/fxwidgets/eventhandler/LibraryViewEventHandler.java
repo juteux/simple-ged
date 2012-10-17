@@ -51,7 +51,10 @@ import com.tools.javafx.ModalConfirmResponse;
  */
 public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCell<String>>, ChangeListener<TreeItem<String>>, DocumentInfoViewerListener {
 
-	private Properties properties = PropertiesHelper.getInstance().getProperties();
+	/**
+	 * Global properties
+	 */
+	private static final Properties properties = PropertiesHelper.getInstance().getProperties();
 	
 	private static final Logger logger = Logger.getLogger(LibraryViewEventHandler.class);
 	
@@ -68,7 +71,7 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 	/**
 	 * Drag & drop format 
 	 */
-	public static DataFormat dataFormatLibraryTreeItem =  new DataFormat("x-ged-library-tree-item");
+	public static final DataFormat dataFormatLibraryTreeItem =  new DataFormat("x-ged-library-tree-item");
 
 	
 	private TreeItem<String> draggedItem;
@@ -132,13 +135,6 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 		String itemPath = getFilePathFromTreeItem(newItem);
 		
 		logger.debug("Full item path : " + itemPath);
-		
-		if (nodeIsRoot(newItem) || nodeIsDirectory(newItem)) {
-			
-		}
-		else { // we are on a document, edition ?
-			
-		}
 		
 		LIBRARY_FILE_TYPE type = LIBRARY_FILE_TYPE.LIBRARY_FILE;
 		if (nodeIsRoot(newItem)) {
@@ -237,9 +233,8 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 		
 		Map<String, Object> extras = new HashMap<>();
 		extras.put("relative-document-root", getFilePathFromTreeItem(node));
-		extras.put("open-in-edition-mode", true);
 		
-		libraryView.get().getParentScreen().putExtra(extras);
+		libraryView.get().getParentScreen().pushExtraValues(extras);
 	}
 	
 	
@@ -258,10 +253,9 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 			
 			Map<String, Object> extras = new HashMap<>();
 			extras.put("relative-document-root", getFilePathFromTreeItem(node));
-			extras.put("open-in-edition-mode", true);
 			extras.put("ged-document", GedDocumentService.getDocumentFromFile(getFilePathFromTreeItem(node)));
 			
-			libraryView.get().getParentScreen().putExtra(extras);
+			libraryView.get().getParentScreen().pushExtraValues(extras);
 			
 		}
 		
@@ -351,7 +345,7 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 						}
 							
 						// the target is a dir ?
-						if (! new File(Profile.getInstance().getLibraryRoot() + getFilePathFromTreeItem(getTreeItem())).isDirectory()) {
+						if (currentNodeIsRoot() || currentNodeIsDirectory()) {
 							dropEnable = false;
 						}
 						
@@ -416,13 +410,13 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 		public void startEdit() {
 			super.startEdit();
 
-			if (!currentNodeIsDirectory()) {
+			if (currentNodeIsFile()) {
+				openEditionForNode(getTreeItem());
 				return;
 			}
 			
 			if (textField == null) {
 				createTextField(); 
-				// TODO : open document edition
 			}
 			
 			setText(null);
@@ -472,6 +466,10 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 
 		private boolean currentNodeIsRoot() {
 			return nodeIsRoot(getTreeItem());
+		}
+		
+		private boolean currentNodeIsFile() {
+			return ! (currentNodeIsDirectory() || currentNodeIsRoot());
 		}
 		
 

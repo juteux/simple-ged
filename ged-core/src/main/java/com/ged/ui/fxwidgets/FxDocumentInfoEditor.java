@@ -43,7 +43,7 @@ public class FxDocumentInfoEditor extends GridPane {
 	/**
 	 * Properties
 	 */
-	private Properties properties = PropertiesHelper.getInstance().getProperties();
+	private static final Properties properties = PropertiesHelper.getInstance().getProperties();
 	
 	/**
 	 * Event handler

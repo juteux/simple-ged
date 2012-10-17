@@ -46,7 +46,7 @@ public class GedDocumentLocationService {
 		List<GedDocument> documentsWithLocationToUpdate = GedDocumentService.findDocumentbyLocation(location);
 		for (GedDocument document : documentsWithLocationToUpdate) {
 			document.setLocation(defaultLocation);
-			GedDocumentService.updateDocument(document);
+			GedDocumentService.addOrUpdateDocument(document);
 		}
 		
 		DocumentLocationDAO.delete(location);

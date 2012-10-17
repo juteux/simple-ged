@@ -2,12 +2,14 @@ package com.ged.ui.fxwidgets;
 
 import java.util.Properties;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 
 import org.apache.log4j.Logger;
 
@@ -62,7 +64,7 @@ public class FxDocumentInfoViewer extends GridPane {
 		// 0 |					|				|				|
 		// 	 |		Title		|		Date	|				|
 		//	 |					|				| Edit button	|
-		//   |------------------+---------------+				|
+		//   |------------------+---------------+	(btnBox)	|
 		//   |									|				|
 		// 1 |			Description             |				|
 		//   |           						|				|
@@ -75,7 +77,11 @@ public class FxDocumentInfoViewer extends GridPane {
 		this.add(date, 1, 0);
 		date.getStyleClass().add("document-info-date");
 		
-		this.add(btnEditDocument, 2, 0, 1, 2);
+		VBox btnBox = new VBox(10);
+		btnBox.setPadding(new Insets(5,5,5,25));
+		btnBox.getChildren().addAll(btnEditDocument);
+		
+		this.add(btnBox, 2, 0, 1, 2);
 		date.getStyleClass().add("document-info-date");
 		
 		this.add(description, 0, 1, 2, 1);
@@ -102,6 +108,7 @@ public class FxDocumentInfoViewer extends GridPane {
 		btnEditDocument = new Button(properties.getProperty("modify"));
 		btnEditDocument.setDisable(true);
 		btnEditDocument.setOnAction(eventHandler);
+		btnEditDocument.setPrefWidth(150);
 		
 		Image i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_edit_doc")));
 		ImageView iv = new ImageView(i);

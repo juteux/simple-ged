@@ -15,6 +15,9 @@ import javafx.scene.control.Button;
 
 import org.apache.log4j.Logger;
 
+import com.ged.Profile;
+import com.ged.models.GedDocument;
+import com.ged.models.GedDocumentFile;
 import com.ged.ui.fxpreviewwidgets.AbstractFilePreviewer;
 import com.ged.ui.fxwidgets.DocumentPreviewer;
 import com.ged.ui.listeners.DocumentPreviewListener;
@@ -36,6 +39,24 @@ public class FxDocumentPreviewerEventHandler implements EventHandler<ActionEvent
 	
 	public FxDocumentPreviewerEventHandler(DocumentPreviewer documentPreviewer) {
 		this.documentPreviewer = new WeakReference<>(documentPreviewer);
+	}
+	
+	
+	/**
+	 * Set the document
+	 * 
+	 * Only the file will be kept, not document id or something like that
+	 */
+	public void setDocument(GedDocument document) {
+		
+		if (document == null) {
+			return;
+		}
+		
+		for (GedDocumentFile gdf : document.getDocumentFiles()) {
+			documentPreviewer.get().addFile(new File(Profile.getInstance().getLibraryRoot() + gdf.getRelativeFilePath()));
+		}
+		documentPreviewer.get().gotoIndex(0);
 	}
 	
 	

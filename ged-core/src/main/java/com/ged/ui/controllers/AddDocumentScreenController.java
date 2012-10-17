@@ -64,7 +64,7 @@ public class AddDocumentScreenController implements ActionListener,
 				);
 			document.setDocumentFiles(attachedFiles);
 			
-			GedDocumentService.addDocument(document);
+			GedDocumentService.addOrUpdateDocument(document);
 			
 			JOptionPane.showMessageDialog(null, properties.getProperty("doc_added"), properties.getProperty("information"), JOptionPane.INFORMATION_MESSAGE);
 			
@@ -207,13 +207,13 @@ public class AddDocumentScreenController implements ActionListener,
 
 	@Override
 	public void releaseOpenedFiles() {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 		
 	}
 
 	@Override
 	public void selectionChanged(LIBRARY_FILE_TYPE newSelectionType) {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 		
 	}
 

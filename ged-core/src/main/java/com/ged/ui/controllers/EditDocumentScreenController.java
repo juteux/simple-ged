@@ -64,10 +64,10 @@ public class EditDocumentScreenController implements ActionListener {
 			document.setDocumentFiles(attachedFiles);
 			
 			if (document.getId() == -1) {
-				GedDocumentService.addDocument(document);
+				GedDocumentService.addOrUpdateDocument(document);
 			}
 			else {
-				GedDocumentService.updateDocument(document);
+				GedDocumentService.addOrUpdateDocument(document);
 			}
 			
 			JOptionPane.showMessageDialog(null, properties.getProperty("doc_modified"), properties.getProperty("information"), JOptionPane.INFORMATION_MESSAGE);

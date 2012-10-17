@@ -11,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
+import com.ged.models.GedDocument;
 import com.ged.ui.FxMainWindow;
 import com.ged.ui.fxscreen.eventhandler.AddDocumentScreenEventHandler;
 import com.ged.ui.fxwidgets.DocumentPreviewer;
@@ -65,6 +66,12 @@ public class AddDocumentScreen extends FxSoftwareScreen {
 	 */
 	private HBox controlButtonsLayout;
 	
+	/**
+	 * The current manipulated document
+	 * This document is null by default (a new document)
+	 */
+	private GedDocument document;
+	
 	
 	/**
 	 * 
@@ -95,9 +102,13 @@ public class AddDocumentScreen extends FxSoftwareScreen {
 	 * Get our target directory
 	 */
 	@Override
-	public void receiveExtraValue(Map<String, Object> extras) {
+	public void pullExtraValues(Map<String, Object> extras) {
 		setDocumentRelativeDirectory((String) extras.get("relative-document-root"));
-		documentPreviewer.setEditionMode(extras.get("open-in-edition-mode") != null && (boolean)extras.get("open-in-edition-mode"));
+		
+		document = (GedDocument)extras.get("ged-document");
+		
+		docInfoEditor.getEventHandler().setDocument(document);
+		documentPreviewer.getEventHandler().setDocument(document);
 	}
 
 	
@@ -148,6 +159,7 @@ public class AddDocumentScreen extends FxSoftwareScreen {
 		
 		documentPreviewer = new DocumentPreviewer();
 		documentPreviewer.getEventHandler().addDocumentPreviewListener(eventHandler);
+		documentPreviewer.setEditionMode(true);
 	}
 
 
@@ -184,6 +196,10 @@ public class AddDocumentScreen extends FxSoftwareScreen {
 
 	protected void setDocumentRelativeDirectory(String documentRelativeDirectory) {
 		this.documentRelativeDirectory = documentRelativeDirectory;
+	}
+
+	public GedDocument getDocument() {
+		return document;
 	}
 	
 }

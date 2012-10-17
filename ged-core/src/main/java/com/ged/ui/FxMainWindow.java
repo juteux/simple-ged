@@ -212,8 +212,8 @@ public class FxMainWindow extends Application {
 	/**
 	 * Give extra values to top screen (current screen)
 	 */
-	public void putExtraToTopScreen(Map<String, Object> extra) {
-		currentCentralScreen.receiveExtraValue(extra);
+	public void pushExtraValuesToTopScreen(Map<String, Object> extra) {
+		currentCentralScreen.pullExtraValues(extra);
 	}
 	
 	/**

@@ -42,7 +42,7 @@ public class AddDocumentScreenEventHandler implements DocumentInfoEditorListener
 	/**
 	 * Properties
 	 */
-	private Properties properties = PropertiesHelper.getInstance().getProperties();
+	private static final Properties properties = PropertiesHelper.getInstance().getProperties();
 	
 	
 	public AddDocumentScreenEventHandler(AddDocumentScreen addDocumentScreen) {
@@ -136,8 +136,17 @@ public class AddDocumentScreenEventHandler implements DocumentInfoEditorListener
 				);
 			document.setDocumentFiles(attachedFiles);
 			
-			GedDocumentService.addDocument(document);
+			if (addDocumentScreen.get().getDocument() != null) {
+				document.setId(addDocumentScreen.get().getDocument().getId());
+			}
+			
+			GedDocumentService.addOrUpdateDocument(document);
 
+			String message = properties.getProperty("doc_added");
+			if (addDocumentScreen.get().getDocument() != null) {
+				message = properties.getProperty("doc_modified");
+			}
+			
 			ModalConfirm.show(addDocumentScreen.get().getMainStage(), new ModalConfirmResponse() {
     			@Override
     			public void confirm() {
@@ -145,7 +154,12 @@ public class AddDocumentScreenEventHandler implements DocumentInfoEditorListener
     			@Override
     			public void cancel() {
     			}
-    		}, properties.getProperty("doc_added"));
+    		}, message);
+			
+			// in case of edition, we have finished our job here
+			if (addDocumentScreen.get().getDocument() != null) {
+				addDocumentScreen.get().finish();
+			}
 			
 			addDocumentScreen.get().getDocInfoEditor().clearFields();
 			addDocumentScreen.get().getDocumentPreviewer().clearPreviews();

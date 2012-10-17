@@ -135,14 +135,14 @@ public class PluginOptionEditionScreenController implements ActionListener, Libr
 
 	@Override
 	public void releaseOpenedFiles() {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 		
 	}
 
 
 	@Override
 	public void selectionChanged(LIBRARY_FILE_TYPE newSelectionType) {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 		
 	}
 	
