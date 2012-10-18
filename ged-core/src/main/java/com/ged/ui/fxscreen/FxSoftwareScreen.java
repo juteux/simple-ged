@@ -39,7 +39,8 @@ public abstract class FxSoftwareScreen extends HBox {
 		PLUGIN_MANAGEMENT_SCREEN, 
 		PLUGIN_OPTION_SCREEN, 
 		MESSAGE_SCREEN, 
-		LOCATION_MANAGEMENT_SCREEN
+		LOCATION_MANAGEMENT_SCREEN,
+		ABOUT_SCREEN
 	}
 
 	public FxSoftwareScreen(FxMainWindow mw) {

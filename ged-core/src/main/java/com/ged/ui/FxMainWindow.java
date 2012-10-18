@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import org.apache.log4j.Logger;
 
 import com.ged.Profile;
+import com.ged.ui.fxscreen.AboutScreen;
 import com.ged.ui.fxscreen.AddDocumentScreen;
 import com.ged.ui.fxscreen.EditDocumentScreen;
 import com.ged.ui.fxscreen.FxSoftwareScreen;
@@ -187,6 +188,8 @@ public class FxMainWindow extends Application {
 		
 		case EDITION_SCREEN :
 			return new EditDocumentScreen(this);
+		case ABOUT_SCREEN :
+			return new AboutScreen(this);
 		/*
 		case SEARCHING_SCREEN :
 			return new SearchingScreen(this);

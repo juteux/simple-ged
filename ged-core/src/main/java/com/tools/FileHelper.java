@@ -1,6 +1,11 @@
 package com.tools;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import org.apache.log4j.Logger;
 
@@ -113,5 +118,30 @@ public class FileHelper {
 	public static boolean folderExists(String folderAbsolutePath) {
 		File f = new File(folderAbsolutePath);
 		return (f.exists() && f.isDirectory());
+	}
+	
+	/**
+	 * Read all the content of the given stream, and return it as string
+	 * 
+	 * @param isr
+	 * 				The stream to read
+	 * 
+	 * @return
+	 * 				The stream content, as string
+	 * 
+	 * @throws IOException
+	 */
+	public static String readAllStringContent(InputStreamReader isr) throws IOException {
+	    
+		BufferedReader br = new BufferedReader(isr);
+		String         ls = System.getProperty("line.separator");
+		StringBuilder  stringBuilder = new StringBuilder();
+		
+		String line;
+		while ((line=br.readLine()) != null) {
+			stringBuilder.append(line).append(ls);
+		}
+
+	    return stringBuilder.toString();
 	}
 }

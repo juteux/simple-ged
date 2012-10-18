@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 
 import org.apache.log4j.Logger;
 
+import com.ged.ui.fxscreen.FxSoftwareScreen.Screen;
 import com.ged.ui.fxscreen.FxToolBar;
 
 /**
@@ -39,9 +40,12 @@ public class ToolBarEventHandler implements EventHandler<Event> {
 	 */
 	@Override
 	public void handle(Event action) {
-	
+		
 		if (action.getSource() == toolBar.get().getBtnBack()) {
 			toolBar.get().finish();
+		}
+		else if (action.getSource() == toolBar.get().getBtnAbout()) {
+			toolBar.get().gotoScreen(Screen.ABOUT_SCREEN);
 		}
 		else {
 			logger.warn("Not implemented yet, see ToolBarController.handle");
