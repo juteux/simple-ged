@@ -250,7 +250,7 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 		else { // node is a file
 			
 			libraryView.get().getParentScreen().pushScreen(Screen.EDITION_SCREEN);
-			
+
 			Map<String, Object> extras = new HashMap<>();
 			extras.put("relative-document-root", getFilePathFromTreeItem(node));
 			extras.put("ged-document", GedDocumentService.getDocumentFromFile(getFilePathFromTreeItem(node)));

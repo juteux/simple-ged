@@ -36,7 +36,7 @@ public class AboutScreen extends FxSoftwareScreen {
 		try {
 			InputStreamReader isr = new InputStreamReader(AboutScreen.class.getResourceAsStream("/html/about.html"));
 			String content = FileHelper.readAllStringContent(isr);
-			logger.debug("content : " + content);
+			//logger.debug("content : " + content);
 			webView.getEngine().loadContent(content);
 		} catch (IOException|NullPointerException e) {
 			logger.error("Failed to read file : html/about.html");
