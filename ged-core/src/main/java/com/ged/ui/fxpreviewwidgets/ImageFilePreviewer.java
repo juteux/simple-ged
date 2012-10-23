@@ -15,17 +15,19 @@ import org.apache.log4j.Logger;
 import com.ged.tools.PrintingHelper;
 import com.tools.FileHelper;
 
+/**
+ * Some previewer for image files
+ * 
+ * @author xavier
+ *
+ */
 public class ImageFilePreviewer extends AbstractFilePreviewer {
 
 	private static final Logger logger = Logger.getLogger(ImageFilePreviewer.class);
 	
-	private Dimension2D maximumSize;
-	
+
 	public ImageFilePreviewer(String absoluteFilePath, Dimension2D maxSize) {
-		super(absoluteFilePath);
-		this.maximumSize = maxSize;
-		
-		logger.debug("Max size : " + maxSize.getWidth() + " x " + maxSize.getHeight());
+		super(absoluteFilePath, maxSize);
 	}
 
 	@Override
@@ -35,7 +37,7 @@ public class ImageFilePreviewer extends AbstractFilePreviewer {
 			Image image = new Image(file.toURI().toURL().toExternalForm());
 
 			Dimension s = Toolkit.getDefaultToolkit().getScreenSize();
-			s.setSize(maximumSize.getWidth(), maximumSize.getHeight());
+			s.setSize(maxSize.getWidth(), maxSize.getHeight());
 
 			double pW = image.getWidth();
 			double pH = image.getHeight();

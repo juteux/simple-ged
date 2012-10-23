@@ -14,15 +14,17 @@ import javafx.geometry.Dimension2D;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextAreaBuilder;
 
-
+/**
+ * Some previewer for text files
+ * 
+ * @author xavier
+ *
+ */
 public class TextFilePreviewer extends AbstractFilePreviewer {
 	
-	private Dimension2D maximumSize;
 	
 	public TextFilePreviewer(String absoluteFilePath, Dimension2D maxSize) {
-		super(absoluteFilePath);
-		
-		this.maximumSize = maxSize;
+		super(absoluteFilePath, maxSize);
 	}
 
 	/**
@@ -48,8 +50,8 @@ public class TextFilePreviewer extends AbstractFilePreviewer {
 		}
 
 		final TextArea textArea = TextAreaBuilder.create()
-				.prefWidth(maximumSize.getWidth())
-				.prefHeight(maximumSize.getHeight())
+				.prefWidth(maxSize.getWidth())
+				.prefHeight(maxSize.getHeight())
 				.wrapText(true)
 				.build();
 		

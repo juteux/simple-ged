@@ -1,12 +1,19 @@
 package com.ged.ui.fxpreviewwidgets;
 
+import javafx.geometry.Dimension2D;
 import javafx.scene.control.Label;
 
-
+/**
+ * 
+ * The default previewer just show an generic message "cannot show previewer"
+ * 
+ * @author xavier
+ *
+ */
 public class DefaultFilePreviewer extends AbstractFilePreviewer {
 	
-	public DefaultFilePreviewer(String absoluteFilePath) {
-		super(absoluteFilePath);
+	public DefaultFilePreviewer(String absoluteFilePath, Dimension2D maxSize) {
+		super(absoluteFilePath, maxSize);
 	}
 
 	/**

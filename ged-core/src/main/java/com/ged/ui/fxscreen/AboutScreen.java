@@ -2,6 +2,7 @@ package com.ged.ui.fxscreen;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Reader;
 
 import javafx.scene.web.WebView;
 
@@ -34,8 +35,8 @@ public class AboutScreen extends FxSoftwareScreen {
 		instanciateWidget();
 		
 		try {
-			InputStreamReader isr = new InputStreamReader(AboutScreen.class.getResourceAsStream("/html/about.html"));
-			String content = FileHelper.readAllStringContent(isr);
+			Reader reader = new InputStreamReader(AboutScreen.class.getResourceAsStream("/html/about.html"));
+			String content = FileHelper.readAllStringContent(reader);
 			//logger.debug("content : " + content);
 			webView.getEngine().loadContent(content);
 		} catch (IOException|NullPointerException e) {

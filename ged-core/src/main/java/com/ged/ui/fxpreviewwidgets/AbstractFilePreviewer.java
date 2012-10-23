@@ -1,5 +1,6 @@
 package com.ged.ui.fxpreviewwidgets;
 
+import javafx.geometry.Dimension2D;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 
@@ -22,15 +23,24 @@ public abstract class AbstractFilePreviewer extends HBox {
 	 */
 	protected String absoluteFilePath;
 
+	/**
+	 * The maximum widget size
+	 */
+	protected Dimension2D maxSize;
+	
 	
 	/**
 	 * Don't forget to give the ABSOLUTE file path !
 	 * 
 	 * @param absoluteFilePath
 	 * 				One more time, the ABSOLUTE file path
+	 * 
+	 * @param maxSize
+	 * 				The maximum previewer size. The children must take in account this value !
 	 */
-	public AbstractFilePreviewer(String absoluteFilePath) {
+	public AbstractFilePreviewer(String absoluteFilePath, Dimension2D maxSize) {
 		this.absoluteFilePath = absoluteFilePath;
+		this.maxSize = maxSize;
 		setAlignment(Pos.CENTER);
 	}
 	
@@ -56,7 +66,7 @@ public abstract class AbstractFilePreviewer extends HBox {
 	/**
 	 * Is the file openable ?
 	 * 
-	 * Should always be true, exepted for special previewer like "AddDocumentPreviewer"
+	 * Should always be true, excepted for special previewer like "AddDocumentPreviewer"
 	 */
 	public boolean isOpenable() {
 		return true;

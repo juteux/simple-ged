@@ -3,7 +3,7 @@ package com.tools;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.Reader;
 
 import org.apache.log4j.Logger;
 
@@ -67,6 +67,7 @@ public class FileHelper {
 		case "PDF" :
 			return FileType.PDF_TYPE;
 		case "HTML" :
+		case "HTM"  :
 			return FileType.HTML_TYPE;
 		case "DOC" :
 			return FileType.DOC_TYPE;
@@ -121,7 +122,7 @@ public class FileHelper {
 	/**
 	 * Read all the content of the given stream, and return it as string
 	 * 
-	 * @param isr
+	 * @param reader
 	 * 				The stream to read
 	 * 
 	 * @return
@@ -129,9 +130,9 @@ public class FileHelper {
 	 * 
 	 * @throws IOException
 	 */
-	public static String readAllStringContent(InputStreamReader isr) throws IOException {
+	public static String readAllStringContent(Reader reader) throws IOException {
 	    
-		BufferedReader br = new BufferedReader(isr);
+		BufferedReader br = new BufferedReader(reader);
 		String         ls = System.getProperty("line.separator");
 		StringBuilder  stringBuilder = new StringBuilder();
 		

@@ -34,7 +34,6 @@ import org.jpedal.PdfDecoder;
 
 import com.ged.Profile;
 import com.ged.tools.PrintingHelper;
-import com.ged.ui.fxwidgets.eventhandler.FxDocumentPreviewerEventHandler;
 import com.sun.pdfview.PDFFile;
 import com.sun.pdfview.PDFPrintPage;
 
@@ -62,12 +61,9 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 	long scheduleDisappearTime = System.currentTimeMillis();
 	Thread visibilityThread;
 
-	private Dimension2D maximumSize;
 
 	public PdfFilePreviewer(String absoluteFilePath, Dimension2D maxSize) {
-		super(absoluteFilePath);
-
-		this.maximumSize = maxSize;
+		super(absoluteFilePath, maxSize);
 
 		// logger.debug("Max size : " + maxSize.getWidth() + " x " +
 		// maxSize.getHeight());
@@ -88,7 +84,7 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 
 		pdf = new PdfDecoder();
 
-		this.setPrefSize(maximumSize.getWidth(), maximumSize.getHeight());
+		this.setPrefSize(maxSize.getWidth(), maxSize.getHeight());
 		AnchorPane anchor = new AnchorPane();
 		this.getChildren().add(anchor);
 		anchor.setStyle("-fx-border-color: black; -fx-border-width: 1; -fx-background-color: black;");
@@ -227,7 +223,7 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 		int pH = pdf.getPdfPageData().getCropBoxHeight(page);
 
 		Dimension s = Toolkit.getDefaultToolkit().getScreenSize();
-		s.setSize(maximumSize.getWidth(), maximumSize.getHeight());
+		s.setSize(maxSize.getWidth(), maxSize.getHeight());
 
 		// s.width -= 100;
 		// s.height -= 100;

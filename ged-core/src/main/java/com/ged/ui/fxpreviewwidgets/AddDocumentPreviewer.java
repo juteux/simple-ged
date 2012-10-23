@@ -34,7 +34,7 @@ public class AddDocumentPreviewer extends AbstractFilePreviewer {
 	
 	
 	public AddDocumentPreviewer(TreeItem<String> parentNode, LibraryViewEventHandler libraryController) {
-		super("");
+		super("", null);
 		
 		this.parentNode = parentNode;
 		this.libraryController = new WeakReference<>(libraryController);

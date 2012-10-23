@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -31,6 +33,11 @@ import com.tools.PropertiesHelper;
  */
 public class DocumentPreviewer extends HBox {
 
+	/**
+	 * My logger
+	 */
+	private static final Logger logger = Logger.getLogger(DocumentPreviewer.class);
+	
 	/**
 	 * Every previewers attached to the current document
 	 */
@@ -250,6 +257,7 @@ public class DocumentPreviewer extends HBox {
 		
 		// always choose the best size for you !
 		Dimension2D maximumPreviewerSize = new Dimension2D(leftBox.getWidth() - 10, leftBox.getHeight() - 10);
+		logger.debug("Max size : " + maximumPreviewerSize.getWidth() + " x " + maximumPreviewerSize.getHeight());
 		
 		previewers.add(FilePreviewerFactory.getFilePreviewer(file, maximumPreviewerSize));
 		gotoIndex(previewers.size()-1);

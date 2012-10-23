@@ -20,6 +20,7 @@ import com.ged.ui.fxscreen.FxSoftwareScreen;
 import com.ged.ui.fxscreen.FxToolBar;
 import com.ged.ui.fxscreen.LibraryViewScreen;
 import com.ged.ui.fxscreen.MessageScreen;
+import com.ged.ui.fxscreen.PluginScreen;
 import com.tools.FileHelper;
 import com.tools.PropertiesHelper;
  
@@ -195,13 +196,13 @@ public class FxMainWindow extends Application {
 		/*
 		case SEARCHING_SCREEN :
 			return new SearchingScreen(this);
-			
+		
 		case PLUGIN_OPTION_SCREEN :
 			return new PluginOptionEditionScreen(this);
-			
+		*/
 		case PLUGIN_MANAGEMENT_SCREEN :
-			return new PluginManagementScreen(this);
-		*/	
+			return new PluginScreen(this);
+		
 		case MESSAGE_SCREEN :
 			return new MessageScreen(this);
 		/*	

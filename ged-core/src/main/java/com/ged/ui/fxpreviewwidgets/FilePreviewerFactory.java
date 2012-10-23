@@ -47,14 +47,14 @@ public class FilePreviewerFactory {
 	    case GIF_TYPE :
 	    	previewer = new ImageFilePreviewer(documentFile.getAbsolutePath(), maxSize);
 	        break;
-	    //case HTML_TYPE :
-	    //	previewer = new HtmlFilePreviewer(documentFile.getAbsolutePath());
-	    //	break;
+	    case HTML_TYPE :
+	    	previewer = new HtmlFilePreviewer(documentFile.getAbsolutePath(), maxSize);
+	    	break;
 	    case PDF_TYPE :
 	    	previewer = new PdfFilePreviewer(documentFile.getAbsolutePath(), maxSize);
 	    	break;
 	    default :
-	    	previewer = new DefaultFilePreviewer(documentFile.getAbsolutePath());
+	    	previewer = new DefaultFilePreviewer(documentFile.getAbsolutePath(), maxSize);
 	        break;
 	    }
 
@@ -68,7 +68,7 @@ public class FilePreviewerFactory {
 	    }
 	    
 	    // return a default previewer
-		previewer = new DefaultFilePreviewer(documentFile.getAbsolutePath());
+		previewer = new DefaultFilePreviewer(documentFile.getAbsolutePath(), maxSize);
 		try {
 			previewer.load();
 		} catch (CannotCreatePreviewerException e) { // should never happen
