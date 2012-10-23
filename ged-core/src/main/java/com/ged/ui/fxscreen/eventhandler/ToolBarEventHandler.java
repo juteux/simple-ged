@@ -50,6 +50,9 @@ public class ToolBarEventHandler implements EventHandler<Event> {
 		else if (action.getSource() == toolBar.get().getBtnMessages()) {
 			toolBar.get().pushScreen(Screen.MESSAGE_SCREEN);
 		}
+		else if (action.getSource() == toolBar.get().getBtnPluginManagement()) {
+			toolBar.get().gotoScreen(Screen.PLUGIN_MANAGEMENT_SCREEN);
+		}
 		else {
 			logger.warn("Not implemented yet, see ToolBarController.handle");
 		}
