@@ -34,12 +34,11 @@ public class HtmlFilePreviewer extends AbstractFilePreviewer {
 	
 	public HtmlFilePreviewer(String absoluteFilePath, Dimension2D maxSize) {
 		super(absoluteFilePath, maxSize);
-		logger.debug("dans le constructeur : " + (maxSize == null ? "null" : "pas null"));
 	}
 
 	@Override
 	public void load() throws CannotCreatePreviewerException {
-		logger.debug("dans le load : " + (maxSize == null ? "null" : "pas null"));
+
 		final WebView webView = WebViewBuilder.create()
 				.prefWidth(maxSize.getWidth())
 				.prefHeight(maxSize.getHeight())
