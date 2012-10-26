@@ -179,6 +179,152 @@ public class PluginFactory {
 			return null;
 		}
 	}
+	
+	
+	
+	/**
+	 * Load the plugin for the given file name
+	 * 
+	 * @param pluginFileName
+	 * 				The plugin file name
+	 * 
+	 * @return
+	 * 		The plugin if loading is successful, null otherwise
+	 * 
+	 * @deprecated Use loadPlugin instead !
+	 */
+	@Deprecated
+	 static SimpleGedPlugin loadPluginOldMethod(String pluginFileName) {
+				
+		try {
+			ClassLoader loader = null;
+			
+			Map<PluginManifestTags, String> pluginInfos = new HashMap<PluginManifestTags, String>(); // <Key, Value>
+			List<SimpleGedPluginProperty> pluginProperties = new ArrayList<SimpleGedPluginProperty>();
+			
+			/*
+			 * Load plugin properties
+			 */
+			
+			logger.info("Loading : " + PluginManager.PLUGINS_DIRECTORY + pluginFileName);
+			URL urls[] = {new File(PluginManager.PLUGINS_DIRECTORY + pluginFileName).toURI().toURL()};
+			loader = URLClassLoader.newInstance(urls);//new URLClassLoader(urls);
+
+			InputStreamReader isr = new InputStreamReader(loader.getResourceAsStream(PluginManager.MANIFEST_FILE_NAME), "utf8"); 
+			BufferedReader br = new BufferedReader(isr);
+	
+			String line;
+			while ((line=br.readLine()) != null) {
+			
+				line = line.replaceAll("[ \t]*=", "");
+
+				if (line.startsWith(PluginManifestTags.fields_tag.getTagLabel())) { // special treatment
+					
+					line = line.replaceAll(PluginManifestTags.fields_tag.getTagLabel(), "");
+					//logger.debug(line);
+					
+					String[] properties = line.split(";");
+					
+					for (String property : properties) {
+						property = property.trim();
+						//logger.debug(property);
+						
+						Pattern p = Pattern.compile("(.*)\\((.*)\\)");
+						Matcher m = p.matcher(property);
+						
+						String key = null;
+						String label = null;
+						while(m.find()) {
+							//logger.debug("find : " + m.group(1) + " -> " + m.group(2));
+							key = m.group(1);
+							label = m.group(2);
+						}
+						
+						SimpleGedPluginProperty sgpp = new SimpleGedPluginProperty();
+						
+						if (key.contains("*")) {
+							key = key.replace("*", "");
+							sgpp.setHidden(true);
+						}
+						
+						sgpp.setPropertyKey(key.trim());
+						sgpp.setPropertyLabel(label.trim());
+						
+						pluginProperties.add(sgpp);
+					}
+
+				} else {	// it's not field tag
+			
+					for (PluginManifestTags tag : PluginManifestTags.values()) {
+						if (line.startsWith(tag.getTagLabel())) {
+							pluginInfos.put(tag, line.replaceAll(tag.getTagLabel(), "").trim());
+						}
+					}
+				}
+			
+			} // end while readline
+
+			
+			/*
+			 * Extract dependency if necessary
+			 */
+			JarFile jar = new JarFile(new File(PluginManager.PLUGINS_DIRECTORY + pluginFileName).getAbsolutePath());
+			Enumeration<JarEntry> enumeration = jar.entries();
+			String tmp;
+			
+			List<String> dependencyJarPath = new ArrayList<String>();
+			
+			while(enumeration.hasMoreElements()){
+				
+				tmp = enumeration.nextElement().toString();
+				
+				if( tmp.endsWith("jar") && ! tmp.endsWith("SimpleGedConnector.jar")) {
+					dependencyJarPath.add(extractJar(pluginFileName, tmp));
+				}
+			}
+
+            URL[] urlsWithDependency = new URL[dependencyJarPath.size() + 1];
+            for (int i=0; i<dependencyJarPath.size(); ++i) {
+            	urlsWithDependency[i] = new File(dependencyJarPath.get(i)).toURI().toURL();
+            }
+            urlsWithDependency[dependencyJarPath.size()] = new File(PluginManager.PLUGINS_DIRECTORY + pluginFileName).toURI().toURL();
+            
+            ClassLoader loaderWithDependency = URLClassLoader.newInstance(urlsWithDependency);
+			
+			
+			/*
+			 * We can create plugin now !
+			 */
+
+			// set plugin infos
+			SimpleGedPlugin sgp = (SimpleGedPlugin) Class.forName(pluginInfos.get(PluginManifestTags.main_class_tag), true, loaderWithDependency).newInstance();
+
+			sgp.setJarFileName(pluginFileName);
+			
+			sgp.setProperties(pluginProperties);
+			
+			for (java.util.Map.Entry<PluginManifestTags, String> e : pluginInfos.entrySet()) {
+				//logger.debug(e.getKey().getTagLabel() + "=" + e.getValue());
+				if (e.getKey().getAttributeName() != null) {
+					if (e.getKey().getAttributeName().contains("date") || e.getKey().getAttributeName().contains("Date")) {
+						String[] dateSplit = e.getValue().split("-");
+						PropertyUtils.setSimpleProperty(
+								sgp, 
+								e.getKey().getAttributeName(), 
+								(new GregorianCalendar(Integer.parseInt(dateSplit[0]), Integer.parseInt(dateSplit[1]) - 1, Integer.parseInt(dateSplit[2]))).getTime()
+						);
+					} else {
+						PropertyUtils.setSimpleProperty(sgp, e.getKey().getAttributeName(), e.getValue());
+					}
+				}
+			}
+			return sgp;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	 
 	 
 	 /**
@@ -193,6 +339,7 @@ public class PluginFactory {
 	  * @return
 	  * 			The path of the extracted file
 	  */
+	@Deprecated
 	private static String extractJar(String jarFileName, String subjarToExtractPath) {
 		
 		FileHelper.createDirectoryIfNecessary(PluginManager.PLUGINS_DEPENDENCY_DIRECTORY + jarFileName);

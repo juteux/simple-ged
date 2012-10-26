@@ -83,7 +83,7 @@ public class PluginManager {
 		
 		for (String pluginFileName : pluginsFiles) {
 			logger.info(pluginFileName);
-			SimpleGedPlugin p = PluginFactory.loadPlugin(pluginFileName);
+			SimpleGedPlugin p = PluginFactory.loadPluginOldMethod(pluginFileName);
 			if ( p == null) {
 				logger.error("Couldn't load plugin : " + pluginFileName);
 			} else {
