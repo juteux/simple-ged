@@ -2,9 +2,11 @@ package com.ged.plugins;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -16,6 +18,7 @@ import com.ged.connector.plugins.SimpleGedPluginException;
 import com.ged.dao.PluginDAO;
 import com.ged.models.GedMessage;
 import com.ged.services.MessageService;
+import com.ged.services.PluginService;
 import com.ged.ui.screens.SoftwareScreen;
 import com.tools.DateHelper;
 import com.tools.FileHelper;
@@ -43,7 +46,7 @@ public class PluginManager {
 	/**
 	 * The name of the manifest file (in plugin jar)
 	 */
-	static final String MANIFEST_FILE_NAME = "ged_plugin_manifest.conf";
+	static final String MANIFEST_FILE_NAME = "ged_plugin_manifest.properties";
 	
     /**
      * The folder which is containing extracted plugins dependencies
@@ -56,7 +59,11 @@ public class PluginManager {
 	 * 
 	 * The list of available plugins in the plugin's directory
 	 * The value can be null
+	 * 
+	 * @deprecated 
+	 * 			use getPluginList instead
 	 */
+    @Deprecated
 	public static Map<SimpleGedPlugin, PluginManagementInformations> getPluginMap() {
 		
 		FileHelper.createDirectoryIfNecessary(PLUGINS_DIRECTORY);
@@ -86,6 +93,40 @@ public class PluginManager {
 		return pluginMap;
 	}
 	
+    
+    
+    /**
+     * Get the plugin list
+     */
+    public static List<PluginManagementInformations> getPluginList() {
+    	
+    	FileHelper.createDirectoryIfNecessary(PLUGINS_DIRECTORY);
+    	
+    	List<PluginManagementInformations> pluginList = new ArrayList<>();
+
+		FilenameFilter jarFilter = new FilenameFilter() {
+			public boolean accept(File arg0, String arg1) {
+				return arg1.endsWith(".jar");
+			}
+		};
+
+		File pluginsDirectory = new File(PLUGINS_DIRECTORY);
+		String[] pluginsFiles = pluginsDirectory.list(jarFilter);
+		
+		for (String pluginFileName : pluginsFiles) {
+			logger.info(pluginFileName);
+			SimpleGedPlugin p = PluginFactory.loadPlugin(pluginFileName);
+			if ( p == null) {
+				logger.error("Couldn't load plugin : " + pluginFileName);
+			} else {
+				pluginList.add(PluginService.getPluginInformations(p));
+			}
+		}
+
+    	return pluginList;
+    }
+    
+    
 	
 	/**
 	 * Launch the plugin update if necessary

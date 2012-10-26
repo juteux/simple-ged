@@ -3,6 +3,7 @@ package com.ged.plugins;
 import java.util.Date;
 import java.util.List;
 
+import com.ged.connector.plugins.SimpleGedPlugin;
 import com.ged.connector.plugins.SimpleGedPluginProperty;
 
 /**
@@ -19,7 +20,7 @@ public class PluginManagementInformations {
     /**
      * Plugin ID
      */
-    private int id;
+    private Integer id;
 	
     /**
      * Plugin's file name
@@ -56,13 +57,17 @@ public class PluginManagementInformations {
      */
     private List<SimpleGedPluginProperty> pluginProperties;
 
+    /**
+     * The concerned plugin
+     */
+    private SimpleGedPlugin plugin;
+
     
-    
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -120,5 +125,17 @@ public class PluginManagementInformations {
 
 	public void setDestinationDirectory(String destinationDirectory) {
 		this.destinationDirectory = destinationDirectory;
+	}
+
+	public SimpleGedPlugin getPlugin() {
+		return plugin;
+	}
+
+	public void setPlugin(SimpleGedPlugin plugin) {
+		this.plugin = plugin;
+	}
+
+	public boolean isActivated() {
+		return (id != null);
 	}
 }
