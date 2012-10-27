@@ -119,39 +119,13 @@ public class PluginFactory {
 			} // end while readline
 
 			
-			/*
-			 * Extract dependency if necessary
-			 */
-			JarFile jar = new JarFile(new File(PluginManager.PLUGINS_DIRECTORY + pluginFileName).getAbsolutePath());
-			Enumeration<JarEntry> enumeration = jar.entries();
-			String tmp;
-			
-			List<String> dependencyJarPath = new ArrayList<String>();
-			
-			while(enumeration.hasMoreElements()){
-				
-				tmp = enumeration.nextElement().toString();
-				
-				if( tmp.endsWith("jar") && ! tmp.endsWith("SimpleGedConnector.jar")) {
-					dependencyJarPath.add(extractJar(pluginFileName, tmp));
-				}
-			}
-
-            URL[] urlsWithDependency = new URL[dependencyJarPath.size() + 1];
-            for (int i=0; i<dependencyJarPath.size(); ++i) {
-            	urlsWithDependency[i] = new File(dependencyJarPath.get(i)).toURI().toURL();
-            }
-            urlsWithDependency[dependencyJarPath.size()] = new File(PluginManager.PLUGINS_DIRECTORY + pluginFileName).toURI().toURL();
-            
-            ClassLoader loaderWithDependency = URLClassLoader.newInstance(urlsWithDependency);
-			
 			
 			/*
 			 * We can create plugin now !
 			 */
 
 			// set plugin infos
-			SimpleGedPlugin sgp = (SimpleGedPlugin) Class.forName(pluginInfos.get(PluginManifestTags.main_class_tag), true, loaderWithDependency).newInstance();
+			SimpleGedPlugin sgp = (SimpleGedPlugin) Class.forName(pluginInfos.get(PluginManifestTags.main_class_tag), true, loader).newInstance();
 
 			sgp.setJarFileName(pluginFileName);
 			

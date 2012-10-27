@@ -1,8 +1,11 @@
 package com.ged.services;
 
+import java.util.List;
+
 import com.ged.connector.plugins.SimpleGedPlugin;
 import com.ged.dao.PluginDAO;
 import com.ged.plugins.PluginManagementInformations;
+import com.ged.plugins.PluginManager;
 
 /**
  * 
@@ -13,6 +16,15 @@ import com.ged.plugins.PluginManagementInformations;
  */
 public class PluginService {
 
+	/**
+	 * Load and returns all plugins
+	 */
+	public static List<PluginManagementInformations> getAllPlugins() {
+		return PluginManager.getPluginList();
+	}
+	
+	
+	
 	/**
 	 * Get plugin informations from database
 	 * 

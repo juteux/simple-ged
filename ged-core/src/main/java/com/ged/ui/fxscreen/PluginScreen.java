@@ -6,8 +6,8 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
@@ -101,19 +101,58 @@ public class PluginScreen extends FxSoftwareScreen {
 			public ObservableValue<VBox> call(CellDataFeatures<PluginManagementInformations, VBox> p) {
 				VBox box = new VBox();
 
-				SimpleGedPlugin plugin = p.getValue().getPlugin();
+				PluginManagementInformations pmi = p.getValue();
+				SimpleGedPlugin plugin = pmi.getPlugin();
 				
 				Text desc = new Text(plugin.getPluginDescription());
 				desc.getStyleClass().add("list-plugin-desc");
 				
 				box.getChildren().addAll(desc);
+				
+				if (p.getValue().isActivated()) {
+					
+					Text desc2 = new Text(
+							properties.getProperty("actionned_on") + " " + pmi.getDayOfMonthForUpdate()
+							+ " " + (pmi.getIntervalBetweenUpdates() == 1 ? properties.getProperty("each_month") : properties.getProperty("every") + " " + pmi.getIntervalBetweenUpdates() + properties.getProperty("month"))
+							+ "\n"
+							+ properties.getProperty("last_action") + " " + (pmi.getLastUpdateDate() != null ? properties.getProperty("the") + " " + DateHelper.calendarToString(pmi.getLastUpdateDate()) : " " + properties.getProperty("never"))
+					);
+
+					box.getChildren().addAll(new Separator(), desc2);
+				}
 
 				return new SimpleObjectProperty<>(box);
 			}
 		});
 		
-		TableColumn<PluginManagementInformations, VBox> colMang = new TableColumn<>(properties.getProperty("plugin_activated"));
+		TableColumn<PluginManagementInformations, VBox> colMang = new TableColumn<>(properties.getProperty("action"));
+		colMang.setCellValueFactory(new Callback<CellDataFeatures<PluginManagementInformations, VBox>, ObservableValue<VBox>>() {
+			public ObservableValue<VBox> call(CellDataFeatures<PluginManagementInformations, VBox> p) {
+				VBox box = new VBox();
 
+				PluginManagementInformations pmi = p.getValue();
+
+				if (pmi.isActivated()) {
+					
+					Button btnDesactivate = new Button(properties.getProperty("desactivate"));
+					
+					Button btnModify = new Button(properties.getProperty("modify"));
+					
+					box.getChildren().addAll(btnDesactivate, btnModify);
+					
+				}
+				else { // pmi is not activated
+					
+					Button btnActivate = new Button(properties.getProperty("activate"));
+					
+					box.getChildren().addAll(btnActivate);
+				}
+
+				return new SimpleObjectProperty<>(box);
+			}
+		});
+		
+		
 		table.getColumns().addAll(colName, colDesc, colMang);
 	}
 
