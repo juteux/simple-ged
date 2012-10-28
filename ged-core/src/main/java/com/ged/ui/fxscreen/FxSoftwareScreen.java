@@ -132,5 +132,12 @@ public abstract class FxSoftwareScreen extends HBox {
 	public Stage getMainStage() {
 		return mainWindow.get().getMainStage();
 	}
+	
+	/**
+	 * Get the main window
+	 */
+	public FxMainWindow getMainWindow() {
+		return mainWindow.get();
+	}
 
 }

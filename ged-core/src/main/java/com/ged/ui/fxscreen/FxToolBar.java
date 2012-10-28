@@ -153,6 +153,8 @@ public class FxToolBar extends FxSoftwareScreen {
 		leftBox.getChildren().add(btnBack);
 		
 		this.getChildren().addAll(leftBox, centralBox, rightBox);
+		
+		fixBackButtonVisibility();
 	}
 	
 	
@@ -197,6 +199,11 @@ public class FxToolBar extends FxSoftwareScreen {
 		}
 	}
 
+	
+	public void fixBackButtonVisibility() {
+		btnBack.setVisible(getMainWindow().getScreenStackCount() > 1);
+	}
+	
 	public void markNewMessagesAvailable() {
 		btnMessages.setImage(properties.getProperty("ico_toolbar_message_on"));
 	}

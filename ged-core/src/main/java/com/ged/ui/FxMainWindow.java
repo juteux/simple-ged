@@ -111,7 +111,7 @@ public class FxMainWindow extends Application {
     
 
 	/**
-	 * Define the central screen, previous central screen will be lost
+	 * Define the central screen, previous central screen won't be lost be lost, we keep screen stack in memory !
 	 */
  
 	public void setCentralScreen(FxSoftwareScreen.Screen newCentralScreen) {
@@ -122,14 +122,7 @@ public class FxMainWindow extends Application {
 			return;
 		}
 		// ---
-		
-		/*
-		if ( currentCentralScreen != null ) { // we've got a previous central screen to remove
-			mainLayout.getCenter().remove(currentCentralScreen);
-		}
-		*/
-		
-		screens.clear();
+
 		pushCentralScreen(newCentralScreen);
 	}
 	
@@ -141,16 +134,20 @@ public class FxMainWindow extends Application {
 		
 		logger.info("Pushing a central screen");
 		
-		/*
-		if ( currentCentralScreen != null ) { // we've got a previous central screen to remove
-			mainLayout.getChildren().remove(currentCentralScreen);
-		}
-		*/
-		
 		currentCentralScreen = getScreen(screen);
 		screens.add(currentCentralScreen);
 
+		toolBar.fixBackButtonVisibility();;
+		
 		mainLayout.setCenter(currentCentralScreen);
+	}
+	
+	
+	/**
+	 * Get screen stack count
+	 */
+	public int getScreenStackCount() {
+		return screens.size();
 	}
 	
 	
@@ -160,12 +157,6 @@ public class FxMainWindow extends Application {
 	 * If no screens left, we display the welcome screen
 	 */
 	public void popScreen() {
-		
-		/*
-		if ( currentCentralScreen != null ) { // we've got a previous central screen to remove
-			getContentPane().remove(currentCentralScreen);
-		}
-		*/
 		
 		screens.remove(currentCentralScreen);
 

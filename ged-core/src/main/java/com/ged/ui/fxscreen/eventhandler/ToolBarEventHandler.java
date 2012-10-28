@@ -43,6 +43,7 @@ public class ToolBarEventHandler implements EventHandler<Event> {
 		
 		if (action.getSource() == toolBar.get().getBtnBack()) {
 			toolBar.get().finish();
+			toolBar.get().fixBackButtonVisibility();
 		}
 		else if (action.getSource() == toolBar.get().getBtnAbout()) {
 			toolBar.get().pushScreen(Screen.ABOUT_SCREEN);

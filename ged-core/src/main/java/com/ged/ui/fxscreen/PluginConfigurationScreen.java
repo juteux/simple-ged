@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -34,6 +36,11 @@ import com.tools.DateHelper;
  */
 public class PluginConfigurationScreen extends FxSoftwareScreen {
 
+	/**
+	 * My logger
+	 */
+	private static final Logger logger = Logger.getLogger(PluginConfigurationScreen.class);
+	
 	/**
 	 * The library view, to chose document target
 	 */
@@ -157,7 +164,8 @@ public class PluginConfigurationScreen extends FxSoftwareScreen {
 		
 		if (plugin.isActivated()) {
 			fieldNamePattern.setText(plugin.getDestinationFilePattern());
-			//comboDayOfMonthForUpdate.
+			comboDayOfMonthForUpdate.getSelectionModel().select(plugin.getDayOfMonthForUpdate() - 1);
+			comboIntervalBetweenUpdateInMonth.getSelectionModel().select(plugin.getIntervalBetweenUpdates() - 1);
 		}
 		
 		
@@ -170,16 +178,17 @@ public class PluginConfigurationScreen extends FxSoftwareScreen {
 				field = new PasswordField();
 			}
 		
+			if (plugin.isActivated()) {
+				logger.debug("Plugin is activated, property value : " + property.getPropertyValue());
+				field.setText(property.getPropertyValue());
+			}
+			
 			field.setOnKeyReleased(eventHandler);
 			
 			propertiesFieldsMap.put(property, field);
 			
 			optionLayout.add(new Label(property.getPropertyLabel()), 0, currentRowNumber);
 			optionLayout.add(field, 1, currentRowNumber);
-
-			if (plugin.isActivated()) {
-				field.setText(property.getPropertyValue());
-			}
 			
 			++currentRowNumber;
 		}
