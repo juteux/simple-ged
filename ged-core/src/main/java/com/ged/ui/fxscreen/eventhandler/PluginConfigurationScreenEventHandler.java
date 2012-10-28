@@ -3,28 +3,25 @@ package com.ged.ui.fxscreen.eventhandler;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.Map.Entry;
-
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-
-import org.apache.log4j.Logger;
-
-import com.ged.connector.plugins.SimpleGedPluginProperty;
-import com.ged.dao.PluginDAO;
-import com.ged.models.GedPlugin;
-import com.ged.plugins.PluginManager;
-import com.ged.services.PluginService;
-import com.ged.ui.fxscreen.PluginConfigurationScreen;
-import com.ged.ui.screens.PluginOptionEditionScreen;
-import com.tools.PropertiesHelper;
+import java.util.Properties;
 
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+
+import org.apache.log4j.Logger;
+
+import com.ged.connector.plugins.SimpleGedPluginProperty;
+import com.ged.models.GedPlugin;
+import com.ged.plugins.PluginManager;
+import com.ged.services.PluginService;
+import com.ged.ui.fxscreen.PluginConfigurationScreen;
+import com.tools.PropertiesHelper;
+import com.tools.javafx.ModalConfirm;
+import com.tools.javafx.ModalConfirmResponse;
 
 
 /**
@@ -98,7 +95,15 @@ public class PluginConfigurationScreenEventHandler implements EventHandler<Event
 			PluginService.addOrUpdateDocument(p);
 			PluginManager.launchPluginUpdate(pluginConfigurationScreen.get());
 
-			JOptionPane.showMessageDialog(null, this.properties.getProperty("plugin_is_activated"), this.properties.getProperty("information"), JOptionPane.INFORMATION_MESSAGE);
+			ModalConfirm.show(pluginConfigurationScreen.get().getMainStage(), new ModalConfirmResponse() {
+    			@Override
+    			public void confirm() {
+    			}
+    			@Override
+    			public void cancel() {
+    			}
+    		},  PluginConfigurationScreenEventHandler.properties.getProperty("plugin_is_activated"));
+
 			
 			pluginConfigurationScreen.get().refreshScreens();
 			pluginConfigurationScreen.get().finish();
