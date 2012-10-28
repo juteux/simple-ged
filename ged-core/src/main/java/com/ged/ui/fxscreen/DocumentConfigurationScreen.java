@@ -24,7 +24,7 @@ import com.ged.ui.fxwidgets.FxDocumentInfoEditor;
  * @author xavier
  *
  */
-public class AddDocumentScreen extends FxSoftwareScreen {
+public class DocumentConfigurationScreen extends FxSoftwareScreen {
 
 	/**
 	 * Button add from file system
@@ -78,7 +78,7 @@ public class AddDocumentScreen extends FxSoftwareScreen {
 	 * 
 	 * @param mw
 	 */
-	public AddDocumentScreen(FxMainWindow mw) {
+	public DocumentConfigurationScreen(FxMainWindow mw) {
 		super(mw);
 	
 		instanciateWidgets();

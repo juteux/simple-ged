@@ -18,7 +18,7 @@ import com.ged.models.GedDocument;
 import com.ged.models.GedDocumentFile;
 import com.ged.services.GedDocumentService;
 import com.ged.tools.FileHelper;
-import com.ged.ui.fxscreen.AddDocumentScreen;
+import com.ged.ui.fxscreen.DocumentConfigurationScreen;
 import com.ged.ui.listeners.DocumentInfoEditorListener;
 import com.ged.ui.listeners.DocumentPreviewListener;
 import com.tools.DateTokenGetter;
@@ -37,7 +37,7 @@ public class AddDocumentScreenEventHandler implements DocumentInfoEditorListener
 	/**
 	 * The watched screen
 	 */
-	private WeakReference<AddDocumentScreen> addDocumentScreen;
+	private WeakReference<DocumentConfigurationScreen> addDocumentScreen;
 
 	/**
 	 * Properties
@@ -45,7 +45,7 @@ public class AddDocumentScreenEventHandler implements DocumentInfoEditorListener
 	private static final Properties properties = PropertiesHelper.getInstance().getProperties();
 	
 	
-	public AddDocumentScreenEventHandler(AddDocumentScreen addDocumentScreen) {
+	public AddDocumentScreenEventHandler(DocumentConfigurationScreen addDocumentScreen) {
 		this.addDocumentScreen = new WeakReference<>(addDocumentScreen);
 	}
 
