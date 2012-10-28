@@ -1,6 +1,8 @@
 package com.ged.ui.fxscreen.eventhandler;
 
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
@@ -8,6 +10,7 @@ import org.apache.log4j.Logger;
 import com.ged.models.GedPlugin;
 import com.ged.services.GedDocumentService;
 import com.ged.services.PluginService;
+import com.ged.ui.fxscreen.FxSoftwareScreen.Screen;
 import com.ged.ui.fxscreen.PluginScreen;
 import com.tools.PropertiesHelper;
 import com.tools.javafx.ModalConfirm;
@@ -55,12 +58,29 @@ public class PluginScreenEventHandler {
 	}
 	
 	
+	/**
+	 * 
+	 * Call when the user clicked on some button (activate, desactivate, modify)
+	 * 
+	 * @param a
+	 * 			The action nested by the user
+	 * 
+	 * @param pmi
+	 * 			The concerned plugin
+	 */
 	public void pluginActionRequired(Action a, final GedPlugin pmi) {
 		
 		switch (a) {
 		
 		case ACTIVATE :
-			logger.warn("Not implemented yet");
+			
+			pluginScreen.get().pushScreen(Screen.PLUGIN_CONFIGURATION_SCREEN);
+			
+			Map<String, Object> extras = new HashMap<>();
+			extras.put("ged-plugin", pmi);
+			
+			pluginScreen.get().pushExtraValues(extras);
+			
 			break;
 			
 		case MODIFY :

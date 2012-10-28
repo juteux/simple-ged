@@ -1,6 +1,7 @@
 package com.ged.ui.fxwidgets;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.Properties;
 
 import javafx.scene.Node;
@@ -49,17 +50,17 @@ public class FxLibraryView extends TreeView<String> {
 	/**
 	 * My parent
 	 */
-	private FxSoftwareScreen parentScreen;
+	private WeakReference<FxSoftwareScreen> parentScreen;
 	
 	/**
 	 * Root item
 	 */
-	TreeItem<String> rootItem;
+	private TreeItem<String> rootItem;
 	
 
 	public FxLibraryView(FxSoftwareScreen parentScreen) {
     	
-    	this.parentScreen = parentScreen;
+    	this.parentScreen = new WeakReference<>(parentScreen);
     	
     	buildTree();
     	
@@ -219,7 +220,7 @@ public class FxLibraryView extends TreeView<String> {
   
 
     public FxSoftwareScreen getParentScreen() {
-		return parentScreen;
+		return parentScreen.get();
 	}
 
 	

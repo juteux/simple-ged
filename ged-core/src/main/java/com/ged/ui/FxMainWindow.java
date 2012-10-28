@@ -15,11 +15,11 @@ import org.apache.log4j.Logger;
 import com.ged.Profile;
 import com.ged.ui.fxscreen.AboutScreen;
 import com.ged.ui.fxscreen.AddDocumentScreen;
-import com.ged.ui.fxscreen.EditDocumentScreen;
 import com.ged.ui.fxscreen.FxSoftwareScreen;
 import com.ged.ui.fxscreen.FxToolBar;
 import com.ged.ui.fxscreen.LibraryViewScreen;
 import com.ged.ui.fxscreen.MessageScreen;
+import com.ged.ui.fxscreen.PluginConfigurationScreen;
 import com.ged.ui.fxscreen.PluginScreen;
 import com.tools.FileHelper;
 import com.tools.PropertiesHelper;
@@ -185,21 +185,19 @@ public class FxMainWindow extends Application {
 		case SETTING_SCREEN :
 			return new SettingsScreen(this);
 		*/
-		case ADD_SCREEN :
+		case ADD_DOC_SCREEN :
+		case EDIT_DOC_SCREEN :
 			return new AddDocumentScreen(this);
-		
-		case EDITION_SCREEN :
-			return new EditDocumentScreen(this);
 			
 		case ABOUT_SCREEN :
 			return new AboutScreen(this);
 		/*
 		case SEARCHING_SCREEN :
 			return new SearchingScreen(this);
-		
-		case PLUGIN_OPTION_SCREEN :
-			return new PluginOptionEditionScreen(this);
 		*/
+		case PLUGIN_CONFIGURATION_SCREEN :
+			return new PluginConfigurationScreen(this);
+		
 		case PLUGIN_MANAGEMENT_SCREEN :
 			return new PluginScreen(this);
 		

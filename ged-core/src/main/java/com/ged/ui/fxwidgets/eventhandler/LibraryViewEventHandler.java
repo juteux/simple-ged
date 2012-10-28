@@ -229,7 +229,7 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 	
 	public void addDocumentUnderNode(TreeItem<String> node) {
 		
-		libraryView.get().getParentScreen().pushScreen(Screen.ADD_SCREEN);
+		libraryView.get().getParentScreen().pushScreen(Screen.ADD_DOC_SCREEN);
 		
 		Map<String, Object> extras = new HashMap<>();
 		extras.put("relative-document-root", getFilePathFromTreeItem(node));
@@ -249,7 +249,7 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 		}
 		else { // node is a file
 			
-			libraryView.get().getParentScreen().pushScreen(Screen.EDITION_SCREEN);
+			libraryView.get().getParentScreen().pushScreen(Screen.EDIT_DOC_SCREEN);
 
 			Map<String, Object> extras = new HashMap<>();
 			extras.put("relative-document-root", getFilePathFromTreeItem(node));
