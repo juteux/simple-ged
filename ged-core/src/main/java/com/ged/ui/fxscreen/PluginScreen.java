@@ -23,7 +23,7 @@ import javafx.util.Callback;
 import org.apache.log4j.Logger;
 
 import com.ged.connector.plugins.SimpleGedPlugin;
-import com.ged.plugins.PluginManagementInformations;
+import com.ged.models.GedPlugin;
 import com.ged.plugins.PluginManager;
 import com.ged.ui.FxMainWindow;
 import com.ged.ui.fxscreen.eventhandler.PluginScreenEventHandler;
@@ -46,12 +46,12 @@ public class PluginScreen extends FxSoftwareScreen {
 	/**
 	 * The table view contains the list of plugins
 	 */
-	private TableView<PluginManagementInformations> table;
+	private TableView<GedPlugin> table;
 
 	/**
 	 * The plugin list
 	 */
-	private ObservableList<PluginManagementInformations> pluginsList;
+	private ObservableList<GedPlugin> pluginsList;
 
 	/**
 	 * My event handler
@@ -82,9 +82,9 @@ public class PluginScreen extends FxSoftwareScreen {
 		pluginsList = FXCollections.observableArrayList();
 		table = new TableView<>();
 	
-		TableColumn<PluginManagementInformations, VBox> colName = new TableColumn<>(properties.getProperty("plugin_name"));
-		colName.setCellValueFactory(new Callback<CellDataFeatures<PluginManagementInformations, VBox>, ObservableValue<VBox>>() {
-			public ObservableValue<VBox> call(CellDataFeatures<PluginManagementInformations, VBox> p) {
+		TableColumn<GedPlugin, VBox> colName = new TableColumn<>(properties.getProperty("plugin_name"));
+		colName.setCellValueFactory(new Callback<CellDataFeatures<GedPlugin, VBox>, ObservableValue<VBox>>() {
+			public ObservableValue<VBox> call(CellDataFeatures<GedPlugin, VBox> p) {
 				VBox box = new VBox();
 
 				SimpleGedPlugin plugin = p.getValue().getPlugin();
@@ -107,12 +107,12 @@ public class PluginScreen extends FxSoftwareScreen {
 			}
 		});
 
-		TableColumn<PluginManagementInformations, VBox> colDesc = new TableColumn<>(properties.getProperty("plugin_description"));
-		colDesc.setCellValueFactory(new Callback<CellDataFeatures<PluginManagementInformations, VBox>, ObservableValue<VBox>>() {
-			public ObservableValue<VBox> call(CellDataFeatures<PluginManagementInformations, VBox> p) {
+		TableColumn<GedPlugin, VBox> colDesc = new TableColumn<>(properties.getProperty("plugin_description"));
+		colDesc.setCellValueFactory(new Callback<CellDataFeatures<GedPlugin, VBox>, ObservableValue<VBox>>() {
+			public ObservableValue<VBox> call(CellDataFeatures<GedPlugin, VBox> p) {
 				VBox box = new VBox();
 
-				PluginManagementInformations pmi = p.getValue();
+				GedPlugin pmi = p.getValue();
 				SimpleGedPlugin plugin = pmi.getPlugin();
 				
 				Text desc = new Text(plugin.getPluginDescription());
@@ -136,12 +136,12 @@ public class PluginScreen extends FxSoftwareScreen {
 			}
 		});
 		
-		TableColumn<PluginManagementInformations, VBox> colMang = new TableColumn<>(properties.getProperty("action"));
-		colMang.setCellValueFactory(new Callback<CellDataFeatures<PluginManagementInformations, VBox>, ObservableValue<VBox>>() {
-			public ObservableValue<VBox> call(CellDataFeatures<PluginManagementInformations, VBox> p) {
+		TableColumn<GedPlugin, VBox> colMang = new TableColumn<>(properties.getProperty("action"));
+		colMang.setCellValueFactory(new Callback<CellDataFeatures<GedPlugin, VBox>, ObservableValue<VBox>>() {
+			public ObservableValue<VBox> call(CellDataFeatures<GedPlugin, VBox> p) {
 				VBox box = new VBox();
 
-				final PluginManagementInformations pmi = p.getValue();
+				final GedPlugin pmi = p.getValue();
 
 				if (pmi.isActivated()) {
 					
@@ -192,19 +192,19 @@ public class PluginScreen extends FxSoftwareScreen {
 
 		pluginsList.clear();
 		
-		List<PluginManagementInformations> plugins = PluginManager.getPluginList();
+		List<GedPlugin> plugins = PluginManager.getPluginList();
 
 		logger.info("Plugin count : " + plugins.size());
 
 		// show only activated plugins
-		for (PluginManagementInformations p : plugins) {
+		for (GedPlugin p : plugins) {
 			if (p.isActivated()) {
 				pluginsList.add(p);
 			}
 		}
 
 		// show non activated plugins
-		for (PluginManagementInformations p : plugins) {
+		for (GedPlugin p : plugins) {
 			if (!p.isActivated()) {
 				pluginsList.add(p);
 			}

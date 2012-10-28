@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.ged.connector.plugins.SimpleGedPlugin;
 import com.ged.dao.PluginDAO;
-import com.ged.plugins.PluginManagementInformations;
+import com.ged.models.GedPlugin;
 import com.ged.plugins.PluginManager;
 
 /**
@@ -19,7 +19,7 @@ public class PluginService {
 	/**
 	 * Load and returns all plugins
 	 */
-	public static List<PluginManagementInformations> getAllPlugins() {
+	public static List<GedPlugin> getAllPlugins() {
 		return PluginManager.getPluginList();
 	}
 	
@@ -33,12 +33,12 @@ public class PluginService {
 	 *            
 	 * If the plugin is 
 	 */
-	public static synchronized PluginManagementInformations getPluginInformations(SimpleGedPlugin plugin) {
+	public static synchronized GedPlugin getPluginInformations(SimpleGedPlugin plugin) {
 		
-		PluginManagementInformations pmi = PluginDAO.getPluginInformations(plugin.getJarFileName());
+		GedPlugin pmi = PluginDAO.getPluginInformations(plugin.getJarFileName());
 		
 		if (pmi == null) {
-			pmi = new PluginManagementInformations();
+			pmi = new GedPlugin();
 		}
 
 		pmi.setPlugin(plugin);
@@ -50,7 +50,7 @@ public class PluginService {
 	/**
 	 * Add or update the given plugin
 	 */
-	public static void addOrUpdateDocument(PluginManagementInformations pmi)
+	public static void addOrUpdateDocument(GedPlugin pmi)
 	{
 		PluginDAO.saveOrUpdate(pmi);
 	}
@@ -59,7 +59,7 @@ public class PluginService {
 	/**
 	 * Desactivate and delete saved informations of the given plugin
 	 */
-	public static void desactivatePlugin(PluginManagementInformations pmi)
+	public static void desactivatePlugin(GedPlugin pmi)
 	{
 		PluginDAO.delete(pmi);
 	}

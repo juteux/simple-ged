@@ -1,13 +1,23 @@
-package com.ged.plugins;
+package com.ged.models;
 
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.ged.connector.plugins.SimpleGedPlugin;
 import com.ged.connector.plugins.SimpleGedPluginProperty;
 
 /**
- * The plugin controller is a class which is required to save plugin informations in database
+ * Some ged plugin is a container for SimpleGedPlugin, which add many details about the plugin (for management)
  * 
  * This is different of SimpleGedPlugin because this class has an access to the informations in
  * database.
@@ -15,51 +25,65 @@ import com.ged.connector.plugins.SimpleGedPluginProperty;
  * @author xavier
  *
  */
-public class PluginManagementInformations {
+@Entity
+@Table(name="plugin")
+public class GedPlugin {
 
     /**
      * Plugin ID
      */
+    @Id
+    @GeneratedValue
+    @Column(name="rowid")
     private Integer id;
 	
     /**
      * Plugin's file name
      */
+    @Column(name="file_name")
     private String fileName;
  
     /**
      * Last update date
      */
+    @Column(name="last_update_date")
     private Date lastUpdateDate;
     
     /**
      * The day of month for update
      */
+    @Column(name="day_of_month_for_update")
     private int dayOfMonthForUpdate;
     
     /**
      * The destination directory (relative path)
      */
+    @Column(name="destination_directory")
     private String destinationDirectory;
     
     /**
      * The destination file name pattern
      */
+    @Column(name="destination_file_pattern")
     private String destinationFilePattern;
     
     /**
      * Interval between updates (in month)
      */
+    @Column(name="interval_between_update")
     private int intervalBetweenUpdates;
     
     /**
      * Properties attached to this plugin
      */
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="plugin_id", nullable=false)
     private List<SimpleGedPluginProperty> pluginProperties;
 
     /**
      * The concerned plugin
      */
+    @Transient
     private SimpleGedPlugin plugin;
 
     

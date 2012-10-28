@@ -20,7 +20,7 @@ import org.apache.log4j.Logger;
 
 import com.ged.connector.plugins.SimpleGedPlugin;
 import com.ged.dao.PluginDAO;
-import com.ged.plugins.PluginManagementInformations;
+import com.ged.models.GedPlugin;
 import com.ged.plugins.PluginManager;
 import com.ged.ui.screens.PluginManagementScreen;
 import com.ged.ui.screens.SoftwareScreen;
@@ -50,7 +50,7 @@ public class PluginManagementScreenController implements ActionListener, TableMo
 	/**
 	 * Plugin map, plugin & infos
 	 */
-	private Map<SimpleGedPlugin, PluginManagementInformations> plugins;
+	private Map<SimpleGedPlugin, GedPlugin> plugins;
 	
 	
 	protected Properties properties;
@@ -78,14 +78,14 @@ public class PluginManagementScreenController implements ActionListener, TableMo
 		plugins = PluginManager.getPluginMap();
 		
 		// show only activated plugins
-		for (Entry<SimpleGedPlugin, PluginManagementInformations> p : plugins.entrySet()) {
+		for (Entry<SimpleGedPlugin, GedPlugin> p : plugins.entrySet()) {
 			if (p.getValue() == null) {
 				continue;
 			}
 			addPluginInTable(p.getKey(), p.getValue());
 		}
 		// show non activated plugins
-		for (Entry<SimpleGedPlugin, PluginManagementInformations> p : plugins.entrySet()) {
+		for (Entry<SimpleGedPlugin, GedPlugin> p : plugins.entrySet()) {
 			if (p.getValue() != null) {
 				continue;
 			}
@@ -96,7 +96,7 @@ public class PluginManagementScreenController implements ActionListener, TableMo
 	/**
 	 * Add some plugin in the plugin table
 	 */
-	private void addPluginInTable(SimpleGedPlugin p, PluginManagementInformations i) {
+	private void addPluginInTable(SimpleGedPlugin p, GedPlugin i) {
 		
 		pluginList.add(p);
 		
@@ -173,7 +173,7 @@ public class PluginManagementScreenController implements ActionListener, TableMo
 		
 		SimpleGedPlugin p = pluginList.get(row);
 
-		PluginManagementInformations i = plugins.get(p);
+		GedPlugin i = plugins.get(p);
 
 		if ( i != null ) {
 			// Deactivate plugin

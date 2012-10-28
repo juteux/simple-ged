@@ -9,7 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-import com.ged.plugins.PluginManagementInformations;
+import com.ged.models.GedPlugin;
 import com.tools.hibernate.HibernateUtil;
 
 /**
@@ -30,17 +30,17 @@ public class PluginDAO {
 	 * @param pluginFileName
 	 *            The plugin file name
 	 */
-	public static synchronized PluginManagementInformations getPluginInformations(String pluginFileName) {
+	public static synchronized GedPlugin getPluginInformations(String pluginFileName) {
 
 		// first step, found the appropriated plugin
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Criteria criteria = session.createCriteria(PluginManagementInformations.class).add(Restrictions.eq("fileName", pluginFileName));  
+		Criteria criteria = session.createCriteria(GedPlugin.class).add(Restrictions.eq("fileName", pluginFileName));  
 		
 		@SuppressWarnings("unchecked")
-		List<PluginManagementInformations> results = criteria.list();  
+		List<GedPlugin> results = criteria.list();  
 
 		// second step, return the appropriated document
-		PluginManagementInformations p = null;
+		GedPlugin p = null;
 
 		if ( ! results.isEmpty() ) {
 			p = results.get(0);
@@ -55,7 +55,7 @@ public class PluginDAO {
 	/**
 	 * Delete some plugin informations from database, the plugin is considered as deactivated.
 	 */
-	public static synchronized void delete(PluginManagementInformations pmi) {
+	public static synchronized void delete(GedPlugin pmi) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
 		session.delete(pmi);
@@ -69,7 +69,7 @@ public class PluginDAO {
 	 * @param document
 	 * 				The document to save or to update
 	 */
-	public static synchronized void saveOrUpdate(PluginManagementInformations pmi)
+	public static synchronized void saveOrUpdate(GedPlugin pmi)
 	{
 		logger.debug("save plugin");
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -86,7 +86,7 @@ public class PluginDAO {
 	 *            The new plugin
 	 */
 	@Deprecated
-	public static synchronized void addPlugin(PluginManagementInformations pmi) {
+	public static synchronized void addPlugin(GedPlugin pmi) {
 		
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
@@ -122,7 +122,7 @@ public class PluginDAO {
 	 * Update some plugin
 	 */
 	@Deprecated
-	public static synchronized void updatePlugin(PluginManagementInformations pmi) {
+	public static synchronized void updatePlugin(GedPlugin pmi) {
 		logger.info("update plugin");
 		
 		Session session = HibernateUtil.getSessionFactory().openSession();

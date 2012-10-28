@@ -27,8 +27,8 @@
 		<mapping class="com.ged.models.GedDocumentFile" />
 		<mapping class="com.ged.models.GedDocumentPhysicalLocation" />
 		<mapping class="com.ged.models.GedMessage" />
-		
-		<mapping resource="mapping/ged_plugin.hbm.xml"/>
+		<mapping class="com.ged.models.GedPlugin" />
+
 		<mapping resource="mapping/ged_plugin_property.hbm.xml"/>
 
     </session-factory>

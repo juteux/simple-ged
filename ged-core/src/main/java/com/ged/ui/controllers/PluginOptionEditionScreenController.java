@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
 
 import com.ged.connector.plugins.SimpleGedPluginProperty;
 import com.ged.dao.PluginDAO;
-import com.ged.plugins.PluginManagementInformations;
+import com.ged.models.GedPlugin;
 import com.ged.plugins.PluginManager;
 import com.ged.ui.listeners.LibraryListener;
 import com.ged.ui.screens.PluginOptionEditionScreen;
@@ -59,7 +59,7 @@ public class PluginOptionEditionScreenController implements ActionListener, Libr
 			
 		} else if (arg0.getSource() == pluginOptionEditionScreen.getBtnSave()) {
 			
-			PluginManagementInformations pmi = new PluginManagementInformations();
+			GedPlugin pmi = new GedPlugin();
 			
 			pmi.setDayOfMonthForUpdate((Integer) pluginOptionEditionScreen.getComboDayOfMonthForUpdate().getSelectedItem());
 			pmi.setDestinationDirectory(pluginOptionEditionScreen.getLibraryView().getSelectedPath());

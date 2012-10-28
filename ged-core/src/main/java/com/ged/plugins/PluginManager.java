@@ -17,6 +17,7 @@ import com.ged.connector.plugins.SimpleGedPlugin;
 import com.ged.connector.plugins.SimpleGedPluginException;
 import com.ged.dao.PluginDAO;
 import com.ged.models.GedMessage;
+import com.ged.models.GedPlugin;
 import com.ged.services.MessageService;
 import com.ged.services.PluginService;
 import com.ged.ui.screens.SoftwareScreen;
@@ -64,13 +65,13 @@ public class PluginManager {
 	 * 			use getPluginList instead
 	 */
     @Deprecated
-	public static Map<SimpleGedPlugin, PluginManagementInformations> getPluginMap() {
+	public static Map<SimpleGedPlugin, GedPlugin> getPluginMap() {
 		
 		FileHelper.createDirectoryIfNecessary(PLUGINS_DIRECTORY);
 		FileHelper.createDirectoryIfNecessary(PLUGINS_DEPENDENCY_DIRECTORY);
 		
 		
-		Map<SimpleGedPlugin, PluginManagementInformations> pluginMap = new HashMap<SimpleGedPlugin, PluginManagementInformations>();
+		Map<SimpleGedPlugin, GedPlugin> pluginMap = new HashMap<SimpleGedPlugin, GedPlugin>();
 		
 		FilenameFilter jarFilter = new FilenameFilter() {
 			public boolean accept(File arg0, String arg1) {
@@ -98,11 +99,11 @@ public class PluginManager {
     /**
      * Get the plugin list
      */
-    public static List<PluginManagementInformations> getPluginList() {
+    public static List<GedPlugin> getPluginList() {
     	
     	FileHelper.createDirectoryIfNecessary(PLUGINS_DIRECTORY);
     	
-    	List<PluginManagementInformations> pluginList = new ArrayList<>();
+    	List<GedPlugin> pluginList = new ArrayList<>();
 
 		FilenameFilter jarFilter = new FilenameFilter() {
 			public boolean accept(File arg0, String arg1) {
@@ -138,16 +139,16 @@ public class PluginManager {
 			@Override
 			public void run() {
 				
-				Map<SimpleGedPlugin, PluginManagementInformations> plugins = getPluginMap();
+				Map<SimpleGedPlugin, GedPlugin> plugins = getPluginMap();
 				
-				for (Entry<SimpleGedPlugin, PluginManagementInformations> e : plugins.entrySet()) {
+				for (Entry<SimpleGedPlugin, GedPlugin> e : plugins.entrySet()) {
 					
 					if (e.getValue() == null) {
 						continue;
 					}
 					
 					SimpleGedPlugin p = e.getKey();
-					PluginManagementInformations i = e.getValue();
+					GedPlugin i = e.getValue();
 					
 					boolean shouldUpdate = false;
 

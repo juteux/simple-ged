@@ -5,7 +5,7 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import com.ged.plugins.PluginManagementInformations;
+import com.ged.models.GedPlugin;
 import com.ged.services.GedDocumentService;
 import com.ged.services.PluginService;
 import com.ged.ui.fxscreen.PluginScreen;
@@ -55,7 +55,7 @@ public class PluginScreenEventHandler {
 	}
 	
 	
-	public void pluginActionRequired(Action a, final PluginManagementInformations pmi) {
+	public void pluginActionRequired(Action a, final GedPlugin pmi) {
 		
 		switch (a) {
 		
