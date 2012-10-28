@@ -72,6 +72,11 @@ public class FxMainWindow extends Application {
 	 */
 	private Stage stage;
 	
+	/**
+	 * The tool bar
+	 */
+	private FxToolBar toolBar;
+	
 	
     @Override
     public void start(Stage primaryStage) {
@@ -83,7 +88,7 @@ public class FxMainWindow extends Application {
         primaryStage.setTitle(properties.getProperty("APPLICATION_NAME"));
         //primaryStage.initStyle(StageStyle.UNDECORATED);
         
-        FxToolBar toolBar = new FxToolBar(this); 
+        toolBar = new FxToolBar(this); 
         int height = 40;
         toolBar.setPrefHeight(height);
         toolBar.setMinHeight(height);
@@ -236,6 +241,11 @@ public class FxMainWindow extends Application {
 	 */
 	public Stage getMainStage() {
 		return stage;
+	}
+
+
+	public FxToolBar getToolBar() {
+		return toolBar;
 	}
 	
 }

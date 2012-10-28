@@ -115,16 +115,16 @@ public abstract class FxSoftwareScreen extends HBox {
 	/**
 	 * Notify that's new message available
 	 */
-	// public void notifyNewMessagesAvailable() {
-	// mainWindow.get().getSlideDock().markNewMessagesAvailable();
-	// }
+	public void notifyNewMessagesAvailable() {
+		mainWindow.get().getToolBar().markNewMessagesAvailable();
+	}
 
 	/**
 	 * Notify that's NO new message available
 	 */
-	// public void notifyNoNewMessagesAvailable() {
-	// mainWindow.get().getSlideDock().markNoNewMessagesAvailable();
-	// }
+	public void notifyNoNewMessagesAvailable() {
+		mainWindow.get().getToolBar().markNoNewMessagesAvailable();
+	}
 
 	/**
 	 * Get the main window stage

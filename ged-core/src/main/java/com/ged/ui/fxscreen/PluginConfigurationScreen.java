@@ -239,4 +239,39 @@ public class PluginConfigurationScreen extends FxSoftwareScreen {
 		fieldNamePattern = new TextField();
 	}
 
+
+	public FxLibraryView getLibraryView() {
+		return libraryView;
+	}
+
+
+	public GedPlugin getPlugin() {
+		return plugin;
+	}
+
+
+	public Button getSave() {
+		return save;
+	}
+
+
+	public ComboBox<Integer> getComboDayOfMonthForUpdate() {
+		return comboDayOfMonthForUpdate;
+	}
+
+
+	public ComboBox<Integer> getComboIntervalBetweenUpdateInMonth() {
+		return comboIntervalBetweenUpdateInMonth;
+	}
+
+
+	public Map<SimpleGedPluginProperty, TextField> getPropertiesFieldsMap() {
+		return propertiesFieldsMap;
+	}
+
+
+	public TextField getFieldNamePattern() {
+		return fieldNamePattern;
+	}
+
 }

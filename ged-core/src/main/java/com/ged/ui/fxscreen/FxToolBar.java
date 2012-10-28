@@ -197,6 +197,14 @@ public class FxToolBar extends FxSoftwareScreen {
 		}
 	}
 
+	public void markNewMessagesAvailable() {
+		btnMessages.setImage(properties.getProperty("ico_toolbar_message_on"));
+	}
+	
+	public void markNoNewMessagesAvailable() {
+		btnMessages.setImage(properties.getProperty("ico_toolbar_message_off"));
+	}
+	
 	public ToolBarButton getBtnAbout() {
 		return btnAbout;
 	}

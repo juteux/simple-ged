@@ -20,6 +20,7 @@ import com.ged.models.GedMessage;
 import com.ged.models.GedPlugin;
 import com.ged.services.MessageService;
 import com.ged.services.PluginService;
+import com.ged.ui.fxscreen.FxSoftwareScreen;
 import com.ged.ui.screens.SoftwareScreen;
 import com.tools.DateHelper;
 import com.tools.FileHelper;
@@ -128,10 +129,102 @@ public class PluginManager {
     }
     
     
+    
+    
+    /**
+	 * Launch the plugin update if necessary
+	 */
+	public static void launchPluginUpdate(final FxSoftwareScreen ss) {
+		
+		Thread t = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				Map<SimpleGedPlugin, GedPlugin> plugins = getPluginMap();
+				
+				for (Entry<SimpleGedPlugin, GedPlugin> e : plugins.entrySet()) {
+					
+					if (e.getValue() == null) {
+						continue;
+					}
+					
+					SimpleGedPlugin p = e.getKey();
+					GedPlugin i = e.getValue();
+					
+					boolean shouldUpdate = false;
+
+					if (i.getLastUpdateDate() == null) {
+						shouldUpdate = true;
+					}
+					else {
+
+						GregorianCalendar c = new GregorianCalendar();
+						c.setTime(i.getLastUpdateDate());
+						
+						c.add(Calendar.MONTH, i.getIntervalBetweenUpdates());
+						c.set(Calendar.DAY_OF_MONTH, i.getDayOfMonthForUpdate());
+						
+						if (c.before(new GregorianCalendar())) {
+							shouldUpdate = true;
+						}
+
+					}
+					
+					
+					if (shouldUpdate) {
+						try {
+							MessageService.addMessage(new GedMessage("NEUTRAL", "Début de récupération de document pour le plugin :" + p.getJarFileName()));
+							
+							String destinationFileName = i.getDestinationFilePattern();
+							
+							if ( destinationFileName.contains("\\w-") && new GregorianCalendar().get(Calendar.MONTH) == 0 ) {
+								destinationFileName = destinationFileName.replace("\\y", String.valueOf(new GregorianCalendar().get(Calendar.YEAR) - 1));
+							}
+							else {
+								destinationFileName = destinationFileName.replace("\\y", String.valueOf(new GregorianCalendar().get(Calendar.YEAR)));
+							}
+							destinationFileName = destinationFileName.replace("\\m-", DateHelper.getMonthName(new GregorianCalendar().get(Calendar.MONTH) - 1));
+							destinationFileName = destinationFileName.replace("\\m", DateHelper.getMonthName(new GregorianCalendar().get(Calendar.MONTH)));
+							
+							p.setDestinationFile(Profile.getInstance().getLibraryRoot() + i.getDestinationDirectory() + (i.getDestinationDirectory().isEmpty() ? "" : File.separator) + destinationFileName);
+							
+							p.setProperties(i.getPluginProperties());
+							
+							p.doGet();
+							
+							i.setLastUpdateDate(new GregorianCalendar().getTime());
+							PluginDAO.updatePlugin(i);
+							
+							MessageService.addMessage(new GedMessage("INFO", "Récupération réussie pour le plugin " + p.getJarFileName() + "<br/>Nouveau fichier enregistré : " + p.getDestinationFile()));
+							
+						} catch (SimpleGedPluginException e1) {
+							
+							MessageService.addMessage(new GedMessage("ERROR", "Echec de récupération pour le plugin " + p.getJarFileName() + "<br/>Détail : " + e1.getMessage()));
+							
+							logger.error("[ " + p.getJarFileName() + " ] Error in plugin DoGet : " + e1.getMessage());
+							e1.printStackTrace();
+						} 
+						finally {
+							ss.notifyNewMessagesAvailable();
+						}
+					}
+				}
+			}
+		});
+		
+		t.start();
+	
+	}
+    
+    
+    
+    
 	
 	/**
 	 * Launch the plugin update if necessary
 	 */
+	@Deprecated
 	public static void launchPluginUpdate(final SoftwareScreen ss) {
 		
 		Thread t = new Thread(new Runnable() {
