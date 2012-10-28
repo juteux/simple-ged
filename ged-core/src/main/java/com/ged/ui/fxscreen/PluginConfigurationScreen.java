@@ -1,16 +1,21 @@
 package com.ged.ui.fxscreen;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import com.ged.connector.plugins.SimpleGedPluginProperty;
 import com.ged.models.GedPlugin;
 import com.ged.ui.FxMainWindow;
 import com.ged.ui.fxwidgets.FxLibraryView;
@@ -70,29 +75,61 @@ public class PluginConfigurationScreen extends FxSoftwareScreen {
 	 */
 	private Button save;
 	
+	/**
+	 * The options layout (will be fill after receving extra values)
+	 */
+	private GridPane optionLayout;
+	
+	/**
+	 * The day selector
+	 */
+	private ComboBox<Integer> comboDayOfMonthForUpdate;
+	
+	/**
+	 * The interval between update selector
+	 */
+	private ComboBox<Integer> comboIntervalBetweenUpdateInMonth;
+	
+	/**
+	 * Map of properties
+	 */
+	private Map<SimpleGedPluginProperty, TextField> propertiesFieldsMap;
+	
+	/**
+	 * The destination file name pattern
+	 */
+	private TextField fieldNamePattern;
+	
 	
 	public PluginConfigurationScreen(FxMainWindow mw) {
 		super(mw);
 		
 		instanciateWidgets();
 		
+		GridPane globalLayout = new GridPane();
+		
 		VBox detailsBox = new VBox();
 		detailsBox.getChildren().addAll(title, version, author, new Separator(), jarName);
 		
-		HBox topBox = new HBox(10);
-		topBox.getChildren().addAll(detailsBox, desc);
+		optionLayout.add(new Label(properties.getProperty("destination_file_name")), 0, 0);
+		optionLayout.add(fieldNamePattern, 1, 0);
+
+		optionLayout.add(new Label(properties.getProperty("day_of_getting")), 0, 1);
+		optionLayout.add(comboDayOfMonthForUpdate, 1, 1);
 		
+		optionLayout.add(new Label(properties.getProperty("time_between")), 0, 2);
+		optionLayout.add(comboIntervalBetweenUpdateInMonth, 1, 2);
 		
-		VBox optionsBox = new VBox();
-		optionsBox.getChildren().addAll(help);
+		VBox optionsBox = new VBox(30);
+		optionsBox.getChildren().addAll(help, optionLayout);
 		
-		HBox middleBox = new HBox();
-		middleBox.getChildren().addAll(libraryView, optionsBox);
+		globalLayout.add(detailsBox, 0, 0);
+		globalLayout.add(desc, 1, 0);
+		globalLayout.add(libraryView, 0, 1);
+		globalLayout.add(optionsBox, 1, 1);
+		globalLayout.add(save, 1, 2);
 		
-		VBox globalBox = new VBox();
-		globalBox.getChildren().addAll(topBox, middleBox);
-		
-		this.getChildren().addAll(globalBox);
+		this.getChildren().addAll(globalLayout);
 	}
 	
 	
@@ -106,8 +143,27 @@ public class PluginConfigurationScreen extends FxSoftwareScreen {
 		jarName.setText(plugin.getPlugin().getJarFileName());
 		desc.setText(plugin.getPlugin().getPluginDescription());
 		
-		if (plugin.isActivated()) {
-			// fill options
+		int currentRowNumber = 3;
+		
+		for (SimpleGedPluginProperty property : plugin.getPlugin().getProperties()) {
+			
+			TextField field = new TextField();
+			if (property.isHidden()) {
+				field = new TextField();
+			}
+		
+			//field.addKeyListener(eventHandler);
+			
+			propertiesFieldsMap.put(property, field);
+			
+			optionLayout.add(new Label(property.getPropertyLabel()), 0, currentRowNumber);
+			optionLayout.add(field, 1, currentRowNumber);
+
+			if (plugin.isActivated()) {
+				field.setText(property.getPropertyValue());
+			}
+			
+			++currentRowNumber;
 		}
 	}
 
@@ -132,7 +188,7 @@ public class PluginConfigurationScreen extends FxSoftwareScreen {
 		desc.getStyleClass().add("list-plugin-desc");
 		
 		help = new Text();
-		help.setText(properties.getProperty("save"));//plugin_option_user_guide"));
+		help.setText(properties.getProperty("plugin_option_user_guide"));
 		
 		save = new Button(properties.getProperty("save"));
 		save.setPrefSize(250, 80);
@@ -146,6 +202,30 @@ public class PluginConfigurationScreen extends FxSoftwareScreen {
 		save.setGraphic(iv3);
 		
 		save.setDisable(true);
+		
+		
+		optionLayout = new GridPane();
+		
+		
+		comboDayOfMonthForUpdate = new ComboBox<>();
+		
+		Vector<Integer> vDays = new Vector<Integer>();
+		for (int i = 1; i <= 30; ++i) {
+			vDays.add(i);
+		}
+		comboDayOfMonthForUpdate.getItems().addAll(vDays);
+
+		
+		comboIntervalBetweenUpdateInMonth = new ComboBox<>();
+		Vector<Integer> vMonth = new Vector<Integer>();
+		for (int i = 1; i <= 12; ++i) {
+			vMonth.add(i);
+		}
+		comboIntervalBetweenUpdateInMonth.getItems().addAll(vMonth);
+		
+		propertiesFieldsMap = new HashMap<>();
+		
+		fieldNamePattern = new TextField();
 	}
 
 }
