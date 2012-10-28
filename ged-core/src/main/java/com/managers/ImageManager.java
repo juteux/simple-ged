@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
  * We don't wan't to load icons every time we need them.
  * This class provide a manager which keep references on icons loaded
  */
-
+@Deprecated
 public class ImageManager {
 
 	private static final Logger logger = Logger.getLogger(ImageManager.class);

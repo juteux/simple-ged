@@ -178,7 +178,7 @@ public class PluginConfigurationScreen extends FxSoftwareScreen {
 
 	private void instanciateWidgets() {
 		
-		libraryView = new FxLibraryView(this);
+		libraryView = new FxLibraryView(this, true);
 		
 		title = new Label();
 		title.getStyleClass().add("list-plugin-title");

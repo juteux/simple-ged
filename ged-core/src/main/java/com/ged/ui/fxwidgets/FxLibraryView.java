@@ -21,6 +21,7 @@ import com.tools.PropertiesHelper;
 /**
  * A view of the library, a tree with files in GED directory
  * 
+ * @author xavier
  */
 
 public class FxLibraryView extends TreeView<String> {
@@ -35,7 +36,7 @@ public class FxLibraryView extends TreeView<String> {
 	/**
 	 * Not setted yet (always false)
 	 */
-	private boolean showDirectoryOnly = false;
+	private boolean showDirectoryOnly;
 	
 	/**
 	 * My event handler
@@ -57,9 +58,28 @@ public class FxLibraryView extends TreeView<String> {
 	 */
 	private TreeItem<String> rootItem;
 	
-
+	/**
+	 * Constructor. Will show directories content
+	 * 
+	 * @param parentScreen
+	 * 				My parent
+	 */
 	public FxLibraryView(FxSoftwareScreen parentScreen) {
-    	
+		this(parentScreen, false);
+    }
+    
+	/**
+	 * Constructor
+	 * 
+	 * @param parentScreen
+	 * 				My parent
+	 * 
+	 * @param showDirectoryOnly
+	 *				Must I only show directories ? (not there content = files)
+	 */
+	public FxLibraryView(FxSoftwareScreen parentScreen, boolean showDirectoryOnly) {
+		this.showDirectoryOnly = showDirectoryOnly;
+		
     	this.parentScreen = new WeakReference<>(parentScreen);
     	
     	buildTree();
@@ -71,9 +91,7 @@ public class FxLibraryView extends TreeView<String> {
     	this.getSelectionModel().select(rootItem);
     	
     	this.getSelectionModel().selectedItemProperty().addListener(eventHandler); 
-    }
-    
-   
+	}
     
 	/**
 	 * Get the path to display in a tree node
@@ -98,17 +116,6 @@ public class FxLibraryView extends TreeView<String> {
 		
 		rootItem.setExpanded(true);
 		this.setRoot(rootItem);
-		
-		/*
-		tree.setDragEnabled(true);
-		tree.setDropMode(DropMode.ON); 
-		
-		controller = new WeakReference<LibraryViewController>(new LibraryViewController(this));
-		tree.addMouseListener(controller.get());
-		tree.addTreeSelectionListener(controller.get());
-		tree.setTransferHandler(controller.get()); 		// for drag & drop
-		model.addTreeModelListener(controller.get());
-		*/
 	}
 	
 	
