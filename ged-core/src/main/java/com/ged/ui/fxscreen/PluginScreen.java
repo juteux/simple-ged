@@ -182,7 +182,9 @@ public class PluginScreen extends FxSoftwareScreen {
 		});
 		
 		
-		table.getColumns().addAll(colName, colDesc, colMang);
+		table.getColumns().add(colName);
+		table.getColumns().add(colDesc);
+		table.getColumns().add(colMang);
 	}
 
 	/**

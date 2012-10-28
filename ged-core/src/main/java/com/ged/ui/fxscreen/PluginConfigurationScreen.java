@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -143,13 +145,20 @@ public class PluginConfigurationScreen extends FxSoftwareScreen {
 		jarName.setText(plugin.getPlugin().getJarFileName());
 		desc.setText(plugin.getPlugin().getPluginDescription());
 		
+		
+		if (plugin.isActivated()) {
+			fieldNamePattern.setText(plugin.getDestinationFilePattern());
+			//comboDayOfMonthForUpdate.
+		}
+		
+		
 		int currentRowNumber = 3;
 		
 		for (SimpleGedPluginProperty property : plugin.getPlugin().getProperties()) {
 			
 			TextField field = new TextField();
 			if (property.isHidden()) {
-				field = new TextField();
+				field = new PasswordField();
 			}
 		
 			//field.addKeyListener(eventHandler);
@@ -205,7 +214,7 @@ public class PluginConfigurationScreen extends FxSoftwareScreen {
 		
 		
 		optionLayout = new GridPane();
-		
+
 		
 		comboDayOfMonthForUpdate = new ComboBox<>();
 		

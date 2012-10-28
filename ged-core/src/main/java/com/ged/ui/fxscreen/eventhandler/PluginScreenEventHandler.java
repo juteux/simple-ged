@@ -8,7 +8,6 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 
 import com.ged.models.GedPlugin;
-import com.ged.services.GedDocumentService;
 import com.ged.services.PluginService;
 import com.ged.ui.fxscreen.FxSoftwareScreen.Screen;
 import com.ged.ui.fxscreen.PluginScreen;
@@ -73,6 +72,7 @@ public class PluginScreenEventHandler {
 		switch (a) {
 		
 		case ACTIVATE :
+		case MODIFY :
 			
 			pluginScreen.get().pushScreen(Screen.PLUGIN_CONFIGURATION_SCREEN);
 			
@@ -81,10 +81,6 @@ public class PluginScreenEventHandler {
 			
 			pluginScreen.get().pushExtraValues(extras);
 			
-			break;
-			
-		case MODIFY :
-			logger.warn("Not implemented yet");
 			break;
 			
 		case DESACTIVATE :
