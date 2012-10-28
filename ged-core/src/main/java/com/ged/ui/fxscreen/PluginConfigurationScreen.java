@@ -170,7 +170,7 @@ public class PluginConfigurationScreen extends FxSoftwareScreen {
 				field = new PasswordField();
 			}
 		
-			//field.addKeyListener(eventHandler);
+			field.setOnKeyReleased(eventHandler);
 			
 			propertiesFieldsMap.put(property, field);
 			
@@ -241,7 +241,12 @@ public class PluginConfigurationScreen extends FxSoftwareScreen {
 			vDays.add(i);
 		}
 		comboDayOfMonthForUpdate.getItems().addAll(vDays);
-
+		comboDayOfMonthForUpdate.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				eventHandler.checkValidity();
+			}
+		});
 		
 		comboIntervalBetweenUpdateInMonth = new ComboBox<>();
 		Vector<Integer> vMonth = new Vector<Integer>();
@@ -249,10 +254,17 @@ public class PluginConfigurationScreen extends FxSoftwareScreen {
 			vMonth.add(i);
 		}
 		comboIntervalBetweenUpdateInMonth.getItems().addAll(vMonth);
+		comboIntervalBetweenUpdateInMonth.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				eventHandler.checkValidity();
+			}
+		});
 		
 		propertiesFieldsMap = new HashMap<>();
 		
 		fieldNamePattern = new TextField();
+		fieldNamePattern.setOnKeyReleased(eventHandler);
 	}
 
 

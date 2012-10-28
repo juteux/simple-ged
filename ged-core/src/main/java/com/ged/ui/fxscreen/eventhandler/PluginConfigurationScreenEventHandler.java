@@ -110,7 +110,15 @@ public class PluginConfigurationScreenEventHandler implements EventHandler<KeyEv
 		if ( pluginConfigurationScreen.get().getFieldNamePattern().getText().trim().isEmpty() ) {
 			valid = false;
 		}
+		
+		if (pluginConfigurationScreen.get().getComboDayOfMonthForUpdate().getSelectionModel().getSelectedItem() == null) {
+			valid = false;
+		}
 
+		if (pluginConfigurationScreen.get().getComboIntervalBetweenUpdateInMonth().getSelectionModel().getSelectedItem() == null) {
+			valid = false;
+		}
+		
 		for (Entry<SimpleGedPluginProperty, TextField> e : pluginConfigurationScreen.get().getPropertiesFieldsMap().entrySet()) {
 			if (e.getValue().getText().isEmpty()) {
 				valid = false;
