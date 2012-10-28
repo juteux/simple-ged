@@ -108,7 +108,9 @@ public class PluginConfigurationScreen extends FxSoftwareScreen {
 		instanciateWidgets();
 		
 		GridPane globalLayout = new GridPane();
-		
+		globalLayout.setHgap(20);
+		globalLayout.setVgap(20);
+
 		VBox detailsBox = new VBox();
 		detailsBox.getChildren().addAll(title, version, author, new Separator(), jarName);
 		
@@ -213,7 +215,8 @@ public class PluginConfigurationScreen extends FxSoftwareScreen {
 		
 		
 		optionLayout = new GridPane();
-
+		optionLayout.setHgap(10);
+		optionLayout.setVgap(10);
 		
 		comboDayOfMonthForUpdate = new ComboBox<>();
 		
