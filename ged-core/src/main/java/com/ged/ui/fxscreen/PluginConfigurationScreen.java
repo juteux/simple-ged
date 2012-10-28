@@ -179,8 +179,13 @@ public class PluginConfigurationScreen extends FxSoftwareScreen {
 			}
 		
 			if (plugin.isActivated()) {
-				logger.debug("Plugin is activated, property value : " + property.getPropertyValue());
-				field.setText(property.getPropertyValue());
+				logger.debug("Plugin is activated, setting value");
+				for (SimpleGedPluginProperty pr : plugin.getPluginProperties()) {
+					if (pr.getPropertyKey().equals(property.getPropertyKey())) {
+						field.setText(pr.getPropertyValue());
+						break;
+					}
+				}
 			}
 			
 			field.setOnKeyReleased(eventHandler);
