@@ -58,7 +58,7 @@ public class GedDocumentService {
 	}
 	
 	/**
-	 * Add a document
+	 * Add or update the given document
 	 */
 	public static void addOrUpdateDocument(GedDocument doc)
 	{

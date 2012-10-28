@@ -46,4 +46,21 @@ public class PluginService {
 		return pmi;
 	}
 	
+	
+	/**
+	 * Add or update the given plugin
+	 */
+	public static void addOrUpdateDocument(PluginManagementInformations pmi)
+	{
+		PluginDAO.saveOrUpdate(pmi);
+	}
+	
+	
+	/**
+	 * Desactivate and delete saved informations of the given plugin
+	 */
+	public static void desactivatePlugin(PluginManagementInformations pmi)
+	{
+		PluginDAO.delete(pmi);
+	}
 }

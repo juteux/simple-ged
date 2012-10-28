@@ -56,36 +56,28 @@ public class PluginDAO {
 	 * Delete some plugin informations from database, the plugin is considered as deactivated.
 	 */
 	public static synchronized void delete(PluginManagementInformations pmi) {
-		
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction transaction = null;
-		try {
-			transaction = session.beginTransaction();
-			
-			session.delete(pmi);			
-			
-			transaction.commit();
-		} catch (HibernateException he) {
-			logger.error("Error while deleting plugin informations");
-			he.printStackTrace();
-			if(transaction != null) {
-				try { 
-					transaction.rollback(); 
-				} catch(HibernateException he2) {
-					logger.error("Error rollback transaction");
-					he2.printStackTrace(); 
-				}
-			}
-		} finally {
-			if(session != null) {
-				try { 
-					session.close();
-				} catch(HibernateException he) {
-				}
-			}
-		}
+		session.beginTransaction();
+		session.delete(pmi);
+		session.getTransaction().commit();
+		session.close();
 	}
+
 	
+	/**
+	 * Save or update document
+	 * @param document
+	 * 				The document to save or to update
+	 */
+	public static synchronized void saveOrUpdate(PluginManagementInformations pmi)
+	{
+		logger.debug("save plugin");
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		session.saveOrUpdate(pmi);
+		session.getTransaction().commit();
+		session.close();
+	}
 	
 	/**
 	 * Add a plugin in database
@@ -93,6 +85,7 @@ public class PluginDAO {
 	 * @param pmi
 	 *            The new plugin
 	 */
+	@Deprecated
 	public static synchronized void addPlugin(PluginManagementInformations pmi) {
 		
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -128,6 +121,7 @@ public class PluginDAO {
 	/**
 	 * Update some plugin
 	 */
+	@Deprecated
 	public static synchronized void updatePlugin(PluginManagementInformations pmi) {
 		logger.info("update plugin");
 		

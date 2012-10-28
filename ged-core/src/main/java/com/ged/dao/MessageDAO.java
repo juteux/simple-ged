@@ -72,7 +72,7 @@ public class MessageDAO {
 	}
 	
 	/**
-	 * Insert a new message in database
+	 * Insert or update a new message in database
 	 */
 	public static synchronized void saveOrUpdate(GedMessage message) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
