@@ -7,7 +7,6 @@ import java.util.Map.Entry;
 import java.util.Properties;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -31,7 +30,7 @@ import com.tools.javafx.ModalConfirmResponse;
  * @author xavier
  *
  */
-public class PluginConfigurationScreenEventHandler implements EventHandler<Event> {
+public class PluginConfigurationScreenEventHandler implements EventHandler<KeyEvent> {
 
 	/**
 	 * My logger
@@ -53,26 +52,7 @@ public class PluginConfigurationScreenEventHandler implements EventHandler<Event
 		this.pluginConfigurationScreen = new WeakReference<>(pluginConfigurationScreen);
 	}
 	
-	
-	/**
-	 * Front controller, distribute events according to there type
-	 */
-	@Override
-	public void handle(Event event) {
-		
-		if (event instanceof ActionEvent) {
-			actionEventDelegate((ActionEvent) event);
-		}
-		else if (event instanceof KeyEvent) {
-			keyEventDelegate((KeyEvent) event);
-		}
-		else {
-			logger.warn("Unknow event type. Won't dispatch");
-		}
-	}
-
-	
-	private void actionEventDelegate(ActionEvent e) {
+	public void setOnActionEvent(ActionEvent e) {
 		
 		if (e.getSource() == pluginConfigurationScreen.get().getSave()) {
 			
@@ -115,7 +95,29 @@ public class PluginConfigurationScreenEventHandler implements EventHandler<Event
 		
 	}
 	
-	private void keyEventDelegate(KeyEvent e) {
+	@Override
+	public void handle(KeyEvent arg0) {
+		checkValidity();
+	}
+	
+
+	/**
+	 * Check if currents values are valid, if true, the save button is available
+	 */
+	public void checkValidity() {
+		boolean valid = true;
 		
+		if ( pluginConfigurationScreen.get().getFieldNamePattern().getText().trim().isEmpty() ) {
+			valid = false;
+		}
+
+		for (Entry<SimpleGedPluginProperty, TextField> e : pluginConfigurationScreen.get().getPropertiesFieldsMap().entrySet()) {
+			if (e.getValue().getText().isEmpty()) {
+				valid = false;
+				break;
+			}
+		}
+		
+		pluginConfigurationScreen.get().getSave().setDisable(!valid);
 	}
 }

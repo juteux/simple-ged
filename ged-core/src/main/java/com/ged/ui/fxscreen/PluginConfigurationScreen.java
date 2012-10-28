@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -19,6 +21,7 @@ import javafx.scene.text.Text;
 import com.ged.connector.plugins.SimpleGedPluginProperty;
 import com.ged.models.GedPlugin;
 import com.ged.ui.FxMainWindow;
+import com.ged.ui.fxscreen.eventhandler.PluginConfigurationScreenEventHandler;
 import com.ged.ui.fxwidgets.FxLibraryView;
 import com.tools.DateHelper;
 
@@ -101,6 +104,11 @@ public class PluginConfigurationScreen extends FxSoftwareScreen {
 	 */
 	private TextField fieldNamePattern;
 	
+	/**
+	 * My event handler
+	 */
+	private PluginConfigurationScreenEventHandler eventHandler;
+	
 	
 	public PluginConfigurationScreen(FxMainWindow mw) {
 		super(mw);
@@ -180,6 +188,9 @@ public class PluginConfigurationScreen extends FxSoftwareScreen {
 
 	private void instanciateWidgets() {
 		
+		eventHandler = new PluginConfigurationScreenEventHandler(this);
+		
+		
 		libraryView = new FxLibraryView(this, true);
 		
 		title = new Label();
@@ -202,7 +213,12 @@ public class PluginConfigurationScreen extends FxSoftwareScreen {
 		
 		save = new Button(properties.getProperty("save"));
 		save.setPrefSize(250, 80);
-		//save.setOnAction(eventHandler);
+		save.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				eventHandler.setOnActionEvent(arg0);
+			}
+		});
 		
 		Image i3 = new Image(getClass().getResourceAsStream(properties.getProperty("ico_save")));
 		ImageView iv3 = new ImageView(i3);
