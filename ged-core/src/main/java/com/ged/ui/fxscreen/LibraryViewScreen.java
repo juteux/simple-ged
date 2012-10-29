@@ -83,6 +83,7 @@ public class LibraryViewScreen extends FxSoftwareScreen {
 		libraryWidget.getEventHandler().addLibraryListener(eventHandler);
 		
 		quickSearchBar = new QuickSearchBar();
+		quickSearchBar.getEventHandler().addQuickSearchListener(libraryWidget.getEventHandler());
 		
 		// intialize previewer
 		eventHandler.selectionChanged(libraryWidget.getEventHandler().getCurrentItemRelativePath());

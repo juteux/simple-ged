@@ -38,6 +38,7 @@ import com.ged.ui.fxscreen.FxSoftwareScreen.Screen;
 import com.ged.ui.fxwidgets.FxLibraryView;
 import com.ged.ui.listeners.DocumentInfoViewerListener;
 import com.ged.ui.listeners.LibraryListener;
+import com.ged.ui.listeners.QuickSearchListener;
 import com.ged.ui.listeners.LibraryListener.LIBRARY_FILE_TYPE;
 import com.tools.PropertiesHelper;
 import com.tools.javafx.ModalConfirm;
@@ -49,7 +50,7 @@ import com.tools.javafx.ModalConfirmResponse;
  * @author xavier
  * 
  */
-public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCell<String>>, ChangeListener<TreeItem<String>>, DocumentInfoViewerListener {
+public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCell<String>>, ChangeListener<TreeItem<String>>, DocumentInfoViewerListener, QuickSearchListener {
 
 	/**
 	 * Global properties
@@ -515,6 +516,13 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 	@Override
 	public void askForDocumentEdition() {
 		openEditionForNode(libraryView.get().getSelectionModel().getSelectedItem());
+	}
+
+
+	@Override
+	public void search(String pattern) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

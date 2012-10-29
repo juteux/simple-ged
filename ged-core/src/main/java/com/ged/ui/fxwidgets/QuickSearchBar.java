@@ -56,5 +56,11 @@ public class QuickSearchBar extends HBox {
 	public TextField getSeachPatternInput() {
 		return seachPatternInput;
 	}
+
+
+	public QuickSearchBarEventHandler getEventHandler() {
+		return eventHandler;
+	}
+	
 	
 }
