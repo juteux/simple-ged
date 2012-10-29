@@ -273,6 +273,8 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 		
 		private ContextMenu directoryContextMenu = new ContextMenu();
 
+		private ContextMenu rootContextMenu = new ContextMenu();
+		
 		private MenuItem directoryAddMenuItem;
 		
 		private MenuItem directoryDeleteMenuItem;
@@ -289,6 +291,7 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
             directoryDeleteMenuItem = new MenuItem(properties.getProperty("delete"));
             directoryAddDocumentItem = new MenuItem(properties.getProperty("add_document"));
             
+            rootContextMenu.getItems().addAll(directoryAddDocumentItem, directoryAddMenuItem);
             directoryContextMenu.getItems().addAll(directoryAddDocumentItem, directoryAddMenuItem, directoryRenameMenuItem, directoryDeleteMenuItem);
             
             directoryAddMenuItem.setOnAction(new EventHandler<ActionEvent>() {
@@ -456,6 +459,9 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 					if (currentNodeIsDirectory()) {
                         setContextMenu(directoryContextMenu);
                     }
+					else if (currentNodeIsRoot()) {
+						setContextMenu(rootContextMenu);
+					}
 					
 				}
 			}
