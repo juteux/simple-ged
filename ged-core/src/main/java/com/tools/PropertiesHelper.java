@@ -2,6 +2,7 @@ package com.tools;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
@@ -58,8 +59,8 @@ public class PropertiesHelper {
 		InputStream input = null;
 		try {
 			input = PropertiesHelper.class.getResourceAsStream("/" + filename);
-
-			properties.load(input);
+			
+			properties.load(new InputStreamReader(input, "UTF-8"));
 		} 
 		catch (Exception e) {
 			logger.error("Error while loading " + filename);
