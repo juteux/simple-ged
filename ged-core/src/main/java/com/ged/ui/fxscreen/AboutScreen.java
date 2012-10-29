@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.web.WebView;
 
 import org.apache.log4j.Logger;
@@ -43,6 +45,9 @@ public class AboutScreen extends FxSoftwareScreen {
 			logger.error("Failed to read file : html/about.html");
 			e.printStackTrace();
 		}
+		
+		HBox.setHgrow(webView, Priority.ALWAYS);
+		HBox.setHgrow(this, Priority.ALWAYS);
 		
 		this.getChildren().add(webView);
 	}

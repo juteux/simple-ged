@@ -6,6 +6,8 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.web.WebView;
 
 import org.apache.log4j.Logger;
@@ -68,6 +70,9 @@ public class MessageScreen extends FxSoftwareScreen {
 
 		webView.getEngine().loadContent(header + strMessage + footer);
 
+		HBox.setHgrow(webView, Priority.ALWAYS);
+		HBox.setHgrow(this, Priority.ALWAYS);
+		
 		this.getChildren().add(webView);
 	}
 	
