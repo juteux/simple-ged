@@ -10,6 +10,7 @@ import com.ged.ui.fxscreen.eventhandler.LibraryViewScreenEventHandler;
 import com.ged.ui.fxwidgets.DocumentPreviewer;
 import com.ged.ui.fxwidgets.FxDocumentInfoViewer;
 import com.ged.ui.fxwidgets.FxLibraryView;
+import com.ged.ui.fxwidgets.QuickSearchBar;
 
 /**
  * Library view screen
@@ -30,6 +31,11 @@ public class LibraryViewScreen extends FxSoftwareScreen {
 	private FxDocumentInfoViewer documentInfoViewerWidget;
 
 	/**
+	 * On the top left, seaching box
+	 */
+	private QuickSearchBar quickSearchBar;
+	
+	/**
 	 * On the right too, the document (or file) preview
 	 */
 	private DocumentPreviewer documentPreviewer;
@@ -41,17 +47,22 @@ public class LibraryViewScreen extends FxSoftwareScreen {
 		
 		VBox rightLayoutBoxing = new VBox();
 		rightLayoutBoxing.getChildren().addAll(documentInfoViewerWidget, documentPreviewer);
-		
 		rightLayoutBoxing.setPadding(new Insets(0, 5, 5, 5));
 		rightLayoutBoxing.setSpacing(5);
 		
+		VBox leftLayoutBoxing = new VBox();
+		leftLayoutBoxing.getChildren().addAll(quickSearchBar, libraryWidget);
+		leftLayoutBoxing.setPadding(new Insets(5, 5, 5, 5));
+		leftLayoutBoxing.setSpacing(5);
+		
 		HBox mainLayout = new HBox();
-		mainLayout.getChildren().addAll(libraryWidget, rightLayoutBoxing);
+		mainLayout.getChildren().addAll(leftLayoutBoxing, rightLayoutBoxing);
 		
 		this.getChildren().add(mainLayout);
 		
 		HBox.setHgrow(rightLayoutBoxing, Priority.ALWAYS);
 		HBox.setHgrow(mainLayout, Priority.ALWAYS);
+		VBox.setVgrow(libraryWidget, Priority.ALWAYS);
 	}
 
 
@@ -68,6 +79,8 @@ public class LibraryViewScreen extends FxSoftwareScreen {
 		documentPreviewer = new DocumentPreviewer();
 		
 		libraryWidget.getEventHandler().addLibraryListener(eventHandler);
+		
+		quickSearchBar = new QuickSearchBar();
 		
 		// intialize previewer
 		eventHandler.selectionChanged(libraryWidget.getEventHandler().getCurrentItemRelativePath());
