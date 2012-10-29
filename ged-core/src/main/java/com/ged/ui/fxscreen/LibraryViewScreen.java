@@ -31,7 +31,7 @@ public class LibraryViewScreen extends FxSoftwareScreen {
 	private FxDocumentInfoViewer documentInfoViewerWidget;
 
 	/**
-	 * On the top left, seaching box
+	 * On the top left, searching box
 	 */
 	private QuickSearchBar quickSearchBar;
 	
@@ -40,6 +40,7 @@ public class LibraryViewScreen extends FxSoftwareScreen {
 	 */
 	private DocumentPreviewer documentPreviewer;
 
+	
 	public LibraryViewScreen(FxMainWindow parent) {
 		super(parent);
 
