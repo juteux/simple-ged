@@ -2,11 +2,12 @@ package com.ged.ui.fxwidgets;
 
 import java.util.Properties;
 
-import com.tools.PropertiesHelper;
-
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+
+import com.ged.ui.fxwidgets.eventhandler.QuickSearchBarEventHandler;
+import com.tools.PropertiesHelper;
 
 /**
  * 
@@ -27,6 +28,10 @@ public class QuickSearchBar extends HBox {
 	 */
 	private static final Properties properties = PropertiesHelper.getInstance().getProperties();
 	
+	/**
+	 * Event handler
+	 */
+	private QuickSearchBarEventHandler eventHandler;
 	
 	public QuickSearchBar() {
 		
@@ -39,8 +44,17 @@ public class QuickSearchBar extends HBox {
 	
 	
 	private void instanciateWidgets() {
+		
+		eventHandler = new QuickSearchBarEventHandler(this);
+		
 		seachPatternInput = new TextField();
 		seachPatternInput.setPromptText(properties.getProperty("search_prompt"));
+		seachPatternInput.setOnKeyReleased(eventHandler);
+	}
+
+
+	public TextField getSeachPatternInput() {
+		return seachPatternInput;
 	}
 	
 }
