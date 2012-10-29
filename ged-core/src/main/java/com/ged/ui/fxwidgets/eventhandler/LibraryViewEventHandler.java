@@ -3,6 +3,7 @@ package com.ged.ui.fxwidgets.eventhandler;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -33,6 +34,7 @@ import javax.swing.event.EventListenerList;
 import org.apache.log4j.Logger;
 
 import com.ged.Profile;
+import com.ged.models.GedDocumentFile;
 import com.ged.services.GedDocumentService;
 import com.ged.ui.fxscreen.FxSoftwareScreen.Screen;
 import com.ged.ui.fxwidgets.FxLibraryView;
@@ -522,6 +524,15 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 	@Override
 	public void search(String pattern) {
 		// TODO Auto-generated method stub
+		List<GedDocumentFile> files = GedDocumentService.searchForWords(pattern);
+		
+		if (files.size() == 0) {
+			logger.info("No matching document for pattern : "+ pattern);
+		}
+		
+		for (GedDocumentFile f : files) {
+			logger.debug("Matching document : " + f.getRelativeFilePath());
+		}
 		
 	}
 

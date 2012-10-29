@@ -1,5 +1,6 @@
 package com.ged.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -150,6 +151,62 @@ public class DocumentDAO {
 		
 		@SuppressWarnings("unchecked")
 		List<GedDocument> results = criteria.list();  
+		
+		session.close();
+		
+		return results;
+	}
+	
+	
+	/**
+	 * Search document which match with one of the given
+	 */
+	@SuppressWarnings("unchecked")
+	public static synchronized List<GedDocumentFile> getDocumentWhichContainsEveryWords(List<String> words) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		
+		List<GedDocumentFile> results =  new ArrayList<>();
+		
+		// 1. Documents name which match with pattern
+		Criteria criteriaDocumentName = session.createCriteria(GedDocument.class);
+		
+		for (String word : words) {
+			criteriaDocumentName.add(Restrictions.like("name", "%" + word + "%").ignoreCase());
+		}
+		
+		// add founded documents
+		List<GedDocument> docsWhichMatchWithName = criteriaDocumentName.list();
+		for (GedDocument doc : docsWhichMatchWithName) {
+			for (GedDocumentFile file : doc.getDocumentFiles()) {
+				results.add(file);
+			}
+		}
+		
+		// 2. Document description match with pattern
+		Criteria criteriaDocumentDesc = session.createCriteria(GedDocument.class);
+		
+		for (String word : words) {
+			criteriaDocumentDesc.add(Restrictions.like("description", "%" + word + "%").ignoreCase());
+		}
+		// add founded documents
+		List<GedDocument> docsWhichMatchWithDescription = criteriaDocumentDesc.list();
+		for (GedDocument doc : docsWhichMatchWithDescription) {
+			for (GedDocumentFile file : doc.getDocumentFiles()) {
+				results.add(file);
+			}
+		}
+
+		// 3. Documents files which match with pattern
+		Criteria criteriaFile = session.createCriteria(GedDocumentFile.class);
+		for (String word : words) {
+			criteriaFile.add(Restrictions.like("relativeFilePath", "%" + word + "%").ignoreCase());
+		}
+		
+		// add founded files
+		List<GedDocumentFile> files = criteriaFile.list();  
+		for (GedDocumentFile file : files) {
+			results.add(file);
+		}
 		
 		session.close();
 		

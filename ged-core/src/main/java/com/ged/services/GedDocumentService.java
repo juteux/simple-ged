@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 
@@ -13,6 +14,7 @@ import org.apache.log4j.Logger;
 import com.ged.Profile;
 import com.ged.dao.DocumentDAO;
 import com.ged.models.GedDocument;
+import com.ged.models.GedDocumentFile;
 import com.ged.models.GedDocumentPhysicalLocation;
 import com.ged.tools.FileHelper;
 
@@ -121,4 +123,22 @@ public class GedDocumentService {
 	public static List<GedDocument> findDocumentbyLocation(GedDocumentPhysicalLocation location) {
 		return DocumentDAO.findDocumentbyLocation(location);
 	}
+	
+	/**
+	 * Search for the given words
+	 * 
+	 * Words is a string where word are splited by space, and a matching item must match with any of the given words
+	 */
+	public static synchronized List<GedDocumentFile> searchForWords(String searchedWords) {
+		String[] words = searchedWords.split(" ");
+		
+		// convert to java list
+		List<String> wordList = new ArrayList<>();
+		for (String w : words) {
+			wordList.add(w);
+		}
+		
+		return DocumentDAO.getDocumentWhichContainsEveryWords(wordList);
+	}
+	
 }
