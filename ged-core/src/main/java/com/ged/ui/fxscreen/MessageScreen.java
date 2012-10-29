@@ -1,5 +1,11 @@
 package com.ged.ui.fxscreen;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.scene.web.WebView;
 
 import org.apache.log4j.Logger;
@@ -8,6 +14,7 @@ import com.ged.models.GedMessage;
 import com.ged.services.MessageService;
 import com.ged.ui.FxMainWindow;
 import com.tools.DateHelper;
+import com.tools.FileHelper;
 
 /**
  * This screen show message about plugins comportement
@@ -20,7 +27,6 @@ public class MessageScreen extends FxSoftwareScreen {
 	/**
 	 * My logger
 	 */
-	@SuppressWarnings("unused")
 	private static final Logger logger = Logger.getLogger(MessageScreen.class);
 	
 	/**
@@ -39,7 +45,28 @@ public class MessageScreen extends FxSoftwareScreen {
 		
 		instanciateWidget();
 		
-		webView.getEngine().loadContent(strMessage);
+		String header = "";
+		String footer = "";
+		Reader reader = new InputStreamReader(AboutScreen.class.getResourceAsStream("/html/message-head.html"));
+		try {
+			header = FileHelper.readAllStringContent(reader);
+			reader.close();
+		} catch (IOException e) {
+			logger.error("Failed to read /html/message-head.html");
+			e.printStackTrace();
+		}
+		
+		Reader reader2 = new InputStreamReader(AboutScreen.class.getResourceAsStream("/html/message-foot.html"));
+		try {
+			footer = FileHelper.readAllStringContent(reader2);
+			reader2.close();
+		} catch (IOException e) {
+			logger.error("Failed to read /html/message-foot.html");
+			e.printStackTrace();
+		}
+		
+
+		webView.getEngine().loadContent(header + strMessage + footer);
 
 		this.getChildren().add(webView);
 	}
@@ -52,25 +79,32 @@ public class MessageScreen extends FxSoftwareScreen {
 		
 		for (GedMessage m : MessageService.getMessages()) {
 			
-			String pre  = "";
-			String post = "";
+			List<String> classes = new ArrayList<>();
+			classes.add("alert");
 			
 			if (! m.isRead()) {
-				pre  = "<b>";
-				post = "</b>";
+				classes.add("unread");
 			}
 			
 			if (m.getMessageLevel().equalsIgnoreCase("error")) {
-				pre  = pre + "<font color='red'>";
-				post = "</font>" + post;
+				classes.add("alert-error");
 			}
 			else if (m.getMessageLevel().equalsIgnoreCase("info")) {
-				pre  = pre + "<font color='green'>";
-				post = "</font>" + post;
+				classes.add("alert-info");
 			}
 			
-			sb.append(DateHelper.calendarToString(m.getDate()) + "<br/>" + pre + m.getLabel() + post);
-			sb.append("<br/><br/><hr/><br/>");
+			String strClass = "";
+			for (String s : classes) {
+				strClass += s + " ";
+			}
+			
+			sb.append("<div class=\"");
+			sb.append(strClass);
+			sb.append("\">");
+			sb.append(DateHelper.calendarToString(m.getDate()));
+			sb.append("<hr/>");
+			sb.append(m.getLabel());
+			sb.append("</div>");
 		}
 		
 		strMessage = sb.toString();
