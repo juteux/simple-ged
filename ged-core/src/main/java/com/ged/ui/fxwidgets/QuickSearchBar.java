@@ -6,6 +6,7 @@ import com.tools.PropertiesHelper;
 
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 
 /**
  * 
@@ -30,6 +31,8 @@ public class QuickSearchBar extends HBox {
 	public QuickSearchBar() {
 		
 		instanciateWidgets();
+		
+		HBox.setHgrow(seachPatternInput, Priority.ALWAYS);
 		
 		getChildren().addAll(seachPatternInput);
 	}

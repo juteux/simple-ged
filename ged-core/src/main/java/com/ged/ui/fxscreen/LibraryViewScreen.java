@@ -63,6 +63,7 @@ public class LibraryViewScreen extends FxSoftwareScreen {
 		HBox.setHgrow(rightLayoutBoxing, Priority.ALWAYS);
 		HBox.setHgrow(mainLayout, Priority.ALWAYS);
 		VBox.setVgrow(libraryWidget, Priority.ALWAYS);
+		HBox.setHgrow(quickSearchBar, Priority.ALWAYS);
 	}
 
 
