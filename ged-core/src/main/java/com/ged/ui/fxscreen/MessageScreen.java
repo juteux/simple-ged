@@ -90,7 +90,10 @@ public class MessageScreen extends FxSoftwareScreen {
 				classes.add("alert-error");
 			}
 			else if (m.getMessageLevel().equalsIgnoreCase("info")) {
-				classes.add("alert-info");
+				classes.add("alert-success");
+			}
+			else {
+				classes.add("alert-info");	
 			}
 			
 			String strClass = "";
