@@ -525,7 +525,9 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 	public void search(String pattern) {
 		
 		if (pattern.isEmpty()) {
+			logger.info("The pattern is empty !");
 			libraryView.get().buildTree();
+			return;
 		}
 		
 		List<GedDocumentFile> files = GedDocumentService.searchForWords(pattern);
