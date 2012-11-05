@@ -144,12 +144,12 @@ public class FxToolBar extends FxSoftwareScreen {
 	    addElement(btnSettings);
 	    addElement(btnAbout);
 	    
-		HBox leftBox = new HBox();
+		HBox leftBox = new HBox(20);
 		leftBox.setPadding(new Insets(5, 0, 0, 5));
 		
 		centralBox.setPadding(new Insets(5, 0, 0, 5));
 		
-		HBox rightBox = new HBox();
+		HBox rightBox = new HBox(20);
 		rightBox.setPadding(new Insets(5, 0, 0, 5));
 		
 		HBox.setHgrow(leftBox, Priority.ALWAYS);
