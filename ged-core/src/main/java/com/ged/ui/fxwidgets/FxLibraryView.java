@@ -97,7 +97,7 @@ public class FxLibraryView extends TreeView<String> {
 	/**
 	 * Get the path to display in a tree node
 	 */
-	private static String convertToNodeName(String path) {
+	public static String convertToNodeName(String path) {
 		String[] files = path.split(File.separator.equals("\\") ? "\\\\" : File.separator);	// stupid windows fix...
 		return files[files.length - 1];
 	}
@@ -106,9 +106,9 @@ public class FxLibraryView extends TreeView<String> {
     /**
 	 * Build the library tree, according to the registered library root
 	 */
-	private void buildTree() {
+	public void buildTree() {
 		
-		rootItem = new TreeItem<String>(convertToNodeName(Profile.getInstance().getLibraryRoot()), getIconForNode(""));
+		TreeItem<String> rootItem = new TreeItem<>(convertToNodeName(Profile.getInstance().getLibraryRoot()), getIconForNode(""));
 
 		listFile(
 				new File(Profile.getInstance().getLibraryRoot()), 
@@ -116,11 +116,21 @@ public class FxLibraryView extends TreeView<String> {
 		);
 		
 		rootItem.setExpanded(true);
+		
+		setRootItem(rootItem);
+	}
+	
+	
+	/**
+	 * Fix the tree root
+	 */
+	public void setRootItem(TreeItem<String> newRoot) {
+		this.rootItem = newRoot;
 		this.setRoot(rootItem);
 	}
 	
 	
- 	private Node getIconForNode(String filePath) {
+ 	public Node getIconForNode(String filePath) {
  		
  		logger.trace(filePath);
  		
@@ -203,7 +213,7 @@ public class FxLibraryView extends TreeView<String> {
 			TreeItem<String> subNode;
 			if (f.isDirectory()) {
 				
-				subNode = new TreeItem<String>(convertToNodeName(f.getName()), getIconForNode(f.getPath()));
+				subNode = new TreeItem<>(convertToNodeName(f.getName()), getIconForNode(f.getPath()));
 				listFile(f, subNode);
 				
 			} else {
@@ -212,7 +222,7 @@ public class FxLibraryView extends TreeView<String> {
 					continue;
 				}
 				
-				subNode = new TreeItem<String>(convertToNodeName(f.getName()), getIconForNode(f.getPath()));
+				subNode = new TreeItem<>(convertToNodeName(f.getName()), getIconForNode(f.getPath()));
 			}
 						
 			node.getChildren().add(subNode);

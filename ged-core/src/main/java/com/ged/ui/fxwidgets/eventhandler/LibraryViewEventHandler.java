@@ -523,20 +523,99 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 
 	@Override
 	public void search(String pattern) {
-		// TODO Auto-generated method stub
+		
+		if (pattern.isEmpty()) {
+			libraryView.get().buildTree();
+		}
+		
 		List<GedDocumentFile> files = GedDocumentService.searchForWords(pattern);
 		
 		if (files.size() == 0) {
 			logger.info("No matching document for pattern : "+ pattern);
 		}
 		
-		//TreeItem<String> newRoot = new TreeItem<>(libraryView.get().convertToNodeName(Profile.getInstance().getLibraryRoot()), libraryView.get().getIconForNode(""));
+		libraryView.get();
+		TreeItem<String> newRoot = new TreeItem<>(FxLibraryView.convertToNodeName(Profile.getInstance().getLibraryRoot()), libraryView.get().getIconForNode(""));
+		newRoot.setExpanded(true);
 		
 		for (GedDocumentFile f : files) {
-			logger.debug("Matching document : " + f.getRelativeFilePath());
-		}
+			logger.debug("Matching file : " + f.getRelativeFilePath());
 		
+			String[] items = f.getRelativeFilePath().split("/");
+			String stack = "";
+			
+			TreeItem<String> child = newRoot;
+			for (String item : items) {
+				logger.debug("item : " + relativeToAbsolultPath(item));
+				
+				// we create the child if it doesn't exists
+				if (! hasChild(child, item)) {
+					child.getChildren().add(new TreeItem<String>(FxLibraryView.convertToNodeName(item), libraryView.get().getIconForNode(relativeToAbsolultPath(stack + item))));
+				}
+				
+				// get the child
+				child = getChild(child, item);
+				child.setExpanded(true);
+				
+				stack += item + "/";
+			}
+		}
+		libraryView.get().setRoot(newRoot);
 	}
 
+	
+	/**
+	 * Convert a relative file path to library root to absolute path (including library root)
+	 * 
+	 * @param relativePath
+	 * 				The path to convert (relative to library root)
+	 * 
+	 * @return
+	 * 				The absolute file path
+	 */
+	private String relativeToAbsolultPath(String relativePath) {
+		return Profile.getInstance().getLibraryRoot() + relativePath;
+	}
+	
+	
+	/**
+	 * Has item the direct child s ?
+	 * 
+	 * @param item
+	 * 			The parent node
+	 * @param s
+	 * 			The child we're looking for
+	 * 
+	 * @return
+	 * 			True if s is a direct child of item, false otherwise
+	 */
+	private boolean hasChild(TreeItem<String> item, String s) {
+		for (TreeItem<String> i : item.getChildren()) {
+			if (i.getValue().equals(s)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
+	/**
+	 * Get the direct child of item named by s
+	 * 
+	 * @param item
+	 * 			The parent node
+	 * @param s
+	 * 			The child we're looking for
+	 * 
+	 * @return
+	 * 			The searched child if it's exists, null otherwise
+	 */
+	private TreeItem<String> getChild(TreeItem<String> item, String s) {
+		for (TreeItem<String> i : item.getChildren()) {
+			if (i.getValue().equals(s)) {
+				return i;
+			}
+		}
+		return null;
+	}
+	
 }

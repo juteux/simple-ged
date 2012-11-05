@@ -10,11 +10,8 @@ import javax.swing.JOptionPane;
 
 import org.apache.log4j.Logger;
 
-import com.ged.plugins.PluginManager;
 import com.ged.services.GedDocumentLocationService;
 import com.ged.ui.FxMainWindow;
-import com.ged.ui.MainWindow;
-import com.ged.ui.screens.FakeScreen;
 import com.ged.update.DoUpdate;
 import com.ged.update.UpdateHelper;
 import com.ged.update.UpdateInformations;
@@ -45,15 +42,6 @@ public class Launcher {
 		GedDocumentLocationService.makeSurAtLeastOneDocumentLocationExists();
 		MiddleProfile.getInstance().completeUpdate();
 		
-		// The main window (fx version)
-		Application.launch(FxMainWindow.class, args);
-		
-		// open main window
-		//MainWindow mw = new MainWindow();
-		//mw.setVisible(true);	
-	
-		// launch plugin update... (threaded)
-		//PluginManager.launchPluginUpdate(new FakeScreen(mw));
 		
 		// check for updates
 		Thread t = new Thread(new Runnable() {
@@ -125,6 +113,10 @@ public class Launcher {
 			}
 		});
 		t.start();
+	
+	
+		// The main window
+		Application.launch(FxMainWindow.class, args);
 	}
 
 }
