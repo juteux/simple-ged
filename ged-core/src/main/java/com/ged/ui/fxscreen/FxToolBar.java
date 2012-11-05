@@ -111,12 +111,17 @@ public class FxToolBar extends FxSoftwareScreen {
 	 * Back to previous screen
 	 */
 	private ToolBarButton btnBack;
-
+	
+	/**
+	 * Home button
+	 */
+	private ToolBarButton btnHome;
+	
 	/**
 	 * My event handler
 	 */
 	private ToolBarEventHandler eventHandler;
-	
+
 	
 	/**
 	 * The box which contains action buttons
@@ -150,7 +155,7 @@ public class FxToolBar extends FxSoftwareScreen {
 		HBox.setHgrow(leftBox, Priority.ALWAYS);
 		HBox.setHgrow(rightBox, Priority.ALWAYS);
 		
-		leftBox.getChildren().add(btnBack);
+		leftBox.getChildren().addAll(btnBack, btnHome);
 		
 		this.getChildren().addAll(leftBox, centralBox, rightBox);
 		
@@ -184,6 +189,7 @@ public class FxToolBar extends FxSoftwareScreen {
 		btnAbout			= new ToolBarButton(properties.getProperty("info_about") + properties.getProperty("APPLICATION_NAME"), eventHandler);
 		btnPluginManagement	= new ToolBarButton(properties.getProperty("info_plugin_management"), eventHandler);
 		btnMessages			= new ToolBarButton(properties.getProperty("info_messages"), eventHandler);
+		btnHome				= new ToolBarButton(properties.getProperty("home"), eventHandler);
 		
 		// define associated pictures
 		Map<ToolBarButton, String> associatedImages = new HashMap<>();
@@ -192,6 +198,7 @@ public class FxToolBar extends FxSoftwareScreen {
 		associatedImages.put(btnAbout,				properties.getProperty("ico_toolbar_about"));
 		associatedImages.put(btnPluginManagement,	properties.getProperty("ico_toolbar_plugins"));
 		associatedImages.put(btnMessages,			properties.getProperty("ico_toolbar_message_off"));
+		associatedImages.put(btnHome,				properties.getProperty("ico_library_root"));
 		
 		// set pictures
 		for (Map.Entry<ToolBarButton, String> e : associatedImages.entrySet()) {
@@ -202,6 +209,7 @@ public class FxToolBar extends FxSoftwareScreen {
 	
 	public void fixBackButtonVisibility() {
 		btnBack.setVisible(getMainWindow().getScreenStackCount() > 1);
+		btnHome.setVisible(getMainWindow().isNotOnHomeScreen());
 	}
 	
 	public void markNewMessagesAvailable() {
@@ -234,6 +242,11 @@ public class FxToolBar extends FxSoftwareScreen {
 
 	public ToolBarButton getBtnBack() {
 		return btnBack;
+	}
+
+
+	public ToolBarButton getBtnHome() {
+		return btnHome;
 	}
 
 }

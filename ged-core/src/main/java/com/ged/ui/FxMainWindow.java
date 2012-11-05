@@ -123,6 +123,7 @@ public class FxMainWindow extends Application {
 		}
 		// ---
 
+		screens.clear();
 		pushCentralScreen(newCentralScreen);
 	}
 	
@@ -237,6 +238,11 @@ public class FxMainWindow extends Application {
 
 	public FxToolBar getToolBar() {
 		return toolBar;
+	}
+
+
+	public boolean isNotOnHomeScreen() {
+		return ! (currentCentralScreen instanceof LibraryViewScreen);
 	}
 	
 }
