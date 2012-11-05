@@ -74,6 +74,8 @@ public class MessageScreen extends FxSoftwareScreen {
 		HBox.setHgrow(this, Priority.ALWAYS);
 		
 		this.getChildren().add(webView);
+		
+		MessageService.markAllMessagesAsRead();
 	}
 	
 	

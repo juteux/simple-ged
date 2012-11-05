@@ -49,11 +49,11 @@ public class Launcher {
 		Application.launch(FxMainWindow.class, args);
 		
 		// open main window
-		MainWindow mw = new MainWindow();
-		mw.setVisible(true);	
+		//MainWindow mw = new MainWindow();
+		//mw.setVisible(true);	
 	
 		// launch plugin update... (threaded)
-		PluginManager.launchPluginUpdate(new FakeScreen(mw));
+		//PluginManager.launchPluginUpdate(new FakeScreen(mw));
 		
 		// check for updates
 		Thread t = new Thread(new Runnable() {

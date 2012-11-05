@@ -13,8 +13,10 @@ import javafx.stage.Stage;
 import org.apache.log4j.Logger;
 
 import com.ged.Profile;
+import com.ged.plugins.PluginManager;
 import com.ged.ui.fxscreen.AboutScreen;
 import com.ged.ui.fxscreen.DocumentConfigurationScreen;
+import com.ged.ui.fxscreen.FakeScreen;
 import com.ged.ui.fxscreen.FxSoftwareScreen;
 import com.ged.ui.fxscreen.FxToolBar;
 import com.ged.ui.fxscreen.LibraryViewScreen;
@@ -107,6 +109,9 @@ public class FxMainWindow extends Application {
         
 		// default central screen
 		setCentralScreen(FxSoftwareScreen.Screen.BROWSING_SCREEN);
+		
+		// launch plugin update... (threaded)
+		PluginManager.launchPluginUpdate(new FakeScreen(this));
     }
     
 
@@ -188,10 +193,7 @@ public class FxMainWindow extends Application {
 			
 		case ABOUT_SCREEN :
 			return new AboutScreen(this);
-		/*
-		case SEARCHING_SCREEN :
-			return new SearchingScreen(this);
-		*/
+
 		case PLUGIN_CONFIGURATION_SCREEN :
 			return new PluginConfigurationScreen(this);
 		

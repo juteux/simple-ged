@@ -34,7 +34,8 @@ public class FxLibraryView extends TreeView<String> {
 	private static final Logger logger = Logger.getLogger(FxLibraryView.class);
 	
 	/**
-	 * Not setted yet (always false)
+	 * Have I to show all files or just directories ? 
+	 * Default : false
 	 */
 	private boolean showDirectoryOnly;
 	
@@ -46,7 +47,7 @@ public class FxLibraryView extends TreeView<String> {
 	/**
 	 * The software properties
 	 */
-	Properties properties = PropertiesHelper.getInstance().getProperties();
+	private static final Properties properties = PropertiesHelper.getInstance().getProperties();
 	
 	/**
 	 * My parent
@@ -194,7 +195,7 @@ public class FxLibraryView extends TreeView<String> {
 	private TreeItem<String> listFile(File file, TreeItem<String> node) {
 
 		if (file.isFile()) {
-			return new TreeItem<String>(convertToNodeName(file.getName()), getIconForNode(file.getPath()));
+			return new TreeItem<>(convertToNodeName(file.getName()), getIconForNode(file.getPath()));
 		}
 
 		for (File f : file.listFiles()) {

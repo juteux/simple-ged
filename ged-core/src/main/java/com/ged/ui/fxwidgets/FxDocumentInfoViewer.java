@@ -26,9 +26,7 @@ public class FxDocumentInfoViewer extends GridPane {
 	/**
 	 * The software properties
 	 */
-	Properties properties = PropertiesHelper.getInstance().getProperties();
-
-	
+	private static final Properties properties = PropertiesHelper.getInstance().getProperties();
 	
 	/**
 	 * This label contains document description
