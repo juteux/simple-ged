@@ -59,8 +59,7 @@ public class SettingsScreenEventHandler implements EventHandler<ActionEvent>, Fi
 
 	@Override
 	public void newFileSelected(FileChangedEventObject e) {
-		logger.warn("Not implement yet (SettingsScreenEventHandler.newFileSelected)");
-		
+		settingsScreen.get().getBtnSubmit().setDisable(! e.isValid());
 	}
 	
 }

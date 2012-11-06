@@ -2,8 +2,6 @@ package com.tools.ui;
 
 import java.io.File;
 
-import com.ged.Profile;
-
 import javafx.stage.DirectoryChooser;
 
 /**
@@ -39,6 +37,9 @@ public class DirectorySelector extends FileSelector {
 		if (file == null) {
 			return;
 		}
+		
+		// save selection
+		setCurrentFilePath(file.toString());
 	}
 
 }
