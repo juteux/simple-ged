@@ -91,7 +91,7 @@ public class SettingsScreen extends SoftwareScreen {
 		
 		JPanel libraryInformationPanel = new JPanel(libraryInfoLayout);
 		libraryInformationPanel.setBorder(BorderFactory.createTitledBorder(properties.getProperty("question_library_location")));
-		libraryInformationPanel.add(libraryLocationSelector);
+		//libraryInformationPanel.add(libraryLocationSelector);
 		
 		// theme selection
 		MigLayout themeLayout = new MigLayout(	

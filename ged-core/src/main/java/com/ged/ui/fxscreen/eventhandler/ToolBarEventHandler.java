@@ -57,6 +57,9 @@ public class ToolBarEventHandler implements EventHandler<Event> {
 		else if (action.getSource() == toolBar.get().getBtnHome()) {
 			toolBar.get().gotoScreen(Screen.BROWSING_SCREEN);
 		}
+		else if (action.getSource() == toolBar.get().getBtnSettings()) {
+			toolBar.get().gotoScreen(Screen.SETTINGS_SCREEN);
+		}
 		else {
 			logger.warn("Not implemented yet, see ToolBarController.handle");
 		}

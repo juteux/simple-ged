@@ -31,7 +31,7 @@ public abstract class FxSoftwareScreen extends HBox {
 	 * Application screen list
 	 */
 	public enum Screen {
-		SETTING_SCREEN, 
+		SETTINGS_SCREEN, 
 		BROWSING_SCREEN, 
 		ADD_DOC_SCREEN, 
 		EDIT_DOC_SCREEN, 

@@ -23,6 +23,7 @@ import com.ged.ui.fxscreen.LibraryViewScreen;
 import com.ged.ui.fxscreen.MessageScreen;
 import com.ged.ui.fxscreen.PluginConfigurationScreen;
 import com.ged.ui.fxscreen.PluginScreen;
+import com.ged.ui.fxscreen.SettingsScreen;
 import com.tools.FileHelper;
 import com.tools.PropertiesHelper;
  
@@ -123,7 +124,7 @@ public class FxMainWindow extends Application {
 		
 		// When library root isn't valid, always return on settings screen
 		if ( ! FileHelper.folderExists(Profile.getInstance().getLibraryRoot())) {
-			pushCentralScreen(FxSoftwareScreen.Screen.SETTING_SCREEN);
+			pushCentralScreen(FxSoftwareScreen.Screen.SETTINGS_SCREEN);
 			return;
 		}
 		// ---
@@ -183,10 +184,10 @@ public class FxMainWindow extends Application {
 	private FxSoftwareScreen getScreen(FxSoftwareScreen.Screen requestedScreen) {
 		
 		switch (requestedScreen) {
-		/*
-		case SETTING_SCREEN :
+
+		case SETTINGS_SCREEN :
 			return new SettingsScreen(this);
-		*/
+
 		case ADD_DOC_SCREEN :
 		case EDIT_DOC_SCREEN :
 			return new DocumentConfigurationScreen(this);

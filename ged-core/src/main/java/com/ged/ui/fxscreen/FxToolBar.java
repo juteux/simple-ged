@@ -209,7 +209,7 @@ public class FxToolBar extends FxSoftwareScreen {
 	
 	public void fixBackButtonVisibility() {
 		btnBack.setVisible(getMainWindow().getScreenStackCount() > 1);
-		btnHome.setVisible(getMainWindow().isNotOnHomeScreen());
+		btnHome.setVisible(getMainWindow().isNotOnHomeScreen() && ! btnBack.isVisible());
 	}
 	
 	public void markNewMessagesAvailable() {

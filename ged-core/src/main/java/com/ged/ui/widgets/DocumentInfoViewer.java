@@ -50,7 +50,7 @@ public class DocumentInfoViewer extends AbstractWidget {
 		super();
 		instantiateWidgets();
 		
-		add(mainContainer);
+		//add(mainContainer);
 	}
 	
 	

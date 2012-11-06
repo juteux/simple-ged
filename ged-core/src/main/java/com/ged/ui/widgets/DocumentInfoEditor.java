@@ -85,7 +85,7 @@ public class DocumentInfoEditor extends AbstractWidget {
 		container.add(new JLabel(properties.getProperty("location_")), "gap para");
 		container.add(locationSelector, "span,growx,wrap");
 		
-		add(container);
+		//add(container);
 	}
 
 	/**

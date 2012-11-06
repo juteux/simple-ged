@@ -180,7 +180,7 @@ public class DocumentPreview extends AbstractWidget {
 		mainContainer.add(actionPanel, "cell 1 0 1 2");
 		mainContainer.add(btnPanel, "cell 0 1");
 		
-		add(mainContainer);
+		//add(mainContainer);
 	}
 	
 
@@ -251,7 +251,7 @@ public class DocumentPreview extends AbstractWidget {
 	 */
 	public void addFile(final File file) {
 		if (maximumPreviewerSize == null) {
-			maximumPreviewerSize = getSize();
+			//maximumPreviewerSize = getSize();
 			maximumPreviewerSize.setSize(maximumPreviewerSize.width, maximumPreviewerSize.height-50);
 		}
 		
@@ -283,8 +283,8 @@ public class DocumentPreview extends AbstractWidget {
 		
 		mainContainer.repaint();
 		mainContainer.validate();
-		repaint();
-		validate();
+		//repaint();
+		//validate();
 	}
 	
 	/**

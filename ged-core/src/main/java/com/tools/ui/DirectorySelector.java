@@ -12,9 +12,7 @@ import javax.swing.JFileChooser;
  */
 public class DirectorySelector extends FileSelector {
 
-	private static final long serialVersionUID = 1L;
 
-	
 	public DirectorySelector(String windowsTitle) {
 		super(windowsTitle);;
 	}

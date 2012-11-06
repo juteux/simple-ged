@@ -93,4 +93,10 @@
     -fx-font-size: 14px;
 }
 
+.text-field .error { 
+	-fx-border-color: #FF0000;
+	-fx-border-insets: 0;
+    -fx-border-width: 2px;
+}
+
 

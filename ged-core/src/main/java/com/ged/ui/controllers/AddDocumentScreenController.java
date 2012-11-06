@@ -86,7 +86,7 @@ public class AddDocumentScreenController implements ActionListener,
 
 			if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 				addDocumentScreen.getDocumentPreview().addFile(new File(chooser.getSelectedFile().toString()));
-				addDocumentScreen.getDocumentPreview().validate();
+				//addDocumentScreen.getDocumentPreview().validate();
 			}
 		} 
 		
@@ -107,7 +107,7 @@ public class AddDocumentScreenController implements ActionListener,
 							File f = File.createTempFile(DateTokenGetter.getToken(), ".jpg");
 							source.saveLastAcquiredImageIntoFile(f);
 							addDocumentScreen.getDocumentPreview().addFile(f);
-							addDocumentScreen.getDocumentPreview().validate();
+							//addDocumentScreen.getDocumentPreview().validate();
 							
 						} catch(Exception e) { 
 								e.printStackTrace(); 

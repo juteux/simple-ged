@@ -3,38 +3,29 @@ package com.tools.ui;
 
 import java.util.Properties;
 
-import javax.swing.JPanel;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 
 import com.tools.PropertiesHelper;
 
-import net.miginfocom.swing.MigLayout;
-
 
 /**
- * Abstract widget, define a main layout which take all place available 
+ * Abstract widget
+ *  
  * @author xavier
  *
  */
-public abstract class AbstractWidget extends JPanel {
+public abstract class AbstractWidget extends HBox {
 
 	/**
-	 * 
+	 * Golbal properties
 	 */
-	private static final long serialVersionUID = 1L;
-	
-	protected Properties properties;
+	protected static final Properties properties = PropertiesHelper.getInstance().getProperties();
 	
 	
 	public AbstractWidget() {
-		super(
-				new MigLayout(	
-						"wrap",
-						"[grow,fill,center]",
-						"[grow,fill,center]"
-					)
-		);
-		
-		properties = PropertiesHelper.getInstance().getProperties();
+		super();
+		HBox.setHgrow(this, Priority.ALWAYS);
 	}
 }
 

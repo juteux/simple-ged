@@ -67,9 +67,9 @@ public class LibraryView extends AbstractWidget {
 		this.parent = new WeakReference<SoftwareScreen>(parent);
 		buildTree(showDirectoryOnly);
 		
-		setMinimumSize(new Dimension(220, 200));
+		//setMinimumSize(new Dimension(220, 200));
 		
-		add(new JScrollPane(tree));
+		//add(new JScrollPane(tree));
 	}
 
 	/**

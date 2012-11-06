@@ -36,8 +36,8 @@ public class BrowseLibraryScreenController implements LibraryListener {
 		}
 	
 		// do not forget to refresh
-		browseLibraryScreen.getDocumentPreview().validate();
-		browseLibraryScreen.validate();
+		//browseLibraryScreen.getDocumentPreview().validate();
+		//browseLibraryScreen.validate();
 	}
 
 	

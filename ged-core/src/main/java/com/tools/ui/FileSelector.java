@@ -1,17 +1,16 @@
 package com.tools.ui;
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.event.EventListenerList;
 
-import net.miginfocom.swing.MigLayout;
+import org.apache.log4j.Logger;
 
 import com.tools.listeners.FileChangedListener;
 
@@ -22,7 +21,10 @@ import com.tools.listeners.FileChangedListener;
 
 public abstract class FileSelector extends AbstractWidget {
 
-	private static final long serialVersionUID = 1L;
+	/**
+	 * My logger
+	 */
+	private static final Logger logger = Logger.getLogger(FileSelector.class);
 
 	/**
 	 * To signal to listeners when selection changed
@@ -42,12 +44,12 @@ public abstract class FileSelector extends AbstractWidget {
     /**
      * The widget which display current selection
      */
-    private JTextField selectionLineEdit; 
+    private TextField selectionLineEdit; 
 
     /**
      * The browsing button
      */
-    private JButton btnBrowse;
+    private Button btnBrowse;
 
 	/**
 	 * @param windowsTitle
@@ -61,45 +63,28 @@ public abstract class FileSelector extends AbstractWidget {
 		dirPath = ".";
 		
 		// Instantiate
-		btnBrowse = new JButton("...");
-		selectionLineEdit = new JTextField();
+		btnBrowse = new Button("...");
+		selectionLineEdit = new TextField();
+		HBox.setHgrow(selectionLineEdit, Priority.ALWAYS);
 		
 		// add actions
-		btnBrowse.addActionListener(new ActionListener() {
+		btnBrowse.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void handle(ActionEvent arg0) {
 				openSelectionPopup();
 			}
 		});
-		
-		selectionLineEdit.addKeyListener(new KeyListener() {
+
+		selectionLineEdit.setOnKeyReleased(new EventHandler<KeyEvent>() {
 			@Override
-			public void keyReleased(KeyEvent arg0) {
+			public void handle(KeyEvent arg0) {
 				validSelection();
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-			}
-
-			@Override
-			public void keyTyped(KeyEvent e) {
 			}
 		});
 		
+		
 		// layouting ...
-		MigLayout layout = new MigLayout(	
-				"wrap",
-				"[grow,fill,center][]",	// columns
-				"[grow,fill,center][]"	// rows
-			);
-		
-		JPanel container = new JPanel(layout);
-		
-		container.add(selectionLineEdit);
-		container.add(btnBrowse);
-		
-		add(container);
+		this.getChildren().addAll(selectionLineEdit, btnBrowse);
 	}
 
 	/**
@@ -141,7 +126,15 @@ public abstract class FileSelector extends AbstractWidget {
 	 * Update the UI, according to the value returned by isValidPath()
 	 */
 	protected void validSelection() {
-		selectionLineEdit.setForeground(isValidPath() ? Color.BLACK : Color.RED);
+		
+		if (isValidPath()) {
+			logger.debug("Valid selection");
+			selectionLineEdit.getStyleClass().remove("error");
+		}
+		else {
+			logger.debug("Invalid selection");
+			selectionLineEdit.getStyleClass().add("error");
+		}
 		
 		// send the good news to listeners
 		FileChangedListener[] listeners = (FileChangedListener [])listenerList.getListeners(FileChangedListener.class);
