@@ -39,6 +39,7 @@ public class AboutScreen extends FxSoftwareScreen {
 		try {
 			Reader reader = new InputStreamReader(AboutScreen.class.getResourceAsStream("/html/about.html"));
 			String content = FileHelper.readAllStringContent(reader);
+			content = content.replaceAll("\\{\\{ged-version\\}\\}", properties.getProperty("APPLICATION_VERSION"));
 			//logger.debug("content : " + content);
 			webView.getEngine().loadContent(content);
 		} catch (IOException|NullPointerException e) {
