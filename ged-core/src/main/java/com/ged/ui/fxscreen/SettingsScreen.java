@@ -56,6 +56,7 @@ public class SettingsScreen extends FxSoftwareScreen {
 		instanciateWidgets();
 		
 		VBox fieldSetLibraryLocationBox = new VBox();
+		//fieldSetLibraryLocationBox.getStyleClass().add("debug-layout");
 		HBox.setHgrow(fieldSetLibraryLocationBox, Priority.ALWAYS);
 		fieldSetLibraryLocationBox.setSpacing(10);
 		FxFieldSet fieldSetLibraryLocation = new FxFieldSet(fieldSetLibraryLocationBox);

@@ -130,3 +130,11 @@
 	-fx-border-style:solid;
 }
 
+
+/**
+	Debug
+*/
+.debug-layout {
+    -fx-background-color: #CCFF99;
+}
+

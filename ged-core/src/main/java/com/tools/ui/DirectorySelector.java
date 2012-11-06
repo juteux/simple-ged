@@ -2,7 +2,9 @@ package com.tools.ui;
 
 import java.io.File;
 
-import javax.swing.JFileChooser;
+import com.ged.Profile;
+
+import javafx.stage.DirectoryChooser;
 
 /**
  * Some file selector specialized for directories
@@ -25,15 +27,18 @@ public class DirectorySelector extends FileSelector {
 
 	@Override
 	public void openSelectionPopup() {
-		JFileChooser chooser = new JFileChooser();
-		chooser.setCurrentDirectory(new java.io.File(getDirPath()));
-		chooser.setDialogTitle(getWindowsTitle());
-		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		chooser.setAcceptAllFileFilterUsed(false);
 		
-	    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-	    	setCurrentFilePath(chooser.getSelectedFile().toString());
-	    }
+		DirectoryChooser directoryChooser = new DirectoryChooser();
+		directoryChooser.setTitle(getWindowsTitle());
+		
+		//directoryChooser.setInitialDirectory(new File(getDirPath()));
+		
+		// Show open file dialog
+		File file = directoryChooser.showDialog(null);
+
+		if (file == null) {
+			return;
+		}
 	}
 
 }
