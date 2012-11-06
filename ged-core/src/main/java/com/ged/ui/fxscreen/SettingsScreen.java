@@ -9,6 +9,7 @@ import javax.print.attribute.standard.Copies;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -19,6 +20,7 @@ import com.ged.Profile;
 import com.ged.ui.FxMainWindow;
 import com.ged.ui.fxscreen.eventhandler.SettingsScreenEventHandler;
 import com.tools.ui.DirectorySelector;
+import com.tools.ui.FxFieldSet;
 
 /**
  * This screen is for global configuration
@@ -53,18 +55,25 @@ public class SettingsScreen extends FxSoftwareScreen {
 
 		instanciateWidgets();
 		
-		//JPanel libraryInformationPanel = new JPanel(libraryInfoLayout);
-		//libraryInformationPanel.setBorder(BorderFactory.createTitledBorder(properties.getProperty("question_library_location")));
-		
-		//JPanel printerPanel = new JPanel(printerLayout);
-		//printerPanel.setBorder(BorderFactory.createTitledBorder(properties.getProperty("question_printer")));
-		//printerPanel.add(comboPrinter);
-		HBox.setHgrow(comboPrinter, Priority.ALWAYS);
+		VBox fieldSetLibraryLocationBox = new VBox();
+		HBox.setHgrow(fieldSetLibraryLocationBox, Priority.ALWAYS);
+		fieldSetLibraryLocationBox.setSpacing(10);
+		FxFieldSet fieldSetLibraryLocation = new FxFieldSet(fieldSetLibraryLocationBox);
+		HBox.setHgrow(fieldSetLibraryLocation, Priority.ALWAYS);
+		fieldSetLibraryLocation.setStyleClassForBorder("fieldSet");
+		fieldSetLibraryLocationBox.getChildren().addAll(new Label(properties.getProperty("question_library_location")), libraryLocationSelector);
+	
+
+		VBox fieldSetPrinterBox = new VBox();
+		fieldSetPrinterBox.setSpacing(10);
+		FxFieldSet fieldSetPrinter = new FxFieldSet(fieldSetPrinterBox);
+		fieldSetPrinter.setStyleClassForBorder("fieldSet");
+		fieldSetPrinterBox.getChildren().addAll(new Label(properties.getProperty("question_printer")), comboPrinter);
 		
 		VBox mainLayout = new VBox(20);
 		HBox.setHgrow(mainLayout, Priority.ALWAYS);
-		
-		mainLayout.getChildren().addAll(libraryLocationSelector, comboPrinter, btnSubmit);
+
+		mainLayout.getChildren().addAll(fieldSetLibraryLocation, fieldSetPrinter, btnSubmit);
 		
 		this.getChildren().addAll(mainLayout);
 	}

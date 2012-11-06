@@ -100,3 +100,33 @@
 }
 
 
+/**
+	Fieldsets
+	
+	@see http://code.google.com/p/javafx-demos/source/search?q=template.css&origq=template.css&btnG=Search+Trunk
+*/
+.fieldSet{
+	-fx-border-color:#EEEEEE;
+	-fx-border-width:2px;
+	-fx-border-style:solid;
+	-fx-border-radius:5px;
+}
+.fieldSetDefault{
+	-fx-border-color:transparent;
+	-fx-border-radius:5px;
+	-fx-border-width:2px;
+	-fx-border-style:solid;
+}
+.fieldSetRed{
+	-fx-border-color:red;
+	-fx-border-radius:5px;
+	-fx-border-width:2px;
+	-fx-border-style:solid;
+}
+.fieldSetGreen{
+	-fx-border-color:green;
+	-fx-border-radius:5px;
+	-fx-border-width:2px;
+	-fx-border-style:solid;
+}
+
