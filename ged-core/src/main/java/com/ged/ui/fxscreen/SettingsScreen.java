@@ -82,6 +82,8 @@ public class SettingsScreen extends FxSoftwareScreen {
 	
 	private void instanciateWidgets() {
 		
+		eventHandler = new SettingsScreenEventHandler(this);
+		
 		libraryLocationSelector = new DirectorySelector(properties.getProperty("select_root_library_directory"));
 		libraryLocationSelector.setCurrentFilePath(Profile.getInstance().getLibraryRoot());
 		libraryLocationSelector.addFileChangedListener(eventHandler);
@@ -96,7 +98,6 @@ public class SettingsScreen extends FxSoftwareScreen {
 			comboPrinter.getItems().add(ps.getName());
 		}
 		comboPrinter.getSelectionModel().select(Profile.getInstance().getDefaultPrinterName());
-		
 		comboPrinter.setOnAction(eventHandler);
 		
 		
@@ -112,6 +113,19 @@ public class SettingsScreen extends FxSoftwareScreen {
 		btnSubmit.setGraphic(iv3);
 		
 		btnSubmit.setDisable(true);
+	}
+
+
+	public DirectorySelector getLibraryLocationSelector() {
+		return libraryLocationSelector;
+	}
+
+	public ComboBox<String> getComboPrinter() {
+		return comboPrinter;
+	}
+
+	public Button getBtnSubmit() {
+		return btnSubmit;
 	}
 
 }

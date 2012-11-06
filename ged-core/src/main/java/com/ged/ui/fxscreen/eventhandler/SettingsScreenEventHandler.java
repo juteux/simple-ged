@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+import com.ged.Profile;
 import com.ged.ui.fxscreen.SettingsScreen;
 import com.tools.listeners.FileChangedListener;
 import com.tools.ui.FileChangedEventObject;
@@ -38,7 +39,21 @@ public class SettingsScreenEventHandler implements EventHandler<ActionEvent>, Fi
 
 	@Override
 	public void handle(ActionEvent action) {
-		logger.warn("Not implement yet (SettingsScreenEventHandler.handle)");
+
+		if (action.getSource() == settingsScreen.get().getBtnSubmit()) {
+			Profile p = Profile.getInstance();
+			p.setDocumentLibraryRoot(settingsScreen.get().getLibraryLocationSelector().getFilePath());
+			p.setDefaultPrinter((String) settingsScreen.get().getComboPrinter().getSelectionModel().getSelectedItem());
+			p.commitChanges();
+
+			settingsScreen.get().getBtnSubmit().setDisable(true);
+		}
+		else if (action.getSource() == settingsScreen.get().getComboPrinter()) {
+			settingsScreen.get().getBtnSubmit().setDisable(false);
+		}
+		else {
+			logger.warn("Not implement yet (SettingsScreenEventHandler.handle)");
+		}
 	}
 
 
