@@ -63,12 +63,12 @@ public class LocationManagementScreenController implements ActionListener, KeyLi
 			if (currentItemID == 1) { // adding
 				GedDocumentPhysicalLocation gdpl = new GedDocumentPhysicalLocation();
 				gdpl.setLabel(locationManagementScreen.getInputNewLabel().getText());
-				GedDocumentLocationService.addLocation(gdpl);
+				//GedDocumentLocationService.addLocation(gdpl);
 			}
 			else { // modify
 				GedDocumentPhysicalLocation gdpl = GedDocumentLocationService.findLocationById(currentItemID);
 				gdpl.setLabel(locationManagementScreen.getInputNewLabel().getText());
-				GedDocumentLocationService.updateLocation(gdpl);
+				//GedDocumentLocationService.updateLocation(gdpl);
 			}
 				
 			refresh = true;

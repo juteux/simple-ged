@@ -1,18 +1,25 @@
 package com.ged.ui.fxwidgets;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Properties;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 import org.apache.log4j.Logger;
 
+import com.ged.models.GedDocumentPhysicalLocation;
+import com.ged.services.GedDocumentLocationService;
 import com.ged.ui.fxwidgets.eventhandler.FxDocumentInfoEditorEventHandler;
 import com.tools.PropertiesHelper;
 import com.tools.javafx.calendar.DatePicker;
@@ -50,6 +57,11 @@ public class FxDocumentInfoEditor extends GridPane {
 	 */
 	private FxDocumentInfoEditorEventHandler eventHandler;
 	
+	/**
+	 * The combo box to select document location
+	 */
+	private ComboBox<String> comboDocumentLocation;
+	
 	
 	public FxDocumentInfoEditor() {
 		instanciateWidgets();
@@ -62,6 +74,7 @@ public class FxDocumentInfoEditor extends GridPane {
 		add(editDocumentTitle, 0, 0);
 		add(editDocumentDate, 0, 1);
 		add(editDocumentDescription, 0, 2);
+		add(comboDocumentLocation, 0, 3);
 	}
 
 
@@ -87,6 +100,17 @@ public class FxDocumentInfoEditor extends GridPane {
 		
 		editDocumentDescription = new TextArea();
 		editDocumentDescription.setPromptText(properties.getProperty("description_prompt"));
+	
+		List<String> locationList = new ArrayList<>();
+		for (GedDocumentPhysicalLocation l : GedDocumentLocationService.getLocations()) {
+			locationList.add(l.getLabel());
+		}
+		
+		ObservableList<String> options = FXCollections.observableArrayList(locationList);
+
+		comboDocumentLocation = new ComboBox<>(options);
+		comboDocumentLocation.setEditable(true);   
+		//HBox.setHgrow(comboDocumentLocation, Priority.ALWAYS);
 	}
 
 
@@ -117,5 +141,9 @@ public class FxDocumentInfoEditor extends GridPane {
 		return eventHandler;
 	}
 	
+	public ComboBox<String> getComboDocumentLocation() {
+		return comboDocumentLocation;
+	}
+
 }
 

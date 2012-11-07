@@ -47,7 +47,7 @@ public class FxMainWindow extends Application {
 	/**
 	 * Default application height
 	 */
-	public static final int APP_HEIGHT = 600;
+	public static final int APP_HEIGHT = 650;
 	
 	
 	/**

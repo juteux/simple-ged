@@ -49,6 +49,31 @@ public class DocumentLocationDAO {
 		session.close();
 	}
 	
+	
+	/**
+	 * Get a location by tge string
+	 * 
+	 * @return
+	 * 			The location if there exists, null otherwise
+	 */
+	public static GedDocumentPhysicalLocation getLocationByName(String name) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Criteria criteria = session.createCriteria(GedDocumentPhysicalLocation.class).add(Restrictions.eq("label", name));  
+		
+		@SuppressWarnings("unchecked")
+		List<GedDocumentPhysicalLocation> results = criteria.list();  
+
+		GedDocumentPhysicalLocation d = null;
+
+		if ( ! results.isEmpty() ) {
+			d = results.get(0);
+		}
+		
+		session.close();
+		
+		return d;
+	}
+	
 
 	/**
 	 * Get the location for the specified id

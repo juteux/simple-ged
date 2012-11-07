@@ -10,6 +10,8 @@ import javax.swing.event.EventListenerList;
 import org.apache.log4j.Logger;
 
 import com.ged.models.GedDocument;
+import com.ged.models.GedDocumentPhysicalLocation;
+import com.ged.services.GedDocumentLocationService;
 import com.ged.ui.fxwidgets.FxDocumentInfoEditor;
 import com.ged.ui.listeners.DocumentInfoEditorListener;
 
@@ -45,7 +47,10 @@ public class FxDocumentInfoEditorEventHandler implements EventHandler<KeyEvent> 
 		document.setName(documentInfoEditor.get().getEditDocumentTitle().getText());
 		document.setDate(documentInfoEditor.get().getEditDocumentDate().getSelectedDate());
 		document.setDescription(documentInfoEditor.get().getEditDocumentDescription().getText());
-		//document.setLocation(GedDocumentLocationService.findLocationById(documentInfoEditor.getLocationSelector().getSelectedLocationID()));
+		
+		GedDocumentPhysicalLocation location = GedDocumentLocationService.getTheLocationAndCreateItIfItDoesntExists(documentInfoEditor.get().getComboDocumentLocation().getValue());
+		document.setLocation(location);
+		
 		return document;
 	}
 	
@@ -63,6 +68,9 @@ public class FxDocumentInfoEditorEventHandler implements EventHandler<KeyEvent> 
 		documentInfoEditor.get().getEditDocumentTitle().setText(document.getName());
 		documentInfoEditor.get().getEditDocumentDate().setSelectedDate(document.getDate());
 		documentInfoEditor.get().getEditDocumentDescription().setText(document.getDescription());
+		if (document.getLocation() != null) {
+			documentInfoEditor.get().getComboDocumentLocation().setValue(document.getLocation().getLabel());
+		}
 	}
 	
 	
