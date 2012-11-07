@@ -183,6 +183,7 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 		
 		String itemPath = item.getValue();
 		TreeItem<String> parent = item.getParent();
+
 		while (parent != null) {
 			if (parent.getParent() == null) { // we wan't to exclude root from the final path
 				break;
@@ -255,7 +256,8 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 			libraryView.get().getParentScreen().pushScreen(Screen.EDIT_DOC_SCREEN);
 
 			Map<String, Object> extras = new HashMap<>();
-			extras.put("relative-document-root", getFilePathFromTreeItem(node));
+			
+			extras.put("relative-document-root", getFilePathFromTreeItem(node.getParent()));
 			extras.put("ged-document", GedDocumentService.getDocumentFromFile(getFilePathFromTreeItem(node)));
 			
 			if (GedDocumentService.getDocumentFromFile(getFilePathFromTreeItem(node)) == null) {
@@ -263,9 +265,7 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 			}
 			
 			libraryView.get().getParentScreen().pushExtraValues(extras);
-			
 		}
-		
 	}
 	
 	
