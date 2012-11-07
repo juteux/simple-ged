@@ -3,6 +3,8 @@ package com.ged.ui.fxscreen;
 import java.io.File;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -26,6 +28,11 @@ import com.ged.ui.fxwidgets.FxDocumentInfoEditor;
  */
 public class DocumentConfigurationScreen extends FxSoftwareScreen {
 
+	/**
+	 * My logger
+	 */
+	private static final Logger logger = Logger.getLogger(DocumentConfigurationScreen.class);
+	
 	/**
 	 * Button add from file system
 	 */
@@ -107,12 +114,14 @@ public class DocumentConfigurationScreen extends FxSoftwareScreen {
 		setDocumentRelativeDirectory((String) extras.get("relative-document-root"));
 		
 		document = (GedDocument)extras.get("ged-document");
+		logger.info("ged-document : " + (document == null ? "null" : "not null"));
 		
 		docInfoEditor.getEventHandler().setDocument(document);
 		documentPreviewer.getEventHandler().setDocument(document);
 		
 		if (extras.containsKey("system-file")) {
 			documentPreviewer.addFile((File)extras.get("system-file"));
+			logger.info("system-file : " + ((File)extras.get("system-file")).getAbsolutePath());
 		}
 	}
 

@@ -66,7 +66,9 @@ public class FileHelper {
 		} catch (IOException e) {
 			logger.error("Cannot copy file : " + file.getAbsolutePath() + " to " + target.getAbsolutePath());
 		}
-		return new GedDocumentFile(target.getAbsolutePath().replaceFirst(Profile.getInstance().getLibraryRoot().replace("\\", "\\\\"), "").replace('\\', '/'));
+		
+		String specialLibraryRoot = Profile.getInstance().getLibraryRoot().replace("\\", "\\\\").replace("\\\\\\\\", "\\\\");
+		return new GedDocumentFile(target.getAbsolutePath().replaceFirst(specialLibraryRoot, "").replace('\\', '/'));
 	}
 
 	/**
@@ -87,7 +89,7 @@ public class FileHelper {
 	public static List<GedDocumentFile> copyFilesIfNecessary(
 			List<File> filesToCopy, File directoryTarget, String fileName) {
 
-		List<GedDocumentFile> l = new ArrayList<GedDocumentFile>();
+		List<GedDocumentFile> l = new ArrayList<>();
 
 		if (filesToCopy.size() <= 1) {
 			l.add(copyFileIfNecessary(filesToCopy.get(0), directoryTarget, cleanFileName(fileName)));
