@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+
 import org.apache.log4j.Logger;
 
 import com.ged.models.GedPlugin;
@@ -12,8 +15,7 @@ import com.ged.services.PluginService;
 import com.ged.ui.fxscreen.FxSoftwareScreen.Screen;
 import com.ged.ui.fxscreen.PluginScreen;
 import com.tools.PropertiesHelper;
-import com.tools.javafx.ModalConfirm;
-import com.tools.javafx.ModalConfirmResponse;
+import com.tools.javafx.antonsmirnov.dialog.Dialog;
 
 /**
  * 
@@ -85,17 +87,18 @@ public class PluginScreenEventHandler {
 			
 		case DESACTIVATE :
 			
-			ModalConfirm.show(pluginScreen.get().getMainStage(), new ModalConfirmResponse() {
-    			@Override
-    			public void confirm() {
+    		Dialog.buildConfirmation(properties.getProperty("delete"), properties.getProperty("wanna_unactivate_item_named").replace("{0}", pmi.getPlugin().getPluginName()), pluginScreen.get().getMainStage())
+			.addYesButton(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent arg0) {
     				PluginService.desactivatePlugin(pmi);
     				pluginScreen.get().refreshPluginListContent();
-    			}
-    			@Override
-    			public void cancel() {
-    				// do nothing
-    			}
-    		}, properties.getProperty("wanna_unactivate_item_named").replace("{0}", pmi.getPlugin().getPluginName()));
+				}
+			})
+			.addNoButton(null)
+			.addCancelButton(null)
+			.build()
+			.show();
 
 			break;
 			

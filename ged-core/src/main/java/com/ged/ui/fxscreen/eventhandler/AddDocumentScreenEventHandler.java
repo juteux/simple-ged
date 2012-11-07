@@ -24,8 +24,7 @@ import com.ged.ui.listeners.DocumentPreviewListener;
 import com.tools.DateTokenGetter;
 import com.tools.OSHelper;
 import com.tools.PropertiesHelper;
-import com.tools.javafx.ModalConfirm;
-import com.tools.javafx.ModalConfirmResponse;
+import com.tools.javafx.antonsmirnov.dialog.Dialog;
 
 public class AddDocumentScreenEventHandler implements DocumentInfoEditorListener, DocumentPreviewListener, EventHandler<ActionEvent> {
 
@@ -147,14 +146,7 @@ public class AddDocumentScreenEventHandler implements DocumentInfoEditorListener
 				message = properties.getProperty("doc_modified");
 			}
 			
-			ModalConfirm.show(addDocumentScreen.get().getMainStage(), new ModalConfirmResponse() {
-    			@Override
-    			public void confirm() {
-    			}
-    			@Override
-    			public void cancel() {
-    			}
-    		}, message);
+			Dialog.showInfo(properties.getProperty("information"), message, addDocumentScreen.get().getMainStage());
 			
 			// in case of edition, we have finished our job here
 			if (addDocumentScreen.get().getDocument() != null) {

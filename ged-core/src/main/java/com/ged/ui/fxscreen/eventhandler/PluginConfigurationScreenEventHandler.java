@@ -19,8 +19,7 @@ import com.ged.plugins.PluginManager;
 import com.ged.services.PluginService;
 import com.ged.ui.fxscreen.PluginConfigurationScreen;
 import com.tools.PropertiesHelper;
-import com.tools.javafx.ModalConfirm;
-import com.tools.javafx.ModalConfirmResponse;
+import com.tools.javafx.antonsmirnov.dialog.Dialog;
 
 
 /**
@@ -75,15 +74,7 @@ public class PluginConfigurationScreenEventHandler implements EventHandler<KeyEv
 			PluginService.addOrUpdateDocument(p);
 			PluginManager.launchPluginUpdate(pluginConfigurationScreen.get());
 
-			ModalConfirm.show(pluginConfigurationScreen.get().getMainStage(), new ModalConfirmResponse() {
-    			@Override
-    			public void confirm() {
-    			}
-    			@Override
-    			public void cancel() {
-    			}
-    		},  PluginConfigurationScreenEventHandler.properties.getProperty("plugin_is_activated"));
-
+			Dialog.showInfo(PluginConfigurationScreenEventHandler.properties.getProperty("information"), PluginConfigurationScreenEventHandler.properties.getProperty("plugin_is_activated"), pluginConfigurationScreen.get().getMainStage());
 			
 			pluginConfigurationScreen.get().refreshScreens();
 			pluginConfigurationScreen.get().finish();

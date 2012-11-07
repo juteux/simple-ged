@@ -40,11 +40,10 @@ import com.ged.ui.fxscreen.FxSoftwareScreen.Screen;
 import com.ged.ui.fxwidgets.FxLibraryView;
 import com.ged.ui.listeners.DocumentInfoViewerListener;
 import com.ged.ui.listeners.LibraryListener;
-import com.ged.ui.listeners.QuickSearchListener;
 import com.ged.ui.listeners.LibraryListener.LIBRARY_FILE_TYPE;
+import com.ged.ui.listeners.QuickSearchListener;
 import com.tools.PropertiesHelper;
-import com.tools.javafx.ModalConfirm;
-import com.tools.javafx.ModalConfirmResponse;
+import com.tools.javafx.antonsmirnov.dialog.Dialog;
 
 /**
  * The event handler for the tree library view
@@ -314,17 +313,18 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
             directoryDeleteMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             	@Override
                 public void handle(ActionEvent t) {
-                	ModalConfirm.show(libraryView.get().getParentScreen().getMainStage(), new ModalConfirmResponse() {
-            			@Override
-            			public void confirm() {
-            				GedDocumentService.deleteDocumentFile(getFilePathFromTreeItem(getTreeItem()));
-            				getTreeItem().getParent().getChildren().remove(getTreeItem());
-            			}
-            			@Override
-            			public void cancel() {
-            				// do nothing
-            			}
-            		}, properties.getProperty("wanna_delete_item_named").replace("{0}", getString()));
+            		Dialog.buildConfirmation(properties.getProperty("delete"), properties.getProperty("wanna_delete_item_named").replace("{0}", getString()))
+            				.addYesButton(new EventHandler<ActionEvent>() {
+								@Override
+								public void handle(ActionEvent arg0) {
+	          						GedDocumentService.deleteDocumentFile(getFilePathFromTreeItem(getTreeItem()));
+            						getTreeItem().getParent().getChildren().remove(getTreeItem());
+								}
+							})
+            				.addNoButton(null)
+            				.addCancelButton(null)
+            				.build()
+            				.show();
                 }
             });
             
