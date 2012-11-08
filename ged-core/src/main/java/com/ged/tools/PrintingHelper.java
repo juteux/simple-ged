@@ -1,6 +1,7 @@
 package com.ged.tools;
 
 import java.io.FileInputStream;
+import java.util.Properties;
 
 import javax.print.Doc;
 import javax.print.DocFlavor;
@@ -11,11 +12,13 @@ import javax.print.SimpleDoc;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 import javax.print.attribute.standard.Copies;
-import javax.swing.JOptionPane;
 
 import org.apache.log4j.Logger;
 
 import com.ged.Profile;
+import com.tools.PropertiesHelper;
+
+import fr.xmichel.javafx.dialog.Dialog;
 
 /**
  * This class is a printing helper
@@ -25,9 +28,15 @@ import com.ged.Profile;
  */
 public class PrintingHelper {
 
-	
+	/**
+	 * Logger
+	 */
 	private static final Logger logger = Logger.getLogger(PrintingHelper.class);
 	
+	/**
+	 * Properties
+	 */
+	private static final Properties properties = PropertiesHelper.getInstance().getProperties();
 	
 	/**
 	 * This method print the given document 
@@ -78,7 +87,7 @@ public class PrintingHelper {
 	
 	
 	public static void showPrintPopupErrorMessage(String message) {
-		JOptionPane.showMessageDialog(null, message, "Erreur", JOptionPane.ERROR_MESSAGE);
+		Dialog.showError(properties.getProperty("error"), message);
 	}
 	
 }
