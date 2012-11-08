@@ -19,8 +19,9 @@ import javafx.scene.layout.VBox;
 import com.ged.Profile;
 import com.ged.ui.FxMainWindow;
 import com.ged.ui.fxscreen.eventhandler.SettingsScreenEventHandler;
-import com.tools.ui.DirectorySelector;
-import com.tools.ui.FxFieldSet;
+
+import fr.xmichel.javafx.fieldset.FxFieldSet;
+import fr.xmichel.javafx.fileselector.DirectorySelector;
 
 /**
  * This screen is for global configuration

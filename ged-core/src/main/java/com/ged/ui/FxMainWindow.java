@@ -102,7 +102,7 @@ public class FxMainWindow extends Application {
         
 
         Scene scene = new Scene(mainLayout, APP_WIDTH, APP_HEIGHT);
-        scene.getStylesheets().addAll("templates/style.css", "templates/tools/calendarstyle.css");
+        scene.getStylesheets().addAll("templates/style.css", "templates/tools/calendarstyle.css", "templates/tools/fielset.css");
         
         primaryStage.setScene(scene);
         

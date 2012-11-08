@@ -89,6 +89,18 @@
 			<artifactId>javafx-calendar</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>fr.xmichel.javafx</groupId>
+			<artifactId>javafx-fieldset</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>fr.xmichel.javafx</groupId>
+			<artifactId>javafx-fileselector</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 
 		<!-- Jar qui ne sont pas dans le repo -->
 

@@ -9,8 +9,10 @@ import javafx.event.EventHandler;
 
 import com.ged.Profile;
 import com.ged.ui.fxscreen.SettingsScreen;
-import com.tools.listeners.FileChangedListener;
-import com.tools.ui.FileChangedEventObject;
+
+import fr.xmichel.javafx.fileselector.FileChangedEventObject;
+import fr.xmichel.javafx.fileselector.FileChangedListener;
+
 
 /**
  * 
