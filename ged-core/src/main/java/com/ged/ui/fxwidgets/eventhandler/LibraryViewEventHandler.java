@@ -43,7 +43,8 @@ import com.ged.ui.listeners.LibraryListener;
 import com.ged.ui.listeners.LibraryListener.LIBRARY_FILE_TYPE;
 import com.ged.ui.listeners.QuickSearchListener;
 import com.tools.PropertiesHelper;
-import com.tools.javafx.antonsmirnov.dialog.Dialog;
+
+import fr.xmichel.javafx.dialog.Dialog;
 
 /**
  * The event handler for the tree library view

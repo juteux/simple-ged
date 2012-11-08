@@ -24,7 +24,9 @@ import com.ged.ui.listeners.DocumentPreviewListener;
 import com.tools.DateTokenGetter;
 import com.tools.OSHelper;
 import com.tools.PropertiesHelper;
-import com.tools.javafx.antonsmirnov.dialog.Dialog;
+
+import fr.xmichel.javafx.dialog.Dialog;
+
 
 public class AddDocumentScreenEventHandler implements DocumentInfoEditorListener, DocumentPreviewListener, EventHandler<ActionEvent> {
 

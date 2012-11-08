@@ -47,6 +47,18 @@
 
 	</build>
 
+	<repositories>
+		<!-- 
+		<repository>
+			<id>xaviermichel-snapshots</id>
+			<url>https://github.com/xaviermichel/maven-repo/raw/master/snapshots</url>
+		</repository>
+		-->
+		<repository>
+			<id>xaviermichel-releases</id>
+			<url>https://github.com/xaviermichel/maven-repo/raw/master/releases</url>
+		</repository>
+	</repositories>
 
 	<dependencies>
 
@@ -61,6 +73,13 @@
 		<dependency>
 			<groupId>fr.simple.ged.connector</groupId>
 			<artifactId>ged-connector</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+		<!-- Dans mon repo -->
+		<dependency>
+			<groupId>fr.xmichel.javafx</groupId>
+			<artifactId>javafx-dialog</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 
@@ -161,7 +180,7 @@
 			<artifactId>commons-beanutils</artifactId>
 			<version>1.8.3</version>
 		</dependency>
-
+		
 	</dependencies>
 
 </project>

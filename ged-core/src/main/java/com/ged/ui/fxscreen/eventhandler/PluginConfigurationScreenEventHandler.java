@@ -19,7 +19,8 @@ import com.ged.plugins.PluginManager;
 import com.ged.services.PluginService;
 import com.ged.ui.fxscreen.PluginConfigurationScreen;
 import com.tools.PropertiesHelper;
-import com.tools.javafx.antonsmirnov.dialog.Dialog;
+
+import fr.xmichel.javafx.dialog.Dialog;
 
 
 /**
