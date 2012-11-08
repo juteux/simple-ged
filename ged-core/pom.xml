@@ -77,9 +77,16 @@
 		</dependency>
 
 		<!-- Dans mon repo -->
+		
 		<dependency>
 			<groupId>fr.xmichel.javafx</groupId>
 			<artifactId>javafx-dialog</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>fr.xmichel.javafx</groupId>
+			<artifactId>javafx-calendar</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 

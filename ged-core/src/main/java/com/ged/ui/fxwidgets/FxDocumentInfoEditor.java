@@ -22,7 +22,8 @@ import com.ged.models.GedDocumentPhysicalLocation;
 import com.ged.services.GedDocumentLocationService;
 import com.ged.ui.fxwidgets.eventhandler.FxDocumentInfoEditorEventHandler;
 import com.tools.PropertiesHelper;
-import com.tools.javafx.calendar.DatePicker;
+
+import fr.xmichel.javafx.calendar.DatePicker;
 
 public class FxDocumentInfoEditor extends GridPane {
 
