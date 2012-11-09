@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ged.connector.plugins.SimpleGedPluginException;
-import com.ged.connector.plugins.SimpleGedPlugin;
-import com.ged.connector.plugins.SimpleGedPluginProperty;
+import com.simple.ged.connector.plugins.SimpleGedPlugin;
+import com.simple.ged.connector.plugins.SimpleGedPluginException;
+import com.simple.ged.connector.plugins.SimpleGedPluginProperty;
 
 /**
  * The demo plugin just copy the file designed by file_to_copy in the selected ged directory

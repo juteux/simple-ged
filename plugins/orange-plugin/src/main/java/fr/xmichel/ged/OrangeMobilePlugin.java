@@ -19,9 +19,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.ged.connector.plugins.SimpleGedPlugin;
-import com.ged.connector.plugins.SimpleGedPluginException;
-import com.ged.connector.plugins.SimpleGedPluginProperty;
+import com.simple.ged.connector.plugins.SimpleGedPlugin;
+import com.simple.ged.connector.plugins.SimpleGedPluginException;
+import com.simple.ged.connector.plugins.SimpleGedPluginProperty;
 
 public class OrangeMobilePlugin extends SimpleGedPlugin {
 

@@ -102,6 +102,19 @@
 			<version>1.0.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>fr.xmichel.toolbox</groupId>
+			<artifactId>tools</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>fr.xmichel.toolbox</groupId>
+			<artifactId>hiberante-sqlite-bridge</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		
+
 		<!-- Jar qui ne sont pas dans le repo -->
 
 		<dependency>
@@ -184,13 +197,6 @@
 			<version>3.7.2</version>
 		</dependency>
 
-		<!-- layouting/styling -->
-
-		<dependency>
-			<groupId>com.miglayout</groupId>
-			<artifactId>miglayout</artifactId>
-			<version>3.7.4</version>
-		</dependency>
 
 		<!-- Autres -->
 

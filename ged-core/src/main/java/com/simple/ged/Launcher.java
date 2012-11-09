@@ -15,8 +15,7 @@ import com.ged.update.UpdateHelper;
 import com.ged.update.UpdateInformations;
 import com.simple.ged.services.GedDocumentLocationService;
 import com.simple.ged.ui.MainWindow;
-import com.tools.PropertiesHelper;
-import com.tools.hibernate.HibernateUtil;
+
 
 /**
  * Application launcher
