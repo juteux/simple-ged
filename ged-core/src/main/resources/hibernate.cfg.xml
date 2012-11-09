@@ -10,7 +10,7 @@
 		
 		<property name="lazy-init">false</property>
 		
-		<property name="dialect">com.tools.hibernate.SQLiteDialect</property>
+		<property name="dialect">fr.xmichel.toolbox.hibernate.sqlite.SQLiteDialect</property>
 		
 		<property name="connection.driver_class">org.sqlite.JDBC</property>
 		<property name="connection.url">jdbc:sqlite:simple_ged.sqlite</property>
