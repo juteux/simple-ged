@@ -23,11 +23,11 @@
 		<property name="hibernate.use_sql_comments">false</property>
 		<property name="hibernate.generate_statistics">false</property>
 
-		<mapping class="com.ged.models.GedDocument" />
-		<mapping class="com.ged.models.GedDocumentFile" />
-		<mapping class="com.ged.models.GedDocumentPhysicalLocation" />
-		<mapping class="com.ged.models.GedMessage" />
-		<mapping class="com.ged.models.GedPlugin" />
+		<mapping class="com.simple.ged.models.GedDocument" />
+		<mapping class="com.simple.ged.models.GedDocumentFile" />
+		<mapping class="com.simple.ged.models.GedDocumentPhysicalLocation" />
+		<mapping class="com.simple.ged.models.GedMessage" />
+		<mapping class="com.simple.ged.models.GedPlugin" />
 
 		<mapping resource="mapping/ged_plugin_property.hbm.xml"/>
 
