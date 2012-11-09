@@ -54,47 +54,6 @@ public class PluginManager {
      */
     static final String PLUGINS_DEPENDENCY_DIRECTORY = "plugin_dependency/";
     
-	
-	/**
-	 * @return	
-	 * 
-	 * The list of available plugins in the plugin's directory
-	 * The value can be null
-	 * 
-	 * @deprecated 
-	 * 			use getPluginList instead
-	 */
-    @Deprecated
-	public static Map<SimpleGedPlugin, GedPlugin> getPluginMap() {
-		
-		FileHelper.createDirectoryIfNecessary(PLUGINS_DIRECTORY);
-		FileHelper.createDirectoryIfNecessary(PLUGINS_DEPENDENCY_DIRECTORY);
-		
-		
-		Map<SimpleGedPlugin, GedPlugin> pluginMap = new HashMap<SimpleGedPlugin, GedPlugin>();
-		
-		FilenameFilter jarFilter = new FilenameFilter() {
-			public boolean accept(File arg0, String arg1) {
-				return arg1.endsWith(".jar");
-			}
-		};
-
-		File pluginsDirectory = new File(PLUGINS_DIRECTORY);
-		String[] pluginsFiles = pluginsDirectory.list(jarFilter);
-		
-		for (String pluginFileName : pluginsFiles) {
-			logger.info(pluginFileName);
-			SimpleGedPlugin p = PluginFactory.loadPluginOldMethod(pluginFileName);
-			if ( p == null) {
-				logger.error("Couldn't load plugin : " + pluginFileName);
-			} else {
-				pluginMap.put(p, PluginDAO.getPluginInformations(pluginFileName));
-			}
-		}
-		return pluginMap;
-	}
-	
-    
     
     /**
      * Get the plugin list

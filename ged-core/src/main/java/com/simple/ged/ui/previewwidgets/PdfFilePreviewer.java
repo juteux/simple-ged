@@ -255,6 +255,7 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 	 * @param height
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	private Image getPageAsImage(int page, int width, int height) {
 
 		BufferedImage img;
