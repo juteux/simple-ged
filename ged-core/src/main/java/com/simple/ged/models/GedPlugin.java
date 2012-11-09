@@ -14,8 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.ged.connector.plugins.SimpleGedPlugin;
-import com.ged.connector.plugins.SimpleGedPluginProperty;
+import com.simple.ged.connector.plugins.SimpleGedPlugin;
+import com.simple.ged.connector.plugins.SimpleGedPluginProperty;
 
 /**
  * Some ged plugin is a container for SimpleGedPlugin, which add many details about the plugin (for management)

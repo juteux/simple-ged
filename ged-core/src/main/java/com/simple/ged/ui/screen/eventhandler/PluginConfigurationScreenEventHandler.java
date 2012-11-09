@@ -13,14 +13,14 @@ import javafx.scene.input.KeyEvent;
 
 import org.apache.log4j.Logger;
 
-import com.ged.connector.plugins.SimpleGedPluginProperty;
+import com.simple.ged.connector.plugins.SimpleGedPluginProperty;
 import com.simple.ged.models.GedPlugin;
 import com.simple.ged.plugins.PluginManager;
 import com.simple.ged.services.PluginService;
 import com.simple.ged.ui.screen.PluginConfigurationScreen;
-import com.tools.PropertiesHelper;
 
 import fr.xmichel.javafx.dialog.Dialog;
+import fr.xmichel.toolbox.tools.PropertiesHelper;
 
 
 /**

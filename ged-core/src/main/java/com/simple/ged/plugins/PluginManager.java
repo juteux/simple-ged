@@ -5,24 +5,21 @@ import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
-import com.ged.connector.plugins.SimpleGedPlugin;
-import com.ged.connector.plugins.SimpleGedPluginException;
 import com.simple.ged.Profile;
-import com.simple.ged.dao.PluginDAO;
+import com.simple.ged.connector.plugins.SimpleGedPlugin;
+import com.simple.ged.connector.plugins.SimpleGedPluginException;
 import com.simple.ged.models.GedMessage;
 import com.simple.ged.models.GedPlugin;
 import com.simple.ged.services.MessageService;
 import com.simple.ged.services.PluginService;
 import com.simple.ged.ui.screen.FxSoftwareScreen;
-import com.tools.DateHelper;
-import com.tools.FileHelper;
+
+import fr.xmichel.toolbox.tools.DateHelper;
+import fr.xmichel.toolbox.tools.FileHelper;
 
 
 /**
@@ -99,16 +96,16 @@ public class PluginManager {
 			@Override
 			public void run() {
 				
-				Map<SimpleGedPlugin, GedPlugin> plugins = getPluginMap();
+				List<GedPlugin> plugins = getPluginList();
 				
-				for (Entry<SimpleGedPlugin, GedPlugin> e : plugins.entrySet()) {
+				for (GedPlugin plugin : plugins) {
 					
-					if (e.getValue() == null) {
+					if ( ! plugin.isActivated() ) {
 						continue;
 					}
 					
-					SimpleGedPlugin p = e.getKey();
-					GedPlugin i = e.getValue();
+					SimpleGedPlugin p = plugin.getPlugin();
+					GedPlugin i = plugin;
 					
 					boolean shouldUpdate = false;
 

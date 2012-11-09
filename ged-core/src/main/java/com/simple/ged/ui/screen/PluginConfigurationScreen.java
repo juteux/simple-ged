@@ -20,12 +20,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-import com.ged.connector.plugins.SimpleGedPluginProperty;
+import com.simple.ged.connector.plugins.SimpleGedPluginProperty;
 import com.simple.ged.models.GedPlugin;
 import com.simple.ged.ui.MainWindow;
 import com.simple.ged.ui.screen.eventhandler.PluginConfigurationScreenEventHandler;
 import com.simple.ged.ui.widgets.FxLibraryView;
-import com.tools.DateHelper;
+
+import fr.xmichel.toolbox.tools.DateHelper;
 
 /**
  * 

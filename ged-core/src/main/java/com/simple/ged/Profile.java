@@ -10,7 +10,8 @@ import java.io.Serializable;
 
 import org.apache.log4j.Logger;
 
-import com.tools.OSHelper;
+import fr.xmichel.toolbox.tools.OSHelper;
+
 
 /**
  * This class is a singleton for accessing to global program preferences, some kind of profile

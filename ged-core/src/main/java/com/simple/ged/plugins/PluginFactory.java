@@ -2,29 +2,23 @@ package com.simple.ged.plugins;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.log4j.Logger;
 
-import com.ged.connector.plugins.SimpleGedPlugin;
-import com.ged.connector.plugins.SimpleGedPluginProperty;
-import com.tools.FileHelper;
+import com.simple.ged.connector.plugins.SimpleGedPlugin;
+import com.simple.ged.connector.plugins.SimpleGedPluginProperty;
+
 
 
 /**

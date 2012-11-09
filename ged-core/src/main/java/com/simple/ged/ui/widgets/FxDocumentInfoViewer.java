@@ -15,8 +15,9 @@ import org.apache.log4j.Logger;
 
 import com.simple.ged.models.GedDocument;
 import com.simple.ged.ui.widgets.eventhandler.DocumentInfoViewerEventHandler;
-import com.tools.DateHelper;
-import com.tools.PropertiesHelper;
+
+import fr.xmichel.toolbox.tools.DateHelper;
+import fr.xmichel.toolbox.tools.PropertiesHelper;
 
 
 public class FxDocumentInfoViewer extends GridPane {

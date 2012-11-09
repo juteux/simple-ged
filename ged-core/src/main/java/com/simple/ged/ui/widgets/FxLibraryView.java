@@ -15,8 +15,9 @@ import org.apache.log4j.Logger;
 import com.simple.ged.Profile;
 import com.simple.ged.ui.screen.FxSoftwareScreen;
 import com.simple.ged.ui.widgets.eventhandler.LibraryViewEventHandler;
-import com.tools.FileHelper;
-import com.tools.PropertiesHelper;
+
+import fr.xmichel.toolbox.tools.FileHelper;
+import fr.xmichel.toolbox.tools.PropertiesHelper;
 
 /**
  * A view of the library, a tree with files in GED directory

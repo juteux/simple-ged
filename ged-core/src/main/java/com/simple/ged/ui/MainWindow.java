@@ -24,8 +24,9 @@ import com.simple.ged.ui.screen.MessageScreen;
 import com.simple.ged.ui.screen.PluginConfigurationScreen;
 import com.simple.ged.ui.screen.PluginScreen;
 import com.simple.ged.ui.screen.SettingsScreen;
-import com.tools.FileHelper;
-import com.tools.PropertiesHelper;
+
+import fr.xmichel.toolbox.tools.FileHelper;
+import fr.xmichel.toolbox.tools.PropertiesHelper;
  
 
 /**

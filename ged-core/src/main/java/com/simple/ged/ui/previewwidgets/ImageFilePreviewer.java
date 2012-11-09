@@ -13,7 +13,8 @@ import javafx.scene.image.ImageView;
 import org.apache.log4j.Logger;
 
 import com.simple.ged.tools.PrintingHelper;
-import com.tools.FileHelper;
+
+import fr.xmichel.toolbox.tools.FileHelper;
 
 /**
  * Some previewer for image files

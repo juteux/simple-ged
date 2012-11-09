@@ -102,7 +102,7 @@
 			<version>1.0.0</version>
 		</dependency>
 	
-		<!--  
+		
 		<dependency>
 			<groupId>fr.xmichel.toolbox</groupId>
 			<artifactId>tools</artifactId>
@@ -114,7 +114,6 @@
 			<artifactId>hiberante-sqlite-bridge</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		-->
 
 		<!-- Jar qui ne sont pas dans le repo -->
 

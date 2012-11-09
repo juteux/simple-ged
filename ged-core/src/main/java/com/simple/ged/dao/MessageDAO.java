@@ -9,7 +9,8 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import com.simple.ged.models.GedMessage;
-import com.tools.hibernate.HibernateUtil;
+
+import fr.xmichel.toolbox.hibernate.sqlite.HibernateUtil;
 
 /**
  * This class is the message DAO

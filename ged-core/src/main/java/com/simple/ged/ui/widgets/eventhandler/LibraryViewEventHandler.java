@@ -42,9 +42,9 @@ import com.simple.ged.ui.listeners.QuickSearchListener;
 import com.simple.ged.ui.listeners.LibraryListener.LIBRARY_FILE_TYPE;
 import com.simple.ged.ui.screen.FxSoftwareScreen.Screen;
 import com.simple.ged.ui.widgets.FxLibraryView;
-import com.tools.PropertiesHelper;
 
 import fr.xmichel.javafx.dialog.Dialog;
+import fr.xmichel.toolbox.tools.PropertiesHelper;
 
 /**
  * The event handler for the tree library view

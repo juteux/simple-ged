@@ -15,8 +15,10 @@ import org.apache.log4j.Logger;
 import com.simple.ged.models.GedMessage;
 import com.simple.ged.services.MessageService;
 import com.simple.ged.ui.MainWindow;
-import com.tools.DateHelper;
-import com.tools.FileHelper;
+
+import fr.xmichel.toolbox.tools.DateHelper;
+import fr.xmichel.toolbox.tools.FileHelper;
+
 
 /**
  * This screen show message about plugins comportement

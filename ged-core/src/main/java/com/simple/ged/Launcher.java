@@ -10,11 +10,14 @@ import javax.swing.JOptionPane;
 
 import org.apache.log4j.Logger;
 
-import com.ged.update.DoUpdate;
-import com.ged.update.UpdateHelper;
-import com.ged.update.UpdateInformations;
+import com.simple.ged.update.DoUpdate;
+import com.simple.ged.update.UpdateHelper;
+import com.simple.ged.update.UpdateInformations;
 import com.simple.ged.services.GedDocumentLocationService;
 import com.simple.ged.ui.MainWindow;
+
+import fr.xmichel.toolbox.hibernate.sqlite.HibernateUtil;
+import fr.xmichel.toolbox.tools.PropertiesHelper;
 
 
 /**

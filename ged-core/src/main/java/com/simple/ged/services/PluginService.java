@@ -2,7 +2,7 @@ package com.simple.ged.services;
 
 import java.util.List;
 
-import com.ged.connector.plugins.SimpleGedPlugin;
+import com.simple.ged.connector.plugins.SimpleGedPlugin;
 import com.simple.ged.dao.PluginDAO;
 import com.simple.ged.models.GedPlugin;
 import com.simple.ged.plugins.PluginManager;

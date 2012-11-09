@@ -15,7 +15,8 @@ import javax.print.DocFlavor;
 import org.apache.log4j.Logger;
 
 import com.simple.ged.tools.PrintingHelper;
-import com.tools.FileHelper;
+
+import fr.xmichel.toolbox.tools.FileHelper;
 
 /**
  * 

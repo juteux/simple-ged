@@ -16,9 +16,9 @@ import javax.print.attribute.standard.Copies;
 import org.apache.log4j.Logger;
 
 import com.simple.ged.Profile;
-import com.tools.PropertiesHelper;
 
 import fr.xmichel.javafx.dialog.Dialog;
+import fr.xmichel.toolbox.tools.PropertiesHelper;
 
 /**
  * This class is a printing helper

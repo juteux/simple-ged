@@ -22,12 +22,13 @@ import javafx.util.Callback;
 
 import org.apache.log4j.Logger;
 
-import com.ged.connector.plugins.SimpleGedPlugin;
+import com.simple.ged.connector.plugins.SimpleGedPlugin;
 import com.simple.ged.models.GedPlugin;
 import com.simple.ged.plugins.PluginManager;
 import com.simple.ged.ui.MainWindow;
 import com.simple.ged.ui.screen.eventhandler.PluginScreenEventHandler;
-import com.tools.DateHelper;
+
+import fr.xmichel.toolbox.tools.DateHelper;
 
 /**
  * 

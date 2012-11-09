@@ -13,7 +13,8 @@ import org.apache.log4j.Logger;
 
 import com.simple.ged.models.GedMessage;
 import com.simple.ged.services.MessageService;
-import com.tools.PropertiesHelper;
+
+import fr.xmichel.toolbox.tools.PropertiesHelper;
 
 
 /**

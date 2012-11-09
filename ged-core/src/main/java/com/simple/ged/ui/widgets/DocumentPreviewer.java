@@ -22,7 +22,8 @@ import com.simple.ged.models.GedDocumentFile;
 import com.simple.ged.ui.previewwidgets.AbstractFilePreviewer;
 import com.simple.ged.ui.previewwidgets.FilePreviewerFactory;
 import com.simple.ged.ui.widgets.eventhandler.FxDocumentPreviewerEventHandler;
-import com.tools.PropertiesHelper;
+
+import fr.xmichel.toolbox.tools.PropertiesHelper;
 
 
 /**

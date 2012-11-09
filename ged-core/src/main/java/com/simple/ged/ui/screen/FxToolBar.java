@@ -18,7 +18,8 @@ import javafx.util.Duration;
 
 import com.simple.ged.ui.MainWindow;
 import com.simple.ged.ui.screen.eventhandler.ToolBarEventHandler;
-import com.tools.PropertiesHelper;
+
+import fr.xmichel.toolbox.tools.PropertiesHelper;
 
 public class FxToolBar extends FxSoftwareScreen {
 

@@ -7,7 +7,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
 import com.simple.ged.ui.widgets.eventhandler.QuickSearchBarEventHandler;
-import com.tools.PropertiesHelper;
+
+import fr.xmichel.toolbox.tools.PropertiesHelper;
 
 /**
  * 

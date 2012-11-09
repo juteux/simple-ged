@@ -4,8 +4,9 @@ import java.io.File;
 
 import org.apache.log4j.Logger;
 
+import fr.xmichel.toolbox.tools.FileHelper;
+
 import javafx.geometry.Dimension2D;
-import com.tools.FileHelper;
 
 
 

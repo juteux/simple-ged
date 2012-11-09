@@ -21,11 +21,12 @@ import com.simple.ged.tools.FileHelper;
 import com.simple.ged.ui.listeners.DocumentInfoEditorListener;
 import com.simple.ged.ui.listeners.DocumentPreviewListener;
 import com.simple.ged.ui.screen.DocumentConfigurationScreen;
-import com.tools.DateTokenGetter;
-import com.tools.OSHelper;
-import com.tools.PropertiesHelper;
+
 
 import fr.xmichel.javafx.dialog.Dialog;
+import fr.xmichel.toolbox.tools.DateTokenGetter;
+import fr.xmichel.toolbox.tools.OSHelper;
+import fr.xmichel.toolbox.tools.PropertiesHelper;
 
 
 public class AddDocumentScreenEventHandler implements DocumentInfoEditorListener, DocumentPreviewListener, EventHandler<ActionEvent> {

@@ -11,7 +11,8 @@ import org.hibernate.criterion.Restrictions;
 import com.simple.ged.models.GedDocument;
 import com.simple.ged.models.GedDocumentFile;
 import com.simple.ged.models.GedDocumentPhysicalLocation;
-import com.tools.hibernate.HibernateUtil;
+
+import fr.xmichel.toolbox.hibernate.sqlite.HibernateUtil;
 
 /**
  * The document manager is an interface for current manipulations on a ged

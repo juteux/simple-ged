@@ -4,13 +4,12 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import com.simple.ged.models.GedPlugin;
-import com.tools.hibernate.HibernateUtil;
+
+import fr.xmichel.toolbox.hibernate.sqlite.HibernateUtil;
 
 /**
  * This class is the DAO for plugins

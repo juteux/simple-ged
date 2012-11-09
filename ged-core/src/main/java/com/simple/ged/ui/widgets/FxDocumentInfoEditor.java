@@ -21,9 +21,9 @@ import org.apache.log4j.Logger;
 import com.simple.ged.models.GedDocumentPhysicalLocation;
 import com.simple.ged.services.GedDocumentLocationService;
 import com.simple.ged.ui.widgets.eventhandler.FxDocumentInfoEditorEventHandler;
-import com.tools.PropertiesHelper;
 
 import fr.xmichel.javafx.calendar.DatePicker;
+import fr.xmichel.toolbox.tools.PropertiesHelper;
 
 public class FxDocumentInfoEditor extends GridPane {
 

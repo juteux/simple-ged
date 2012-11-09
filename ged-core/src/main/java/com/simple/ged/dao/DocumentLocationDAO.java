@@ -9,7 +9,9 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import com.simple.ged.models.GedDocumentPhysicalLocation;
-import com.tools.hibernate.HibernateUtil;
+
+import fr.xmichel.toolbox.hibernate.sqlite.HibernateUtil;
+
 
 /**
  * This class is the document location DAO

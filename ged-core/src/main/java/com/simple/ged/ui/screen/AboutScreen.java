@@ -11,7 +11,8 @@ import javafx.scene.web.WebView;
 import org.apache.log4j.Logger;
 
 import com.simple.ged.ui.MainWindow;
-import com.tools.FileHelper;
+
+import fr.xmichel.toolbox.tools.FileHelper;
 
 /**
  * The screen about

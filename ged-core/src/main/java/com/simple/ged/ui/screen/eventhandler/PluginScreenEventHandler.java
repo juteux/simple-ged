@@ -14,9 +14,9 @@ import com.simple.ged.models.GedPlugin;
 import com.simple.ged.services.PluginService;
 import com.simple.ged.ui.screen.PluginScreen;
 import com.simple.ged.ui.screen.FxSoftwareScreen.Screen;
-import com.tools.PropertiesHelper;
 
 import fr.xmichel.javafx.dialog.Dialog;
+import fr.xmichel.toolbox.tools.PropertiesHelper;
 
 /**
  * 

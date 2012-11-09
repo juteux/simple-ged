@@ -12,7 +12,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 import com.simple.ged.ui.widgets.eventhandler.LibraryViewEventHandler;
-import com.tools.PropertiesHelper;
+
+import fr.xmichel.toolbox.tools.PropertiesHelper;
 
 /**
  * Not really a previewer, I know...

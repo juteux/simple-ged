@@ -10,7 +10,8 @@ import javafx.stage.Stage;
 import org.apache.log4j.Logger;
 
 import com.simple.ged.ui.MainWindow;
-import com.tools.PropertiesHelper;
+
+import fr.xmichel.toolbox.tools.PropertiesHelper;
 
 /**
  * 
