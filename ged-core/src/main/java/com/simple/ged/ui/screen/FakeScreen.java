@@ -10,7 +10,7 @@ import com.simple.ged.ui.MainWindow;
  * @author xavier
  *
  */
-public class FakeScreen extends FxSoftwareScreen {
+public class FakeScreen extends SoftwareScreen {
 
 	public FakeScreen(MainWindow mw) {
 		super(mw);

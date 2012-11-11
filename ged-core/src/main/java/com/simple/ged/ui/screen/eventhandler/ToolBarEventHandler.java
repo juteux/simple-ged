@@ -7,8 +7,8 @@ import javafx.event.EventHandler;
 
 import org.apache.log4j.Logger;
 
-import com.simple.ged.ui.screen.FxToolBar;
-import com.simple.ged.ui.screen.FxSoftwareScreen.Screen;
+import com.simple.ged.ui.screen.ToolBar;
+import com.simple.ged.ui.screen.SoftwareScreen.Screen;
 
 /**
  * Tool bar event handler
@@ -26,11 +26,11 @@ public class ToolBarEventHandler implements EventHandler<Event> {
 	/**
 	 * The controlled object
 	 */
-	private WeakReference<FxToolBar> toolBar;
+	private WeakReference<ToolBar> toolBar;
 	
 	
 	
-	public ToolBarEventHandler(FxToolBar toolBar) {
+	public ToolBarEventHandler(ToolBar toolBar) {
 		this.toolBar = new WeakReference<>(toolBar);
 	}
 	

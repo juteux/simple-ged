@@ -13,7 +13,7 @@ import javafx.scene.image.ImageView;
 import org.apache.log4j.Logger;
 
 import com.simple.ged.Profile;
-import com.simple.ged.ui.screen.FxSoftwareScreen;
+import com.simple.ged.ui.screen.SoftwareScreen;
 import com.simple.ged.ui.widgets.eventhandler.LibraryViewEventHandler;
 
 import fr.xmichel.toolbox.tools.FileHelper;
@@ -25,14 +25,14 @@ import fr.xmichel.toolbox.tools.PropertiesHelper;
  * @author xavier
  */
 
-public class FxLibraryView extends TreeView<String> {
+public class LibraryView extends TreeView<String> {
 
 	/**
 	 * Tree item icon size (px)
 	 */
 	public static final int TREE_ITEM_SIZE = 30;
 	
-	private static final Logger logger = Logger.getLogger(FxLibraryView.class);
+	private static final Logger logger = Logger.getLogger(LibraryView.class);
 	
 	/**
 	 * Have I to show all files or just directories ? 
@@ -53,7 +53,7 @@ public class FxLibraryView extends TreeView<String> {
 	/**
 	 * My parent
 	 */
-	private WeakReference<FxSoftwareScreen> parentScreen;
+	private WeakReference<SoftwareScreen> parentScreen;
 	
 	/**
 	 * Root item
@@ -66,7 +66,7 @@ public class FxLibraryView extends TreeView<String> {
 	 * @param parentScreen
 	 * 				My parent
 	 */
-	public FxLibraryView(FxSoftwareScreen parentScreen) {
+	public LibraryView(SoftwareScreen parentScreen) {
 		this(parentScreen, false);
     }
     
@@ -79,7 +79,7 @@ public class FxLibraryView extends TreeView<String> {
 	 * @param showDirectoryOnly
 	 *				Must I only show directories ? (not there content = files)
 	 */
-	public FxLibraryView(FxSoftwareScreen parentScreen, boolean showDirectoryOnly) {
+	public LibraryView(SoftwareScreen parentScreen, boolean showDirectoryOnly) {
 		this.showDirectoryOnly = showDirectoryOnly;
 		
     	this.parentScreen = new WeakReference<>(parentScreen);
@@ -238,7 +238,7 @@ public class FxLibraryView extends TreeView<String> {
 	}
   
 
-    public FxSoftwareScreen getParentScreen() {
+    public SoftwareScreen getParentScreen() {
 		return parentScreen.get();
 	}
 

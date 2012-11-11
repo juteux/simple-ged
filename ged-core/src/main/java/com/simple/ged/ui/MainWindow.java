@@ -17,8 +17,8 @@ import com.simple.ged.plugins.PluginManager;
 import com.simple.ged.ui.screen.AboutScreen;
 import com.simple.ged.ui.screen.DocumentConfigurationScreen;
 import com.simple.ged.ui.screen.FakeScreen;
-import com.simple.ged.ui.screen.FxSoftwareScreen;
-import com.simple.ged.ui.screen.FxToolBar;
+import com.simple.ged.ui.screen.SoftwareScreen;
+import com.simple.ged.ui.screen.ToolBar;
 import com.simple.ged.ui.screen.LibraryViewScreen;
 import com.simple.ged.ui.screen.MessageScreen;
 import com.simple.ged.ui.screen.PluginConfigurationScreen;
@@ -59,12 +59,12 @@ public class MainWindow extends Application {
 	/**
 	 * Loaded screens, you can see this as a stack with the more recent screen at the top (last element)
 	 */
-	private List<FxSoftwareScreen> screens;
+	private List<SoftwareScreen> screens;
 	
 	/**
 	 * The current application screen, should be the last one of the screen list
 	 */
-	private FxSoftwareScreen currentCentralScreen = null;
+	private SoftwareScreen currentCentralScreen = null;
 	
 	/**
 	 * Central screen node
@@ -79,7 +79,7 @@ public class MainWindow extends Application {
 	/**
 	 * The tool bar
 	 */
-	private FxToolBar toolBar;
+	private ToolBar toolBar;
 	
 	
     @Override
@@ -92,7 +92,7 @@ public class MainWindow extends Application {
         primaryStage.setTitle(properties.getProperty("APPLICATION_NAME"));
         //primaryStage.initStyle(StageStyle.UNDECORATED);
         
-        toolBar = new FxToolBar(this); 
+        toolBar = new ToolBar(this); 
         int height = 40;
         toolBar.setPrefHeight(height);
         toolBar.setMinHeight(height);
@@ -110,7 +110,7 @@ public class MainWindow extends Application {
         primaryStage.show();
         
 		// default central screen
-		setCentralScreen(FxSoftwareScreen.Screen.BROWSING_SCREEN);
+		setCentralScreen(SoftwareScreen.Screen.BROWSING_SCREEN);
 		
 		// launch plugin update... (threaded)
 		PluginManager.launchPluginUpdate(new FakeScreen(this));
@@ -121,11 +121,11 @@ public class MainWindow extends Application {
 	 * Define the central screen, previous central screen won't be lost be lost, we keep screen stack in memory !
 	 */
  
-	public void setCentralScreen(FxSoftwareScreen.Screen newCentralScreen) {
+	public void setCentralScreen(SoftwareScreen.Screen newCentralScreen) {
 		
 		// When library root isn't valid, always return on settings screen
 		if ( ! FileHelper.folderExists(Profile.getInstance().getLibraryRoot())) {
-			pushCentralScreen(FxSoftwareScreen.Screen.SETTINGS_SCREEN);
+			pushCentralScreen(SoftwareScreen.Screen.SETTINGS_SCREEN);
 			return;
 		}
 		// ---
@@ -138,7 +138,7 @@ public class MainWindow extends Application {
 	/**
 	 * Push a new central screen on screens stack
 	 */
-	public void pushCentralScreen(FxSoftwareScreen.Screen screen) {
+	public void pushCentralScreen(SoftwareScreen.Screen screen) {
 		
 		logger.info("Pushing a central screen");
 		
@@ -169,7 +169,7 @@ public class MainWindow extends Application {
 		screens.remove(currentCentralScreen);
 
 		if (screens.isEmpty()) {
-			setCentralScreen(FxSoftwareScreen.Screen.BROWSING_SCREEN);
+			setCentralScreen(SoftwareScreen.Screen.BROWSING_SCREEN);
 		}
 		else {
 			currentCentralScreen = screens.get(screens.size() - 1);
@@ -182,7 +182,7 @@ public class MainWindow extends Application {
 	/**
 	 * Return the wanted screen, according to the given value
 	 */
-	private FxSoftwareScreen getScreen(FxSoftwareScreen.Screen requestedScreen) {
+	private SoftwareScreen getScreen(SoftwareScreen.Screen requestedScreen) {
 		
 		switch (requestedScreen) {
 
@@ -226,7 +226,7 @@ public class MainWindow extends Application {
 	 */
 	public void refreshScreens() {
 		logger.info("refreshing screens...");
-		for (FxSoftwareScreen ss : screens) {
+		for (SoftwareScreen ss : screens) {
 			ss.refresh();
 		}
 	}
@@ -240,7 +240,7 @@ public class MainWindow extends Application {
 	}
 
 
-	public FxToolBar getToolBar() {
+	public ToolBar getToolBar() {
 		return toolBar;
 	}
 

@@ -21,7 +21,7 @@ import com.simple.ged.ui.screen.eventhandler.ToolBarEventHandler;
 
 import fr.xmichel.toolbox.tools.PropertiesHelper;
 
-public class FxToolBar extends FxSoftwareScreen {
+public class ToolBar extends SoftwareScreen {
 
 
 	/**
@@ -129,7 +129,7 @@ public class FxToolBar extends FxSoftwareScreen {
 	 */
 	private HBox centralBox;
 	
-	public FxToolBar(MainWindow w) {
+	public ToolBar(MainWindow w) {
 		super(w);
 		
 		this.getStyleClass().add("toolbar");

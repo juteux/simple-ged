@@ -24,7 +24,7 @@ import com.simple.ged.connector.plugins.SimpleGedPluginProperty;
 import com.simple.ged.models.GedPlugin;
 import com.simple.ged.ui.MainWindow;
 import com.simple.ged.ui.screen.eventhandler.PluginConfigurationScreenEventHandler;
-import com.simple.ged.ui.widgets.FxLibraryView;
+import com.simple.ged.ui.widgets.LibraryView;
 
 import fr.xmichel.toolbox.tools.DateHelper;
 
@@ -35,7 +35,7 @@ import fr.xmichel.toolbox.tools.DateHelper;
  * @author xavier
  *
  */
-public class PluginConfigurationScreen extends FxSoftwareScreen {
+public class PluginConfigurationScreen extends SoftwareScreen {
 
 	/**
 	 * My logger
@@ -45,7 +45,7 @@ public class PluginConfigurationScreen extends FxSoftwareScreen {
 	/**
 	 * The library view, to chose document target
 	 */
-	private FxLibraryView libraryView;
+	private LibraryView libraryView;
 	
 	/**
 	 * The concerned plugin
@@ -206,7 +206,7 @@ public class PluginConfigurationScreen extends FxSoftwareScreen {
 		eventHandler = new PluginConfigurationScreenEventHandler(this);
 		
 		
-		libraryView = new FxLibraryView(this, true);
+		libraryView = new LibraryView(this, true);
 		
 		title = new Label();
 		title.getStyleClass().add("list-plugin-title");
@@ -283,7 +283,7 @@ public class PluginConfigurationScreen extends FxSoftwareScreen {
 	}
 
 
-	public FxLibraryView getLibraryView() {
+	public LibraryView getLibraryView() {
 		return libraryView;
 	}
 

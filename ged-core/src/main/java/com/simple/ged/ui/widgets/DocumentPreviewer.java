@@ -21,7 +21,7 @@ import com.simple.ged.models.GedDocument;
 import com.simple.ged.models.GedDocumentFile;
 import com.simple.ged.ui.previewwidgets.AbstractFilePreviewer;
 import com.simple.ged.ui.previewwidgets.FilePreviewerFactory;
-import com.simple.ged.ui.widgets.eventhandler.FxDocumentPreviewerEventHandler;
+import com.simple.ged.ui.widgets.eventhandler.DocumentPreviewerEventHandler;
 
 import fr.xmichel.toolbox.tools.PropertiesHelper;
 
@@ -77,7 +77,7 @@ public class DocumentPreviewer extends HBox {
 	/**
 	 * My controller
 	 */
-	private FxDocumentPreviewerEventHandler eventHandler;
+	private DocumentPreviewerEventHandler eventHandler;
 	
 	/**
 	 * Button for opening document
@@ -162,7 +162,7 @@ public class DocumentPreviewer extends HBox {
 	 */
 	private void instantiateWidgets() {
 		
-		eventHandler = new FxDocumentPreviewerEventHandler(this);
+		eventHandler = new DocumentPreviewerEventHandler(this);
 		
 		previewers = new ArrayList<>();
 		
@@ -380,7 +380,7 @@ public class DocumentPreviewer extends HBox {
 		return currentPreviewer.getAbsoluteFilePath();
 	}
 
-	public FxDocumentPreviewerEventHandler getEventHandler() {
+	public DocumentPreviewerEventHandler getEventHandler() {
 		return eventHandler;
 	}
 

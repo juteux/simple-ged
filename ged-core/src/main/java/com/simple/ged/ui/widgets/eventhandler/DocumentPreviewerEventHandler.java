@@ -22,9 +22,9 @@ import com.simple.ged.ui.listeners.DocumentPreviewListener;
 import com.simple.ged.ui.previewwidgets.AbstractFilePreviewer;
 import com.simple.ged.ui.widgets.DocumentPreviewer;
 
-public class FxDocumentPreviewerEventHandler implements EventHandler<ActionEvent> {
+public class DocumentPreviewerEventHandler implements EventHandler<ActionEvent> {
 
-	private static final Logger logger = Logger.getLogger(FxDocumentPreviewerEventHandler.class);
+	private static final Logger logger = Logger.getLogger(DocumentPreviewerEventHandler.class);
 	
 	/**
 	 * The controlled object
@@ -37,7 +37,7 @@ public class FxDocumentPreviewerEventHandler implements EventHandler<ActionEvent
 	private final EventListenerList listeners = new EventListenerList();
 	
 	
-	public FxDocumentPreviewerEventHandler(DocumentPreviewer documentPreviewer) {
+	public DocumentPreviewerEventHandler(DocumentPreviewer documentPreviewer) {
 		this.documentPreviewer = new WeakReference<>(documentPreviewer);
 	}
 	

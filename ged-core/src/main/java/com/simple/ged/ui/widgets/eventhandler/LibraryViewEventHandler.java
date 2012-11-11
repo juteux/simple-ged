@@ -40,8 +40,8 @@ import com.simple.ged.ui.listeners.DocumentInfoViewerListener;
 import com.simple.ged.ui.listeners.LibraryListener;
 import com.simple.ged.ui.listeners.QuickSearchListener;
 import com.simple.ged.ui.listeners.LibraryListener.LIBRARY_FILE_TYPE;
-import com.simple.ged.ui.screen.FxSoftwareScreen.Screen;
-import com.simple.ged.ui.widgets.FxLibraryView;
+import com.simple.ged.ui.screen.SoftwareScreen.Screen;
+import com.simple.ged.ui.widgets.LibraryView;
 
 import fr.xmichel.javafx.dialog.Dialog;
 import fr.xmichel.toolbox.tools.PropertiesHelper;
@@ -64,7 +64,7 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 	/**
 	 * The controlled object
 	 */
-	private WeakReference<FxLibraryView> libraryView;
+	private WeakReference<LibraryView> libraryView;
 	
 	/**
 	 * Event listener
@@ -80,7 +80,7 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 	private TreeItem<String> draggedItem;
 	
 	
-	public LibraryViewEventHandler(FxLibraryView libraryView) {
+	public LibraryViewEventHandler(LibraryView libraryView) {
 		this.libraryView = new WeakReference<>(libraryView);
 	}
 	
@@ -220,8 +220,8 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 		Image i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_library_folder")));
 		ImageView iv = new ImageView(i);
 		iv.setSmooth(true);
-		iv.setFitWidth(FxLibraryView.TREE_ITEM_SIZE);
-		iv.setFitHeight(FxLibraryView.TREE_ITEM_SIZE);
+		iv.setFitWidth(LibraryView.TREE_ITEM_SIZE);
+		iv.setFitHeight(LibraryView.TREE_ITEM_SIZE);
     	
         TreeItem<String> newFolder = new TreeItem<>(properties.getProperty("new_dir"), iv);
         
@@ -490,7 +490,7 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 		private void createTextField() {
 			textField = new TextField(getString());
 			
-			textField.setPrefHeight(FxLibraryView.TREE_ITEM_SIZE);
+			textField.setPrefHeight(LibraryView.TREE_ITEM_SIZE);
 			
 			textField.setOnKeyReleased(new EventHandler<KeyEvent>() {
 
@@ -538,7 +538,7 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 		}
 		
 		libraryView.get();
-		TreeItem<String> newRoot = new TreeItem<>(FxLibraryView.convertToNodeName(Profile.getInstance().getLibraryRoot()), libraryView.get().getIconForNode(""));
+		TreeItem<String> newRoot = new TreeItem<>(LibraryView.convertToNodeName(Profile.getInstance().getLibraryRoot()), libraryView.get().getIconForNode(""));
 		newRoot.setExpanded(true);
 		
 		for (GedDocumentFile f : files) {
@@ -553,7 +553,7 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 				
 				// we create the child if it doesn't exists
 				if (! hasChild(child, item)) {
-					child.getChildren().add(new TreeItem<String>(FxLibraryView.convertToNodeName(item), libraryView.get().getIconForNode(relativeToAbsolultPath(stack + item))));
+					child.getChildren().add(new TreeItem<String>(LibraryView.convertToNodeName(item), libraryView.get().getIconForNode(relativeToAbsolultPath(stack + item))));
 				}
 				
 				// get the child

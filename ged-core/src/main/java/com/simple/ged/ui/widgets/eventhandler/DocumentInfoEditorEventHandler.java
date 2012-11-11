@@ -13,28 +13,28 @@ import com.simple.ged.models.GedDocument;
 import com.simple.ged.models.GedDocumentPhysicalLocation;
 import com.simple.ged.services.GedDocumentLocationService;
 import com.simple.ged.ui.listeners.DocumentInfoEditorListener;
-import com.simple.ged.ui.widgets.FxDocumentInfoEditor;
+import com.simple.ged.ui.widgets.DocumentInfoEditor;
 
 
-public class FxDocumentInfoEditorEventHandler implements EventHandler<KeyEvent> {
+public class DocumentInfoEditorEventHandler implements EventHandler<KeyEvent> {
 
 	/**
 	 * Logger
 	 */
-	private static final Logger logger = Logger.getLogger(FxDocumentInfoEditorEventHandler.class);
+	private static final Logger logger = Logger.getLogger(DocumentInfoEditorEventHandler.class);
 	
 	
 	/**
 	 * The object we're listerning to
 	 */
-	private WeakReference<FxDocumentInfoEditor> documentInfoEditor;
+	private WeakReference<DocumentInfoEditor> documentInfoEditor;
 
 	/**
 	 * Event listener
 	 */
 	private final EventListenerList listeners = new EventListenerList();
 
-	public FxDocumentInfoEditorEventHandler(FxDocumentInfoEditor documentInfoEditor) {
+	public DocumentInfoEditorEventHandler(DocumentInfoEditor documentInfoEditor) {
 		this.documentInfoEditor = new WeakReference<>(documentInfoEditor);
 	}
 	

@@ -20,9 +20,9 @@ import fr.xmichel.toolbox.tools.PropertiesHelper;
  * @author xavier
  * 
  */
-public abstract class FxSoftwareScreen extends HBox {
+public abstract class SoftwareScreen extends HBox {
 
-	private static final Logger logger = Logger.getLogger(FxSoftwareScreen.class);
+	private static final Logger logger = Logger.getLogger(SoftwareScreen.class);
 
 	protected Properties properties;
 
@@ -44,7 +44,7 @@ public abstract class FxSoftwareScreen extends HBox {
 		ABOUT_SCREEN
 	}
 
-	public FxSoftwareScreen(MainWindow mw) {
+	public SoftwareScreen(MainWindow mw) {
 		mainWindow = new WeakReference<MainWindow>(mw);
 		properties = PropertiesHelper.getInstance().getProperties();
 	}
@@ -55,14 +55,14 @@ public abstract class FxSoftwareScreen extends HBox {
 	 * @param newCentralScreen
 	 *            The new screen to display
 	 */
-	public void gotoScreen(FxSoftwareScreen.Screen newCentralScreen) {
+	public void gotoScreen(SoftwareScreen.Screen newCentralScreen) {
 		mainWindow.get().setCentralScreen(newCentralScreen);
 	}
 
 	/**
 	 * Push a new screen on this screen (screen stack)
 	 */
-	public void pushScreen(FxSoftwareScreen.Screen screen) {
+	public void pushScreen(SoftwareScreen.Screen screen) {
 		mainWindow.get().pushCentralScreen(screen);
 	}
 

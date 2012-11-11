@@ -37,7 +37,7 @@ import fr.xmichel.toolbox.tools.DateHelper;
  * @author xavier
  * 
  */
-public class PluginScreen extends FxSoftwareScreen {
+public class PluginScreen extends SoftwareScreen {
 
 	/**
 	 * My logger

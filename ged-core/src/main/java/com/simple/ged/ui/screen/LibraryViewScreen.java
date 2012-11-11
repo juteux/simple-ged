@@ -8,8 +8,8 @@ import javafx.scene.layout.VBox;
 import com.simple.ged.ui.MainWindow;
 import com.simple.ged.ui.screen.eventhandler.LibraryViewScreenEventHandler;
 import com.simple.ged.ui.widgets.DocumentPreviewer;
-import com.simple.ged.ui.widgets.FxDocumentInfoViewer;
-import com.simple.ged.ui.widgets.FxLibraryView;
+import com.simple.ged.ui.widgets.DocumentInfoViewer;
+import com.simple.ged.ui.widgets.LibraryView;
 import com.simple.ged.ui.widgets.QuickSearchBar;
 
 /**
@@ -18,17 +18,17 @@ import com.simple.ged.ui.widgets.QuickSearchBar;
  * @author xavier
  * 
  */
-public class LibraryViewScreen extends FxSoftwareScreen {
+public class LibraryViewScreen extends SoftwareScreen {
 
 	/**
 	 * On the left, the tree with the library content
 	 */
-	private FxLibraryView libraryWidget;
+	private LibraryView libraryWidget;
 
 	/**
 	 * On the right, the document informations
 	 */
-	private FxDocumentInfoViewer documentInfoViewerWidget;
+	private DocumentInfoViewer documentInfoViewerWidget;
 
 	/**
 	 * On the top left, searching box
@@ -72,10 +72,10 @@ public class LibraryViewScreen extends FxSoftwareScreen {
 
 		LibraryViewScreenEventHandler eventHandler = new LibraryViewScreenEventHandler(this);
 
-		libraryWidget = new FxLibraryView(this);
+		libraryWidget = new LibraryView(this);
 		libraryWidget.getEventHandler().addLibraryListener(eventHandler);
 
-		documentInfoViewerWidget = new FxDocumentInfoViewer();
+		documentInfoViewerWidget = new DocumentInfoViewer();
 		documentInfoViewerWidget.getEventHandler().addDocumentInfoViewerListener(libraryWidget.getEventHandler());
 		
 		documentPreviewer = new DocumentPreviewer();
@@ -89,11 +89,11 @@ public class LibraryViewScreen extends FxSoftwareScreen {
 		eventHandler.selectionChanged(libraryWidget.getEventHandler().getCurrentItemRelativePath());
 	}
 
-	public FxLibraryView getLibraryWidget() {
+	public LibraryView getLibraryWidget() {
 		return libraryWidget;
 	}
 
-	public FxDocumentInfoViewer getDocumentInfoViewerWidget() {
+	public DocumentInfoViewer getDocumentInfoViewerWidget() {
 		return documentInfoViewerWidget;
 	}
 

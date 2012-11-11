@@ -20,9 +20,9 @@ import fr.xmichel.toolbox.tools.DateHelper;
 import fr.xmichel.toolbox.tools.PropertiesHelper;
 
 
-public class FxDocumentInfoViewer extends GridPane {
+public class DocumentInfoViewer extends GridPane {
 
-	private static final Logger logger = Logger.getLogger(FxDocumentInfoViewer.class);
+	private static final Logger logger = Logger.getLogger(DocumentInfoViewer.class);
 	
 	/**
 	 * The software properties
@@ -55,7 +55,7 @@ public class FxDocumentInfoViewer extends GridPane {
 	private DocumentInfoViewerEventHandler eventHandler;
 	
 	
-	public FxDocumentInfoViewer() {
+	public DocumentInfoViewer() {
 		instantiateWidgets();
 		
 		//         	0                  1				2

@@ -28,7 +28,7 @@ import fr.xmichel.javafx.fileselector.DirectorySelector;
  *
  * @author xavier
  */
-public class SettingsScreen extends FxSoftwareScreen {
+public class SettingsScreen extends SoftwareScreen {
 
 	/**
 	 * The directory selector for library location

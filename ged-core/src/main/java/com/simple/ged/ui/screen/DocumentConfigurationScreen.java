@@ -18,7 +18,7 @@ import com.simple.ged.models.GedDocument;
 import com.simple.ged.ui.MainWindow;
 import com.simple.ged.ui.screen.eventhandler.AddDocumentScreenEventHandler;
 import com.simple.ged.ui.widgets.DocumentPreviewer;
-import com.simple.ged.ui.widgets.FxDocumentInfoEditor;
+import com.simple.ged.ui.widgets.DocumentInfoEditor;
 
 /**
  * The view for adding a document in the ged
@@ -26,7 +26,7 @@ import com.simple.ged.ui.widgets.FxDocumentInfoEditor;
  * @author xavier
  *
  */
-public class DocumentConfigurationScreen extends FxSoftwareScreen {
+public class DocumentConfigurationScreen extends SoftwareScreen {
 
 	/**
 	 * My logger
@@ -51,7 +51,7 @@ public class DocumentConfigurationScreen extends FxSoftwareScreen {
 	/**
 	 * Document info editor
 	 */
-	private FxDocumentInfoEditor docInfoEditor;
+	private DocumentInfoEditor docInfoEditor;
 	
 	/**
 	 * Document preview
@@ -154,7 +154,7 @@ public class DocumentConfigurationScreen extends FxSoftwareScreen {
 		btnAddFromScanner.setGraphic(iv2);
 		
 		
-		docInfoEditor = new FxDocumentInfoEditor();
+		docInfoEditor = new DocumentInfoEditor();
 		docInfoEditor.getEventHandler().addDocumentInfoEditorListener(eventHandler);
 		
 		btnSubmit = new Button(properties.getProperty("save"));
@@ -193,7 +193,7 @@ public class DocumentConfigurationScreen extends FxSoftwareScreen {
 		return documentPreviewer;
 	}
 
-	public FxDocumentInfoEditor getDocInfoEditor() {
+	public DocumentInfoEditor getDocInfoEditor() {
 		return docInfoEditor;
 	}
 

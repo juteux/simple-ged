@@ -20,18 +20,18 @@ import org.apache.log4j.Logger;
 
 import com.simple.ged.models.GedDocumentPhysicalLocation;
 import com.simple.ged.services.GedDocumentLocationService;
-import com.simple.ged.ui.widgets.eventhandler.FxDocumentInfoEditorEventHandler;
+import com.simple.ged.ui.widgets.eventhandler.DocumentInfoEditorEventHandler;
 
 import fr.xmichel.javafx.calendar.DatePicker;
 import fr.xmichel.toolbox.tools.PropertiesHelper;
 
-public class FxDocumentInfoEditor extends GridPane {
+public class DocumentInfoEditor extends GridPane {
 
 	/**
 	 * My logger
 	 */
 	@SuppressWarnings("unused")
-	private static final Logger logger = Logger.getLogger(FxDocumentInfoEditor.class);
+	private static final Logger logger = Logger.getLogger(DocumentInfoEditor.class);
 	
 	/**
 	 * Line edit title
@@ -56,7 +56,7 @@ public class FxDocumentInfoEditor extends GridPane {
 	/**
 	 * Event handler
 	 */
-	private FxDocumentInfoEditorEventHandler eventHandler;
+	private DocumentInfoEditorEventHandler eventHandler;
 	
 	/**
 	 * The combo box to select document location
@@ -64,7 +64,7 @@ public class FxDocumentInfoEditor extends GridPane {
 	private ComboBox<String> comboDocumentLocation;
 	
 	
-	public FxDocumentInfoEditor() {
+	public DocumentInfoEditor() {
 		instanciateWidgets();
 		
 		setAlignment(Pos.CENTER);
@@ -85,7 +85,7 @@ public class FxDocumentInfoEditor extends GridPane {
 	 */
 	private void instanciateWidgets() {
 
-		eventHandler = new FxDocumentInfoEditorEventHandler(this);
+		eventHandler = new DocumentInfoEditorEventHandler(this);
 		
 		editDocumentTitle = new TextField();
 		editDocumentTitle.setPromptText(properties.getProperty("title_prompt"));	
@@ -138,7 +138,7 @@ public class FxDocumentInfoEditor extends GridPane {
 		return editDocumentDescription;
 	}
 
-	public FxDocumentInfoEditorEventHandler getEventHandler() {
+	public DocumentInfoEditorEventHandler getEventHandler() {
 		return eventHandler;
 	}
 	

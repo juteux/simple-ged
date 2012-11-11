@@ -20,7 +20,7 @@ import fr.xmichel.toolbox.tools.FileHelper;
  * @author xavier
  *
  */
-public class AboutScreen extends FxSoftwareScreen {
+public class AboutScreen extends SoftwareScreen {
 
 	/**
 	 * My logger

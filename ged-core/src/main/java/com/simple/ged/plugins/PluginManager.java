@@ -16,7 +16,7 @@ import com.simple.ged.models.GedMessage;
 import com.simple.ged.models.GedPlugin;
 import com.simple.ged.services.MessageService;
 import com.simple.ged.services.PluginService;
-import com.simple.ged.ui.screen.FxSoftwareScreen;
+import com.simple.ged.ui.screen.SoftwareScreen;
 
 import fr.xmichel.toolbox.tools.DateHelper;
 import fr.xmichel.toolbox.tools.FileHelper;
@@ -89,7 +89,7 @@ public class PluginManager {
     /**
 	 * Launch the plugin update if necessary
 	 */
-	public static void launchPluginUpdate(final FxSoftwareScreen ss) {
+	public static void launchPluginUpdate(final SoftwareScreen ss) {
 		
 		Thread t = new Thread(new Runnable() {
 			

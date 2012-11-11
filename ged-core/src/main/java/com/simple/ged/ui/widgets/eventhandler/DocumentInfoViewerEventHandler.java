@@ -10,7 +10,7 @@ import javax.swing.event.EventListenerList;
 import org.apache.log4j.Logger;
 
 import com.simple.ged.ui.listeners.DocumentInfoViewerListener;
-import com.simple.ged.ui.widgets.FxDocumentInfoViewer;
+import com.simple.ged.ui.widgets.DocumentInfoViewer;
 
 /**
  * The event handler for document info viewer
@@ -33,10 +33,10 @@ public class DocumentInfoViewerEventHandler implements EventHandler<ActionEvent>
 	/**
 	 * The listened object
 	 */
-	private WeakReference<FxDocumentInfoViewer> documentInfoViewer;
+	private WeakReference<DocumentInfoViewer> documentInfoViewer;
 	
 	
-	public DocumentInfoViewerEventHandler(FxDocumentInfoViewer documentInfoViewer) {
+	public DocumentInfoViewerEventHandler(DocumentInfoViewer documentInfoViewer) {
 		this.documentInfoViewer = new WeakReference<>(documentInfoViewer);
 	}
 	
