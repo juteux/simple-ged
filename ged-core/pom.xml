@@ -67,7 +67,7 @@
 		<dependency>
 			<groupId>fr.simple.ged.updater</groupId>
 			<artifactId>ged-update</artifactId>
-			<version>1.2</version>
+			<version>${ged.updater.version}</version>
 		</dependency>
 
 		<dependency>

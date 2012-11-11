@@ -37,6 +37,7 @@ public class Launcher {
 		PropertiesHelper.getInstance().load("properties/strings.properties");
 		PropertiesHelper.getInstance().load("properties/icons.properties");
 		PropertiesHelper.getInstance().load("properties/constants.properties");
+		PropertiesHelper.getInstance().load("properties/update_message.properties");
 		
 		// create or update database
 		HibernateUtil.getSessionFactory().openSession();
