@@ -180,6 +180,8 @@ public class Profile implements Serializable {
 		} 
 		catch(Exception e) {
 			logger.error("Error while loading profil");
+			
+			profil = new Profile();
 		} 
 		return profil;
 	}

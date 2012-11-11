@@ -153,6 +153,9 @@ public class MiddleProfile implements Serializable {
 		} 
 		catch(Exception e) {
 			logger.error("Error while loading middle profil");
+			
+			// if exception, create profile
+			profil = new MiddleProfile();
 		} 
 		return profil;
 	}
