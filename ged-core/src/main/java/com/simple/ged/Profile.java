@@ -52,7 +52,10 @@ public class Profile implements Serializable {
 
 	/**
 	 * Current theme name
+	 * 
+	 * @deprecated Isn't use now. Was in previous versions.
 	 */
+	@SuppressWarnings("unused")
 	private String currentTheme;
 	
 	/**
@@ -63,7 +66,6 @@ public class Profile implements Serializable {
 	
 	private Profile() {
 		libraryRoot = "Non défini";
-		currentTheme = "Metal";			// default theme
 		defaultPrinter = "";
 	}
 	
@@ -77,15 +79,6 @@ public class Profile implements Serializable {
 	 */
 	public synchronized void setDocumentLibraryRoot(String newRoot) {
 		libraryRoot = newRoot + (libraryRoot.endsWith(File.separator) ? "" : File.separator);
-	}
-
-	/**
-	 * Define and save current theme
-	 * 
-	 * Warning : the value isn't save, please call commit to save changes !
-	 */
-	public synchronized void setTheme(String newTheme) {
-		currentTheme = newTheme;
 	}
 	
 	/**
@@ -116,14 +109,6 @@ public class Profile implements Serializable {
 		return libraryRoot + (libraryRoot.endsWith(File.separator) ? "" : File.separator);
 	}
 
-	
-	/**
-	 * Get the current theme name
-	 */
-	public String getThemeName() {
-		return currentTheme;
-	}
-	
 	
 	/**
 	 * Get the default printer name
