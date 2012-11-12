@@ -28,7 +28,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>com.ged.Launcher</mainClass>
+							<mainClass>com.simple.ged.Launcher</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
