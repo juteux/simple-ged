@@ -78,6 +78,7 @@ public class MessageScreen extends SoftwareScreen {
 		this.getChildren().add(webView);
 		
 		MessageService.markAllMessagesAsRead();
+		notifyNoNewMessagesAvailable();
 	}
 	
 	
