@@ -5,6 +5,7 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Properties;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.FileChooser;
@@ -115,9 +116,15 @@ public class AddDocumentScreenEventHandler implements DocumentInfoEditorListener
 							source.open();
 							source.acquireImage();
 
-							File f = File.createTempFile(DateTokenGetter.getToken(), ".jpg");
+							final File f = File.createTempFile(DateTokenGetter.getToken(), ".jpg");
 							source.saveLastAcquiredImageIntoFile(f);
-							addDocumentScreen.get().getDocumentPreviewer().addFile(f);
+							Platform.runLater(new Runnable() {
+						        @Override
+						        public void run() {
+						        	addDocumentScreen.get().getDocumentPreviewer().addFile(f);
+						        }
+						   });
+							
 						} catch (Exception e) {
 							e.printStackTrace();
 						} finally {
