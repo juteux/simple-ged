@@ -15,9 +15,7 @@
 	<version>${ged.core.version}</version>
 
 	<build>
-
 		<plugins>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -42,9 +40,7 @@
 					</execution>
 				</executions>
 			</plugin>
-
 		</plugins>
-
 	</build>
 
 	<repositories>
@@ -58,8 +54,13 @@
 			<id>xaviermichel-releases</id>
 			<url>https://github.com/xaviermichel/maven-repo/raw/master/releases</url>
 		</repository>
+
 	</repositories>
 
+
+
+
+	
 	<dependencies>
 
 		<!-- Modules -->
@@ -116,40 +117,36 @@
 		</dependency>
 
 		<!-- Jar qui ne sont pas dans le repo -->
-
+		<!-- 
+			Il faut les déployer dans le repo local
+			en utilisant install_in_local_repo.sh
+			(sous windows, il est possible de copier
+			les instructions présentes dans ce fichier
+			dans une invite de commande)
+		-->
+		
 		<dependency>
 			<groupId>com.sun</groupId>
 			<artifactId>PDFRenderer</artifactId>
 			<version>0.9.1</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/PDFRenderer-0.9.1.jar</systemPath>
 		</dependency>
 
 		<dependency>
 			<groupId>com.asprise</groupId>
 			<artifactId>JTwain</artifactId>
 			<version>1.0.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/JTwain.jar</systemPath>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jpedal</groupId>
 			<artifactId>jpedal</artifactId>
 			<version>1.0.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/jpedal_lgpl.jar</systemPath>
 		</dependency>
-
-
-		<!-- javafx -->
 
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>javafx</artifactId>
 			<version>2.2</version>
-			<systemPath>${java.home}/lib/jfxrt.jar</systemPath>
-			<scope>system</scope>
 		</dependency>
 
 		<!-- Dans les repos -->
