@@ -125,6 +125,7 @@ public class DocumentPreviewer extends HBox {
 		//	+-----------+-------------------+
 		
 		leftBox = new VBox();
+		leftBox.setMinSize(100, 100);
 		//leftBox.setStyle("-fx-background-color:orange");
 		HBox.setHgrow(leftBox, Priority.ALWAYS);
 		VBox.setVgrow(leftBox, Priority.ALWAYS);
