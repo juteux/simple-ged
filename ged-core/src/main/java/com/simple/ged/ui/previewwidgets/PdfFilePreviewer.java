@@ -359,7 +359,7 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 	
 			// Print it
 			pjob.print(aset);
-			
+			fis.close();
 		} catch (Exception e) {
 			PrintingHelper.showPrintPopupErrorMessage("Impossible d'imprimer le fichier : " + e.getMessage());
 			e.printStackTrace();
