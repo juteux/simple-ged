@@ -188,6 +188,12 @@ public class PluginScreen extends SoftwareScreen {
 		table.getColumns().add(colMang);
 	}
 
+	
+	@Override
+	public void refresh() {
+		this.refreshPluginListContent();
+	}
+	
 	/**
 	 * Fill the table with the plugin list
 	 */
