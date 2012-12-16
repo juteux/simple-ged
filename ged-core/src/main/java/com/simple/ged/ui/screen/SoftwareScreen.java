@@ -45,7 +45,7 @@ public abstract class SoftwareScreen extends HBox {
 	}
 
 	public SoftwareScreen(MainWindow mw) {
-		mainWindow = new WeakReference<MainWindow>(mw);
+		mainWindow = new WeakReference<>(mw);
 		properties = PropertiesHelper.getInstance().getProperties();
 	}
 

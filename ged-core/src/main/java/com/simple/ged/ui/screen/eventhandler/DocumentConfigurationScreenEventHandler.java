@@ -30,12 +30,12 @@ import fr.xmichel.toolbox.tools.OSHelper;
 import fr.xmichel.toolbox.tools.PropertiesHelper;
 
 
-public class AddDocumentScreenEventHandler implements DocumentInfoEditorListener, DocumentPreviewListener, EventHandler<ActionEvent> {
+public class DocumentConfigurationScreenEventHandler implements DocumentInfoEditorListener, DocumentPreviewListener, EventHandler<ActionEvent> {
 
 	/**
 	 * My logger
 	 */
-	private static final Logger logger = Logger.getLogger(AddDocumentScreenEventHandler.class);
+	private static final Logger logger = Logger.getLogger(DocumentConfigurationScreenEventHandler.class);
 
 	/**
 	 * The watched screen
@@ -48,7 +48,7 @@ public class AddDocumentScreenEventHandler implements DocumentInfoEditorListener
 	private static final Properties properties = PropertiesHelper.getInstance().getProperties();
 	
 	
-	public AddDocumentScreenEventHandler(DocumentConfigurationScreen addDocumentScreen) {
+	public DocumentConfigurationScreenEventHandler(DocumentConfigurationScreen addDocumentScreen) {
 		this.addDocumentScreen = new WeakReference<>(addDocumentScreen);
 	}
 
@@ -162,6 +162,8 @@ public class AddDocumentScreenEventHandler implements DocumentInfoEditorListener
 			if (addDocumentScreen.get().getDocument() != null) {
 				addDocumentScreen.get().finish();
 			}
+			
+			addDocumentScreen.get().refreshScreens();
 			
 			addDocumentScreen.get().getDocInfoEditor().clearFields();
 			addDocumentScreen.get().getDocumentPreviewer().clearPreviews();

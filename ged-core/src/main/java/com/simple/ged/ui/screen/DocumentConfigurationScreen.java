@@ -16,7 +16,7 @@ import javafx.scene.layout.VBox;
 
 import com.simple.ged.models.GedDocument;
 import com.simple.ged.ui.MainWindow;
-import com.simple.ged.ui.screen.eventhandler.AddDocumentScreenEventHandler;
+import com.simple.ged.ui.screen.eventhandler.DocumentConfigurationScreenEventHandler;
 import com.simple.ged.ui.widgets.DocumentPreviewer;
 import com.simple.ged.ui.widgets.DocumentInfoEditor;
 
@@ -61,7 +61,7 @@ public class DocumentConfigurationScreen extends SoftwareScreen {
 	/**
 	 * My event handler
 	 */
-	private AddDocumentScreenEventHandler eventHandler;
+	private DocumentConfigurationScreenEventHandler eventHandler;
 	
 	/**
 	 * My target directory (relative path)
@@ -128,7 +128,7 @@ public class DocumentConfigurationScreen extends SoftwareScreen {
 	
 	private void instanciateWidgets() {
 
-		eventHandler = new AddDocumentScreenEventHandler(this);
+		eventHandler = new DocumentConfigurationScreenEventHandler(this);
 		
 		btnAddFromFS = new Button(properties.getProperty("add_from_hard_drive"));
 		btnAddFromFS.setPrefSize(300, 80);

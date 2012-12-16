@@ -1,5 +1,8 @@
 package com.simple.ged.ui.screen;
 
+
+import org.apache.log4j.Logger;
+
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -20,6 +23,11 @@ import com.simple.ged.ui.widgets.QuickSearchBar;
  */
 public class LibraryViewScreen extends SoftwareScreen {
 
+	/**
+	 * Logger
+	 */
+	private static final Logger logger = Logger.getLogger(LibraryViewScreen.class);
+	
 	/**
 	 * On the left, the tree with the library content
 	 */
@@ -87,6 +95,12 @@ public class LibraryViewScreen extends SoftwareScreen {
 		
 		// intialize previewer
 		eventHandler.selectionChanged(libraryWidget.getEventHandler().getCurrentItemRelativePath());
+	}
+	
+	@Override
+	public void refresh() {
+		logger.info("Refresh library view");
+		libraryWidget.buildTree();
 	}
 
 	public LibraryView getLibraryWidget() {

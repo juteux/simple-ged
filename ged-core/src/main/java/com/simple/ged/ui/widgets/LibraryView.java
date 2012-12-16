@@ -84,7 +84,10 @@ public class LibraryView extends TreeView<String> {
 		
     	this.parentScreen = new WeakReference<>(parentScreen);
     	
+    	this.rootItem = new TreeItem<>(convertToNodeName(Profile.getInstance().getLibraryRoot()), getIconForNode(""));
+    	
     	buildTree();
+    	setRootItem(rootItem);
     	
     	eventHandler = new LibraryViewEventHandler(this);
     	
@@ -109,8 +112,10 @@ public class LibraryView extends TreeView<String> {
 	 */
 	public void buildTree() {
 		
-		TreeItem<String> rootItem = new TreeItem<>(convertToNodeName(Profile.getInstance().getLibraryRoot()), getIconForNode(""));
-
+		logger.info("Build or rebuild tree");
+		
+		rootItem.getChildren().clear();
+		
 		listFile(
 				new File(Profile.getInstance().getLibraryRoot()), 
 				rootItem
@@ -118,7 +123,7 @@ public class LibraryView extends TreeView<String> {
 		
 		rootItem.setExpanded(true);
 		
-		setRootItem(rootItem);
+		logger.info("Build or rebuild tree over");
 	}
 	
 	
@@ -205,6 +210,8 @@ public class LibraryView extends TreeView<String> {
 	 */
 	private TreeItem<String> listFile(File file, TreeItem<String> node) {
 
+		logger.trace(file.getName());
+		
 		if (file.isFile()) {
 			return new TreeItem<>(convertToNodeName(file.getName()), getIconForNode(file.getPath()));
 		}

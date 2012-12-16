@@ -65,7 +65,7 @@ public class Launcher {
 					
 					for (Entry<String, String> e : UpdateHelper.getFilesToDownloadMap(UpdateInformations.UPDATER_UPDATE_DESCRIPTOR_PATH).entrySet()) {
 						logger.debug(e.getKey() + " => " + System.getProperty("user.dir") + File.separator + e.getValue());
-						try {;
+						try {
 							UpdateHelper.downloadAndReplaceFile(e.getKey(), System.getProperty("user.dir") + File.separator + e.getValue());
 						} 
 						catch (Exception e2) {
