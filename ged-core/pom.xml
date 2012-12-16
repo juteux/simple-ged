@@ -118,10 +118,10 @@
 
 		<!-- Jar qui ne sont pas dans le repo -->
 		<!-- 
-			Il faut les déployer dans le repo local
+			Il faut les dï¿½ployer dans le repo local
 			en utilisant install_in_local_repo.sh
 			(sous windows, il est possible de copier
-			les instructions présentes dans ce fichier
+			les instructions prï¿½sentes dans ce fichier
 			dans une invite de commande)
 		-->
 		

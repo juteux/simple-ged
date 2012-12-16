@@ -80,7 +80,6 @@ public class MiddleProfile implements Serializable {
 			lastKnownVersion = 3.3;
 		}
 		
-		
 		// changes on version 3.4
 		if (lastKnownVersion < 3.4) {
 			logger.info("Completing update to version 3.4 ...");
@@ -89,6 +88,13 @@ public class MiddleProfile implements Serializable {
 			lastKnownVersion = 3.4;
 		}
 		
+		// changes on version 4.0
+		if (lastKnownVersion < 4.0) {
+			logger.info("Completing update to version 4.0 ...");
+			// add update informations message
+			MessageService.addMessage(new GedMessage("NEUTRAL", properties.getProperty("update_40_msg")));
+			lastKnownVersion = 4.0;
+		}
 		
 		// save new known version
 		lastKnownVersion = Double.parseDouble(properties.getProperty("APPLICATION_VERSION"));

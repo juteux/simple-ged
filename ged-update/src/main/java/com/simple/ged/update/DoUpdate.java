@@ -3,18 +3,16 @@ package com.simple.ged.update;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
-import java.io.IOException;
+import java.net.URL;
 import java.util.Map.Entry;
 
-import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import com.simple.ged.update.UpdateInformations;
 
 /**
  * 
@@ -28,7 +26,7 @@ public class DoUpdate {
 	/**
 	 * This updater version
 	 */
-	public static String UPDATER_VERSION = "1.2";
+	public static String UPDATER_VERSION = "1.4";
 	
 	/**
 	 * @param args
@@ -49,13 +47,16 @@ public class DoUpdate {
 		JLabel img = new JLabel();
 		Image image = null;
 		try {
-			image = ImageIO.read(new File("images/refresh.png"));
-		} catch (IOException e) {
+			 URL imgURL = DoUpdate.class.getResource("images/refresh.png");
+			 Toolkit tk = Toolkit.getDefaultToolkit();
+			
+			 image = tk.getImage(imgURL);//ImageIO.read(new File("images/refresh.png"));
+			 img.setIcon(new ImageIcon(image));
+			 addLabel(img, frame);
+		} catch (Exception e) {
 			System.out.println("Error while loading image : images/refresh.png");
 		}
-		img.setIcon(new ImageIcon(image));
-		
-		addLabel(img, frame);
+
 		addLabel(new JLabel("Mise à jour en cours... Veuillez patienter"), frame);
 		addLabel(new JLabel("---"), frame);
 		addLabel(new JLabel("Simple GED redémarrera automatiquement une"), frame);
