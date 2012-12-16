@@ -47,7 +47,7 @@ public class DoUpdate {
 		JLabel img = new JLabel();
 		Image image = null;
 		try {
-			 URL imgURL = DoUpdate.class.getResource("images/refresh.png");
+			 URL imgURL = DoUpdate.class.getResource("/images/refresh.png");
 			 Toolkit tk = Toolkit.getDefaultToolkit();
 			
 			 image = tk.getImage(imgURL);//ImageIO.read(new File("images/refresh.png"));
