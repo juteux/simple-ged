@@ -141,4 +141,12 @@ public abstract class SoftwareScreen extends HBox {
 		return mainWindow.get();
 	}
 
+	/**
+	 * Cancel file reading : stop to use resources, close opened ged files/documents !
+	 * 
+	 * Override me if necessary
+	 */
+	public void releaseOpenedFiles() {
+	}
+	
 }

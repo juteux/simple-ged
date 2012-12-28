@@ -33,9 +33,10 @@ import org.apache.log4j.Logger;
 import org.jpedal.PdfDecoder;
 
 import com.simple.ged.Profile;
-import com.simple.ged.tools.PrintingHelper;
 import com.sun.pdfview.PDFFile;
 import com.sun.pdfview.PDFPrintPage;
+
+import fr.xmichel.javafx.dialog.Dialog;
 
 /**
  * 
@@ -75,6 +76,7 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 		logger.info("Need to close pdf file");
 		if (pdf.isOpen()) {
 			pdf.closePdfFile();
+			logger.info("Closed, you can go on");
 		}
 	}
 	
@@ -267,7 +269,8 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 				return javafx.scene.image.Image.impl_fromExternalImage(img);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Cannot display pdf", e);
+			Dialog.showThrowable("Erreur", "Impossible d'afficher le pdf", e);
 		}
 
 		return null;
@@ -299,7 +302,7 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 								try {
 									Thread.sleep(50);
 								} catch (InterruptedException e) {
-									e.printStackTrace();
+									logger.error("Cannot sleep !", e);
 								}
 							}
 
@@ -361,8 +364,8 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 			pjob.print(aset);
 			fis.close();
 		} catch (Exception e) {
-			PrintingHelper.showPrintPopupErrorMessage("Impossible d'imprimer le fichier : " + e.getMessage());
-			e.printStackTrace();
+			logger.error("Cannot print pdf", e);
+			Dialog.showThrowable("Erreur", "Impossible d'imprimer le fichier", e);
 		}
 		
 	}

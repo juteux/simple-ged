@@ -278,6 +278,9 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 
 		private ContextMenu rootContextMenu = new ContextMenu();
 		
+		private ContextMenu fileContextMenu = new ContextMenu();
+		
+		
 		private MenuItem directoryAddMenuItem;
 		
 		private MenuItem directoryDeleteMenuItem;
@@ -285,6 +288,10 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 		private MenuItem directoryRenameMenuItem;
 		
 		private MenuItem directoryAddDocumentItem;
+	
+		private MenuItem fileRenameMenuItem;
+		
+		private MenuItem fileEditMenuItem;
 		
 		
 		public TextFieldTreeCellImpl() {
@@ -294,8 +301,12 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
             directoryDeleteMenuItem = new MenuItem(properties.getProperty("delete"));
             directoryAddDocumentItem = new MenuItem(properties.getProperty("add_document"));
             
+            fileRenameMenuItem = new MenuItem(properties.getProperty("rename")); 
+            fileEditMenuItem = new MenuItem(properties.getProperty("modify")); 
+            
             rootContextMenu.getItems().addAll(directoryAddDocumentItem, directoryAddMenuItem);
             directoryContextMenu.getItems().addAll(directoryAddDocumentItem, directoryAddMenuItem, directoryRenameMenuItem, directoryDeleteMenuItem);
+            fileContextMenu.getItems().addAll(fileEditMenuItem, fileRenameMenuItem, directoryDeleteMenuItem);
             
             directoryAddMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             	@Override
@@ -309,6 +320,20 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
                 public void handle(ActionEvent t) {
                 	startEdit();
                 }
+            });
+            
+            fileRenameMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent arg0) {
+					startEdit();
+				}
+            });
+            
+            fileEditMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent arg0) {
+					startFileModification();
+				}
             });
             
             directoryDeleteMenuItem.setOnAction(new EventHandler<ActionEvent>() {
@@ -416,16 +441,17 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 		}
 
 		
+		public void startFileModification() {
+			if (currentNodeIsFile()) {
+				openEditionForNode(getTreeItem());
+			}
+		}
+		
 		
 		@Override
 		public void startEdit() {
 			super.startEdit();
 
-			if (currentNodeIsFile()) {
-				openEditionForNode(getTreeItem());
-				return;
-			}
-			
 			if (textField == null) {
 				createTextField(); 
 			}
@@ -466,7 +492,10 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 					else if (currentNodeIsRoot()) {
 						setContextMenu(rootContextMenu);
 					}
-					
+					else if (currentNodeIsFile()){
+						setContextMenu(fileContextMenu);
+					}
+					// should not have other case
 				}
 			}
 		}
@@ -499,6 +528,7 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 					if (t.getCode() == KeyCode.ENTER) {
 						
 						logger.info("renaming from : " + getFilePathFromTreeItem(getTreeItem()) + " => " + getFilePathFromTreeItem(getTreeItem().getParent()) + File.separatorChar + textField.getText());
+						libraryView.get().getParentScreen().releaseOpenedFiles();
 						GedDocumentService.renameDocumentFile(getFilePathFromTreeItem(getTreeItem()), getFilePathFromTreeItem(getTreeItem().getParent()) + File.separatorChar + textField.getText());
 						
 						

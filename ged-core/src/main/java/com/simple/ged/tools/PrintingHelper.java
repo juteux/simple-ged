@@ -57,7 +57,8 @@ public class PrintingHelper {
 			PrintService pss[] = PrintServiceLookup.lookupPrintServices(documentType, pras);
 
 			if (pss.length == 0) {
-				showPrintPopupErrorMessage("Impossible d'imprimer, aucune imprimante compatible n'est détectée !");
+				logger.error("Cannot print file : no PrintService detected");
+				Dialog.showError("Erreur", "Impossible d'imprimer, aucune imprimante compatible n'est détectée !");
 				return;
 			}
 				
@@ -79,15 +80,9 @@ public class PrintingHelper {
 
 			fin.close();
 		} catch (Exception e) {
-			showPrintPopupErrorMessage("Impossible de lancer l'impression du document !");
-			logger.error(e.getMessage());
-			e.printStackTrace();
+			logger.error("Cannot print file", e);
+			Dialog.showThrowable("Erreur", "Impossible de lancer l'impression du document", e);
 		}
-	}
-	
-	
-	public static void showPrintPopupErrorMessage(String message) {
-		Dialog.showError(properties.getProperty("error"), message);
 	}
 	
 }

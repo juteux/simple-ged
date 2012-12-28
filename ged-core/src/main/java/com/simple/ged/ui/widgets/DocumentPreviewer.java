@@ -104,7 +104,7 @@ public class DocumentPreviewer extends HBox {
 	/**
 	 * Properties
 	 */
-	Properties properties = PropertiesHelper.getInstance().getProperties();
+	private static final Properties properties = PropertiesHelper.getInstance().getProperties();
 	
 	
 	public DocumentPreviewer() {

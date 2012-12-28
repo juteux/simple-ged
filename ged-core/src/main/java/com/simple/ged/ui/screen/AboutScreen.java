@@ -44,8 +44,7 @@ public class AboutScreen extends SoftwareScreen {
 			//logger.debug("content : " + content);
 			webView.getEngine().loadContent(content);
 		} catch (IOException|NullPointerException e) {
-			logger.error("Failed to read file : html/about.html");
-			e.printStackTrace();
+			logger.error("Failed to read file : html/about.html", e);
 		}
 		
 		HBox.setHgrow(webView, Priority.ALWAYS);

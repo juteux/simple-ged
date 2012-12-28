@@ -56,8 +56,7 @@ public class MessageScreen extends SoftwareScreen {
 			header = FileHelper.readAllStringContent(reader);
 			reader.close();
 		} catch (IOException e) {
-			logger.error("Failed to read /html/message-head.html");
-			e.printStackTrace();
+			logger.error("Failed to read /html/message-head.html", e);
 		}
 		
 		Reader reader2 = new InputStreamReader(AboutScreen.class.getResourceAsStream("/html/message-foot.html"));
@@ -65,8 +64,7 @@ public class MessageScreen extends SoftwareScreen {
 			footer = FileHelper.readAllStringContent(reader2);
 			reader2.close();
 		} catch (IOException e) {
-			logger.error("Failed to read /html/message-foot.html");
-			e.printStackTrace();
+			logger.error("Failed to read /html/message-foot.html", e);
 		}
 		
 

@@ -126,7 +126,8 @@ public class DocumentConfigurationScreenEventHandler implements DocumentInfoEdit
 						   });
 							
 						} catch (Exception e) {
-							e.printStackTrace();
+							logger.error("Cannot scan image", e);
+							Dialog.showThrowable("Erreur", "Impossible de lancer le scanner", e);
 						} finally {
 							SourceManager.closeSourceManager();
 						}

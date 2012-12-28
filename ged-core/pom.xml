@@ -82,7 +82,7 @@
 		<dependency>
 			<groupId>fr.xmichel.javafx</groupId>
 			<artifactId>javafx-dialog</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
 		</dependency>
 
 		<dependency>

@@ -102,6 +102,11 @@ public class LibraryViewScreen extends SoftwareScreen {
 		logger.info("Refresh library view");
 		libraryWidget.buildTree();
 	}
+	
+	@Override
+	public void releaseOpenedFiles() {
+		documentPreviewer.releaseOpenedFiles();
+	}
 
 	public LibraryView getLibraryWidget() {
 		return libraryWidget;

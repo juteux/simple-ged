@@ -69,8 +69,7 @@ public class Launcher {
 							UpdateHelper.downloadAndReplaceFile(e.getKey(), System.getProperty("user.dir") + File.separator + e.getValue());
 						} 
 						catch (Exception e2) {
-							e2.printStackTrace();
-							logger.error("Error while downloading : " + e.getKey());
+							logger.error("Error while downloading : " + e.getKey(), e2);
 						}
 					}
 				}
@@ -104,7 +103,8 @@ public class Launcher {
 						        System.exit(0);
 							} catch (Exception e) {
 								e.printStackTrace();
-								Dialog.showError( "Erreur", "Impossible de lancer l'assistant de mise à jour");
+								logger.error("Cannot do upgrade : ", e);
+								Dialog.showThrowable("Erreur", "Impossible de lancer l'assistant de mise à jour", e);
 							}
 			            }
 			        })

@@ -3,6 +3,8 @@ package com.simple.ged.ui.previewwidgets;
 import java.lang.ref.WeakReference;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -24,6 +26,11 @@ import fr.xmichel.toolbox.tools.PropertiesHelper;
 public class AddDocumentPreviewer extends AbstractFilePreviewer {
 
 	/**
+	 * Logger
+	 */
+	private static final Logger logger = Logger.getLogger(AddDocumentPreviewer.class);
+	
+	/**
 	 * The node we're on
 	 */
 	private TreeItem<String> parentNode;
@@ -43,7 +50,7 @@ public class AddDocumentPreviewer extends AbstractFilePreviewer {
 		try {
 			this.load();
 		} catch (CannotCreatePreviewerException e) {
-			e.printStackTrace();
+			logger.error("Cannot load previewer for file" + e);
 		}
 	}
 

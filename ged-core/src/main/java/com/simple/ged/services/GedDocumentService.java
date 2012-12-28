@@ -18,6 +18,8 @@ import com.simple.ged.models.GedDocumentFile;
 import com.simple.ged.models.GedDocumentPhysicalLocation;
 import com.simple.ged.tools.FileHelper;
 
+import fr.xmichel.javafx.dialog.Dialog;
+
 /**
  * @class GedDocumentService
  * 
@@ -94,7 +96,8 @@ public class GedDocumentService {
 			Files.move(oldFilePath, newFilePath);
 		} catch (IOException e) {
 			logger.error("Move failed : (" + oldFilePath + " => " + newFilePath);
-			e.printStackTrace();
+			logger.fatal("Impossible de déplacer le fichier", e);
+			Dialog.showThrowable("Impossible de renommer/déplacer le fichier", "Le renommage/déplacement du fichier a échoué :", e);
 		}
 		
 		// rename in database

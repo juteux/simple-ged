@@ -52,8 +52,7 @@ public class HtmlFilePreviewer extends AbstractFilePreviewer {
 			//logger.debug("content : " + content);
 			webView.getEngine().loadContent(content);
 		} catch (IOException|NullPointerException e) {
-			logger.error("Failed to read file : " + absoluteFilePath);
-			e.printStackTrace();
+			logger.error("Failed to read file : " + absoluteFilePath, e);
 			throw new CannotCreatePreviewerException();
 		}
 		
