@@ -89,7 +89,7 @@ public class PluginConfigurationScreen extends SoftwareScreen {
 	private Button save;
 	
 	/**
-	 * The options layout (will be fill after receving extra values)
+	 * The options layout (will be fill after receiving extra values)
 	 */
 	private GridPane optionLayout;
 	

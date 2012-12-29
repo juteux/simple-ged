@@ -117,7 +117,10 @@ public class PluginScreen extends SoftwareScreen {
 				GedPlugin pmi = p.getValue();
 				SimpleGedPlugin plugin = pmi.getPlugin();
 				
-				Text desc = new Text(plugin.getPluginDescription());
+				logger.trace("Contient \\n ? {}", plugin.getPluginDescription().contains("\\n"));
+				logger.trace(plugin.getPluginDescription().replace("\\n", "<br/>"));
+				
+				Text desc = new Text(plugin.getPluginDescription().replace("\\n", "\n"));
 				desc.getStyleClass().add("list-plugin-desc");
 				
 				box.getChildren().addAll(desc);

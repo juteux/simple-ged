@@ -44,7 +44,7 @@ public class MainWindow extends Application {
 	/**
 	 * Default application width
 	 */
-	public static final int APP_WIDTH = 930;
+	public static final int APP_WIDTH = 940;
 	
 	/**
 	 * Default application height

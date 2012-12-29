@@ -27,8 +27,12 @@
 
 	</appender>
 
+	<!-- hibernate -->
 	<logger name="org.hibernate.type" level="INFO" />
 	<logger name="org.hibernate" level="INFO" />
+
+	<!-- bean utils -->
+	<logger name="org.apache" level="INFO" />
 
 	<root level="INFO">
 		<appender-ref ref="FILE" />
