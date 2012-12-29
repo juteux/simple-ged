@@ -41,7 +41,7 @@ fi
 #
 
 
-mvn clean install
+#mvn clean install
 
 
 #
@@ -54,6 +54,28 @@ then
 	mkdir ${RELEASE_TARGET}
 fi
 
+
+RELEASE_DIR_TARGET=${RELEASE_TARGET}/simple\ ged
+IMAGE_TARGET=${RELEASE_DIR_TARGET}/images
+
+# la version globale : pour une installation sans rien avant
+
+mkdir -p ${IMAGE_TARGET}
+cp ged-core/src/main/resources/images/icon.ico ${IMAGE_TARGET}
+cp ged-core/dll/AspriseJTwain.dll ${RELEASE_DIR_TARGET}
+
+cp ged-connector/target/ged-connector*.jar ${RELEASE_DIR_TARGET}/SimpleGedConnector.jar
+
+cp ged-update/target/ged-update-${UPDATER_MAVEN_VERSION}-jar-with-dependencies.jar ${RELEASE_DIR_TARGET}/simpleGedUpdateSystem.jar
+
+cp ged-core/target/ged-update-${CORE_MAVEN_VERSION}-jar-with-dependencies.jar ${RELEASE_DIR_TARGET}/simple_ged.jar
+
+
+# les versions pour mise a jour (que les jars qui ont changes)
+
+cp ged-update/target/ged-update-${UPDATER_MAVEN_VERSION}-jar-with-dependencies.jar ${RELEASE_TARGET}
+
+cp ged-core/target/ged-update-${CORE_MAVEN_VERSION}-jar-with-dependencies.jar ${RELEASE_TARGET}
 
 
 #
