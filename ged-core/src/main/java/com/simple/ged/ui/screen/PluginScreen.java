@@ -20,7 +20,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.connector.plugins.SimpleGedPlugin;
 import com.simple.ged.models.GedPlugin;
@@ -42,7 +43,7 @@ public class PluginScreen extends SoftwareScreen {
 	/**
 	 * My logger
 	 */
-	private static final Logger logger = Logger.getLogger(PluginScreen.class);
+	private static final Logger logger = LoggerFactory.getLogger(PluginScreen.class);
 
 	/**
 	 * The table view contains the list of plugins

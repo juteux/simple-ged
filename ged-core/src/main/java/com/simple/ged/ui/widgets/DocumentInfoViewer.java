@@ -11,7 +11,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.models.GedDocument;
 import com.simple.ged.ui.widgets.eventhandler.DocumentInfoViewerEventHandler;
@@ -22,7 +23,7 @@ import fr.xmichel.toolbox.tools.PropertiesHelper;
 
 public class DocumentInfoViewer extends GridPane {
 
-	private static final Logger logger = Logger.getLogger(DocumentInfoViewer.class);
+	private static final Logger logger = LoggerFactory.getLogger(DocumentInfoViewer.class);
 	
 	/**
 	 * The software properties

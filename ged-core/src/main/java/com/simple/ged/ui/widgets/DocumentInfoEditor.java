@@ -16,7 +16,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.models.GedDocumentPhysicalLocation;
 import com.simple.ged.services.GedDocumentLocationService;
@@ -31,7 +32,7 @@ public class DocumentInfoEditor extends GridPane {
 	 * My logger
 	 */
 	@SuppressWarnings("unused")
-	private static final Logger logger = Logger.getLogger(DocumentInfoEditor.class);
+	private static final Logger logger = LoggerFactory.getLogger(DocumentInfoEditor.class);
 	
 	/**
 	 * Line edit title

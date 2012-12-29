@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.Profile;
 import com.simple.ged.dao.DocumentDAO;
@@ -30,7 +31,7 @@ import fr.xmichel.javafx.dialog.Dialog;
  */
 public class GedDocumentService {
 
-	private static final Logger logger = Logger.getLogger(GedDocumentService.class);
+	private static final Logger logger = LoggerFactory.getLogger(GedDocumentService.class);
 
 	
 	/**
@@ -96,7 +97,7 @@ public class GedDocumentService {
 			Files.move(oldFilePath, newFilePath);
 		} catch (IOException e) {
 			logger.error("Move failed : (" + oldFilePath + " => " + newFilePath);
-			logger.fatal("Impossible de déplacer le fichier", e);
+			logger.error("Impossible de déplacer le fichier", e);
 			Dialog.showThrowable("Impossible de renommer/déplacer le fichier", "Le renommage/déplacement du fichier a échoué :", e);
 		}
 		

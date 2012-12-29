@@ -8,7 +8,8 @@ import java.util.Properties;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.models.GedPlugin;
 import com.simple.ged.services.PluginService;
@@ -42,7 +43,7 @@ public class PluginScreenEventHandler {
 	/**
 	 * My logger
 	 */
-	private static final Logger logger = Logger.getLogger(PluginScreenEventHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(PluginScreenEventHandler.class);
 	
 	/**
 	 * Properties

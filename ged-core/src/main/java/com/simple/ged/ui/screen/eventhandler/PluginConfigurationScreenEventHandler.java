@@ -11,7 +11,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.connector.plugins.SimpleGedPluginProperty;
 import com.simple.ged.models.GedPlugin;
@@ -35,7 +36,7 @@ public class PluginConfigurationScreenEventHandler implements EventHandler<KeyEv
 	/**
 	 * My logger
 	 */
-	private static final Logger logger = Logger.getLogger(PluginConfigurationScreenEventHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(PluginConfigurationScreenEventHandler.class);
 	
 	/**
 	 * Properties

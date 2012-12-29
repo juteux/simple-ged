@@ -8,7 +8,8 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.services.GedDocumentLocationService;
 import com.simple.ged.ui.MainWindow;
@@ -28,9 +29,9 @@ import fr.xmichel.toolbox.tools.PropertiesHelper;
  */
 public class Launcher {
 
-	
-	private static final Logger logger = Logger.getLogger(Launcher.class);
+	private static final Logger logger = LoggerFactory.getLogger(Launcher.class);
 
+	
 	public static void main(String[] args) {
 				
 		// load properties

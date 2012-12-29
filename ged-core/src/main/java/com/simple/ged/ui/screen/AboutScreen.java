@@ -8,7 +8,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.web.WebView;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.ui.MainWindow;
 
@@ -25,7 +26,7 @@ public class AboutScreen extends SoftwareScreen {
 	/**
 	 * My logger
 	 */
-	private static final Logger logger = Logger.getLogger(AboutScreen.class);
+	private static final Logger logger = LoggerFactory.getLogger(AboutScreen.class);
 	
 	/**
 	 * the about screen is a web view

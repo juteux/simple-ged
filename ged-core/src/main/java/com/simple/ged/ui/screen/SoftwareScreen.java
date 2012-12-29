@@ -7,7 +7,8 @@ import java.util.Properties;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.ui.MainWindow;
 
@@ -22,7 +23,7 @@ import fr.xmichel.toolbox.tools.PropertiesHelper;
  */
 public abstract class SoftwareScreen extends HBox {
 
-	private static final Logger logger = Logger.getLogger(SoftwareScreen.class);
+	private static final Logger logger = LoggerFactory.getLogger(SoftwareScreen.class);
 
 	protected Properties properties;
 

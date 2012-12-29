@@ -1,7 +1,8 @@
 package com.simple.ged.ui.screen;
 
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
@@ -26,7 +27,7 @@ public class LibraryViewScreen extends SoftwareScreen {
 	/**
 	 * Logger
 	 */
-	private static final Logger logger = Logger.getLogger(LibraryViewScreen.class);
+	private static final Logger logger = LoggerFactory.getLogger(LibraryViewScreen.class);
 	
 	/**
 	 * On the left, the tree with the library content

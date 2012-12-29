@@ -2,7 +2,8 @@ package com.simple.ged.ui.previewwidgets;
 
 import java.io.File;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.xmichel.toolbox.tools.FileHelper;
 
@@ -18,7 +19,7 @@ import javafx.geometry.Dimension2D;
  */
 public class FilePreviewerFactory {
 	
-	private static final Logger logger = Logger.getLogger(FilePreviewerFactory.class);
+	private static final Logger logger = LoggerFactory.getLogger(FilePreviewerFactory.class);
 	
 
 	/**

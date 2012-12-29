@@ -10,7 +10,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.FileChooser;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.asprise.util.jtwain.Source;
 import com.asprise.util.jtwain.SourceManager;
@@ -35,7 +36,7 @@ public class DocumentConfigurationScreenEventHandler implements DocumentInfoEdit
 	/**
 	 * My logger
 	 */
-	private static final Logger logger = Logger.getLogger(DocumentConfigurationScreenEventHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(DocumentConfigurationScreenEventHandler.class);
 
 	/**
 	 * The watched screen

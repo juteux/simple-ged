@@ -14,7 +14,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.connector.plugins.SimpleGedPlugin;
 import com.simple.ged.connector.plugins.SimpleGedPluginProperty;
@@ -30,7 +32,7 @@ import com.simple.ged.connector.plugins.SimpleGedPluginProperty;
 public class PluginFactory {
 
 	
-	private static final Logger logger = Logger.getLogger(PluginFactory.class);
+	private static final Logger logger = LoggerFactory.getLogger(PluginFactory.class);
 	
 	
 	/**

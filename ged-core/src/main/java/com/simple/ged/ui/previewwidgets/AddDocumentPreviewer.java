@@ -3,7 +3,8 @@ package com.simple.ged.ui.previewwidgets;
 import java.lang.ref.WeakReference;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -28,7 +29,7 @@ public class AddDocumentPreviewer extends AbstractFilePreviewer {
 	/**
 	 * Logger
 	 */
-	private static final Logger logger = Logger.getLogger(AddDocumentPreviewer.class);
+	private static final Logger logger = LoggerFactory.getLogger(AddDocumentPreviewer.class);
 	
 	/**
 	 * The node we're on

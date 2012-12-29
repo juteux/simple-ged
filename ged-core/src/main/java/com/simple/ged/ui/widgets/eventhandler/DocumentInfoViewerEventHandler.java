@@ -7,7 +7,8 @@ import javafx.event.EventHandler;
 
 import javax.swing.event.EventListenerList;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.ui.listeners.DocumentInfoViewerListener;
 import com.simple.ged.ui.widgets.DocumentInfoViewer;
@@ -23,7 +24,7 @@ public class DocumentInfoViewerEventHandler implements EventHandler<ActionEvent>
 	/**
 	 * My logger
 	 */
-	private static final Logger logger = Logger.getLogger(DocumentInfoViewerEventHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(DocumentInfoViewerEventHandler.class);
 	
 	/**
 	 * Event listener

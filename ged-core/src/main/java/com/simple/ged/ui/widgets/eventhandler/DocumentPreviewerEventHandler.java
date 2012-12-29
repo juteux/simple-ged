@@ -13,7 +13,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.Profile;
 import com.simple.ged.models.GedDocument;
@@ -24,7 +25,7 @@ import com.simple.ged.ui.widgets.DocumentPreviewer;
 
 public class DocumentPreviewerEventHandler implements EventHandler<ActionEvent> {
 
-	private static final Logger logger = Logger.getLogger(DocumentPreviewerEventHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(DocumentPreviewerEventHandler.class);
 	
 	/**
 	 * The controlled object

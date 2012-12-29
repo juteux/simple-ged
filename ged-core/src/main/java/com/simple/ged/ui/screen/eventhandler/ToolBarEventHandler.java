@@ -5,7 +5,8 @@ import java.lang.ref.WeakReference;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.ui.screen.ToolBar;
 import com.simple.ged.ui.screen.SoftwareScreen.Screen;
@@ -21,7 +22,7 @@ public class ToolBarEventHandler implements EventHandler<Event> {
 	/**
 	 * My logger
 	 */
-	private static final Logger logger = Logger.getLogger(ToolBarEventHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(ToolBarEventHandler.class);
 	
 	/**
 	 * The controlled object

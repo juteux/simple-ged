@@ -7,7 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.Profile;
 import com.simple.ged.models.GedDocumentFile;
@@ -21,7 +22,7 @@ import com.simple.ged.models.GedDocumentFile;
 public class FileHelper {
 
 	
-	private static final Logger logger = Logger.getLogger(FileHelper.class);
+	private static final Logger logger = LoggerFactory.getLogger(FileHelper.class);
 	
 	
 	/**

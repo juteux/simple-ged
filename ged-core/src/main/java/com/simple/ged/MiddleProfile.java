@@ -9,7 +9,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.models.GedMessage;
 import com.simple.ged.services.MessageService;
@@ -32,7 +33,7 @@ public class MiddleProfile implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	
-	transient private static final Logger logger = Logger.getLogger(MiddleProfile.class);
+	transient private static final Logger logger = LoggerFactory.getLogger(MiddleProfile.class);
 	
 	transient private static MiddleProfile currentMiddleProfil = null;
 

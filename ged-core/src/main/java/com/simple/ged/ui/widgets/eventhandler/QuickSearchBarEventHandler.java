@@ -8,7 +8,8 @@ import javafx.scene.input.KeyEvent;
 
 import javax.swing.event.EventListenerList;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.ui.listeners.QuickSearchListener;
 import com.simple.ged.ui.widgets.QuickSearchBar;
@@ -24,7 +25,7 @@ public class QuickSearchBarEventHandler implements EventHandler<KeyEvent> {
 	/**
 	 * The logger
 	 */
-	private static final Logger logger = Logger.getLogger(QuickSearchBarEventHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(QuickSearchBarEventHandler.class);
 	
 	/**
 	 * The watched widget

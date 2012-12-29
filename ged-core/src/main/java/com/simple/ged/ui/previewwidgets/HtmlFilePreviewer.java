@@ -12,7 +12,8 @@ import javafx.scene.web.WebViewBuilder;
 
 import javax.print.DocFlavor;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.tools.PrintingHelper;
 
@@ -30,7 +31,7 @@ public class HtmlFilePreviewer extends AbstractFilePreviewer {
 	/**
 	 * My logger
 	 */
-	private static final Logger logger = Logger.getLogger(HtmlFilePreviewer.class);
+	private static final Logger logger = LoggerFactory.getLogger(HtmlFilePreviewer.class);
 	
 	
 	public HtmlFilePreviewer(String absoluteFilePath, Dimension2D maxSize) {

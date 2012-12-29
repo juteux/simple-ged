@@ -10,7 +10,8 @@ import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.Profile;
 import com.simple.ged.ui.screen.SoftwareScreen;
@@ -32,7 +33,7 @@ public class LibraryView extends TreeView<String> {
 	 */
 	public static final int TREE_ITEM_SIZE = 30;
 	
-	private static final Logger logger = Logger.getLogger(LibraryView.class);
+	private static final Logger logger = LoggerFactory.getLogger(LibraryView.class);
 	
 	/**
 	 * Have I to show all files or just directories ? 

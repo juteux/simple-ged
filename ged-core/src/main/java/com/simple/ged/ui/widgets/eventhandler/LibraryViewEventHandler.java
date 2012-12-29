@@ -31,15 +31,16 @@ import javafx.util.Callback;
 
 import javax.swing.event.EventListenerList;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.Profile;
 import com.simple.ged.models.GedDocumentFile;
 import com.simple.ged.services.GedDocumentService;
 import com.simple.ged.ui.listeners.DocumentInfoViewerListener;
 import com.simple.ged.ui.listeners.LibraryListener;
-import com.simple.ged.ui.listeners.QuickSearchListener;
 import com.simple.ged.ui.listeners.LibraryListener.LIBRARY_FILE_TYPE;
+import com.simple.ged.ui.listeners.QuickSearchListener;
 import com.simple.ged.ui.screen.SoftwareScreen.Screen;
 import com.simple.ged.ui.widgets.LibraryView;
 
@@ -59,7 +60,7 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 	 */
 	private static final Properties properties = PropertiesHelper.getInstance().getProperties();
 	
-	private static final Logger logger = Logger.getLogger(LibraryViewEventHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(LibraryViewEventHandler.class);
 	
 	/**
 	 * The controlled object

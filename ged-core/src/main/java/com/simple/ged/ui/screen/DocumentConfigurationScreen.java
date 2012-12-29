@@ -3,7 +3,8 @@ package com.simple.ged.ui.screen;
 import java.io.File;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -31,7 +32,7 @@ public class DocumentConfigurationScreen extends SoftwareScreen {
 	/**
 	 * My logger
 	 */
-	private static final Logger logger = Logger.getLogger(DocumentConfigurationScreen.class);
+	private static final Logger logger = LoggerFactory.getLogger(DocumentConfigurationScreen.class);
 	
 	/**
 	 * Button add from file system

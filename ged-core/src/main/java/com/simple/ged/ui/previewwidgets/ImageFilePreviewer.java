@@ -10,7 +10,8 @@ import javafx.geometry.Dimension2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.tools.PrintingHelper;
 
@@ -24,7 +25,7 @@ import fr.xmichel.toolbox.tools.FileHelper;
  */
 public class ImageFilePreviewer extends AbstractFilePreviewer {
 
-	private static final Logger logger = Logger.getLogger(ImageFilePreviewer.class);
+	private static final Logger logger = LoggerFactory.getLogger(ImageFilePreviewer.class);
 	
 
 	public ImageFilePreviewer(String absoluteFilePath, Dimension2D maxSize) {

@@ -7,7 +7,8 @@ import javafx.scene.input.KeyEvent;
 
 import javax.swing.event.EventListenerList;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.models.GedDocument;
 import com.simple.ged.models.GedDocumentPhysicalLocation;
@@ -21,7 +22,7 @@ public class DocumentInfoEditorEventHandler implements EventHandler<KeyEvent> {
 	/**
 	 * Logger
 	 */
-	private static final Logger logger = Logger.getLogger(DocumentInfoEditorEventHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(DocumentInfoEditorEventHandler.class);
 	
 	
 	/**

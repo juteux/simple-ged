@@ -13,7 +13,8 @@ import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 import javax.print.attribute.standard.Copies;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.Profile;
 
@@ -31,7 +32,7 @@ public class PrintingHelper {
 	/**
 	 * Logger
 	 */
-	private static final Logger logger = Logger.getLogger(PrintingHelper.class);
+	private static final Logger logger = LoggerFactory.getLogger(PrintingHelper.class);
 	
 	/**
 	 * Properties

@@ -10,7 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.Profile;
 import com.simple.ged.plugins.PluginManager;
@@ -38,7 +39,7 @@ import fr.xmichel.toolbox.tools.PropertiesHelper;
 public class MainWindow extends Application {
 
 	
-	private static final Logger logger = Logger.getLogger(MainWindow.class);
+	private static final Logger logger = LoggerFactory.getLogger(MainWindow.class);
 	
 	/**
 	 * Default application width

@@ -3,7 +3,8 @@ package com.simple.ged.ui.screen.eventhandler;
 import java.io.File;
 import java.lang.ref.WeakReference;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.Profile;
 import com.simple.ged.models.GedDocument;
@@ -23,7 +24,7 @@ public class LibraryViewScreenEventHandler implements LibraryListener {
 	/**
 	 * Logger
 	 */
-	private static final Logger logger = Logger.getLogger(LibraryViewScreenEventHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(LibraryViewScreenEventHandler.class);
 	
 	/**
 	 * The controlled object

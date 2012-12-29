@@ -8,7 +8,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.xmichel.javafx.dialog.Dialog;
 import fr.xmichel.toolbox.tools.OSHelper;
@@ -28,7 +29,7 @@ public class Profile implements Serializable {
 
 	transient private static final String PROFILE_FILE_NAME = OSHelper.getOSName() + ".profile";
 	
-	transient private static final Logger logger = Logger.getLogger(Profile.class);
+	transient private static final Logger logger = LoggerFactory.getLogger(Profile.class);
 	
 	
 	/**

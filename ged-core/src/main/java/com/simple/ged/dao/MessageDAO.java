@@ -2,7 +2,8 @@ package com.simple.ged.dao;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -21,7 +22,7 @@ import fr.xmichel.toolbox.hibernate.sqlite.HibernateUtil;
 public class MessageDAO {
 
 	
-	private static final Logger logger = Logger.getLogger(MessageDAO.class);
+	private static final Logger logger = LoggerFactory.getLogger(MessageDAO.class);
 	
 	
 	/**

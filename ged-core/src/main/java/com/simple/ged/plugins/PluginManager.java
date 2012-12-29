@@ -7,7 +7,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.Profile;
 import com.simple.ged.connector.plugins.SimpleGedPlugin;
@@ -33,7 +34,7 @@ import fr.xmichel.toolbox.tools.FileHelper;
 public class PluginManager {
 
 	
-	private static final Logger logger = Logger.getLogger(PluginManager.class);
+	private static final Logger logger = LoggerFactory.getLogger(PluginManager.class);
 	
 	
 	/**

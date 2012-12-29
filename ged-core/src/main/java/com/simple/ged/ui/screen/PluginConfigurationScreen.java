@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -40,7 +41,7 @@ public class PluginConfigurationScreen extends SoftwareScreen {
 	/**
 	 * My logger
 	 */
-	private static final Logger logger = Logger.getLogger(PluginConfigurationScreen.class);
+	private static final Logger logger = LoggerFactory.getLogger(PluginConfigurationScreen.class);
 	
 	/**
 	 * The library view, to chose document target

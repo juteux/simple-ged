@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
@@ -39,7 +40,7 @@ public class DocumentPreviewer extends HBox {
 	/**
 	 * My logger
 	 */
-	private static final Logger logger = Logger.getLogger(DocumentPreviewer.class);
+	private static final Logger logger = LoggerFactory.getLogger(DocumentPreviewer.class);
 	
 	/**
 	 * Every previewers attached to the current document

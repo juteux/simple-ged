@@ -4,7 +4,8 @@ import javafx.geometry.Dimension2D;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 
@@ -16,7 +17,7 @@ import org.apache.log4j.Logger;
  */
 public abstract class AbstractFilePreviewer extends HBox {
 
-	private static final Logger logger = Logger.getLogger(AbstractFilePreviewer.class);
+	private static final Logger logger = LoggerFactory.getLogger(AbstractFilePreviewer.class);
 	
 	/**
 	 * The ABSOLUTE file path

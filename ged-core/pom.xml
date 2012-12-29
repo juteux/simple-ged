@@ -100,14 +100,14 @@
 		<dependency>
 			<groupId>fr.xmichel.javafx</groupId>
 			<artifactId>javafx-fileselector</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
 		</dependency>
 	
 		
 		<dependency>
 			<groupId>fr.xmichel.toolbox</groupId>
 			<artifactId>tools</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
 		</dependency>
 		
 		<dependency>
@@ -118,10 +118,10 @@
 
 		<!-- Jar qui ne sont pas dans le repo -->
 		<!-- 
-			Il faut les d�ployer dans le repo local
+			Il faut les déployer dans le repo local
 			en utilisant install_in_local_repo.sh
 			(sous windows, il est possible de copier
-			les instructions pr�sentes dans ce fichier
+			les instructions présentes dans ce fichier
 			dans une invite de commande)
 		-->
 		
@@ -154,16 +154,35 @@
 		<!-- Logs -->
 
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.16</version>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.2</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>1.6.4</version>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.7.2</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+			<version>1.7.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.0.7</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.0.7</version>
+		</dependency>
+
 
 		<!-- Hibernate -->
 
@@ -201,6 +220,12 @@
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
 			<version>1.8.3</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 	</dependencies>

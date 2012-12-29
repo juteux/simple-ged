@@ -29,8 +29,9 @@ import javax.print.PrintService;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 
-import org.apache.log4j.Logger;
 import org.jpedal.PdfDecoder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.Profile;
 import com.sun.pdfview.PDFFile;
@@ -49,7 +50,7 @@ import fr.xmichel.javafx.dialog.Dialog;
  */
 public class PdfFilePreviewer extends AbstractFilePreviewer {
 
-	private static final Logger logger = Logger.getLogger(PdfFilePreviewer.class);
+	private static final Logger logger = LoggerFactory.getLogger(PdfFilePreviewer.class);
 	
 	PdfDecoder pdf;
 	ImageView imageView;

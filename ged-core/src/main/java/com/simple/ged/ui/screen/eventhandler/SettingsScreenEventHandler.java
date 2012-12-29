@@ -2,7 +2,8 @@ package com.simple.ged.ui.screen.eventhandler;
 
 import java.lang.ref.WeakReference;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,7 +27,7 @@ public class SettingsScreenEventHandler implements EventHandler<ActionEvent>, Fi
 	/**
 	 * Logger
 	 */
-	private static final Logger logger = Logger.getLogger(SettingsScreenEventHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(SettingsScreenEventHandler.class);
 	
 	/**
 	 * The watched screen
