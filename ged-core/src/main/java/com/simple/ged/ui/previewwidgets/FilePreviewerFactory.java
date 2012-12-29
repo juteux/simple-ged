@@ -35,7 +35,7 @@ public class FilePreviewerFactory {
 	public static AbstractFilePreviewer getFilePreviewer(File documentFile, Dimension2D maxSize) {
 		
 		AbstractFilePreviewer previewer = null;
-		
+
 	    // choose the correct previewer
 	    switch (FileHelper.getFileType(documentFile.getAbsolutePath()))
 	    {
@@ -65,7 +65,7 @@ public class FilePreviewerFactory {
 	    	return previewer;
 	    }
 	    catch (CannotCreatePreviewerException e) {
-	    	logger.error("Cannot load file preview : " + documentFile.getAbsolutePath());
+	    	logger.error("Cannot load file preview : " + documentFile.getAbsolutePath(), e);
 	    }
 	    
 	    // return a default previewer

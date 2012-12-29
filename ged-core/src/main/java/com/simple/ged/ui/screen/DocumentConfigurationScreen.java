@@ -171,7 +171,7 @@ public class DocumentConfigurationScreen extends SoftwareScreen {
 		btnSubmit.setDisable(true);
 		
 		
-		documentPreviewer = new DocumentPreviewer();
+		documentPreviewer = new DocumentPreviewer(this);
 		documentPreviewer.getEventHandler().addDocumentPreviewListener(eventHandler);
 		documentPreviewer.setEditionMode(true);
 	}

@@ -50,7 +50,7 @@ public class AddDocumentPreviewer extends AbstractFilePreviewer {
 		try {
 			this.load();
 		} catch (CannotCreatePreviewerException e) {
-			logger.error("Cannot load previewer for file" + e);
+			logger.error("Cannot load previewer for file", e);
 		}
 	}
 

@@ -1,6 +1,7 @@
 package com.simple.ged.ui.widgets;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -21,6 +22,7 @@ import com.simple.ged.models.GedDocument;
 import com.simple.ged.models.GedDocumentFile;
 import com.simple.ged.ui.previewwidgets.AbstractFilePreviewer;
 import com.simple.ged.ui.previewwidgets.FilePreviewerFactory;
+import com.simple.ged.ui.screen.SoftwareScreen;
 import com.simple.ged.ui.widgets.eventhandler.DocumentPreviewerEventHandler;
 
 import fr.xmichel.toolbox.tools.PropertiesHelper;
@@ -100,14 +102,22 @@ public class DocumentPreviewer extends HBox {
 	 */
 	private boolean editionMode;
 	
+	/**
+	 * My parent
+	 */
+	private WeakReference<SoftwareScreen> parent;
 	
 	/**
 	 * Properties
 	 */
 	private static final Properties properties = PropertiesHelper.getInstance().getProperties();
 	
+
 	
-	public DocumentPreviewer() {
+	
+	public DocumentPreviewer(SoftwareScreen parent) {
+		
+		this.parent = new WeakReference<>(parent);
 		
 		editionMode = false;
 		
@@ -221,7 +231,7 @@ public class DocumentPreviewer extends HBox {
 	 * We can find files to load with the given document
 	 */
 	public void setGedDocument(GedDocument document) {
-		previewers.clear();
+		clearPreviewersList();
 		for (GedDocumentFile file : document.getDocumentFiles()) {
 			addFile(new File(Profile.getInstance().getLibraryRoot() + file.getRelativeFilePath()));
 		}
@@ -236,7 +246,7 @@ public class DocumentPreviewer extends HBox {
 	 * @param file
 	 */
 	public void setFile(File file) {
-		previewers.clear();
+		clearPreviewersList();
 		addFile(file);
 		gotoIndex(0);
 	}
@@ -245,7 +255,7 @@ public class DocumentPreviewer extends HBox {
 	 * Set a special previewer, which is a previewer for add new document (used on directories)
 	 */
 	public void setSpecialPreviewer(AbstractFilePreviewer p) {
-		previewers.clear();
+		clearPreviewersList();
 		previewers.add(p);
 		gotoIndex(0);
 	}
@@ -256,7 +266,6 @@ public class DocumentPreviewer extends HBox {
 	 * The insert file is showed
 	 */
 	public void addFile(final File file) {
-		
 		// always choose the best size for you !
 		Dimension2D maximumPreviewerSize = new Dimension2D(leftBox.getWidth() - 10, leftBox.getHeight() - 10);
 		logger.debug("Max size : " + maximumPreviewerSize.getWidth() + " x " + maximumPreviewerSize.getHeight());
@@ -297,7 +306,8 @@ public class DocumentPreviewer extends HBox {
 	/**
 	 * Remove all items in previewer
 	 */
-	public void clearPreviews() {
+	public void clearPreviewersList() {
+		parent.get().releaseOpenedFiles();
 		previewers.clear();
 		gotoIndex(0);
 	}

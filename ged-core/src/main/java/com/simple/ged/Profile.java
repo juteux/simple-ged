@@ -10,6 +10,7 @@ import java.io.Serializable;
 
 import org.apache.log4j.Logger;
 
+import fr.xmichel.javafx.dialog.Dialog;
 import fr.xmichel.toolbox.tools.OSHelper;
 
 
@@ -25,7 +26,7 @@ public class Profile implements Serializable {
 
 	transient private static Profile currentProfil = null;
 
-	transient private static String profil_file = OSHelper.getOSName() + ".profile";
+	transient private static final String PROFILE_FILE_NAME = OSHelper.getOSName() + ".profile";
 	
 	transient private static final Logger logger = Logger.getLogger(Profile.class);
 	
@@ -35,7 +36,7 @@ public class Profile implements Serializable {
 	 */
 	public static synchronized Profile getInstance() {
 		if (currentProfil == null) {
-			File f = new File(profil_file);
+			File f = new File(PROFILE_FILE_NAME);
 			if ( f.exists() ) {
 				currentProfil = loadState();
 			} else {
@@ -124,14 +125,15 @@ public class Profile implements Serializable {
 	private synchronized void saveState(){
 		FileOutputStream fos = null;
 		try {
-			fos = new FileOutputStream(profil_file);
+			fos = new FileOutputStream(PROFILE_FILE_NAME);
 			ObjectOutputStream oos= new ObjectOutputStream(fos);
 			oos.writeObject(this); 
 			oos.flush();
 			oos.close();
 		} 
 		catch (Exception e) {
-			logger.error("Error while saving profil");
+			logger.error("Error while saving profil", e);
+			Dialog.showThrowable("Erreur", "La sauvegarde de votre profil a échouée.", e);
 		}
 		finally {
 			try {
@@ -149,7 +151,7 @@ public class Profile implements Serializable {
 	private static synchronized Profile loadState(){
 		Profile profil = null;
 		try {
-			FileInputStream fis = new FileInputStream(profil_file);
+			FileInputStream fis = new FileInputStream(PROFILE_FILE_NAME);
 			ObjectInputStream ois= new ObjectInputStream(fis);
 			try {	
 				profil = (Profile) ois.readObject(); 
@@ -164,7 +166,8 @@ public class Profile implements Serializable {
 			}
 		} 
 		catch(Exception e) {
-			logger.error("Error while loading profil");
+			logger.error("Error while loading profil", e);
+			Dialog.showThrowable("Erreur", "Le chargement de votre profil a échouée.", e);
 			
 			profil = new Profile();
 		} 

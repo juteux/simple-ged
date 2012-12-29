@@ -36,14 +36,14 @@ public class MiddleProfile implements Serializable {
 	
 	transient private static MiddleProfile currentMiddleProfil = null;
 
-	transient private static String middle_profil_file = "middle.profile";
+	transient private static final String MIDDLE_PROFILE_FILE_NAME = "middle.profile";
 	
 	/**
 	 * Singleton getter
 	 */
 	public static synchronized MiddleProfile getInstance() {
 		if (currentMiddleProfil == null) {
-			File f = new File(middle_profil_file);
+			File f = new File(MIDDLE_PROFILE_FILE_NAME);
 			if ( f.exists() ) {
 				currentMiddleProfil = loadState();
 			} else {
@@ -118,7 +118,7 @@ public class MiddleProfile implements Serializable {
 	private synchronized void saveState(){
 		FileOutputStream fos = null;
 		try {
-			fos = new FileOutputStream(middle_profil_file);
+			fos = new FileOutputStream(MIDDLE_PROFILE_FILE_NAME);
 			ObjectOutputStream oos= new ObjectOutputStream(fos);
 			oos.writeObject(this); 
 			oos.flush();
@@ -143,7 +143,7 @@ public class MiddleProfile implements Serializable {
 	private static synchronized MiddleProfile loadState(){
 		MiddleProfile profil = null;
 		try {
-			FileInputStream fis = new FileInputStream(middle_profil_file);
+			FileInputStream fis = new FileInputStream(MIDDLE_PROFILE_FILE_NAME);
 			ObjectInputStream ois= new ObjectInputStream(fis);
 			try {	
 				profil = (MiddleProfile) ois.readObject(); 

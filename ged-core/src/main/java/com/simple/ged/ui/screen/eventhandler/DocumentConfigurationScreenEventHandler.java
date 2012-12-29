@@ -167,7 +167,7 @@ public class DocumentConfigurationScreenEventHandler implements DocumentInfoEdit
 			addDocumentScreen.get().refreshScreens();
 			
 			addDocumentScreen.get().getDocInfoEditor().clearFields();
-			addDocumentScreen.get().getDocumentPreviewer().clearPreviews();
+			addDocumentScreen.get().getDocumentPreviewer().clearPreviewersList();
 			
 		} else {
 			logger.warn("Not implemented yet, see AddDocumentScreenEventHandler.handle");

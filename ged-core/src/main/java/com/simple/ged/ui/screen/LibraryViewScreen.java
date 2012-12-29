@@ -86,9 +86,7 @@ public class LibraryViewScreen extends SoftwareScreen {
 		documentInfoViewerWidget = new DocumentInfoViewer();
 		documentInfoViewerWidget.getEventHandler().addDocumentInfoViewerListener(libraryWidget.getEventHandler());
 		
-		documentPreviewer = new DocumentPreviewer();
-		
-		libraryWidget.getEventHandler().addLibraryListener(eventHandler);
+		documentPreviewer = new DocumentPreviewer(this);
 		
 		quickSearchBar = new QuickSearchBar();
 		quickSearchBar.getEventHandler().addQuickSearchListener(libraryWidget.getEventHandler());

@@ -73,10 +73,10 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 	
 	@Override
 	public void closeFile() {
-		logger.info("Need to close pdf file");
+		logger.debug("Need to close pdf file");
 		if (pdf.isOpen()) {
 			pdf.closePdfFile();
-			logger.info("Closed, you can go on");
+			logger.debug("Closed, you can go on");
 		}
 	}
 	
