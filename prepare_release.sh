@@ -41,7 +41,7 @@ fi
 #
 
 
-#mvn clean install
+mvn clean install
 
 
 #
@@ -79,13 +79,13 @@ cp ged-core/target/ged-core-${CORE_MAVEN_VERSION}-jar-with-dependencies.jar ${RE
 
 
 #
-# Creation des archives
+# Creation des archives (zip)
 #
 
 
 
 #
-# Generation des descripteurs de mise a jour
+# Generation des descripteurs (xml) de mise a jour
 #
 
 
