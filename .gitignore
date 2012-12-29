@@ -28,3 +28,6 @@ target
 *.log
 *.log.zip
 
+# temp dir for releases
+files-to-release
+
