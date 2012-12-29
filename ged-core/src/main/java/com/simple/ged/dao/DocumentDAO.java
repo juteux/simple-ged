@@ -3,7 +3,8 @@ package com.simple.ged.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -28,7 +29,7 @@ import fr.xmichel.toolbox.hibernate.sqlite.HibernateUtil;
 public class DocumentDAO {
 
 	
-	private static final Logger logger = Logger.getLogger(DocumentDAO.class);
+	private static final Logger logger = LoggerFactory.getLogger(DocumentDAO.class);
 	
 	/**
 	 * 
