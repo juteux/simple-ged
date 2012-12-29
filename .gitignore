@@ -24,3 +24,7 @@ target
 # windows dependencies
 *.dll
 
+# logs
+*.log
+*.log.zip
+
