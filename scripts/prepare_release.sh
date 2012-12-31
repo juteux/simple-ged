@@ -37,10 +37,12 @@ check_maven_code_version() {
 	fi
 }
 
+
 #
 # retour à la source
 #
 cd ..
+pwd
 
 
 #
@@ -49,11 +51,9 @@ cd ..
 rm -fr ${RELEASE_TARGET}
 
 
-
 #
 # Verification de la coherence des versions
 #
-
 
 CORE_CODE_VERSION=$(grep 'APPLICATION_VERSION' 'ged-core/src/main/resources/properties/constants.properties' | sed 's/^.*=\(.*\)$/\1/')
 CORE_MAVEN_VERSION=$(grep 'ged.core.version' 'pom.xml' | sed 's/^.*>\(.*\)<.*$/\1/')
@@ -97,21 +97,21 @@ fi
 
 show_neutral_message "Appuyez sur entrer pour valider"
 read
- 
+
+
 #
 # Compilation
 #
-
 
 mvn clean install
 
 show_neutral_message 'Tous les builds dont en succès ? (Appuyez sur entrer pour valider)'
 read
 
+
 #
 # Regrouppement des fichiers pour la release
 #
-
 
 if [ ! -e "${RELEASE_TARGET}" ]
 then
@@ -156,6 +156,7 @@ read
 
 cp -r ged-core/target/site "${RELEASE_TARGET}/doc"
 
+
 #
 # Creation des archives (zip)
 #
@@ -166,5 +167,41 @@ cp -r ged-core/target/site "${RELEASE_TARGET}/doc"
 # Generation des descripteurs (xml) de mise a jour
 #
 
+cat > "${RELEASE_TARGET}/last_version.xml" <<EOL
+<?xml version="1.0" encoding="UTF-8"?>
+<version>
+	<number>CURRENT_VERSION</number>
+	<files>
+		<file>
+			<url>http://ged90.googlecode.com/files/ged-core-CURRENT_VERSION-jar-with-dependencies.jar</url>
+			<destination>simple_ged.jar</destination>
+		</file>
+	</files>
+</version>
+EOL
 
+sed -i -e "s/CURRENT_VERSION/${CORE_MAVEN_VERSION}/g" "${RELEASE_TARGET}/last_version.xml"
+
+
+cat > "${RELEASE_TARGET}/updater_last_version.xml" <<EOL
+<?xml version="1.0" encoding="UTF-8"?>
+<version>
+	<number>CURRENT_VERSION</number>
+	<files>
+		<file>
+			<url>http://ged90.googlecode.com/files/ged-update-CURRENT_VERSION-jar-with-dependencies.jar</url>
+			<destination>simpleGedUpdateSystem.jar</destination>
+		</file>
+	</files>
+</version>
+EOL
+
+sed -i -e "s/CURRENT_VERSION/${UPDATER_MAVEN_VERSION}/g" "${RELEASE_TARGET}/updater_last_version.xml"
+
+
+#
+# Retour dans le repertoire de travail
+#
+cd scripts
+pwd
 
