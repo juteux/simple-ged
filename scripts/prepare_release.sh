@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# proxy
-X_PROXY=
-
 # nom du répertoire ou seront deployés les fichiers générés
 RELEASE_TARGET=scripts/files-to-release
 
@@ -21,12 +18,24 @@ show_error_message(){
 	echo -e "\033[7;31;47m$@\033[0m"
 }
 
+
+
+# proxy
+if [ ! -z "${HTTP_PROXY}" ]
+then
+	X_PROXY="`echo '-x'` `echo ${HTTP_PROXY}`"
+	echo "Proxy configuré : ${X_PROXY}"
+fi
+
+
 #
 # Vérifie que les version entre le code et maven sont identiques
 #
 # @param 1 Version du code
 # @param 2 Version de maven
 # @param 3 Module concerné
+#
+# Quitte en cas d'erreur
 #
 check_maven_code_version() {
 	if [ "$1" != "$2" ]
@@ -37,6 +46,23 @@ check_maven_code_version() {
 	fi
 }
 
+#
+# Vérifie que la version en ligne n'est pas la même que celle que l'on veut générer
+#
+# @param 1 Version du code
+# @param 2 Version de maven
+# @param 3 Module concerné
+#
+# Quitte en cas d'erreur
+#
+check_maven_online_version() {
+	if [ "$1" == "$2" ]
+	then
+		show_error_message "La version que vous essayez de générée est déjà en ligne pour $3"
+		show_error_message "Merci de passer à la version suivante avant de lancer le build de la release"
+		exit
+	fi
+}
 
 #
 # retour à la source
@@ -76,6 +102,8 @@ echo "Version en ligne de ged-upcater       : ${UPDATER_ONLINE_VERSION}"
 check_maven_code_version ${CORE_CODE_VERSION} ${CORE_MAVEN_VERSION} ged_core
 check_maven_code_version ${UPDATER_CODE_VERSION} ${UPDATER_MAVEN_VERSION} ged-updater
 
+check_maven_online_version ${CORE_MAVEN_VERSION} ${CORE_ONLINE_VERSION} ged_core
+
 
 # doit-on mettre l'updater à jour ?
 UPDATER_IS_TO_UPDATE=0
@@ -84,6 +112,7 @@ then
 	echo "ged-update doit être mis à jour"
 	UPDATER_IS_TO_UPDATE=1
 fi
+
 
 # Résumé des informations
 show_neutral_message "Résumé des informations" 
@@ -161,6 +190,10 @@ cp -r ged-core/target/site "${RELEASE_TARGET}/doc"
 # Creation des archives (zip)
 #
 
+cd "${RELEASE_TARGET}"
+zip -r "simple_ged_${CORE_MAVEN_VERSION}.zip" "simple_ged" 
+rm -fr "simple_ged" 
+cd -
 
 
 #
@@ -200,8 +233,15 @@ sed -i -e "s/CURRENT_VERSION/${UPDATER_MAVEN_VERSION}/g" "${RELEASE_TARGET}/upda
 
 
 #
+# Upload sur google code
+# 
+
+
+#
 # Retour dans le repertoire de travail
 #
 cd scripts
 pwd
+
+
 
