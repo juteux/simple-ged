@@ -4,7 +4,7 @@
 X_PROXY=
 
 # nom du répertoire ou seront deployés les fichiers générés
-RELEASE_TARGET=files-to-release
+RELEASE_TARGET=scripts/files-to-release
 
 
 
@@ -36,6 +36,11 @@ check_maven_code_version() {
 		exit
 	fi
 }
+
+#
+# retour à la source
+#
+cd ..
 
 
 #

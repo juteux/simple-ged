@@ -14,7 +14,6 @@
 	<name>Simple Ged Updater</name>
 	<version>${ged.updater.version}</version>
 
-	
 	<build>
 		<plugins>
 			<plugin>
