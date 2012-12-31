@@ -103,7 +103,6 @@ public class Launcher {
 						        Runtime.getRuntime().exec("java -jar simpleGedUpdateSystem.jar");
 						        System.exit(0);
 							} catch (Exception e) {
-								e.printStackTrace();
 								logger.error("Cannot do upgrade : ", e);
 								Dialog.showThrowable("Erreur", "Impossible de lancer l'assistant de mise à jour", e);
 							}

@@ -145,13 +145,17 @@ public class FileHelper {
 	         "File not found '" + path.getAbsolutePath() + "'");
 	      if (path.isDirectory()) {
 	         File[] children = path.listFiles();
-	         for (int i=0; children != null && i<children.length; i++)
+	         for (int i=0; children != null && i<children.length; i++) {
 	            recursifDelete(children[i]);
-	         if (!path.delete()) throw new IOException(
-	            "No delete path '" + path.getAbsolutePath() + "'");
+	         }
+	         if (!path.delete()) {
+	        	 throw new IOException( "No delete path '" + path.getAbsolutePath() + "'");
+	         }
 	      }
-	      else if (!path.delete()) throw new IOException(
-	         "No delete file '" + path.getAbsolutePath() + "'");
+	      else if (!path.delete()) { 
+	    	  throw new IOException("No delete file '" + path.getAbsolutePath() + "'");
+	      }
+	         
 	   }
 	
 	

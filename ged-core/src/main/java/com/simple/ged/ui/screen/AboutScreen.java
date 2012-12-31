@@ -44,7 +44,7 @@ public class AboutScreen extends SoftwareScreen {
 			content = content.replaceAll("\\{\\{ged-version\\}\\}", properties.getProperty("APPLICATION_VERSION"));
 			//logger.debug("content : " + content);
 			webView.getEngine().loadContent(content);
-		} catch (IOException|NullPointerException e) {
+		} catch (IOException e) {
 			logger.error("Failed to read file : html/about.html", e);
 		}
 		

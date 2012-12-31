@@ -18,7 +18,7 @@ import fr.xmichel.toolbox.tools.OSHelper;
 /**
  * This class is a singleton for accessing to global program preferences, some kind of profile
  */
-public class Profile implements Serializable {
+public final class Profile implements Serializable {
 
 	/**
 	 * 

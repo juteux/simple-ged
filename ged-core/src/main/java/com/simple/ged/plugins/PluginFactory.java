@@ -145,9 +145,10 @@ public class PluginFactory {
 			return sgp;
 			
 		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
+			logger.error("Failed to load plugin " + pluginFileName, e);
 		}
+		
+		return null;
 	}
 	
 }

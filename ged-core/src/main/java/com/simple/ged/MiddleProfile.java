@@ -25,7 +25,7 @@ import fr.xmichel.toolbox.tools.PropertiesHelper;
  * @author xavier
  *
  */
-public class MiddleProfile implements Serializable {
+public final class MiddleProfile implements Serializable {
 
 	/**
 	 * 

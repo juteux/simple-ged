@@ -52,7 +52,7 @@ public class HtmlFilePreviewer extends AbstractFilePreviewer {
 			String content = FileHelper.readAllStringContent(reader);
 			//logger.debug("content : " + content);
 			webView.getEngine().loadContent(content);
-		} catch (IOException|NullPointerException e) {
+		} catch (IOException e) {
 			logger.error("Failed to read file : " + absoluteFilePath, e);
 			throw new CannotCreatePreviewerException();
 		}

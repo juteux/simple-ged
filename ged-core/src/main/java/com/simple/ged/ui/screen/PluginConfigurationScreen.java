@@ -1,11 +1,9 @@
 package com.simple.ged.ui.screen;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Vector;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,6 +18,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.connector.plugins.SimpleGedPluginProperty;
 import com.simple.ged.models.GedPlugin;
@@ -252,7 +253,7 @@ public class PluginConfigurationScreen extends SoftwareScreen {
 		
 		comboDayOfMonthForUpdate = new ComboBox<>();
 		
-		Vector<Integer> vDays = new Vector<Integer>();
+		List<Integer> vDays = new ArrayList<>();
 		for (int i = 1; i <= 30; ++i) {
 			vDays.add(i);
 		}
@@ -265,7 +266,7 @@ public class PluginConfigurationScreen extends SoftwareScreen {
 		});
 		
 		comboIntervalBetweenUpdateInMonth = new ComboBox<>();
-		Vector<Integer> vMonth = new Vector<Integer>();
+		List<Integer> vMonth = new ArrayList<Integer>();
 		for (int i = 1; i <= 12; ++i) {
 			vMonth.add(i);
 		}

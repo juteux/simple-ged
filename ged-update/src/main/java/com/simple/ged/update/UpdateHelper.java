@@ -13,6 +13,8 @@ import java.util.Map;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class provides tools for an easiest update =)
@@ -22,6 +24,8 @@ import org.jdom2.input.SAXBuilder;
  */
 public class UpdateHelper {
 
+	private static final Logger logger = LoggerFactory.getLogger(UpdateHelper.class);
+	
 	/**
 	 * Get the version number in the hosted xml descriptor
 	 * 
@@ -51,7 +55,7 @@ public class UpdateHelper {
 			try {
 				xmlDocument = sxb.build(stream);
 			} catch (Exception e) {
-				e.printStackTrace();
+				logger.error("Could not parse xml document " + address, e);
 			}
 			
 			// get root
@@ -63,7 +67,7 @@ public class UpdateHelper {
 			}
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Could not get xml document" + address, e);
 		}
 
 		return onlineVersion;

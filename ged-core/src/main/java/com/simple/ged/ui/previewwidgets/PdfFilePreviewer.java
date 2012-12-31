@@ -211,16 +211,18 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 		pageNumber = page;
 
 		// Show/hide buttons as neccessary
-		if (page == pdf.getPageCount())
+		if (page == pdf.getPageCount()) {
 			next.setVisible(false);
-		else
+		} else {
 			next.setVisible(true);
-
-		if (page == 1)
+		}
+		
+		if (page == 1) {
 			back.setVisible(false);
-		else
+		} else {
 			back.setVisible(true);
-
+		}
+		
 		// Calculate scale
 		int pW = pdf.getPdfPageData().getCropBoxWidth(page);
 		int pH = pdf.getPdfPageData().getCropBoxHeight(page);

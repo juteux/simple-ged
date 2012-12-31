@@ -2,6 +2,7 @@ package fr.xmichel.ged;
 
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.connector.plugins.SimpleGedPlugin;
 import com.simple.ged.connector.plugins.SimpleGedPluginException;
@@ -25,10 +28,12 @@ import com.simple.ged.connector.plugins.SimpleGedPluginProperty;
 
 public class OrangeMobilePlugin extends SimpleGedPlugin {
 
+	private static final Logger logger = LoggerFactory.getLogger(OrangeMobilePlugin.class);
+	
 	@Override
 	public void doGet() throws SimpleGedPluginException {
 
-		System.out.println("Starting OrangeMobilePlugin...");
+		logger.info("Starting OrangeMobilePlugin...");
 		
 		try {
 			HttpClient httpclient = new DefaultHttpClient();
@@ -69,7 +74,7 @@ public class OrangeMobilePlugin extends SimpleGedPlugin {
 				throw new SimpleGedPluginException("Impossible d'obtenir la page de connexion");
 			}
 			
-			System.out.println("Target URL => " + targetURL);
+			logger.debug("Target URL => {}", targetURL);
 			
 			// a little wait
 			Thread.sleep(2000);
@@ -110,7 +115,7 @@ public class OrangeMobilePlugin extends SimpleGedPlugin {
 			String clientSpacePageContent = new String();
 			
 			if (gotoClientSpaceEntity != null) {
-				System.out.println("Going to facturation page");
+				logger.debug("Going to facturation page");
 			   BufferedReader reader = new BufferedReader(new InputStreamReader(gotoClientSpaceEntity.getContent()));
 
 			   String line;
@@ -133,7 +138,7 @@ public class OrangeMobilePlugin extends SimpleGedPlugin {
 				throw new SimpleGedPluginException("Impossible de lire l'adresse de la facture");
 			}
 			
-			System.out.println("Fichier facture => " + factureFile);
+			logger.debug("Fichier facture => {}", factureFile);
 			
 			// a little wait
 			Thread.sleep(2000);
@@ -150,29 +155,38 @@ public class OrangeMobilePlugin extends SimpleGedPlugin {
 			HttpEntity pdfFileEntity = pdfFileResponse.getEntity();
 			
 			if (pdfFileEntity != null) {
-				System.out.println("Downloading facture...");
+				logger.debug("Downloading facture...");
 
-				FileOutputStream fos = new FileOutputStream(getDestinationFile() + ".pdf");	// don't forget the file suffix
+				try (FileOutputStream fos = new FileOutputStream(getDestinationFile() + ".pdf")) { // don't forget the file suffix
 				
-				InputStream instream = pdfFileEntity.getContent();
-				int l;
-				byte[] tmp = new byte[2048];
-				while ((l = instream.read(tmp)) != -1) {
-					fos.write(tmp, 0, l);
-					fos.flush();
+					try (InputStream instream = pdfFileEntity.getContent()) {
+						int l;
+						byte[] tmp = new byte[2048];
+						while ((l = instream.read(tmp)) != -1) {
+							fos.write(tmp, 0, l);
+							fos.flush();
+						}
+					}
+					catch(IOException e) {
+						logger.error("Could not open read source file", e);
+						throw new SimpleGedPluginException("La lecture du fichier source a échouée : " + e.getMessage());
+					}
+						
 				}
-				fos.close();
+				catch (IOException e) {
+					logger.error("Could not open target file", e);
+					throw new SimpleGedPluginException("L'écriture dans le fichier de destination a échouée : " + e.getMessage());
+				}
 
 			}
 
 		}
 		catch (Exception e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-			throw new SimpleGedPluginException("La récupération de la facture s'est soldée par un échec !");
+			logger.error("Failed to execute recuperation", e);
+			throw new SimpleGedPluginException("La récupération de la facture s'est soldée par un échec : " + e.getMessage());
 		}
 		
-		System.out.println("End of OrangeMobilePlugin");
+		logger.info("End of OrangeMobilePlugin");
 	}
 	
 	
@@ -188,17 +202,17 @@ public class OrangeMobilePlugin extends SimpleGedPlugin {
 		List<SimpleGedPluginProperty> properties = new ArrayList<SimpleGedPluginProperty>();
 		
 		// create the required properties
-		SimpleGedPluginProperty phone_number  = new SimpleGedPluginProperty();
-		phone_number.setPropertyKey("phone_number");
-		phone_number.setPropertyValue("06XXXXXXXX");
+		SimpleGedPluginProperty phoneNumber  = new SimpleGedPluginProperty();
+		phoneNumber.setPropertyKey("phone_number");
+		phoneNumber.setPropertyValue("06XXXXXXXX");
 		
-		SimpleGedPluginProperty secret_code  = new SimpleGedPluginProperty();
-		secret_code.setPropertyKey("secret_code");
-		secret_code.setPropertyValue("XXXXXX");
+		SimpleGedPluginProperty secretCode  = new SimpleGedPluginProperty();
+		secretCode.setPropertyKey("secret_code");
+		secretCode.setPropertyValue("XXXXXX");
 		
 		// add the property in list
-		properties.add(phone_number);
-		properties.add(secret_code);
+		properties.add(phoneNumber);
+		properties.add(secretCode);
 		
 		// set properties list to our plugin
 		p.setProperties(properties);
@@ -210,8 +224,7 @@ public class OrangeMobilePlugin extends SimpleGedPlugin {
 		try {
 			p.doGet();
 		} catch (SimpleGedPluginException e) {
-			System.out.println("Epic fail :");
-			e.printStackTrace();
+			logger.error("Epic fail :", e);
 		}
 	}
 	

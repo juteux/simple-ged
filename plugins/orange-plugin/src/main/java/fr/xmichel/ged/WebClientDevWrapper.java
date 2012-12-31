@@ -13,6 +13,8 @@ import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /*
 	// http://javaskeleton.blogspot.com/2010/07/avoiding-peer-not-authenticated-with.html
@@ -20,6 +22,12 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 public class WebClientDevWrapper {
 
+	private static final Logger logger = LoggerFactory.getLogger(WebClientDevWrapper.class);
+	
+	// this class is not instanciable
+	private WebClientDevWrapper() {
+	}
+	
 	public static HttpClient wrapClient(HttpClient base) {
 		try {
 			SSLContext ctx = SSLContext.getInstance("TLS");
@@ -48,7 +56,7 @@ public class WebClientDevWrapper {
 			sr.register(new Scheme("https", ssf, 443));
 			return new DefaultHttpClient(ccm, base.getParams());
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			logger.error("Cannot wrap client", ex);
 			return null;
 		}
 	}

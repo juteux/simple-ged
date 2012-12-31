@@ -12,7 +12,7 @@
 	<groupId>fr.simple.ged.plugin</groupId>
 	<artifactId>demo-plugin</artifactId>
 	<name>Demo Plugin</name>
-	<version>1.0</version>
+	<version>1.1</version>
 
 	<build>
 		<plugins>
@@ -61,6 +61,24 @@
 			<groupId>fr.simple.ged.connector</groupId>
 			<artifactId>ged-connector</artifactId>
 			<version>1.0.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.0.7</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.0.7</version>
 		</dependency>
 	</dependencies>
 

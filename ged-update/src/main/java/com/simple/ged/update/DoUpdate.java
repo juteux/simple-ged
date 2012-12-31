@@ -14,6 +14,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * 
  * This class is the launcher which perform update
@@ -26,7 +29,10 @@ public class DoUpdate {
 	/**
 	 * This updater version
 	 */
-	public static String UPDATER_VERSION = "1.4";
+	public static final String UPDATER_VERSION = "1.4";
+
+	
+	private static final Logger logger = LoggerFactory.getLogger(DoUpdate.class);
 	
 	/**
 	 * @param args
@@ -88,7 +94,7 @@ public class DoUpdate {
 				UpdateHelper.downloadAndReplaceFile(e.getKey(), System.getProperty("user.dir") + File.separator + e.getValue());
 			} 
 			catch (Exception e2) {
-				e2.printStackTrace();
+				logger.error("Could not download file", e2);
 				dynamicLabel.setText("Error while downloading : " + e.getKey());
 				try {
 					Thread.sleep(2000);
@@ -110,7 +116,7 @@ public class DoUpdate {
 	        Runtime.getRuntime().exec("java -jar simple_ged.jar");
 	        System.exit(0);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Could not re-launch simple ged", e);
 			JOptionPane.showMessageDialog(null, "Erreur", "Oups ! Impossible de relancer Simple GED :-/", JOptionPane.ERROR_MESSAGE);
 		}
 	}
