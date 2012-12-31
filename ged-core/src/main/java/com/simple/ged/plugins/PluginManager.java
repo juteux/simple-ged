@@ -158,8 +158,7 @@ public class PluginManager {
 							
 							MessageService.addMessage(new GedMessage("ERROR", "Echec de récupération pour le plugin " + p.getJarFileName() + "<br/>Détail : " + e1.getMessage()));
 							
-							logger.error("[ " + p.getJarFileName() + " ] Error in plugin DoGet : " + e1.getMessage());
-							e1.printStackTrace();
+							logger.error("[ " + p.getJarFileName() + " ] Error in plugin DoGet : ", e1);
 						} 
 						finally {
 							ss.notifyNewMessagesAvailable();

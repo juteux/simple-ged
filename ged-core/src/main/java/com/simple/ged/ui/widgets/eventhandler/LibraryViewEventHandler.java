@@ -249,10 +249,12 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 			return; // we never edit the root !
 		}
 		
-		if (nodeIsDirectory(node)) {
-			// will come later
-		}
-		else { // node is a file
+		// 
+		// if node is directory, we may would like to choose the direcory icon
+		// it's not planned on the roadmap for now, will come later ?
+		//
+		
+		if (! nodeIsDirectory(node)) { // node is a file
 			
 			libraryView.get().getParentScreen().pushScreen(Screen.EDIT_DOC_SCREEN);
 
@@ -391,9 +393,9 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 							self.getStyleClass().add("over-element");
 						}
 					}
-					else { // move from system ?
+					//else { // move from system ?
 						//event.acceptTransferModes(TransferMode.MOVE);
-					}
+					//}
 					
 				}
 			});

@@ -11,7 +11,7 @@
 	<groupId>fr.simple.ged.plugin</groupId>
 	<artifactId>orange-ged-plugin</artifactId>
 	<name>Orange Plugin</name>
-	<version>1.1</version>
+	<version>1.2</version>
 
 	<build>
 		<plugins>
@@ -67,6 +67,24 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<version>4.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.0.7</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.0.7</version>
 		</dependency>
 	</dependencies>
 

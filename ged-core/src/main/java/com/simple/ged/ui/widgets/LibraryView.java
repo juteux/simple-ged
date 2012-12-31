@@ -142,7 +142,7 @@ public class LibraryView extends TreeView<String> {
  		logger.trace(filePath);
  		
  		// root
- 		if (filePath == "") {
+ 		if (filePath.isEmpty()) {
 			Image i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_library_root")));
 			ImageView iv = new ImageView(i);
 			iv.setSmooth(true);

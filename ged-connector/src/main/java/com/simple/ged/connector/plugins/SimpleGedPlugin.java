@@ -158,18 +158,23 @@ public abstract class SimpleGedPlugin {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		SimpleGedPlugin other = (SimpleGedPlugin) obj;
 		if (jarFileName == null) {
-			if (other.jarFileName != null)
+			if (other.jarFileName != null) {
 				return false;
-		} else if (!jarFileName.equals(other.jarFileName))
+			}
+		} else if (!jarFileName.equals(other.jarFileName)) {
 			return false;
+		}
 		return true;
 	}
 	
