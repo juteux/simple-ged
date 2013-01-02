@@ -47,6 +47,8 @@ public final class Launcher {
 		PropertiesHelper.getInstance().load("properties/constants.properties");
 		PropertiesHelper.getInstance().load("properties/update_message.properties");
 		
+		PropertiesHelper.getInstance().load(UpdateInformations.CONSTANT_PROPERTIES_FILE_PATH);
+		
 		// create or update database
 		HibernateUtil.getSessionFactory().openSession();
 		

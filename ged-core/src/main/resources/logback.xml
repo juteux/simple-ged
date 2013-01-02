@@ -34,7 +34,7 @@
 	<!-- bean utils -->
 	<logger name="org.apache" level="INFO" />
 
-	<root level="TRACE">
+	<root level="INFO">
 		<appender-ref ref="FILE" />
 		<appender-ref ref="STDOUT" />
 	</root>

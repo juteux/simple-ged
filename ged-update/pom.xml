@@ -71,6 +71,12 @@
 			<version>1.0.7</version>
 		</dependency>
 
+		<dependency>
+			<groupId>fr.xmichel.toolbox</groupId>
+			<artifactId>tools</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+
 	</dependencies>
 
 </project>
