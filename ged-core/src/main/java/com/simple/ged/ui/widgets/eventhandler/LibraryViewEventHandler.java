@@ -189,7 +189,7 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 			if (parent.getParent() == null) { // we wan't to exclude root from the final path
 				break;
 			}
-			itemPath = parent.getValue() + File.separatorChar + itemPath;
+			itemPath = parent.getValue() + "/" + itemPath;
 			parent = parent.getParent();
 		}
 		return itemPath;
@@ -526,9 +526,9 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 				public void handle(KeyEvent t) {
 					if (t.getCode() == KeyCode.ENTER) {
 						
-						logger.info("renaming from : " + getFilePathFromTreeItem(getTreeItem()) + " => " + getFilePathFromTreeItem(getTreeItem().getParent()) + File.separatorChar + textField.getText());
+						logger.info("renaming from : " + getFilePathFromTreeItem(getTreeItem()) + " => " + getFilePathFromTreeItem(getTreeItem().getParent()) + (getFilePathFromTreeItem(getTreeItem().getParent()).isEmpty() ? "" : "/") + textField.getText());
 						libraryView.get().getParentScreen().releaseOpenedFiles();
-						GedDocumentService.renameDocumentFile(getFilePathFromTreeItem(getTreeItem()), getFilePathFromTreeItem(getTreeItem().getParent()) + File.separatorChar + textField.getText());
+						GedDocumentService.renameDocumentFile(getFilePathFromTreeItem(getTreeItem()), getFilePathFromTreeItem(getTreeItem().getParent()) + (getFilePathFromTreeItem(getTreeItem().getParent()).isEmpty() ? "" : "/") + textField.getText());
 						
 						
 						commitEdit(textField.getText());
