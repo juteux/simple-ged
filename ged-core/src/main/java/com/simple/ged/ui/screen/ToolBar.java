@@ -40,13 +40,13 @@ public class ToolBar extends SoftwareScreen {
 		 */
 		private FadeTransition currentTransition = null;
 		
-		
+		/**
+		 * Note : toolTipText is not used yet
+		 */
 		public ToolBarButton(String toolTipText, ToolBarEventHandler eventHandler) {
 			super();
 			
 			setOpacity(INITIAL_OPACITY);
-
-			//setTooltip(new Tooltip(toolTipText));
 			
 			final ToolBarButton self = this;
 			

@@ -42,7 +42,7 @@ public class AboutScreen extends SoftwareScreen {
 			Reader reader = new InputStreamReader(AboutScreen.class.getResourceAsStream("/html/about.html"));
 			String content = FileHelper.readAllStringContent(reader);
 			content = content.replaceAll("\\{\\{ged-version\\}\\}", properties.getProperty("APPLICATION_VERSION"));
-			//logger.debug("content : " + content);
+			logger.trace("content : " + content);
 			webView.getEngine().loadContent(content);
 		} catch (IOException e) {
 			logger.error("Failed to read file : html/about.html", e);

@@ -26,10 +26,16 @@ import fr.xmichel.toolbox.hibernate.sqlite.HibernateUtil;
  * @author xavier
  * 
  */
-public class DocumentDAO {
+public final class DocumentDAO {
 
 	
 	private static final Logger logger = LoggerFactory.getLogger(DocumentDAO.class);
+	
+	/**
+	 * Should not be instantiated
+	 */
+	private DocumentDAO() {
+	}
 	
 	/**
 	 * 

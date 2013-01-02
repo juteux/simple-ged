@@ -20,10 +20,18 @@ import fr.xmichel.toolbox.hibernate.sqlite.HibernateUtil;
  * @author xavier
  *
  */
-public class DocumentLocationDAO {
+public final class DocumentLocationDAO {
 
 	
 	private static final Logger logger = LoggerFactory.getLogger(DocumentLocationDAO.class);
+	
+	
+	/**
+	 * Should not be instantiated
+	 */
+	private DocumentLocationDAO() {
+	}
+	
 	
 	/**
 	 * Get locations, sorted by ID 

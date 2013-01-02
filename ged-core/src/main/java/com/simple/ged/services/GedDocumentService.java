@@ -29,10 +29,17 @@ import fr.xmichel.javafx.dialog.Dialog;
  * @author xavier
  *
  */
-public class GedDocumentService {
+public final class GedDocumentService {
 
 	private static final Logger logger = LoggerFactory.getLogger(GedDocumentService.class);
 
+	
+	/**
+	 * Should not be instantiated
+	 */
+	private GedDocumentService() {	
+	}
+	
 	
 	/**
 	 * Replace \\ by /, to keep unix like path in database

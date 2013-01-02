@@ -27,12 +27,20 @@ import fr.xmichel.toolbox.tools.PropertiesHelper;
  * @author xavier
  *
  */
-public class PrintingHelper {
+public final class PrintingHelper {
 
 	/**
 	 * Logger
 	 */
 	private static final Logger logger = LoggerFactory.getLogger(PrintingHelper.class);
+	
+	
+	/**
+	 * Should not be instantiated
+	 */
+	private PrintingHelper() {
+	}
+	
 	
 	/**
 	 * Properties

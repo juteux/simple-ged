@@ -31,10 +31,17 @@ import fr.xmichel.toolbox.tools.FileHelper;
  * @author xavier
  *
  */
-public class PluginManager {
+public final class PluginManager {
 
 	
 	private static final Logger logger = LoggerFactory.getLogger(PluginManager.class);
+	
+	
+	/**
+	 * Should not be instantiated
+	 */
+	private PluginManager() {
+	}
 	
 	
 	/**

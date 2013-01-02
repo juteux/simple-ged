@@ -112,7 +112,6 @@ public class DocumentInfoEditor extends GridPane {
 
 		comboDocumentLocation = new ComboBox<>(options);
 		comboDocumentLocation.setEditable(true);   
-		//HBox.setHgrow(comboDocumentLocation, Priority.ALWAYS);
 	}
 
 

@@ -14,8 +14,15 @@ import com.simple.ged.plugins.PluginManager;
  * @author xavier
  *
  */
-public class PluginService {
+public final class PluginService {
 
+	/**
+	 * Should not be instantiated
+	 */
+	private PluginService() {
+	}
+	
+	
 	/**
 	 * Load and returns all plugins
 	 */

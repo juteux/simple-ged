@@ -55,7 +55,7 @@ public class MainWindow extends Application {
 	/**
 	 * Proporties loaded from configuration files
 	 */
-	protected Properties properties;
+	private Properties properties;
 	
 	/**
 	 * Loaded screens, you can see this as a stack with the more recent screen at the top (last element)
@@ -91,7 +91,6 @@ public class MainWindow extends Application {
     	stage = primaryStage;
     	
         primaryStage.setTitle(properties.getProperty("APPLICATION_NAME"));
-        //primaryStage.initStyle(StageStyle.UNDECORATED);
         
         toolBar = new ToolBar(this); 
         int height = 40;
@@ -146,7 +145,7 @@ public class MainWindow extends Application {
 		currentCentralScreen = getScreen(screen);
 		screens.add(currentCentralScreen);
 
-		toolBar.fixBackButtonVisibility();;
+		toolBar.fixBackButtonVisibility();
 		
 		mainLayout.setCenter(currentCentralScreen);
 	}
@@ -205,10 +204,7 @@ public class MainWindow extends Application {
 		
 		case MESSAGE_SCREEN :
 			return new MessageScreen(this);
-		/*	
-		case LOCATION_MANAGEMENT_SCREEN :
-			return new LocationManagementScreen(this);
-		*/
+			
 		case BROWSING_SCREEN :
 		default:
 			return new LibraryViewScreen(this);

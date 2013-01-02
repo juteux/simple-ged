@@ -5,8 +5,14 @@ import java.util.List;
 import com.simple.ged.dao.MessageDAO;
 import com.simple.ged.models.GedMessage;
 
-public class MessageService {
+public final class MessageService {
 
+	/**
+	 * Should not be instantiated
+	 */
+	private MessageService() {
+	}
+	
 	/**
 	 * Get messages, sorted by date desc
 	 */

@@ -33,11 +33,11 @@ public final class MiddleProfile implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	
-	transient private static final Logger logger = LoggerFactory.getLogger(MiddleProfile.class);
+	private static final transient Logger logger = LoggerFactory.getLogger(MiddleProfile.class);
 	
-	transient private static MiddleProfile currentMiddleProfil = null;
+	private static transient MiddleProfile currentMiddleProfil = null;
 
-	transient private static final String MIDDLE_PROFILE_FILE_NAME = "middle.profile";
+	private static final transient String MIDDLE_PROFILE_FILE_NAME = "middle.profile";
 	
 	/**
 	 * Singleton getter

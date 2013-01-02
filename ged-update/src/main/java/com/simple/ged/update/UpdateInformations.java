@@ -6,8 +6,14 @@ package com.simple.ged.update;
  * @author xavier
  *
  */
-public class UpdateInformations {
+public final class UpdateInformations {
 
+	/**
+	 * Should not be instantiated
+	 */
+	private UpdateInformations() {
+	}
+	
 	/**
 	 * Path to xml which describe update for GED core
 	 */

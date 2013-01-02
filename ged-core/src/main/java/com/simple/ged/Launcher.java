@@ -27,10 +27,17 @@ import fr.xmichel.toolbox.tools.PropertiesHelper;
  * @author xavier
  * 
  */
-public class Launcher {
+public final class Launcher {
 
 	private static final Logger logger = LoggerFactory.getLogger(Launcher.class);
 
+	
+	/**
+	 * Should not be instantiated
+	 */
+	private Launcher() {
+	}
+	
 	
 	public static void main(String[] args) {
 				

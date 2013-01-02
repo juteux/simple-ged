@@ -393,10 +393,9 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 							self.getStyleClass().add("over-element");
 						}
 					}
-					//else { // move from system ?
-						//event.acceptTransferModes(TransferMode.MOVE);
-					//}
-					
+					//
+					// Here, issue #12
+					//
 				}
 			});
             
@@ -430,9 +429,6 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
                 	
                 	sourceItem.getParent().getChildren().remove(sourceItem);
                 	targetItem.getChildren().add(sourceItem);
-                	
-                	//targetItem.setExpanded(true);
-                    //libraryView.getSelectionModel().select(targetItem);
                 	
     				event.acceptTransferModes(TransferMode.MOVE);    
     				event.setDropCompleted(true);

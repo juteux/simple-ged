@@ -19,11 +19,17 @@ import com.simple.ged.models.GedDocumentFile;
  * @author xavier
  * 
  */
-public class FileHelper {
+public final class FileHelper {
 
 	
 	private static final Logger logger = LoggerFactory.getLogger(FileHelper.class);
 	
+	
+	/**
+	 * Should not be instantiated
+	 */
+	private FileHelper() {
+	}
 	
 	/**
 	 * Copy the file in the library if necessary (if the file is not even in
@@ -141,8 +147,9 @@ public class FileHelper {
 	 * @see http://java.developpez.com/sources/?page=fluxFichiers#manipFile
 	 */
 	public static void recursifDelete(File path) throws IOException {
-	      if (!path.exists()) throw new IOException(
-	         "File not found '" + path.getAbsolutePath() + "'");
+	      if (!path.exists()) {
+	    	  throw new IOException("File not found '" + path.getAbsolutePath() + "'");
+	      }
 	      if (path.isDirectory()) {
 	         File[] children = path.listFiles();
 	         for (int i=0; children != null && i<children.length; i++) {

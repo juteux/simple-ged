@@ -29,10 +29,17 @@ import com.simple.ged.connector.plugins.SimpleGedPluginProperty;
  * @author xavier
  *
  */
-public class PluginFactory {
+public final class PluginFactory {
 
 	
 	private static final Logger logger = LoggerFactory.getLogger(PluginFactory.class);
+	
+	
+	/**
+	 * Should not be instantiated
+	 */
+	private PluginFactory() {
+	}
 	
 	
 	/**
@@ -58,7 +65,7 @@ public class PluginFactory {
 			
 			logger.info("Loading : " + PluginManager.PLUGINS_DIRECTORY + pluginFileName);
 			URL urls[] = {new File(PluginManager.PLUGINS_DIRECTORY + pluginFileName).toURI().toURL()};
-			loader = URLClassLoader.newInstance(urls);//new URLClassLoader(urls);
+			loader = URLClassLoader.newInstance(urls);
 
 			InputStreamReader isr = new InputStreamReader(loader.getResourceAsStream(PluginManager.MANIFEST_FILE_NAME), "utf8"); 
 			BufferedReader br = new BufferedReader(isr);
@@ -71,13 +78,13 @@ public class PluginFactory {
 				if (line.startsWith(PluginManifestTags.fields_tag.getTagLabel())) { // special treatment
 					
 					line = line.replaceAll(PluginManifestTags.fields_tag.getTagLabel(), "");
-					//logger.debug(line);
+					logger.trace(line);
 					
 					String[] properties = line.split(";");
 					
 					for (String property : properties) {
 						property = property.trim();
-						//logger.debug(property);
+						logger.trace(property);
 						
 						Pattern p = Pattern.compile("(.*)\\((.*)\\)");
 						Matcher m = p.matcher(property);
@@ -85,7 +92,7 @@ public class PluginFactory {
 						String key = null;
 						String label = null;
 						while(m.find()) {
-							//logger.debug("find : " + m.group(1) + " -> " + m.group(2));
+							logger.trace("find : " + m.group(1) + " -> " + m.group(2));
 							key = m.group(1);
 							label = m.group(2);
 						}
@@ -128,7 +135,9 @@ public class PluginFactory {
 			sgp.setProperties(pluginProperties);
 			
 			for (java.util.Map.Entry<PluginManifestTags, String> e : pluginInfos.entrySet()) {
-				//logger.debug(e.getKey().getTagLabel() + "=" + e.getValue());
+				
+				logger.trace(e.getKey().getTagLabel() + "=" + e.getValue());
+				
 				if (e.getKey().getAttributeName() != null) {
 					if (e.getKey().getAttributeName().contains("date") || e.getKey().getAttributeName().contains("Date")) {
 						String[] dateSplit = e.getValue().split("-");

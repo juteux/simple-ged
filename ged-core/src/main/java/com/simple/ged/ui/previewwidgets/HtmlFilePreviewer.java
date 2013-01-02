@@ -50,7 +50,7 @@ public class HtmlFilePreviewer extends AbstractFilePreviewer {
 			InputStream inputStream = new FileInputStream(absoluteFilePath);
 			Reader      reader      = new InputStreamReader(inputStream);
 			String content = FileHelper.readAllStringContent(reader);
-			//logger.debug("content : " + content);
+			logger.trace("content : " + content);
 			webView.getEngine().loadContent(content);
 		} catch (IOException e) {
 			logger.error("Failed to read file : " + absoluteFilePath, e);

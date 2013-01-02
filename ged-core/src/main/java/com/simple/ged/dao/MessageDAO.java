@@ -19,10 +19,16 @@ import fr.xmichel.toolbox.hibernate.sqlite.HibernateUtil;
  * @author xavier
  *
  */
-public class MessageDAO {
+public final class MessageDAO {
 
 	
 	private static final Logger logger = LoggerFactory.getLogger(MessageDAO.class);
+	
+	/**
+	 * Should not be instantiated
+	 */
+	private MessageDAO() {
+	}
 	
 	
 	/**

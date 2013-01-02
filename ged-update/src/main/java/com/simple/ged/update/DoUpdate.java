@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
  * @author xavier
  *
  */
-public class DoUpdate {
+public final class DoUpdate {
 
 	/**
 	 * This updater version
@@ -33,6 +33,14 @@ public class DoUpdate {
 
 	
 	private static final Logger logger = LoggerFactory.getLogger(DoUpdate.class);
+	
+	
+	/**
+	 * Should not be instantiated
+	 */
+	private DoUpdate() {
+	}
+	
 	
 	/**
 	 * @param args
@@ -56,11 +64,11 @@ public class DoUpdate {
 			 URL imgURL = DoUpdate.class.getResource("/images/refresh.png");
 			 Toolkit tk = Toolkit.getDefaultToolkit();
 			
-			 image = tk.getImage(imgURL);//ImageIO.read(new File("images/refresh.png"));
+			 image = tk.getImage(imgURL);
 			 img.setIcon(new ImageIcon(image));
 			 addLabel(img, frame);
 		} catch (Exception e) {
-			System.out.println("Error while loading image : images/refresh.png");
+			logger.error("Error while loading image : images/refresh.png", e);
 		}
 
 		addLabel(new JLabel("Mise à jour en cours... Veuillez patienter"), frame);
@@ -85,10 +93,10 @@ public class DoUpdate {
 		String onlineVersion = UpdateHelper.getVersionNumber(UpdateInformations.GED_CORE_UPDATE_DESCRIPTOR_PATH);
 		frame.setTitle("Simple GED - Mise à jour vers la version " + onlineVersion);
 		
-		System.out.println("Simple GED is updating to version " + onlineVersion);
+		logger.info("Simple GED is updating to version " + onlineVersion);
 		
 		for (Entry<String, String> e : UpdateHelper.getFilesToDownloadMap(UpdateInformations.GED_CORE_UPDATE_DESCRIPTOR_PATH).entrySet()) {
-			System.out.println(e.getKey() + " => " + e.getValue());
+			logger.info(e.getKey() + " => " + e.getValue());
 			dynamicLabel.setText("Downloading : " + e.getKey());
 			try {
 				UpdateHelper.downloadAndReplaceFile(e.getKey(), System.getProperty("user.dir") + File.separator + e.getValue());

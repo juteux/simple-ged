@@ -12,8 +12,16 @@ import com.simple.ged.models.GedDocumentPhysicalLocation;
  * @author xavier
  *
  */
-public class GedDocumentLocationService {
+public final class GedDocumentLocationService {
 
+	
+	/**
+	 * Should not be instantiated
+	 */
+	private GedDocumentLocationService() {
+	}
+	
+	
 	/**
 	 * Get all locations
 	 * 

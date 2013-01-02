@@ -25,11 +25,11 @@ public final class Profile implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	transient private static Profile currentProfil = null;
+	private static transient Profile currentProfil = null;
 
-	transient private static final String PROFILE_FILE_NAME = OSHelper.getOSName() + ".profile";
+	private static final transient String PROFILE_FILE_NAME = OSHelper.getOSName() + ".profile";
 	
-	transient private static final Logger logger = LoggerFactory.getLogger(Profile.class);
+	private static final transient Logger logger = LoggerFactory.getLogger(Profile.class);
 	
 	
 	/**

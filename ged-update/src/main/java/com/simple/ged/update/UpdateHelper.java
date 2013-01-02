@@ -22,9 +22,17 @@ import org.slf4j.LoggerFactory;
  * @author xavier
  *
  */
-public class UpdateHelper {
+public final class UpdateHelper {
 
 	private static final Logger logger = LoggerFactory.getLogger(UpdateHelper.class);
+	
+	
+	/**
+	 * Should not be instantiated
+	 */
+	private UpdateHelper() {
+	}
+	
 	
 	/**
 	 * Get the version number in the hosted xml descriptor
@@ -100,7 +108,7 @@ public class UpdateHelper {
 			try {
 				xmlDocument = sxb.build(stream);
 			} catch (Exception e) {
-				e.printStackTrace();
+				logger.error("Could not parse xml file", e);
 			}
 			
 			// get root
@@ -119,7 +127,7 @@ public class UpdateHelper {
 			}
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Could not get file list", e);
 		}
 		
 		return fileToDownload;
@@ -155,7 +163,9 @@ public class UpdateHelper {
 			
 			while(deplacement < length){
 				currentBit = is.read(data, deplacement, data.length-deplacement);	
-				if(currentBit == -1)break;	
+				if(currentBit == -1) {
+					break;	
+				}
 				deplacement += currentBit;
 			}
 
@@ -171,15 +181,15 @@ public class UpdateHelper {
 			destinationFile.flush();
 
 	      } catch (MalformedURLException e) { 
-	    	  System.err.println("Problème avec l'URL : " + onlineFileUrl); 
+	    	  logger.error("Wrong url : " + onlineFileUrl, e); 
 	      } catch (IOException e) { 
-	        e.printStackTrace();
-	      } finally{
+	    	  logger.error("Could not read source file", e);
+	      } finally {
 	    	  try {
 	    		  is.close();
 				  destinationFile.close();
 	    	  } catch (IOException e) {
-	    		  e.printStackTrace();
+	    		  logger.error("Could not write target file", e);
 	    	  }
 	      }
 	}

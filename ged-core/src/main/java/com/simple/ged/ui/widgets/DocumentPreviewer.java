@@ -137,7 +137,7 @@ public class DocumentPreviewer extends HBox {
 		
 		leftBox = new VBox();
 		leftBox.setMinSize(100, 100);
-		//leftBox.setStyle("-fx-background-color:orange");
+
 		HBox.setHgrow(leftBox, Priority.ALWAYS);
 		VBox.setVgrow(leftBox, Priority.ALWAYS);
 
@@ -156,8 +156,6 @@ public class DocumentPreviewer extends HBox {
 		
 		rightBox = new VBox();
 		rightBox.getChildren().addAll(topRightBox, bottomRightBox);
-		//rightBox.setStyle("-fx-background-color:green");
-		
 		
 		setPadding(new Insets(5,5,5,5));
 		
@@ -280,7 +278,7 @@ public class DocumentPreviewer extends HBox {
 	 */
 	private void refreshDocumentViewer() {
 		if (currentPreviewer != null) {
-			leftBox.getChildren().clear();//remove(currentPreviewer);
+			leftBox.getChildren().clear();
 		}
 		
 		if (previewers.size() != 0) {

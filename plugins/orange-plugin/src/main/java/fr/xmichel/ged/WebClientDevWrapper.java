@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 	// http://javaskeleton.blogspot.com/2010/07/avoiding-peer-not-authenticated-with.html
 */
 
-public class WebClientDevWrapper {
+public final class WebClientDevWrapper {
 
 	private static final Logger logger = LoggerFactory.getLogger(WebClientDevWrapper.class);
 	

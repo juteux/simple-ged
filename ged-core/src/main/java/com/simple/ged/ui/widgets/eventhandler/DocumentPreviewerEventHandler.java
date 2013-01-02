@@ -120,7 +120,7 @@ public class DocumentPreviewerEventHandler implements EventHandler<ActionEvent> 
 		Button btnNext = documentPreviewer.get().getNext();
 		Button btnPrevious = documentPreviewer.get().getBack();
 		Button btnPrint = documentPreviewer.get().getBtnPrintFile();
-		//JLabel labelNavigation = documentPreviewer.getNavigationLabel();
+		
 		int currentIndex = documentPreviewer.get().getCurrentPreviewerIndex();
 		int viewerCount = documentPreviewer.get().getPreviewersCount();
 
@@ -136,13 +136,9 @@ public class DocumentPreviewerEventHandler implements EventHandler<ActionEvent> 
 	    	
 	    	btnPrevious.setVisible(false);
 	        btnNext.setVisible(false);
-	        //labelNavigation.setVisible(false);
 	        return;
 	    }
 	    
-	    //labelNavigation.setVisible(true);
-	    //labelNavigation.setText( (currentIndex+1) + "/" + viewerCount );
-
 	    btnPrevious.setVisible(true);
 	    btnPrevious.setDisable(currentIndex == 0);
 

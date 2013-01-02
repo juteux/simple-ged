@@ -18,10 +18,17 @@ import fr.xmichel.toolbox.hibernate.sqlite.HibernateUtil;
  * @author xavier
  *
  */
-public class PluginDAO {
+public final class PluginDAO {
 
 	
 	private static final Logger logger = LoggerFactory.getLogger(PluginDAO.class);
+	
+	
+	/**
+	 * Should not be instantiated
+	 */
+	private PluginDAO() {
+	}
 	
 	
 	/**

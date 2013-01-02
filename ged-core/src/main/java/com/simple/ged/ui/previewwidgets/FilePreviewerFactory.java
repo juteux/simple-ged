@@ -17,9 +17,16 @@ import javafx.geometry.Dimension2D;
  * @author xavier
  * 
  */
-public class FilePreviewerFactory {
+public final class FilePreviewerFactory {
 	
 	private static final Logger logger = LoggerFactory.getLogger(FilePreviewerFactory.class);
+
+	
+	/**
+	 * Should not be instantiated
+	 */
+	private FilePreviewerFactory() {
+	}
 	
 
 	/**

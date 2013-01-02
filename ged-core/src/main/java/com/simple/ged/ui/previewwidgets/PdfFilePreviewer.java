@@ -52,23 +52,18 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 
 	private static final Logger logger = LoggerFactory.getLogger(PdfFilePreviewer.class);
 	
-	PdfDecoder pdf;
-	ImageView imageView;
-	Button back, next;
-	List<Button> buttonGroup;
-	int pageNumber = 1;
-	File lastSuccessfullyLoadedFile = null;
-
+	private PdfDecoder pdf;
+	private ImageView imageView;
+	private Button back, next;
+	private List<Button> buttonGroup;
+	private int pageNumber = 1;
 	// Variables for making buttons disappear
-	long scheduleDisappearTime = System.currentTimeMillis();
-	Thread visibilityThread;
+	private long scheduleDisappearTime = System.currentTimeMillis();
+	private Thread visibilityThread;
 
 
 	public PdfFilePreviewer(String absoluteFilePath, Dimension2D maxSize) {
 		super(absoluteFilePath, maxSize);
-
-		// logger.debug("Max size : " + maxSize.getWidth() + " x " +
-		// maxSize.getHeight());
 	}
 	
 	
@@ -155,8 +150,9 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 		final int DUR = 250;
 
 		// Avoid starting new transition during old transition
-		if (dueToEnd != -1 && System.currentTimeMillis() < dueToEnd)
+		if (dueToEnd != -1 && System.currentTimeMillis() < dueToEnd) {
 			return;
+		}
 
 		for (Button n : buttonGroup) {
 			FadeTransition f = new FadeTransition(Duration.millis(250), n);
@@ -178,8 +174,9 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 	 * @return true if failed
 	 */
 	private boolean openFile(File file) {
-		if (file == null)
+		if (file == null) {
 			return true;
+		}
 
 		String filename = file.getAbsolutePath();
 
@@ -190,7 +187,6 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 			return true;
 		}
 
-		lastSuccessfullyLoadedFile = file;
 		return false;
 	}
 
@@ -202,10 +198,12 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 	private void showPage(int page) {
 
 		// Check in range
-		if (page > pdf.getPageCount())
+		if (page > pdf.getPageCount()) {
 			return;
-		if (page < 1)
+		}
+		if (page < 1) {
 			return;
+		}
 
 		// Store
 		pageNumber = page;
@@ -230,9 +228,6 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 		Dimension s = Toolkit.getDefaultToolkit().getScreenSize();
 		s.setSize(maxSize.getWidth(), maxSize.getHeight());
 
-		// s.width -= 100;
-		// s.height -= 100;
-
 		double xScale = (double) s.width / pW;
 		double yScale = (double) s.height / pH;
 		double scale = xScale < yScale ? xScale : yScale;
@@ -248,8 +243,6 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 		// Set size of components
 		imageView.setFitWidth(pW);
 		imageView.setFitHeight(pH);
-		//this.setWidth(imageView.getFitWidth() /*+ 2*/);
-		//this.setHeight(imageView.getFitHeight() /*+ 2*/);
 	}
 
 	/**
@@ -268,8 +261,9 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 			img = pdf.getPageAsImage(page);
 
 			// Use deprecated method since there's no real alternative
-			if (Image.impl_isExternalFormatSupported(BufferedImage.class))
+			if (Image.impl_isExternalFormatSupported(BufferedImage.class)) {
 				return javafx.scene.image.Image.impl_fromExternalImage(img);
+			}
 
 		} catch (Exception e) {
 			logger.error("Cannot display pdf", e);
@@ -348,7 +342,7 @@ public class PdfFilePreviewer extends AbstractFilePreviewer {
 			    String pName = ps.getName();
 			    if(pName.equals(Profile.getInstance().getDefaultPrinterName())){
 			        pjob.setPrintService(ps);
-			        //logger.info("Printing on : " + pName);
+			        logger.debug("Printing on : " + pName);
 			        break;
 			    }
 			}

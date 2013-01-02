@@ -49,7 +49,7 @@ public class OrangeMobilePlugin extends SimpleGedPlugin {
 			
 			HttpEntity getVarsEntity = getVarsResponse.getEntity();
 			
-			String varsPageContent = new String();
+			String varsPageContent = "";
 			
 			if (getVarsEntity != null) {
 			   BufferedReader reader = new BufferedReader(new InputStreamReader(getVarsEntity.getContent()));
@@ -112,7 +112,7 @@ public class OrangeMobilePlugin extends SimpleGedPlugin {
 			
 			HttpEntity gotoClientSpaceEntity = gotoClientSpaceResponse.getEntity();
 			
-			String clientSpacePageContent = new String();
+			String clientSpacePageContent = "";
 			
 			if (gotoClientSpaceEntity != null) {
 				logger.debug("Going to facturation page");
