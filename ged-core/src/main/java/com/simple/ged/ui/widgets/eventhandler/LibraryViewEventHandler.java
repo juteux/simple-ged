@@ -346,6 +346,7 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
             				.addYesButton(new EventHandler<ActionEvent>() {
 								@Override
 								public void handle(ActionEvent arg0) {
+									libraryView.get().getParentScreen().releaseOpenedFiles();
 	          						GedDocumentService.deleteDocumentFile(getFilePathFromTreeItem(getTreeItem()));
             						getTreeItem().getParent().getChildren().remove(getTreeItem());
 								}
