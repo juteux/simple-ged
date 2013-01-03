@@ -40,7 +40,7 @@ fi
 check_maven_code_version() {
 	if [ "$1" != "$2" ]
 	then
-		show_error_message "Les version definies entre maven et celle definie dans l'application sont differentes pour $3"
+		show_error_message "Les versions définies entre maven et l'application sont différentes pour $3"
 		show_error_message "Merci de les ajuster avant de lancer le build de la release"
 		exit
 	fi
@@ -58,7 +58,7 @@ check_maven_code_version() {
 check_maven_online_version() {
 	if [ "$1" == "$2" ]
 	then
-		show_error_message "La version que vous essayez de générée est déjà en ligne pour $3"
+		show_error_message "La version que vous essayez de générer est déjà en ligne pour $3"
 		show_error_message "Merci de passer à la version suivante avant de lancer le build de la release"
 		exit
 	fi
@@ -99,10 +99,10 @@ echo "Version de ged-updater selon maven    : ${UPDATER_MAVEN_VERSION}"
 echo "Version en ligne de ged-core          : ${CORE_ONLINE_VERSION}"
 echo "Version en ligne de ged-upcater       : ${UPDATER_ONLINE_VERSION}"
 
-check_maven_code_version ${CORE_CODE_VERSION} ${CORE_MAVEN_VERSION} ged_core
+check_maven_code_version ${CORE_CODE_VERSION} ${CORE_MAVEN_VERSION} ged-core
 check_maven_code_version ${UPDATER_CODE_VERSION} ${UPDATER_MAVEN_VERSION} ged-updater
 
-check_maven_online_version ${CORE_MAVEN_VERSION} ${CORE_ONLINE_VERSION} ged_core
+check_maven_online_version ${CORE_MAVEN_VERSION} ${CORE_ONLINE_VERSION} ged-core
 
 
 # doit-on mettre l'updater à jour ?
