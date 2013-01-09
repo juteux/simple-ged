@@ -52,7 +52,7 @@
 	</build>
 
 	<repositories>
-		<!-- 
+		<!--
 		<repository>
 			<id>xaviermichel-snapshots</id>
 			<url>https://github.com/xaviermichel/maven-repo/raw/master/snapshots</url>
@@ -68,7 +68,7 @@
 
 
 
-	
+
 	<dependencies>
 
 		<!-- Modules -->
@@ -82,11 +82,11 @@
 		<dependency>
 			<groupId>fr.simple.ged.connector</groupId>
 			<artifactId>ged-connector</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
 		</dependency>
 
 		<!-- Dans mon repo -->
-		
+
 		<dependency>
 			<groupId>fr.xmichel.javafx</groupId>
 			<artifactId>javafx-dialog</artifactId>
@@ -98,26 +98,26 @@
 			<artifactId>javafx-calendar</artifactId>
 			<version>${fr.xmichel.javafx.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>fr.xmichel.javafx</groupId>
 			<artifactId>javafx-fieldset</artifactId>
 			<version>${fr.xmichel.javafx.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>fr.xmichel.javafx</groupId>
 			<artifactId>javafx-fileselector</artifactId>
 			<version>${fr.xmichel.javafx.version}</version>
 		</dependency>
-	
-		
+
+
 		<dependency>
 			<groupId>fr.xmichel.toolbox</groupId>
 			<artifactId>tools</artifactId>
 			<version>${fr.xmichel.toolbox.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>fr.xmichel.toolbox</groupId>
 			<artifactId>hibernate-sqlite-bridge</artifactId>
@@ -125,14 +125,14 @@
 		</dependency>
 
 		<!-- Jar qui ne sont pas dans le repo -->
-		<!-- 
+		<!--
 			Il faut les déployer dans le repo local
 			en utilisant install_in_local_repo.sh
 			(sous windows, il est possible de copier
 			les instructions présentes dans ce fichier
 			dans une invite de commande)
 		-->
-		
+
 		<dependency>
 			<groupId>com.sun</groupId>
 			<artifactId>PDFRenderer</artifactId>
@@ -172,7 +172,7 @@
 			<artifactId>jcl-over-slf4j</artifactId>
 			<version>1.7.2</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jul-to-slf4j</artifactId>
@@ -184,7 +184,7 @@
 			<artifactId>logback-classic</artifactId>
 			<version>1.0.7</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>
@@ -235,7 +235,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 	</dependencies>
 
 </project>
