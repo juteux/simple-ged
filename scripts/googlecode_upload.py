@@ -122,7 +122,7 @@ def upload(file, project_name, user_name, password, summary, labels=None):
   urllib2.install_opener(opener)
   req = urllib2.Request(target_url, body, headers)
   
-  if os.environ.get('HTTP_PROXY') != "" :
+  if os.environ.get('HTTP_PROXY') != None :
 	req.set_proxy(os.environ.get('HTTP_PROXY')[7:], 'http')
   
   server_response_code      = 201
