@@ -275,7 +275,7 @@ pwd
 #
 
 show_information_message "Packages générés et uploadés, il faut mettre à jour les pom maintenant"
-show_error_message "Note : les descripteurs de mise à jour ne sont pas déployés automatique, à vous de le faire après les vérifications d'usage"
+show_error_message "Note : les descripteurs de mise à jour ne sont pas déployés automatiquement, à vous de le faire après les vérifications d'usage"
 
 
 
