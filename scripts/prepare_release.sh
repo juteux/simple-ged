@@ -6,7 +6,7 @@ RELEASE_TARGET=scripts/files-to-release
 
 
 # @params neutral message
-show_neutral_message(){ 
+show_neutral_message(){
 	echo -e "\033[0;36;40m$@\033[0m"
 }
 # @params information message
@@ -115,7 +115,7 @@ fi
 
 
 # Résumé des informations
-show_neutral_message "Résumé des informations" 
+show_neutral_message "Résumé des informations"
 
 show_information_message "ged-core   ${CORE_ONLINE_VERSION} -> ${CORE_MAVEN_VERSION}"
 
@@ -134,8 +134,11 @@ read
 
 mvn clean install
 
-show_neutral_message 'Tous les builds dont en succès ? (Appuyez sur entrer pour valider)'
-read
+if [ $? -ne 0 ]
+then
+	show_error_message 'Le build global du projet a échoué !'
+	exit 1
+fi
 
 
 #
@@ -180,8 +183,11 @@ cd ged-core
 mvn javadoc:javadoc
 cd ..
 
-show_neutral_message 'Tous les builds dont en succès ? (Appuyez sur entrer pour valider)'
-read
+if [ $? -ne 0 ]
+then
+	show_error_message 'La génération de la javadoc a échouée'
+	exit 1
+fi
 
 cp -r ged-core/target/site "${RELEASE_TARGET}/doc"
 
@@ -191,8 +197,8 @@ cp -r ged-core/target/site "${RELEASE_TARGET}/doc"
 #
 
 cd "${RELEASE_TARGET}"
-zip -r "simple_ged_${CORE_MAVEN_VERSION}.zip" "simple_ged" 
-rm -fr "simple_ged" 
+zip -r "simple_ged_${CORE_MAVEN_VERSION}.zip" "simple_ged"
+rm -fr "simple_ged"
 cd -
 
 
@@ -233,8 +239,28 @@ sed -i -e "s/CURRENT_VERSION/${UPDATER_MAVEN_VERSION}/g" "${RELEASE_TARGET}/upda
 
 
 #
+# On mets les droits a tous (probleme de mon windows ?)
+#
+chmod -R 777 ${RELEASE_TARGET}/*
+
+
+#
 # Upload sur google code
-# 
+#
+# Tout est caché (deprecated), une action humain doit montrer l'installeur principal
+#
+
+show_neutral_message "Upload... (peut prendre un peu beaucoup de temps)"
+
+python scripts/googlecode_upload.py -p ged90 -s "Simple GED ${CORE_MAVEN_VERSION}" -l Deprecated ${RELEASE_TARGET}/simple_ged_${CORE_MAVEN_VERSION}.zip
+python scripts/googlecode_upload.py -p ged90 -s "Updater vers la version ${CORE_MAVEN_VERSION}" -l Deprecated ${RELEASE_TARGET}/ged-core-${CORE_MAVEN_VERSION}-jar-with-dependencies.jar
+
+if [ "${UPDATER_IS_TO_UPDATE}" == "1" ]
+then
+	python scripts/googlecode_upload.py -p ged90 -s "Updater de l'updater vers la version ${CORE_MAVEN_VERSION}" -l Deprecated ${RELEASE_TARGET}/ged-update-${UPDATER_MAVEN_VERSION}-jar-with-dependencies.jar
+fi
+
+
 
 
 #
@@ -242,6 +268,16 @@ sed -i -e "s/CURRENT_VERSION/${UPDATER_MAVEN_VERSION}/g" "${RELEASE_TARGET}/upda
 #
 cd scripts
 pwd
+
+
+#
+# fini
+#
+
+show_information_message "Packages générés et uploadés, il faut mettre à jour les pom maintenant"
+show_error_message "Note : les descripteurs de mise à jour ne sont pas déployés automatique, à vous de le faire après les vérifications d'usage"
+
+
 
 
 
