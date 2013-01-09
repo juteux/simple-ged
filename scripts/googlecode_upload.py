@@ -175,13 +175,13 @@ def upload(file, project_name, user_name, password, summary, labels=None):
     }
 
   target_url = 'https://' + upload_host + upload_uri
-	
-  opener = urllib2.build_opener(ConnectHTTPSHandler, ConnectHTTPSHandler)
-  urllib2.install_opener(opener)
-  req = urllib2.Request(target_url, body, headers)
   
   if os.environ.get('HTTP_PROXY') != None :
-	req.set_proxy(os.environ.get('HTTP_PROXY')[7:], 'http')
+    opener = urllib2.build_opener(ConnectHTTPSHandler, ConnectHTTPSHandler)
+    urllib2.install_opener(opener)
+    req.set_proxy(os.environ.get('HTTP_PROXY')[7:], 'http')
+
+  req = urllib2.Request(target_url, body, headers)
   
   server_response_code      = 201
   serveur_response_label    = ''
