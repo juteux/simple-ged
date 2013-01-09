@@ -78,7 +78,7 @@ mvn -DaltDeploymentRepository=${deployement}-repo::default::file:${REPO_LOCATION
 
 if [ $? -eq 0 ]
 then
-	show_information_message "${deployment} deployment success, you just need to add, commit and push the maven repo now"
+	show_information_message "${deployment} deployment success, you just need to add, commit and push the git repo now"
 else
 	show_error_message "${deployment} deployment failure, fix it and try again !"
 	exit
