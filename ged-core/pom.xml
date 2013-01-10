@@ -20,8 +20,7 @@
 		<fr.xmichel.javafx.version>1.0.2</fr.xmichel.javafx.version>
 	</properties>
 
-
-
+	
 	<build>
 		<plugins>
 			<plugin>
@@ -51,6 +50,7 @@
 		</plugins>
 	</build>
 
+	
 	<repositories>
 		<!--
 		<repository>
@@ -64,9 +64,6 @@
 		</repository>
 
 	</repositories>
-
-
-
 
 
 	<dependencies>

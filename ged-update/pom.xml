@@ -32,7 +32,6 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<addClasspath>true</addClasspath>
 							<mainClass>com.simple.ged.update.DoUpdate</mainClass>
 						</manifest>
 					</archive>
