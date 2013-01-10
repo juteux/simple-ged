@@ -106,6 +106,7 @@ public final class GedDocumentService {
 			logger.error("Move failed : (" + oldFilePath + " => " + newFilePath);
 			logger.error("Impossible de déplacer le fichier", e);
 			Dialog.showThrowable("Impossible de renommer/déplacer le fichier", "Le renommage/déplacement du fichier a échoué :", e);
+			return;
 		}
 		
 		// rename in database
@@ -122,7 +123,9 @@ public final class GedDocumentService {
 			FileHelper.recursifDelete(new File(Profile.getInstance()
 					.getLibraryRoot() + filePath));
 		} catch (IOException e) {
-			logger.error("Delete error");
+			logger.error("Delete error", e);
+			Dialog.showThrowable("Impossible de supprimer le fichier", "La suppression du fichier a échoué :", e);
+			return;
 		}
 		
 		DocumentDAO.deleteFile(forceUnixSeparator(filePath));
