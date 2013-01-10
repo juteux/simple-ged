@@ -55,12 +55,6 @@ public final class PluginManager {
 	static final String MANIFEST_FILE_NAME = "ged_plugin_manifest.properties";
 	
     /**
-     * The folder which is containing extracted plugins dependencies
-     */
-    static final String PLUGINS_DEPENDENCY_DIRECTORY = "plugin_dependency/";
-    
-    
-    /**
      * Get the plugin list
      */
     public static List<GedPlugin> getPluginList() {
