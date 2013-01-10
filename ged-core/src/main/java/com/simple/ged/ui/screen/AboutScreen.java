@@ -39,7 +39,7 @@ public class AboutScreen extends SoftwareScreen {
 		instanciateWidget();
 		
 		try {
-			Reader reader = new InputStreamReader(AboutScreen.class.getResourceAsStream("/html/about.html"));
+			Reader reader = new InputStreamReader(AboutScreen.class.getResourceAsStream("/html/about.html"), "UTF-8");
 			String content = FileHelper.readAllStringContent(reader);
 			content = content.replaceAll("\\{\\{ged-version\\}\\}", properties.getProperty("APPLICATION_VERSION"));
 			logger.trace("content : " + content);
