@@ -135,7 +135,7 @@ public final class PluginManager {
 							
 							String destinationFileName = i.getDestinationFilePattern();
 							
-							if ( destinationFileName.contains("\\w-") && new GregorianCalendar().get(Calendar.MONTH) == 0 ) {
+							if ( destinationFileName.contains("\\m-") && new GregorianCalendar().get(Calendar.MONTH) == 0 ) {
 								destinationFileName = destinationFileName.replace("\\y", String.valueOf(new GregorianCalendar().get(Calendar.YEAR) - 1));
 							}
 							else {
