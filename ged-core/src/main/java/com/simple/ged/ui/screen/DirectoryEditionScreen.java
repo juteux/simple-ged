@@ -29,6 +29,17 @@ public class DirectoryEditionScreen extends SoftwareScreen {
 	public static final String DIRECTORY_ICON_DIRECTORY = "directory_icons/"; 
 	
 	/**
+	 * Remember the folder name
+	 */
+	private Label folderNameLabel;
+	
+	/**
+	 * Online icon selector
+	 */
+	
+	
+	
+	/**
 	 * Directory relative location
 	 */
 	private String directoryRelativeLocation;

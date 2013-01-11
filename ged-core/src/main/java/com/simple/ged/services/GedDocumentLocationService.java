@@ -2,6 +2,9 @@ package com.simple.ged.services;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.simple.ged.dao.DocumentLocationDAO;
 import com.simple.ged.models.GedDocument;
 import com.simple.ged.models.GedDocumentPhysicalLocation;
@@ -21,6 +24,10 @@ public final class GedDocumentLocationService {
 	private GedDocumentLocationService() {
 	}
 	
+	/**
+	 * logger
+	 */
+	private static final Logger logger = LoggerFactory.getLogger(GedDocumentLocationService.class);
 	
 	/**
 	 * Get all locations
@@ -39,6 +46,7 @@ public final class GedDocumentLocationService {
 	
 		List<GedDocumentPhysicalLocation> locations = DocumentLocationDAO.getLocations();
 		if (locations.isEmpty()) {
+			logger.debug("no location exists yet");
 			GedDocumentPhysicalLocation loc = new GedDocumentPhysicalLocation();
 			loc.setLabel("");
 			DocumentLocationDAO.saveOrUpdate(loc);		
