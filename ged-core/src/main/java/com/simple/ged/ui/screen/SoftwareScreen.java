@@ -42,7 +42,8 @@ public abstract class SoftwareScreen extends HBox {
 		PLUGIN_CONFIGURATION_SCREEN, 
 		MESSAGE_SCREEN, 
 		LOCATION_MANAGEMENT_SCREEN,
-		ABOUT_SCREEN
+		ABOUT_SCREEN,
+		DIRECTORY_EDITION_SCREEN
 	}
 
 	public SoftwareScreen(MainWindow mw) {

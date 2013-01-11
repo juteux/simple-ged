@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import com.simple.ged.Profile;
 import com.simple.ged.plugins.PluginManager;
 import com.simple.ged.ui.screen.AboutScreen;
+import com.simple.ged.ui.screen.DirectoryEditionScreen;
 import com.simple.ged.ui.screen.DocumentConfigurationScreen;
 import com.simple.ged.ui.screen.FakeScreen;
 import com.simple.ged.ui.screen.SoftwareScreen;
@@ -204,6 +205,9 @@ public class MainWindow extends Application {
 		
 		case MESSAGE_SCREEN :
 			return new MessageScreen(this);
+			
+		case DIRECTORY_EDITION_SCREEN :
+			return new DirectoryEditionScreen(this);
 			
 		case BROWSING_SCREEN :
 		default:
