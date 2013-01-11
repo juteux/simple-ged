@@ -249,10 +249,6 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 			return; // we never edit the root !
 		}
 		
-		// 
-		// if node is directory, we may would like to choose the direcory icon
-		// it's not planned on the roadmap for now, will come later ?
-		//
 		
 		if (! nodeIsDirectory(node)) { // node is a file
 			
@@ -268,6 +264,9 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 			}
 			
 			libraryView.get().getParentScreen().pushExtraValues(extras);
+		}
+		else if (nodeIsDirectory(node)) {
+			logger.debug("Wan't to edit directory node");
 		}
 	}
 	
@@ -296,6 +295,8 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 		
 		private MenuItem fileEditMenuItem;
 		
+		private MenuItem directoryEditMenuItem;
+		
 		
 		public TextFieldTreeCellImpl() {
             
@@ -303,12 +304,13 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 			directoryRenameMenuItem = new MenuItem(properties.getProperty("rename"));
             directoryDeleteMenuItem = new MenuItem(properties.getProperty("delete"));
             directoryAddDocumentItem = new MenuItem(properties.getProperty("add_document"));
+            directoryEditMenuItem = new MenuItem(properties.getProperty("modify")); 
             
             fileRenameMenuItem = new MenuItem(properties.getProperty("rename")); 
             fileEditMenuItem = new MenuItem(properties.getProperty("modify")); 
             
             rootContextMenu.getItems().addAll(directoryAddDocumentItem, directoryAddMenuItem);
-            directoryContextMenu.getItems().addAll(directoryAddDocumentItem, directoryAddMenuItem, directoryRenameMenuItem, directoryDeleteMenuItem);
+            directoryContextMenu.getItems().addAll(directoryAddDocumentItem, directoryAddMenuItem, directoryRenameMenuItem, directoryEditMenuItem, directoryDeleteMenuItem);
             fileContextMenu.getItems().addAll(fileEditMenuItem, fileRenameMenuItem, directoryDeleteMenuItem);
             
             directoryAddMenuItem.setOnAction(new EventHandler<ActionEvent>() {
@@ -336,6 +338,13 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 				@Override
 				public void handle(ActionEvent arg0) {
 					startFileModification();
+				}
+            });
+            
+            directoryEditMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent arg0) {
+					startDirectoryModification();
 				}
             });
             
@@ -446,6 +455,13 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 				openEditionForNode(getTreeItem());
 			}
 		}
+		
+		public void startDirectoryModification() {
+			if (currentNodeIsDirectory()) {
+				openEditionForNode(getTreeItem());
+			}
+		}
+		
 		
 		
 		@Override

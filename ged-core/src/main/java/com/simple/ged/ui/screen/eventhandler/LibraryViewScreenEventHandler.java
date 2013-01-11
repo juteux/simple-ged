@@ -70,7 +70,7 @@ public class LibraryViewScreenEventHandler implements LibraryListener {
 
 	@Override
 	public void selectionChanged(LIBRARY_FILE_TYPE newSelectionType) {
-		libraryViewScreen.get().getDocumentInfoViewerWidget().getBtnEditDocument().setDisable(newSelectionType != LIBRARY_FILE_TYPE.LIBRARY_FILE);
+		libraryViewScreen.get().getDocumentInfoViewerWidget().getBtnEditDocument().setDisable(newSelectionType != LIBRARY_FILE_TYPE.LIBRARY_FILE && newSelectionType != LIBRARY_FILE_TYPE.LIBRARY_DIR);
 	}
 
 }
