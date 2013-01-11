@@ -31,3 +31,6 @@ target
 # temp dir for releases
 files-to-release
 
+# logback
+logback.xml
+
