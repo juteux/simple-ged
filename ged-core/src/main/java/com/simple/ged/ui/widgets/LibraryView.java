@@ -115,7 +115,7 @@ public class LibraryView extends TreeView<String> {
 		
 		logger.info("Build or rebuild tree");
 		
-		rootItem.getChildren().clear();
+		rootItem = new TreeItem<>(LibraryView.convertToNodeName(Profile.getInstance().getLibraryRoot()), getIconForNode(""));
 		
 		listFile(
 				new File(Profile.getInstance().getLibraryRoot()), 
@@ -125,6 +125,8 @@ public class LibraryView extends TreeView<String> {
 		rootItem.setExpanded(true);
 		
 		logger.info("Build or rebuild tree over");
+		
+		setRoot(rootItem);
 	}
 	
 	
