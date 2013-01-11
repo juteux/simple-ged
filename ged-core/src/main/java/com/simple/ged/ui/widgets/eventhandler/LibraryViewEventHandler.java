@@ -267,6 +267,12 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 		}
 		else if (nodeIsDirectory(node)) {
 			logger.debug("Wan't to edit directory node");
+			
+			libraryView.get().getParentScreen().pushScreen(Screen.DIRECTORY_EDITION_SCREEN);
+
+			Map<String, Object> extras = new HashMap<>();		
+			extras.put("relative-directory-root", getFilePathFromTreeItem(node.getParent()));
+			libraryView.get().getParentScreen().pushExtraValues(extras);
 		}
 	}
 	
