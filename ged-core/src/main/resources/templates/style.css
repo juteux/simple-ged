@@ -55,6 +55,22 @@
 	
 }
 
+/**
+	Global
+*/
+.title-style {
+	-fx-font-size: 24px;
+    /*-fx-padding: 20;*/
+    -fx-font-weight: bold;
+    -fx-text-fill: #317EAC;
+}
+.subtitle-style {
+	-fx-font-size: 16px;
+    -fx-padding: 20;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FF9933;
+}
+
 /*
 	Buttons
 	@see http://fxexperience.com/2011/12/styling-fx-buttons-with-css/
