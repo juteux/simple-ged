@@ -1,18 +1,14 @@
 package com.simple.ged.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.simple.ged.models.GedDirectory;
-import com.simple.ged.models.GedDocument;
-import com.simple.ged.models.GedDocumentFile;
-import com.simple.ged.models.GedDocumentPhysicalLocation;
 
 import fr.xmichel.toolbox.hibernate.sqlite.HibernateUtil;
 
@@ -22,15 +18,15 @@ import fr.xmichel.toolbox.hibernate.sqlite.HibernateUtil;
  * @author xavier
  * 
  */
-public final class DirectoryIconDAO {
+public final class DirectoryDAO {
 
 	
-	private static final Logger logger = LoggerFactory.getLogger(DirectoryIconDAO.class);
+	private static final Logger logger = LoggerFactory.getLogger(DirectoryDAO.class);
 	
 	/**
 	 * Should not be instantiated
 	 */
-	private DirectoryIconDAO() {
+	private DirectoryDAO() {
 	}
 	
 	/**
@@ -38,7 +34,7 @@ public final class DirectoryIconDAO {
 	 * @param directoryPath
 	 *            The directory path, relative to ged root
 	 */
-	public static synchronized GedDirectory findDirectorybyFilePath(String directoryPath) {
+	public static synchronized GedDirectory findDirectorybyDirectoryPath(String directoryPath) {
 		logger.debug("Get directory for file : " + directoryPath);
 
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -91,7 +87,7 @@ public final class DirectoryIconDAO {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
 		
-		Criteria criteria = session.createCriteria(GedDirectory.class).add(Restrictions.like("relativeDirectoryPath", oldName + "%"));  
+		Criteria criteria = session.createCriteria(GedDirectory.class).add(Restrictions.eq("relativeDirectoryPath", oldName));  
 		
 		@SuppressWarnings("unchecked")
 		List<GedDirectory> results = criteria.list();  
@@ -117,7 +113,7 @@ public final class DirectoryIconDAO {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
 		
-		Criteria criteria = session.createCriteria(GedDirectory.class).add(Restrictions.like("relativeDirectoryPath", directoryPath + "%"));  
+		Criteria criteria = session.createCriteria(GedDirectory.class).add(Restrictions.eq("relativeDirectoryPath", directoryPath + "%"));  
 		
 		@SuppressWarnings("unchecked")
 		List<GedDirectory> results = criteria.list();  

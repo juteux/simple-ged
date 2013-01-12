@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.simple.ged.Profile;
+import com.simple.ged.dao.DirectoryDAO;
 import com.simple.ged.dao.DocumentDAO;
 import com.simple.ged.models.GedDocument;
 import com.simple.ged.models.GedDocumentFile;
@@ -24,13 +25,16 @@ import fr.xmichel.javafx.dialog.Dialog;
 /**
  * @class GedDocumentService
  * 
- * Provide method for document manipulation
+ * Provide method for document AND directory manipulation
  * 
  * @author xavier
  *
  */
 public final class GedDocumentService {
 
+	/**
+	 * My logger
+	 */
 	private static final Logger logger = LoggerFactory.getLogger(GedDocumentService.class);
 
 	
@@ -110,6 +114,7 @@ public final class GedDocumentService {
 		}
 		
 		// rename in database
+		DirectoryDAO.updateDirectoryPath(forceUnixSeparator(oldName), forceUnixSeparator(newName));
 		DocumentDAO.updateFilePath(forceUnixSeparator(oldName), forceUnixSeparator(newName));
 	}
 	
@@ -128,6 +133,7 @@ public final class GedDocumentService {
 			return;
 		}
 		
+		DirectoryDAO.deleteDirectory(forceUnixSeparator(filePath));
 		DocumentDAO.deleteFile(forceUnixSeparator(filePath));
 	}
 	
