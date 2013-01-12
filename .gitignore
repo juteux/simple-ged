@@ -17,6 +17,7 @@ target
 *.profile
 *.sqlite
 *.sqlite-journal
+directory_icons
 
 # others
 *.swp

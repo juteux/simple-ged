@@ -2,6 +2,8 @@ package com.simple.ged.ui.screen;
 
 import java.util.Map;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -13,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.simple.ged.ui.MainWindow;
+import com.simple.ged.ui.widgets.eventhandler.DirectoryEditionScreenEventHandler;
 
 import fr.xmichel.toolbox.tools.FileHelper;
 
@@ -58,7 +61,12 @@ public class DirectoryEditionScreen extends SoftwareScreen {
 	/**
 	 * Online icon download button
 	 */
-	private Button downloadOnlineIcon;
+	private Button buttonDownloadOnlineIcon;
+	
+	/**
+	 * Event handler
+	 */
+	private DirectoryEditionScreenEventHandler eventHandler;
 	
 	
 	/**
@@ -75,13 +83,16 @@ public class DirectoryEditionScreen extends SoftwareScreen {
 		
 		instantiateWidgets();
 	
-		HBox httpDownloadBox = new HBox();
-		httpDownloadBox.getChildren().addAll(downloadIconFromWebLabel, editIconOnlineLocation, downloadOnlineIcon);
+		HBox httpDownloadBox = new HBox(20);
+		httpDownloadBox.getChildren().addAll(downloadIconFromWebLabel, editIconOnlineLocation, buttonDownloadOnlineIcon);
 		
 		HBox.setHgrow(httpDownloadBox, Priority.ALWAYS);
+		HBox.setHgrow(editIconOnlineLocation, Priority.ALWAYS);
 		
 		VBox mainLayout = new VBox();
 		mainLayout.getChildren().addAll(folderNameLabel, labelChangeIcon, httpDownloadBox);
+		
+		HBox.setHgrow(mainLayout, Priority.ALWAYS);
 		
 		this.getChildren().addAll(mainLayout);
 	}
@@ -101,19 +112,42 @@ public class DirectoryEditionScreen extends SoftwareScreen {
 	 */
 	private void instantiateWidgets() {
 		
+		eventHandler = new DirectoryEditionScreenEventHandler(this);
+		
 		folderNameLabel = new Label(properties.getProperty("folder_edition_of").replace("{0}", "?"));
 		folderNameLabel.getStyleClass().add("title-style");
 		
 		labelChangeIcon = new Label(properties.getProperty("change_icon"));
 		labelChangeIcon.getStyleClass().add("subtitle-style");
 		
-		downloadIconFromWebLabel = new Label(properties.getProperty("icon_from_internet_download"));
+		downloadIconFromWebLabel = new Label(properties.getProperty("get_url_from_icon"));
 		
 		editIconOnlineLocation = new TextField();
 		editIconOnlineLocation.setPromptText("http://");
+		editIconOnlineLocation.setOnKeyReleased(eventHandler);
 		
-		downloadOnlineIcon = new Button(properties.getProperty("download_folder_icon"));
+		buttonDownloadOnlineIcon = new Button(properties.getProperty("download_folder_icon"));
+		buttonDownloadOnlineIcon.setDisable(true);
+		buttonDownloadOnlineIcon.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				eventHandler.lanchIconDownload();
+			}
+		});
 	}
-	
+
+
+	public TextField getEditIconOnlineLocation() {
+		return editIconOnlineLocation;
+	}
+
+	public Button getButtonDownloadOnlineIcon() {
+		return buttonDownloadOnlineIcon;
+	}
+
+	public String getDirectoryRelativeLocation() {
+		return directoryRelativeLocation;
+	}
+
 	
 }
