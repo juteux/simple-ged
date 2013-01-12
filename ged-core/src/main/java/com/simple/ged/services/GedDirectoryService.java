@@ -56,6 +56,10 @@ public final class GedDirectoryService {
 	 */
 	public static void addOrUpdateDirectory(GedDirectory directory)
 	{
+		if (directory.getRelativeDirectoryPath().startsWith("/")) {
+			directory.setRelativeDirectoryPath(directory.getRelativeDirectoryPath().replaceFirst("/", ""));
+		}
+		
 		DirectoryDAO.saveOrUpdate(directory);
 	}
 	

@@ -100,7 +100,7 @@ public class DirectoryEditionScreenEventHandler implements EventHandler<KeyEvent
 		
 		GedDirectoryService.addOrUpdateDirectory(dir);
 		
-		//directoryEditionScreen.get().refreshScreens();
+		directoryEditionScreen.get().refreshScreens();
 		
 		Dialog.showInfo("Remplacement effectué", "L'icône a bien été modifée !");
 	}
