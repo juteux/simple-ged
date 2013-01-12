@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import com.simple.ged.ui.screen.DirectoryEditionScreen;
 
 import fr.xmichel.javafx.dialog.Dialog;
+import fr.xmichel.toolbox.tools.FileHelper;
 
 /**
  * 
@@ -76,7 +77,7 @@ public class DirectoryEditionScreenEventHandler implements EventHandler<KeyEvent
 			userUrl = "http://" + userUrl;
 		}
 		
-		String targetLocation = DirectoryEditionScreen.DIRECTORY_ICON_DIRECTORY + directoryName;
+		String targetLocation = DirectoryEditionScreen.DIRECTORY_ICON_DIRECTORY + directoryName + "." + FileHelper.getExtension(userUrl).toLowerCase();
 		
 		logger.debug("Start downloading : {}", userUrl);
 		logger.debug("Target location : {}", targetLocation);
