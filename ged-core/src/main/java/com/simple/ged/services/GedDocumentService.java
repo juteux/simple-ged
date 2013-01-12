@@ -96,6 +96,13 @@ public final class GedDocumentService {
 			return;
 		}
 		
+		if (oldName.startsWith("/")) {
+			oldName = oldName.replaceFirst("/", "");
+		}
+		if (newName.startsWith("/")) {
+			newName = newName.replaceFirst("/", "");
+		}
+		
 		// physical renaming
 		Path oldFilePath = Paths.get(Profile.getInstance().getLibraryRoot() + oldName);
 		Path newFilePath = Paths.get(Profile.getInstance().getLibraryRoot() + newName);

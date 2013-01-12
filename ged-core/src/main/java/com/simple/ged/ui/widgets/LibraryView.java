@@ -63,11 +63,6 @@ public class LibraryView extends TreeView<String> {
 	private WeakReference<SoftwareScreen> parentScreen;
 	
 	/**
-	 * Root item
-	 */
-	private TreeItem<String> rootItem;
-	
-	/**
 	 * Constructor. Will show directories content
 	 * 
 	 * @param parentScreen
@@ -91,16 +86,13 @@ public class LibraryView extends TreeView<String> {
 		
     	this.parentScreen = new WeakReference<>(parentScreen);
     	
-    	this.rootItem = new TreeItem<>(convertToNodeName(Profile.getInstance().getLibraryRoot()), getIconForNode(""));
-    	
     	buildTree();
-    	setRootItem(rootItem);
     	
     	eventHandler = new LibraryViewEventHandler(this);
     	
     	this.setEditable(true);
     	this.setCellFactory(eventHandler);
-    	this.getSelectionModel().select(rootItem);
+    	this.getSelectionModel().select(this.getRoot());
     	
     	this.getSelectionModel().selectedItemProperty().addListener(eventHandler); 
 	}
@@ -122,26 +114,16 @@ public class LibraryView extends TreeView<String> {
 		logger.info("Build or rebuild tree");
 		
 		TreeItem<String> newRoot = new TreeItem<>(LibraryView.convertToNodeName(Profile.getInstance().getLibraryRoot()), getIconForNode(""));
+		newRoot.setExpanded(true);
 		
 		listFile(
 				new File(Profile.getInstance().getLibraryRoot()), 
-				rootItem
+				newRoot
 		);
-		
-		rootItem.setExpanded(true);
 		
 		logger.info("Build or rebuild tree over");
 		
 		setRoot(newRoot);
-	}
-	
-	
-	/**
-	 * Fix the tree root
-	 */
-	public void setRootItem(TreeItem<String> newRoot) {
-		this.rootItem = newRoot;
-		this.setRoot(newRoot);
 	}
 	
 	
