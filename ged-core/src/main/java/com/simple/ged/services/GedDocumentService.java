@@ -96,13 +96,6 @@ public final class GedDocumentService {
 			return;
 		}
 		
-		if (oldName.startsWith("/")) {
-			oldName = oldName.replaceFirst("/", "");
-		}
-		if (newName.startsWith("/")) {
-			newName = newName.replaceFirst("/", "");
-		}
-		
 		// physical renaming
 		Path oldFilePath = Paths.get(Profile.getInstance().getLibraryRoot() + oldName);
 		Path newFilePath = Paths.get(Profile.getInstance().getLibraryRoot() + newName);
@@ -121,9 +114,22 @@ public final class GedDocumentService {
 			return;
 		}
 		
+		String oldNameUnixStyle = forceUnixSeparator(oldName);
+		String newNameUnixStyle = forceUnixSeparator(newName);
+		
+		if (oldNameUnixStyle.startsWith("/")) {
+			oldNameUnixStyle = oldNameUnixStyle.replaceFirst("/", "");
+		}
+		if (newNameUnixStyle.startsWith("/")) {
+			newNameUnixStyle = newNameUnixStyle.replaceFirst("/", "");
+		}
+		
+		logger.debug("Old name : {}", oldNameUnixStyle);
+		logger.debug("New name : {}", newNameUnixStyle);
+		
 		// rename in database
-		DirectoryDAO.updateDirectoryPath(forceUnixSeparator(oldName), forceUnixSeparator(newName));
-		DocumentDAO.updateFilePath(forceUnixSeparator(oldName), forceUnixSeparator(newName));
+		DirectoryDAO.updateDirectoryPath(oldNameUnixStyle, newNameUnixStyle);
+		DocumentDAO.updateFilePath(oldNameUnixStyle, newNameUnixStyle);
 	}
 	
 	

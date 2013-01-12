@@ -589,7 +589,6 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 			logger.info("No matching document for pattern : "+ pattern);
 		}
 		
-		libraryView.get();
 		TreeItem<String> newRoot = new TreeItem<>(LibraryView.convertToNodeName(Profile.getInstance().getLibraryRoot()), libraryView.get().getIconForNode(""));
 		newRoot.setExpanded(true);
 		

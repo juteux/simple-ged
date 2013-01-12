@@ -124,6 +124,8 @@ public class LibraryView extends TreeView<String> {
 		logger.info("Build or rebuild tree over");
 		
 		setRoot(newRoot);
+		
+		logger.debug("New root is defined");
 	}
 	
 	
