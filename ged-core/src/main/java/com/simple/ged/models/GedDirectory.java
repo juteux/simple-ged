@@ -17,7 +17,7 @@ import org.hibernate.annotations.Index;
  *
  */
 @Entity
-@Table(name="ged_direcory")
+@Table(name="ged_directory")
 public class GedDirectory {
 
 	/**
@@ -42,7 +42,7 @@ public class GedDirectory {
 	private String iconPath;
 	
 	
-	private GedDirectory() {
+	public GedDirectory() {
 		id = null;
 	}
 

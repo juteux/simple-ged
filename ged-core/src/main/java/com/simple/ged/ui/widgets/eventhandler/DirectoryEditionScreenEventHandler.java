@@ -16,6 +16,8 @@ import org.apache.commons.validator.routines.UrlValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.simple.ged.models.GedDirectory;
+import com.simple.ged.services.GedDirectoryService;
 import com.simple.ged.ui.screen.DirectoryEditionScreen;
 
 import fr.xmichel.javafx.dialog.Dialog;
@@ -77,7 +79,8 @@ public class DirectoryEditionScreenEventHandler implements EventHandler<KeyEvent
 			userUrl = "http://" + userUrl;
 		}
 		
-		String targetLocation = DirectoryEditionScreen.DIRECTORY_ICON_DIRECTORY + directoryName + "." + FileHelper.getExtension(userUrl).toLowerCase();
+		String targetLocationWithoutPrefix = directoryName + "." + FileHelper.getExtension(userUrl).toLowerCase();
+		String targetLocation = DirectoryEditionScreen.DIRECTORY_ICON_DIRECTORY + targetLocationWithoutPrefix;
 		
 		logger.debug("Start downloading : {}", userUrl);
 		logger.debug("Target location : {}", targetLocation);
@@ -86,7 +89,16 @@ public class DirectoryEditionScreenEventHandler implements EventHandler<KeyEvent
 			return;
 		}
 		
-		// TODO : action in BDD
+		GedDirectory dir = GedDirectoryService.findDirectorybyDirectoryPath(directoryName);
+		if (dir == null) {
+			logger.trace("Instanciate new directory");
+			dir = new GedDirectory();
+		}
+		
+		dir.setRelativeDirectoryPath(directoryName);
+		dir.setIconPath(targetLocationWithoutPrefix);
+		
+		GedDirectoryService.addOrUpdateDirectory(dir);
 		
 		Dialog.showInfo("Remplacement effectué", "L'icône a bien été modifée !");
 	}
