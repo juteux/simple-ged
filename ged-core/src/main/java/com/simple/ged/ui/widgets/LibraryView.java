@@ -2,6 +2,8 @@ package com.simple.ged.ui.widgets;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Properties;
 
 import javafx.scene.Node;
@@ -14,6 +16,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.simple.ged.Profile;
+import com.simple.ged.models.GedDirectory;
+import com.simple.ged.services.GedDirectoryService;
+import com.simple.ged.services.GedDocumentService;
+import com.simple.ged.ui.screen.DirectoryEditionScreen;
 import com.simple.ged.ui.screen.SoftwareScreen;
 import com.simple.ged.ui.widgets.eventhandler.LibraryViewEventHandler;
 
@@ -139,6 +145,9 @@ public class LibraryView extends TreeView<String> {
 	}
 	
 	
+	/**
+	 * The given path is absolute
+	 */
  	public Node getIconForNode(String filePath) {
  		
  		logger.trace(filePath);
@@ -155,8 +164,31 @@ public class LibraryView extends TreeView<String> {
  		
  		// folder
  		if (new File(filePath).isDirectory()) {
-			Image i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_library_folder")));
-			ImageView iv = new ImageView(i);
+ 			
+ 			logger.trace("ged icon for directory : {}", GedDocumentService.getRelativeFromAbsloutePath(filePath));
+ 			
+ 			GedDirectory dir = GedDirectoryService.findDirectorybyDirectoryPath(GedDocumentService.getRelativeFromAbsloutePath(filePath));
+ 			
+ 			ImageView iv = null;
+ 			
+ 			// no customization, default icon
+ 			if (dir == null) {
+				Image i = new Image(getClass().getResourceAsStream(properties.getProperty("ico_library_folder")));
+				 iv = new ImageView(i);
+ 			}
+ 			else {
+	 			// icon is customized
+ 				URL iconFileUrl = null;
+				try {
+					iconFileUrl = new File(DirectoryEditionScreen.DIRECTORY_ICON_DIRECTORY + dir.getIconPath()).toURI().toURL();
+				} catch (MalformedURLException e) {
+					logger.error("Fail to read custom icon url", e);
+				}
+ 				logger.debug("custom image file : {}", iconFileUrl.toString());
+	 			Image i = new Image(iconFileUrl.toString());
+	 			iv = new ImageView(i);
+ 			}
+ 			
 			iv.setSmooth(true);
 			iv.setFitWidth(TREE_ITEM_SIZE);
 			iv.setFitHeight(TREE_ITEM_SIZE);
@@ -203,7 +235,7 @@ public class LibraryView extends TreeView<String> {
 			iv.setFitHeight(TREE_ITEM_SIZE);
 			return iv;
  		}
- 		
+
  		return null;
  	}
 	

@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -159,6 +160,14 @@ public final class GedDocumentService {
 		}
 		
 		return DocumentDAO.getDocumentWhichContainsEveryWords(wordList);
+	}
+	
+	
+	/**
+	 * Get relative file path from the absolute path
+	 */
+	public static String getRelativeFromAbsloutePath(String absolutePath) {
+		return absolutePath.replaceFirst(Pattern.quote(Profile.getInstance().getLibraryRoot()), "");
 	}
 	
 }

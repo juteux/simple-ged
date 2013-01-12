@@ -33,7 +33,9 @@ import fr.xmichel.toolbox.tools.FileHelper;
  */
 public final class PluginManager {
 
-	
+	/**
+	 * My logger
+	 */
 	private static final Logger logger = LoggerFactory.getLogger(PluginManager.class);
 	
 	
