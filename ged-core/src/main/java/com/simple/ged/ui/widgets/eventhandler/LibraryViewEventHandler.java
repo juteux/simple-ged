@@ -118,7 +118,6 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
             }
         });
 		
-		
 		return new TextFieldTreeCellImpl();
 	}
 	
