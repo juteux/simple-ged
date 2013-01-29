@@ -1,3 +1,9 @@
+
+.. image:: https://secure.travis-ci.org/xaviermichel/simple-ged.png?branch=master
+   :alt: Build Status
+   :target: http://travis-ci.org/xaviermichel/simple-ged
+   
+
 Simple GED
 ==========
 
