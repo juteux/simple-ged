@@ -1,3 +1,5 @@
+![http://travis-ci.org/xaviermichel/simple-ged](https://secure.travis-ci.org/xaviermichel/simple-ged.png?branch=master) 
+
 Simple GED
 ==========
 
