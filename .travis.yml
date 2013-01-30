@@ -2,4 +2,5 @@ language: java
 jdk:
   - openjdk7
   - oraclejdk7
+before_script:./external-dependencies/install_in_local_repo.sh
 
