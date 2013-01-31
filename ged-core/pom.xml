@@ -20,7 +20,7 @@
 		<fr.xmichel.javafx.version>1.0.2</fr.xmichel.javafx.version>
 	</properties>
 
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -50,7 +50,7 @@
 		</plugins>
 	</build>
 
-	
+
 	<repositories>
 		<!--
 		<repository>
@@ -63,6 +63,10 @@
 			<url>https://github.com/xaviermichel/maven-repo/raw/master/releases</url>
 		</repository>
 
+		<repository>
+			<id>xaviermichel-bigfile-releases</id>
+			<url>https://xmi-maven-repo.googlecode.com/git/releases</url>
+		</repository>
 	</repositories>
 
 
@@ -121,14 +125,7 @@
 			<version>${fr.xmichel.toolbox.version}</version>
 		</dependency>
 
-		<!-- Jar qui ne sont pas dans le repo -->
-		<!--
-			Il faut les déployer dans le repo local
-			en utilisant install_in_local_repo.sh
-			(sous windows, il est possible de copier
-			les instructions présentes dans ce fichier
-			dans une invite de commande)
-		-->
+		<!-- Jar qui ne sont pas dans les repo officiels -->
 
 		<dependency>
 			<groupId>com.sun</groupId>

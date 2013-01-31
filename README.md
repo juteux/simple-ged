@@ -1,4 +1,4 @@
-![http://travis-ci.org/xaviermichel/simple-ged](https://secure.travis-ci.org/xaviermichel/simple-ged.png?branch=master) 
+[![Build Status](https://travis-ci.org/xaviermichel/simple-ged.png?branch=master)](https://travis-ci.org/xaviermichel/simple-ged)
 
 Simple GED
 ==========
