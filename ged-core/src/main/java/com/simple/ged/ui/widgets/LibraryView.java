@@ -1,5 +1,6 @@
 package com.simple.ged.ui.widgets;
 
+import java.beans.EventHandler;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
@@ -93,7 +94,7 @@ public class LibraryView extends TreeView<String> {
     	this.setEditable(true);
     	this.setCellFactory(eventHandler);
     	this.getSelectionModel().select(this.getRoot());
-    	
+
     	this.getSelectionModel().selectedItemProperty().addListener(eventHandler); 
 	}
     
@@ -116,6 +117,14 @@ public class LibraryView extends TreeView<String> {
 		if (getRoot() == null) {
 			TreeItem<String> newRoot = new TreeItem<>(LibraryView.convertToNodeName(Profile.getInstance().getLibraryRoot()), getIconForNode(""));
 			setRoot(newRoot);
+            /*
+            newRoot.addEventHandler(TreeItem.branchExpandedEvent(), new EventHandler<TreeItem.TreeModificationEvent<String>>() {
+                @Override
+                public void handle(TreeItem.TreeModificationEvent<String> event) {
+
+                }
+            });
+            */
 		}
 
 		getRoot().getChildren().clear();
