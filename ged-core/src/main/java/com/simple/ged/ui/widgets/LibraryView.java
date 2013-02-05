@@ -4,10 +4,14 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeItem.TreeModificationEvent;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -39,7 +43,15 @@ public class LibraryView extends TreeView<String> {
 	 */
 	public static final int TREE_ITEM_SIZE = 30;
 	
+	/**
+	 * My logger
+	 */
 	private static final Logger logger = LoggerFactory.getLogger(LibraryView.class);
+	
+	/**
+	 * Some facking (yes it's a 'A') node which is a fack children (for expandable property)
+	 */
+	public static final TreeItem<String> FACK_CHILD = new TreeItem<String>("");
 	
 	/**
 	 * Have I to show all files or just directories ? 
@@ -93,7 +105,7 @@ public class LibraryView extends TreeView<String> {
     	this.setEditable(true);
     	this.setCellFactory(eventHandler);
     	this.getSelectionModel().select(this.getRoot());
-    	
+
     	this.getSelectionModel().selectedItemProperty().addListener(eventHandler); 
 	}
     
@@ -116,14 +128,23 @@ public class LibraryView extends TreeView<String> {
 		if (getRoot() == null) {
 			TreeItem<String> newRoot = new TreeItem<>(LibraryView.convertToNodeName(Profile.getInstance().getLibraryRoot()), getIconForNode(""));
 			setRoot(newRoot);
+			
+			newRoot.addEventHandler(TreeItem.branchExpandedEvent(), new EventHandler<TreeItem.TreeModificationEvent<Object>>() { // object is string...
+				@Override
+				public void handle(TreeModificationEvent<Object> arg0) { // object is string...
+					logger.trace("Want to expand {}", arg0);
+					eventHandler.branchExpandedEventHandler(arg0.getSource());
+				}
+			});
+
 		}
 
 		getRoot().getChildren().clear();
-		
-		listFile(
-				new File(Profile.getInstance().getLibraryRoot()), 
-				getRoot()
-		);
+	
+		loadAndAddChildrenUnderNode(new File(Profile.getInstance().getLibraryRoot()), getRoot());
+
+		// old methode
+		//listFile(new File(Profile.getInstance().getLibraryRoot()), getRoot());
 		
 		logger.info("Build or rebuild tree over");
 	}
@@ -223,10 +244,39 @@ public class LibraryView extends TreeView<String> {
  		return null;
  	}
 	
+ 	
+ 	
+	/**
+	 * List files under the given node
+	 * 
+	 * if node is a file, returns an empty list
+	 */
+	public void loadAndAddChildrenUnderNode(File file, TreeItem<String> node) {
+		if (file.isFile()) {
+			return;
+		}
+		for (File f : file.listFiles()) {
+
+			TreeItem<String> subNode = new TreeItem<>(convertToNodeName(f.getName()), getIconForNode(f.getPath()));
+			
+			if (f.isDirectory()) {
+				subNode.getChildren().add(FACK_CHILD);
+			} else { // f is child
+				if (showDirectoryOnly) {
+					continue;
+				}
+			}
+			
+			node.getChildren().add(subNode);
+		}
+	}
+ 	
+ 	
 	
 	/**
 	 * List files in given directory, and add them in tree
 	 */
+	@Deprecated
 	private TreeItem<String> listFile(File file, TreeItem<String> node) {
 
 		logger.trace(file.getName());
