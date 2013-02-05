@@ -251,12 +251,12 @@ public class LibraryView extends TreeView<String> {
 	 * 
 	 * if node is a file, returns an empty list
 	 */
-	private void loadAndAddChildrenUnderNode(File file, TreeItem<String> node) {
+	public void loadAndAddChildrenUnderNode(File file, TreeItem<String> node) {
 		if (file.isFile()) {
 			return;
 		}
-
 		for (File f : file.listFiles()) {
+
 			TreeItem<String> subNode = new TreeItem<>(convertToNodeName(f.getName()), getIconForNode(f.getPath()));
 			
 			if (f.isDirectory()) {
