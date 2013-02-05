@@ -1,14 +1,15 @@
 package com.simple.ged.ui.widgets;
 
-import java.beans.EventHandler;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeItem.TreeModificationEvent;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -117,14 +118,15 @@ public class LibraryView extends TreeView<String> {
 		if (getRoot() == null) {
 			TreeItem<String> newRoot = new TreeItem<>(LibraryView.convertToNodeName(Profile.getInstance().getLibraryRoot()), getIconForNode(""));
 			setRoot(newRoot);
-            /*
-            newRoot.addEventHandler(TreeItem.branchExpandedEvent(), new EventHandler<TreeItem.TreeModificationEvent<String>>() {
-                @Override
-                public void handle(TreeItem.TreeModificationEvent<String> event) {
+			
+			newRoot.addEventHandler(TreeItem.branchExpandedEvent(), new EventHandler<TreeItem.TreeModificationEvent<Object>>() { // object is string...
+				@Override
+				public void handle(TreeModificationEvent<Object> arg0) { // object is string...
+					// TODO Auto-generated method stub
+					logger.info("Want to expand {}", arg0);
+				}
+			});
 
-                }
-            });
-            */
 		}
 
 		getRoot().getChildren().clear();
