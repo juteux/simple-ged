@@ -41,8 +41,5 @@ logback.xml
 
 <<<<<<< HEAD
 # do not release my data !
-=======
-# my personal files ! (is there already on another branch ?)
->>>>>>> origin/master
 *.pdf
 
