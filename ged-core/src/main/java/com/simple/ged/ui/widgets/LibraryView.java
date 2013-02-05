@@ -43,7 +43,15 @@ public class LibraryView extends TreeView<String> {
 	 */
 	public static final int TREE_ITEM_SIZE = 30;
 	
+	/**
+	 * My logger
+	 */
 	private static final Logger logger = LoggerFactory.getLogger(LibraryView.class);
+	
+	/**
+	 * Some facking (yes it's a 'A') node which is a fack children (for expandable property)
+	 */
+	public static final TreeItem<String> FACK_CHILD = new TreeItem<String>("");
 	
 	/**
 	 * Have I to show all files or just directories ? 
@@ -249,10 +257,17 @@ public class LibraryView extends TreeView<String> {
 		}
 
 		for (File f : file.listFiles()) {
-			if (! (f.isFile() && showDirectoryOnly)) {
-				TreeItem<String> subNode = new TreeItem<>(convertToNodeName(f.getName()), getIconForNode(f.getPath()));
-				node.getChildren().add(subNode);
+			TreeItem<String> subNode = new TreeItem<>(convertToNodeName(f.getName()), getIconForNode(f.getPath()));
+			
+			if (f.isDirectory()) {
+				subNode.getChildren().add(FACK_CHILD);
+			} else { // f is child
+				if (showDirectoryOnly) {
+					continue;
+				}
 			}
+			
+			node.getChildren().add(subNode);
 		}
 	}
  	
