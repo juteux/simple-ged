@@ -4,8 +4,6 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 import javafx.event.EventHandler;
@@ -130,6 +128,7 @@ public class LibraryView extends TreeView<String> {
 			setRoot(newRoot);
 			
 			newRoot.addEventHandler(TreeItem.branchExpandedEvent(), new EventHandler<TreeItem.TreeModificationEvent<Object>>() { // object is string...
+				@SuppressWarnings("unchecked")
 				@Override
 				public void handle(TreeModificationEvent<Object> arg0) { // object is string...
 					logger.trace("Want to expand {}", arg0);
