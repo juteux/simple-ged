@@ -39,3 +39,6 @@ files-to-release
 # logback
 logback.xml
 
+# my personal files ! (is there already on another branch ?)
+*.pdf
+
