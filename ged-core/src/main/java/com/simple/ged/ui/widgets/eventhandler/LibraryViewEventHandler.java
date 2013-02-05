@@ -123,7 +123,6 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 	
 	
 	public void branchExpandedEventHandler(TreeItem<String> source) {
-		// TODO
 		if (source.getChildren().size() == 1 && source.getChildren().get(0).equals(LibraryView.FACK_CHILD)) {
 			source.getChildren().clear();
 			logger.debug("loading child for {} ", getFileFromTreeItem(source).getAbsolutePath());
