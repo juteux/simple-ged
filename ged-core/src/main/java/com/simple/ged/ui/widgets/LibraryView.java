@@ -4,6 +4,8 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javafx.event.EventHandler;
@@ -122,19 +124,19 @@ public class LibraryView extends TreeView<String> {
 			newRoot.addEventHandler(TreeItem.branchExpandedEvent(), new EventHandler<TreeItem.TreeModificationEvent<Object>>() { // object is string...
 				@Override
 				public void handle(TreeModificationEvent<Object> arg0) { // object is string...
-					// TODO Auto-generated method stub
-					logger.info("Want to expand {}", arg0);
+					logger.trace("Want to expand {}", arg0);
+					eventHandler.branchExpandedEventHandler(arg0.getSource());
 				}
 			});
 
 		}
 
 		getRoot().getChildren().clear();
-		
-		listFile(
-				new File(Profile.getInstance().getLibraryRoot()), 
-				getRoot()
-		);
+	
+		loadAndAddChildrenUnderNode(new File(Profile.getInstance().getLibraryRoot()), getRoot());
+
+		// old methode
+		//listFile(new File(Profile.getInstance().getLibraryRoot()), getRoot());
 		
 		logger.info("Build or rebuild tree over");
 	}
@@ -234,10 +236,32 @@ public class LibraryView extends TreeView<String> {
  		return null;
  	}
 	
+ 	
+ 	
+	/**
+	 * List files under the given node
+	 * 
+	 * if node is a file, returns an empty list
+	 */
+	private void loadAndAddChildrenUnderNode(File file, TreeItem<String> node) {
+		if (file.isFile()) {
+			return;
+		}
+
+		for (File f : file.listFiles()) {
+			if (! (f.isFile() && showDirectoryOnly)) {
+				TreeItem<String> subNode = new TreeItem<>(convertToNodeName(f.getName()), getIconForNode(f.getPath()));
+				node.getChildren().add(subNode);
+			}
+		}
+	}
+ 	
+ 	
 	
 	/**
 	 * List files in given directory, and add them in tree
 	 */
+	@Deprecated
 	private TreeItem<String> listFile(File file, TreeItem<String> node) {
 
 		logger.trace(file.getName());

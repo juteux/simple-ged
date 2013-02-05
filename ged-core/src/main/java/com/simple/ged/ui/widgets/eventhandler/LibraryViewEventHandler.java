@@ -122,6 +122,10 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 	}
 	
 	
+	public void branchExpandedEventHandler(TreeItem<String> source) {
+		// TODO
+	}
+	
 
 	/**
 	 * Selection changed
