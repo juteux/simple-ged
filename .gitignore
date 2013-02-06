@@ -41,4 +41,3 @@ logback.xml
 
 # do not release my data !
 *.pdf
-

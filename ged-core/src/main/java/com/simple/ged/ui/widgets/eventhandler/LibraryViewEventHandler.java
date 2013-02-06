@@ -122,6 +122,14 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 	}
 	
 	
+	public void branchExpandedEventHandler(TreeItem<String> source) {
+		if (source.getChildren().size() == 1 && source.getChildren().get(0).equals(LibraryView.FACK_CHILD)) {
+			source.getChildren().clear();
+			logger.debug("loading child for {} ", getFileFromTreeItem(source).getAbsolutePath());
+			libraryView.get().loadAndAddChildrenUnderNode(getFileFromTreeItem(source), source);
+		}
+	}
+	
 
 	/**
 	 * Selection changed
@@ -174,6 +182,9 @@ public class LibraryViewEventHandler implements Callback<TreeView<String>,TreeCe
 	}
 
 	
+	private File getFileFromTreeItem(TreeItem<String> item) {
+		return new File(Profile.getInstance().getLibraryRoot() + getFilePathFromTreeItem(item));
+	}
 	
 	private String getFilePathFromTreeItem(TreeItem<String> item) {
 		
