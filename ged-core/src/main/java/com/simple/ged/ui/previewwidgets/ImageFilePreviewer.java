@@ -102,6 +102,8 @@ public class ImageFilePreviewer extends AbstractFilePreviewer {
 		case GIF_TYPE:
 			flavor = DocFlavor.INPUT_STREAM.GIF;
 			break;
+		default:
+			return;
 		}
 		
 		PrintingHelper.printFile(absoluteFilePath, flavor);
